@@ -1,0 +1,16 @@
+# Misc
+local.properties
+
+# Android Studio
+*.idea
+/build/
+/*/build/
+*.iml
+.gradle
+/captures
+
+
+# Misc
+com_crashlytics_export_strings.xml
+.directory
+.DS_Store
