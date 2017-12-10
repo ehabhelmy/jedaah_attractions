@@ -1,4 +1,4 @@
-package com.example.ehab.japroject.usecase.authentication;
+package com.example.ehab.japroject.usecase;
 
 /**
  * Created by ehab on 12/2/17.

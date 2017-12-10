@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.datalayer.local;
 
-import com.example.ehab.japroject.datalayer.pojo.User;
+import com.example.ehab.japroject.datalayer.pojo.BaseModel;
+import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 
 import io.reactivex.Single;
 
@@ -11,5 +12,7 @@ import io.reactivex.Single;
 public interface LocalSource {
     // all apis cached in the application
 
-    Single<User> checkUser();
+    DataResponse getData();
+
+    void saveData(DataResponse dataResponse);
 }

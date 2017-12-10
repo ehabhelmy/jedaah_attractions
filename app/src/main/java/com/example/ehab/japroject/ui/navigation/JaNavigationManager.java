@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.example.ehab.japroject.JaApplication;
-import com.example.ehab.japroject.datalayer.pojo.BaseModel;
-import com.example.ehab.japroject.datalayer.pojo.User;
 import com.example.ehab.japroject.ui.Base.BaseActivity;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 
@@ -40,13 +38,6 @@ public abstract class JaNavigationManager {
     private void replaceFragment(BaseFragment fragment,boolean addToBackStack){
 
     }
-
-    public abstract void navigateToLogin();
-
-    public abstract void navigateToHome(User user);
-
-    public abstract void navigateToDetails(Bundle bundle);
-
 
     public BaseActivity getCurrentActivity() {
         return currentActivity.get();

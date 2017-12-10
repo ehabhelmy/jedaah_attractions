@@ -4,12 +4,10 @@ import android.accounts.NetworkErrorException;
 import android.support.annotation.NonNull;
 
 import com.example.ehab.japroject.JaApplication;
-import com.example.ehab.japroject.datalayer.pojo.User;
-import com.example.ehab.japroject.datalayer.pojo.request.LoginRequest;
-import com.example.ehab.japroject.datalayer.pojo.response.UserResponse;
-import com.example.ehab.japroject.datalayer.remote.service.LoginService;
-import com.example.ehab.japroject.datalayer.remote.service.RegisterService;
-import com.example.ehab.japroject.util.Constants;
+import com.example.ehab.japroject.datalayer.pojo.BaseModel;
+import com.example.ehab.japroject.datalayer.pojo.ErrorModel;
+import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -24,7 +22,6 @@ import static com.example.ehab.japroject.datalayer.remote.ServiceError.SUCCESS_C
 import static com.example.ehab.japroject.util.Constants.BASE_URL;
 import static com.example.ehab.japroject.util.Constants.ERROR_UNDEFINED;
 import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
-import static java.util.Objects.isNull;
 
 /**
  * Created by ehab on 12/2/17.
@@ -37,58 +34,6 @@ public class RemoteRepository implements RemoteSource {
     @Inject
     public RemoteRepository(ServiceGenerator serviceGenerator) {
         this.serviceGenerator = serviceGenerator;
-    }
-
-    @Override
-    public Single checkUser(String email, String password) {
-        Single<UserResponse> userResponseSingle = Single.create(singleOnSubscribe -> {
-                    if (!isConnected(JaApplication.getContext())) {
-                        Exception exception = new NetworkErrorException();
-                        singleOnSubscribe.onError(exception);
-                    } else {
-                        try {
-                            LoginService loginService = serviceGenerator.createService(LoginService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(loginService.loginUser(new LoginRequest(email, password)), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE) {
-                                UserResponse userResponse = (UserResponse) serviceResponse.getData();
-                                singleOnSubscribe.onSuccess(userResponse);
-                            } else {
-                                Throwable throwable = new NetworkErrorException();
-                                singleOnSubscribe.onError(throwable);
-                            }
-                        } catch (Exception e) {
-                            singleOnSubscribe.onError(e);
-                        }
-                    }
-                }
-        );
-        return userResponseSingle;
-    }
-
-    @Override
-    public Single registerUser(User user) {
-        Single<UserResponse> userResponseSingle = Single.create(singleOnSubscribe -> {
-                    if (!isConnected(JaApplication.getContext())) {
-                        Exception exception = new NetworkErrorException();
-                        singleOnSubscribe.onError(exception);
-                    } else {
-                        try {
-                            RegisterService registerService = serviceGenerator.createService(RegisterService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(registerService.registerUser(user), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE) {
-                                UserResponse userResponse = (UserResponse) serviceResponse.getData();
-                                singleOnSubscribe.onSuccess(userResponse);
-                            } else {
-                                Throwable throwable = new NetworkErrorException();
-                                singleOnSubscribe.onError(throwable);
-                            }
-                        } catch (Exception e) {
-                            singleOnSubscribe.onError(e);
-                        }
-                    }
-                }
-        );
-        return userResponseSingle;
     }
 
     @NonNull
@@ -115,15 +60,15 @@ public class RemoteRepository implements RemoteSource {
         }
     }
 
-//    @Override
-//    public Single registerUser(User user) {
-//        RegisterService registerService  = serviceGenerator.createService(RegisterService.class,BASE_URL);
-//        return registerService.registerUser(user);
-//    }
-
-//    @Override
-//    public Single checkUser(String email, String password) {
-//       LoginService loginService = serviceGenerator.createService(LoginService.class,BASE_URL);
-//       return loginService.loginUser(new LoginRequest(email, password));
-//    }
+    @Override
+    public DataResponse getData() {
+        DataService dataService = serviceGenerator.createService(DataService.class, BASE_URL);
+        ServiceResponse serviceResponse = processCall(dataService.getData(), false);
+        if (serviceResponse.getCode() == SUCCESS_CODE){
+            DataResponse dataResponse = (DataResponse) serviceResponse.getData();
+            return dataResponse;
+        }else{
+            return null;
+        }
+    }
 }

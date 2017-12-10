@@ -1,8 +1,7 @@
 package com.example.ehab.japroject.datalayer.remote;
 
-import com.example.ehab.japroject.datalayer.pojo.User;
-
-import io.reactivex.Single;
+import com.example.ehab.japroject.datalayer.pojo.BaseModel;
+import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 
 /**
  * Created by ehab on 12/2/17.
@@ -11,7 +10,5 @@ import io.reactivex.Single;
 public interface RemoteSource {
 
     // all apis in the application
-    Single checkUser(String email,String password);
-
-    Single registerUser(User user);
+    DataResponse getData();
 }

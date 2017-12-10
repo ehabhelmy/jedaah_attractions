@@ -1,7 +1,6 @@
 package com.example.ehab.japroject.datalayer;
 
-import com.example.ehab.japroject.datalayer.pojo.User;
-import com.example.ehab.japroject.datalayer.pojo.response.UserResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 
 import io.reactivex.Single;
 
@@ -11,9 +10,5 @@ import io.reactivex.Single;
 
 public interface DataSource {
 
-    Single<UserResponse> login(String email, String password);
-
-    Single<UserResponse> register();
-
-    Single<User> checkUser();
+    Single<DataResponse> getData();
 }
