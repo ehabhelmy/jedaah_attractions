@@ -14,6 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:id="@+id/eventImage"
             android:background="@mipmap/myimage"
             android:layout_weight="1.8">
 
@@ -41,7 +42,7 @@
                     app:dots_secondary_color="@color/colorTitle"
                     app:circle_end_color="@color/colorTitle"
                     app:anim_scale_factor="2"
-                    android:id="@+id/star_button"/>
+                    android:id="@+id/favourite"/>
             </FrameLayout>
         </RelativeLayout>
 
@@ -106,6 +107,7 @@
                     android:layout_marginTop="14dp"
                     android:gravity="center_horizontal"
                     android:textColor="@color/colorTitle"
+                    android:id="@+id/eventName"
                     android:text="Amr Diab Concert" />
 
                 <LinearLayout
@@ -124,12 +126,13 @@
                         android:textSize="@dimen/daysRemaining"
                         android:gravity="center"
                         android:textColor="#636060"
+                        android:id="@+id/eventAddress"
                         android:text="12, Al-Aziz , Jeddah" />
                 </LinearLayout>
                 
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/eventInterested"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"

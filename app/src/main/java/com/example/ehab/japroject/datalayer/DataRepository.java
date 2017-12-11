@@ -3,6 +3,7 @@ package com.example.ehab.japroject.datalayer;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 
 import javax.inject.Inject;
@@ -31,6 +32,11 @@ public class DataRepository implements DataSource {
         //TODO : if there isn't internet connection then call localRepository.getData
         //TODO : create Single that sends BaseModel in on success.
         //TODO : incase of BaseModel == null ----> call on Error.
+        return null;
+    }
+
+    @Override
+    public Single<TopEventsResponse> getTopEvents() {
         return null;
     }
 }
