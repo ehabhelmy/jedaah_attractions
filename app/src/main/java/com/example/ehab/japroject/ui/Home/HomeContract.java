@@ -13,6 +13,8 @@ public interface HomeContract {
 
     }
     interface Presenter{
-
+        void showExplore();
+        void showEvents();
+        void showProfile();
     }
 }

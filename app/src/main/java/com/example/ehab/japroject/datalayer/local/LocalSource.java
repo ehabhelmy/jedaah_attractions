@@ -2,6 +2,7 @@ package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
 
 import io.reactivex.Single;
 
@@ -15,4 +16,8 @@ public interface LocalSource {
     DataResponse getData();
 
     void saveData(DataResponse dataResponse);
+
+    Single<TopEventsResponse> getTopEvents();
+
+    void saveTopEvents(TopEventsResponse topEventsResponse);
 }

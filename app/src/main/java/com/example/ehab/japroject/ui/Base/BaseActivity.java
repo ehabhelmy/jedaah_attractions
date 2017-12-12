@@ -30,7 +30,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
-        jaNavigationManager = JaNavigationManager.getInstance();
+        JaNavigationManager.getInstance().setCurrentActivity(this);
+        JaNavigationManager.getInstance().setFragmentManager(getSupportFragmentManager());
         initializeDagger();
         initializePresenter();
         if (presenter != null) {

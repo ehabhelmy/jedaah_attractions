@@ -7,7 +7,9 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.datalayer.pojo.ErrorModel;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
+import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -70,5 +72,31 @@ public class RemoteRepository implements RemoteSource {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public Single<TopEventsResponse> getTopEvents() {
+        Single<TopEventsResponse> userResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            TopEventsService topEventsService = serviceGenerator.createService(TopEventsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(topEventsService.getTopEvents(), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                TopEventsResponse topEventsResponse = (TopEventsResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(topEventsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return userResponseSingle;
     }
 }

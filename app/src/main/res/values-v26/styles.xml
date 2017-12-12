@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TitleTheme">
+        <item name="android:textSize">@dimen/static_title_size</item>
+        <item name="android:textColor">@color/staticTitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">@dimen/spaceBetweenTitleAndItems</item>
+    </style>
+
+
+</resources>

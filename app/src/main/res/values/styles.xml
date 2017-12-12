@@ -19,11 +19,16 @@
 
     <style name="TitleTheme">
         <item name="android:textSize">@dimen/static_title_size</item>
-        <item name="android:textColor">@color/colorTitle</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/staticTitle</item>
+        <item name="android:fontFamily">@font/gotham_bold</item>
         <item name="android:layout_marginBottom">@dimen/spaceBetweenTitleAndItems</item>
     </style>
 
-    <dimen name="static_title_size">24sp</dimen>
-    <dimen name="spaceBetweenTitleAndItems">5dp</dimen>
+    <style name="eventName">
+        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textSize">@dimen/titleSize</item>
+        <item name="android:fontFamily">@font/gotham_medium</item>
+    </style>
+
+
 </resources>

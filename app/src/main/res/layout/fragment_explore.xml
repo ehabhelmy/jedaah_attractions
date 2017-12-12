@@ -9,11 +9,68 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingTop="10dp"
         android:weightSum="4">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TitleTheme"
+                android:text="@string/exploreJeddah" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:layout_marginLeft="10.5dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="1dp"
+                app:srcCompat="@drawable/ic_events_main" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10.5dp"
+                android:elevation="1dp"
+                app:srcCompat="@drawable/ic_venues_main" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:elevation="1dp"
+                android:layout_marginLeft="10.5dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/ic_attractions_main" />
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="2"
+            android:background="@color/background"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <TextView
@@ -24,9 +81,9 @@
                 android:text="@string/topEvents" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/topEvents"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/topEvents"/>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
     </LinearLayout>

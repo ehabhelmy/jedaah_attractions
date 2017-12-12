@@ -19,5 +19,5 @@ public abstract class BaseViewHolder<M extends BaseModel> extends RecyclerView.V
         ButterKnife.bind(this,itemView);
     }
 
-    public abstract void bind(M BaseModel, RecyclerViewItemListener.onViewListener onViewListener,RecyclerViewItemListener.onFavouriteListener onFavouriteListener);
+    public abstract void bind(M baseModel, RecyclerViewItemListener.onViewListener onViewListener,RecyclerViewItemListener.onFavouriteListener onFavouriteListener);
 }

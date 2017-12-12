@@ -34,6 +34,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()){
                 case R.id.explore :
+                    presenter.showExplore();
                     break;
                 case R.id.events :
                     break;
@@ -48,6 +49,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        presenter.showExplore();
     }
 
     @Override

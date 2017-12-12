@@ -1,5 +1,8 @@
 package com.example.ehab.japroject.ui.Home.explore;
 
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -9,6 +12,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.Datum;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.explore.adapter.TopEventsListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,8 +30,6 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @BindView(R.id.topEvents)
     RecyclerView topEvents;
-
-    private RecyclerView.LayoutManager layoutManager  = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
 
     @Override
     protected void initializeDagger() {
@@ -63,7 +65,18 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @Override
     public void setupTopEvents(List<Datum> events) {
+        RecyclerView.LayoutManager layoutManager  = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.divider));
         topEvents.setLayoutManager(layoutManager);
+        topEvents.addItemDecoration(dividerItemDecoration);
+        topEvents.setItemAnimator(new DefaultItemAnimator());
         TopEventsListAdapter topEventsListAdapter = new TopEventsListAdapter();
+        topEventsListAdapter.setData((ArrayList<Datum>) events);
+        topEventsListAdapter.setOnFavouriteListener(model -> {
+            Datum datum = (Datum) model;
+            //TODO : call presenter to send id of the event to the backend
+        });
+        topEvents.setAdapter(topEventsListAdapter);
     }
 }

@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 public class HomePresenter extends BasePresenter<HomeContract.View> implements HomeContract.Presenter {
 
-    // inject proper constructor
     @Inject
     public HomePresenter() {
     }
@@ -20,5 +19,20 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
+    }
+
+    @Override
+    public void showExplore() {
+        jaNavigationManager.showExploreScreen();
+    }
+
+    @Override
+    public void showEvents() {
+
+    }
+
+    @Override
+    public void showProfile() {
+
     }
 }

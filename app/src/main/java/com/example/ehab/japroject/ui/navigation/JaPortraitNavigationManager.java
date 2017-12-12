@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.ehab.japroject.ui.Home.HomeActivity;
+import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.util.Constants;
 
 /**
@@ -13,4 +14,12 @@ import com.example.ehab.japroject.util.Constants;
 public class JaPortraitNavigationManager extends JaNavigationManager {
 
 
+    @Override
+    public void showExploreScreen() {
+        ExploreFragment exploreFragment = (ExploreFragment) fragmentManager.findFragmentByTag(EXPLORE);
+        if (exploreFragment == null) {
+            exploreFragment = new ExploreFragment();
+        }
+        replaceFragment(exploreFragment,false);
+    }
 }
