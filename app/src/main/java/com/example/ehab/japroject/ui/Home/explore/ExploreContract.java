@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.Datum;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.Base.listener.ProgressView;
+import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
 import com.example.ehab.japroject.usecase.Unsubscribable;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public interface ExploreContract {
 
     interface View extends BaseView,ErrorView,ProgressView {
-        void setupTopEvents(List<Datum> events);
+        void setupTopEvents(List<Event> events);
     }
 
     interface Presenter extends Unsubscribable{

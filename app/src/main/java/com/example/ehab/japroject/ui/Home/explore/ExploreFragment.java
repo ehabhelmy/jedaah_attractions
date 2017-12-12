@@ -11,6 +11,7 @@ import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.Datum;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.explore.adapter.TopEventsListAdapter;
+import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     }
 
     @Override
-    public void setupTopEvents(List<Datum> events) {
+    public void setupTopEvents(List<Event> events) {
         RecyclerView.LayoutManager layoutManager  = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.divider));
@@ -72,9 +73,9 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         topEvents.addItemDecoration(dividerItemDecoration);
         topEvents.setItemAnimator(new DefaultItemAnimator());
         TopEventsListAdapter topEventsListAdapter = new TopEventsListAdapter();
-        topEventsListAdapter.setData((ArrayList<Datum>) events);
+        topEventsListAdapter.setData((ArrayList<Event>) events);
         topEventsListAdapter.setOnFavouriteListener(model -> {
-            Datum datum = (Datum) model;
+            Event event = (Event) model;
             //TODO : call presenter to send id of the event to the backend
         });
         topEvents.setAdapter(topEventsListAdapter);

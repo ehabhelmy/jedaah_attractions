@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
+import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
 import com.example.ehab.japroject.usecase.topevents.TopEvents;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         public void onSuccess(TopEventsResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                    getView().setupTopEvents(model.getData());
+                    getView().setupTopEvents(EventsAdapter.convertIntoEventUi(model.getData()));
                 } else {
                     getView().showError();
                 }

@@ -33,7 +33,7 @@ public class DateTimeUtils {
     public static String getMonth(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        String monthName = new SimpleDateFormat("MMMM").format(calendar.getTime());
+        String monthName = new SimpleDateFormat("MMM").format(calendar.getTime());
         return monthName;
     }
 
@@ -48,7 +48,7 @@ public class DateTimeUtils {
         Date date1 = new Date();
         long diff = date.getTime() - date1.getTime();
         int day = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        return day+"";
+        return day+"- DAYS";
     }
 
     /**

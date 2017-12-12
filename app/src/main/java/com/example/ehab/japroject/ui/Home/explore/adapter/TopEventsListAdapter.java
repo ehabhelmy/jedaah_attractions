@@ -8,13 +8,14 @@ import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.Datum;
 import com.example.ehab.japroject.ui.Base.BaseRecyclerViewAdapter;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
+import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
 import com.example.ehab.japroject.ui.Home.explore.viewholder.TopEventsViewHolder;
 
 /**
  * Created by ehab on 12/11/17.
  */
 
-public class TopEventsListAdapter extends BaseRecyclerViewAdapter<Datum> {
+public class TopEventsListAdapter extends BaseRecyclerViewAdapter<Event> {
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
