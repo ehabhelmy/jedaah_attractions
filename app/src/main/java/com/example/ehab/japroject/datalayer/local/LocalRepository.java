@@ -2,7 +2,10 @@ package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.util.Constants;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,13 +26,13 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public DataResponse getData() {
-        DataResponse dataResponse = (DataResponse) sharedPref.getObject(sharedPref.DATA_KEY,DataResponse.class);
+        DataResponse dataResponse = (DataResponse) sharedPref.getObject(sharedPref.DATA_KEY, DataResponse.class);
         return dataResponse;
     }
 
     @Override
     public void saveData(DataResponse dataResponse) {
-        sharedPref.saveObject(SharedPref.DATA_KEY,dataResponse);
+        sharedPref.saveObject(SharedPref.DATA_KEY, dataResponse);
     }
 
     @Override
@@ -66,5 +69,23 @@ public class LocalRepository implements LocalSource {
     @Override
     public void saveNearByEvents(EventsResponse eventsResponse) {
         sharedPref.saveObject(SharedPref.NEARBY_EVENTS, eventsResponse);
+    }
+
+    @Override
+    public Single<List<Category>> getCategories() {
+        List<Category> categoriesResponse = (List<Category>) sharedPref.getCategoryList(SharedPref.CATEGORIES);
+        Single<List<Category>> categoriesResponseSingle = Single.create(e -> {
+            if (categoriesResponse != null) {
+                e.onSuccess(categoriesResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return categoriesResponseSingle;
+    }
+
+    @Override
+    public void saveCategories(List<Category> categoriesResponse) {
+        sharedPref.saveObject(SharedPref.CATEGORIES, categoriesResponse);
     }
 }

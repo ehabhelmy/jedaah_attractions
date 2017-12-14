@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.ui.Home.explore;
 
 import com.example.ehab.japroject.datalayer.pojo.response.Datum;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.Base.listener.ProgressView;
@@ -23,6 +24,8 @@ public interface ExploreContract {
         boolean isLocationEnabled();
         void showErrorLocationNotEnabled();
         void getLatitudeAndLongitude();
+        void setupCategories(List<Category> categories);
+
     }
 
     interface Presenter extends Unsubscribable{

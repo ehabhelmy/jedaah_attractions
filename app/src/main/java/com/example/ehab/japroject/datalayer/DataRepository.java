@@ -3,8 +3,11 @@ package com.example.ehab.japroject.datalayer;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
+
+import java.util.List;
 import com.google.android.gms.maps.model.LatLng;
 
 import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
@@ -15,6 +18,8 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
 
 /**
  * Created by ehab on 12/2/17.
@@ -59,7 +64,7 @@ public class DataRepository implements DataSource {
                         }
                     });
             return remoteRepository.getTopEvents();
-        }else{
+        } else {
             return localRepository.getTopEvents();
         }
     }
@@ -84,6 +89,30 @@ public class DataRepository implements DataSource {
             return remoteRepository.getNearByEvents(latLng);
         }else{
             return localRepository.getNearByEvents();
+        }
+    }
+
+    @Override
+    public Single<List<Category>> getCategories() {
+        if (isConnected(JaApplication.getContext())) {
+            remoteRepository.getCategories()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<List<Category>>() {
+
+                        @Override
+                        public void onSuccess(List<Category> categories) {
+                            localRepository.saveCategories(categories);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
+            return remoteRepository.getCategories();
+        } else {
+            return localRepository.getCategories();
         }
     }
 }

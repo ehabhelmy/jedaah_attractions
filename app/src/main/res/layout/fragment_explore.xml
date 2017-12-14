@@ -86,6 +86,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/lightBlack"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TitleTheme"
+                android:text="@string/title_categories" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/categories"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/background"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"

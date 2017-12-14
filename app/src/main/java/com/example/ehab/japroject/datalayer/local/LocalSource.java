@@ -1,6 +1,9 @@
 package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+
+import java.util.List;
 import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 
 import io.reactivex.Single;
@@ -23,5 +26,8 @@ public interface LocalSource {
     Single<EventsResponse> getNearByEvents();
 
     void saveNearByEvents(EventsResponse eventsResponse);
-    
+
+    Single<List<Category>> getCategories();
+
+    void saveCategories(List<Category> categoriesResponse);
 }
