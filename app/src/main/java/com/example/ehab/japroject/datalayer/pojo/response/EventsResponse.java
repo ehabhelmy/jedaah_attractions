@@ -7,7 +7,7 @@ import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TopEventsResponse extends BaseModel {
+public class EventsResponse extends BaseModel {
 
     @SerializedName("success")
     @Expose

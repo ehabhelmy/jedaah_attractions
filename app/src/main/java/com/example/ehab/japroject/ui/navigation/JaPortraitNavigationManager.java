@@ -2,6 +2,7 @@ package com.example.ehab.japroject.ui.navigation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
@@ -21,5 +22,10 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             exploreFragment = new ExploreFragment();
         }
         replaceFragment(exploreFragment,false);
+    }
+
+    @Override
+    public void showLocationSettings() {
+        getCurrentActivity().startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),LOCATION_SETTINGS);
     }
 }

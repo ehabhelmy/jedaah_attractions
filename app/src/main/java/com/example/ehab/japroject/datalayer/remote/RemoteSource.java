@@ -1,8 +1,8 @@
 package com.example.ehab.japroject.datalayer.remote;
 
-import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.google.android.gms.maps.model.LatLng;
 
 import io.reactivex.Single;
 
@@ -15,5 +15,8 @@ public interface RemoteSource {
     // all apis in the application
     DataResponse getData();
 
-    Single<TopEventsResponse> getTopEvents();
+    Single<EventsResponse> getTopEvents();
+
+    Single<EventsResponse> getNearByEvents(LatLng latLng);
+
 }

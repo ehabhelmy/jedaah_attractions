@@ -4,12 +4,13 @@ import android.accounts.NetworkErrorException;
 import android.support.annotation.NonNull;
 
 import com.example.ehab.japroject.JaApplication;
-import com.example.ehab.japroject.datalayer.pojo.BaseModel;
-import com.example.ehab.japroject.datalayer.pojo.ErrorModel;
+import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
+import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -75,8 +76,8 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<TopEventsResponse> getTopEvents() {
-        Single<TopEventsResponse> userResponseSingle = Single.create(singleOnSubscribe -> {
+    public Single<EventsResponse> getTopEvents() {
+        Single<EventsResponse> topEventsSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
                         singleOnSubscribe.onError(exception);
@@ -85,8 +86,8 @@ public class RemoteRepository implements RemoteSource {
                             TopEventsService topEventsService = serviceGenerator.createService(TopEventsService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(topEventsService.getTopEvents(), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
-                                TopEventsResponse topEventsResponse = (TopEventsResponse) serviceResponse.getData();
-                                singleOnSubscribe.onSuccess(topEventsResponse);
+                                EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(eventsResponse);
                             } else {
                                 Throwable throwable = new NetworkErrorException();
                                 singleOnSubscribe.onError(throwable);
@@ -97,6 +98,32 @@ public class RemoteRepository implements RemoteSource {
                     }
                 }
         );
-        return userResponseSingle;
+        return topEventsSingle;
+    }
+
+    @Override
+    public Single<EventsResponse> getNearByEvents(LatLng latLng) {
+        Single<EventsResponse> nearByEventsSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            NearByEventsService nearByEventsService = serviceGenerator.createService(NearByEventsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(nearByEventsService.getNearbyEvents(new NearbyEventsRequest(latLng.latitude+"",latLng.longitude+"")), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(eventsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return nearByEventsSingle;
     }
 }

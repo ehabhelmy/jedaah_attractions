@@ -1,14 +1,22 @@
 package com.example.ehab.japroject.ui.Home;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseActivity;
+import com.example.ehab.japroject.ui.navigation.JaNavigationManager;
 
 import javax.inject.Inject;
 
@@ -20,6 +28,9 @@ import butterknife.BindView;
 
 public class HomeActivity extends BaseActivity implements HomeContract.View {
 
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private boolean locationPermission = false;
+    private boolean locationdEnabled =false;
     @Inject
     HomePresenter presenter;
 
@@ -49,7 +60,56 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        getLocationPermission();
+        checkLocationEnabled();
         presenter.showExplore();
+    }
+
+    private void checkLocationEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            locationdEnabled = true;
+        }
+    }
+
+    private void getLocationPermission() {
+    /*
+     * Request location permission, so that we can get the location of the
+     * device. The result of the permission request is handled by a callback,
+     * onRequestPermissionsResult.
+     */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            //the permission is already granted just check it when you need it
+            locationPermission = true;
+
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == JaNavigationManager.LOCATION_SETTINGS){
+            if (resultCode == 0) {
+                presenter.locationIsEnabled();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        locationPermission = false;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermission = true;
+                }
+        }
     }
 
     @Override
@@ -82,5 +142,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     public void hideLoading() {
 
+    }
+
+    @Override
+    public boolean isLocationPermissionGranted() {
+        return locationPermission;
+    }
+
+    @Override
+    public boolean isLocationServicesEnabled() {
+        return locationdEnabled;
     }
 }

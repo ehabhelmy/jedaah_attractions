@@ -29,6 +29,8 @@ public abstract class JaNavigationManager {
 
     public static final String EXPLORE = "explore";
 
+    public static final int LOCATION_SETTINGS = 2;
+
 
     public static JaNavigationManager getInstance(){
         if (jaNavigationManager == null){
@@ -45,6 +47,8 @@ public abstract class JaNavigationManager {
 
     public abstract void showExploreScreen();
 
+    public abstract void showLocationSettings();
+
     protected void addFragment(BaseFragment fragment,boolean addToBackStack){
 
     }
@@ -54,6 +58,10 @@ public abstract class JaNavigationManager {
         fragmentTransaction.replace(R.id.frame_layout,fragment,EXPLORE);
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         fragmentTransaction.commitNowAllowingStateLoss();
+    }
+
+    public  <F extends BaseFragment> F getCurrentFragment(){
+        return (F) fragmentManager.findFragmentById(R.id.frame_layout);
     }
 
     public BaseActivity getCurrentActivity() {

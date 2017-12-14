@@ -1,6 +1,6 @@
 package com.example.ehab.japroject.datalayer.remote.service;
 
-import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,5 +11,5 @@ import retrofit2.http.GET;
 
 public interface TopEventsService {
     @GET("topEvents")
-    Call<TopEventsResponse> getTopEvents();
+    Call<EventsResponse> getTopEvents();
 }

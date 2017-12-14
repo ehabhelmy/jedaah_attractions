@@ -3,6 +3,7 @@ package com.example.ehab.japroject.ui.Home;
 import android.os.Bundle;
 
 import com.example.ehab.japroject.ui.Base.BasePresenter;
+import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 
 import javax.inject.Inject;
 
@@ -34,5 +35,11 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     @Override
     public void showProfile() {
 
+    }
+
+    @Override
+    public void locationIsEnabled() {
+        ExploreFragment exploreFragment = jaNavigationManager.getCurrentFragment();
+        exploreFragment.locationIsEnabled();
     }
 }

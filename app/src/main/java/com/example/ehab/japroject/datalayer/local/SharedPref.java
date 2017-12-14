@@ -18,6 +18,7 @@ public class SharedPref<T extends BaseModel>{
     private SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE);
     public static final String DATA_KEY = "data-key";
     public static final String TOP_EVENTS = "topEvents";
+    public static final String NEARBY_EVENTS = "nearbyEvents";
 
     public void saveObject(String key,Object object){
         SharedPreferences.Editor editor = preferences.edit();

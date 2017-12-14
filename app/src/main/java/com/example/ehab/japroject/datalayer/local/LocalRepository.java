@@ -1,18 +1,12 @@
 package com.example.ehab.japroject.datalayer.local;
 
-import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
-import com.example.ehab.japroject.datalayer.remote.ServiceResponse;
-import com.example.ehab.japroject.datalayer.remote.service.DataService;
+import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.util.Constants;
 
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-
-import static com.example.ehab.japroject.datalayer.remote.ServiceError.SUCCESS_CODE;
-import static com.example.ehab.japroject.util.Constants.BASE_URL;
 
 /**
  * Created by ehab on 12/2/17.
@@ -39,11 +33,11 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
-    public Single<TopEventsResponse> getTopEvents() {
-        TopEventsResponse topEventsResponse= (TopEventsResponse) sharedPref.getObject(sharedPref.TOP_EVENTS,TopEventsResponse.class);
-        Single<TopEventsResponse> topEventsResponseSingle = Single.create(e -> {
-           if (topEventsResponse != null){
-               e.onSuccess(topEventsResponse);
+    public Single<EventsResponse> getTopEvents() {
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.TOP_EVENTS,EventsResponse.class);
+        Single<EventsResponse> topEventsResponseSingle = Single.create(e -> {
+           if (eventsResponse != null){
+               e.onSuccess(eventsResponse);
            }else{
                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
            }
@@ -52,7 +46,25 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
-    public void saveTopEvents(TopEventsResponse topEventsResponse) {
-        sharedPref.saveObject(SharedPref.TOP_EVENTS,topEventsResponse);
+    public void saveTopEvents(EventsResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.TOP_EVENTS, eventsResponse);
+    }
+
+    @Override
+    public Single<EventsResponse> getNearByEvents() {
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.NEARBY_EVENTS,EventsResponse.class);
+        Single<EventsResponse> NearByEventsResponseSingle = Single.create(e -> {
+            if (eventsResponse != null){
+                e.onSuccess(eventsResponse);
+            }else{
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return NearByEventsResponseSingle;
+    }
+
+    @Override
+    public void saveNearByEvents(EventsResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.NEARBY_EVENTS, eventsResponse);
     }
 }
