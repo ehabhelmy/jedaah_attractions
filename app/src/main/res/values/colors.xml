@@ -10,4 +10,5 @@
     <color name="lightBlack">#292C30</color>
     <color name="white">#ffffff</color>
     <color name="background">#F7F7F7</color>
+    <color name="categoryBackground">#313438</color>
 </resources>

@@ -7,6 +7,8 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -125,5 +128,31 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return nearByEventsSingle;
+    }
+
+    @Override
+    public Single<List<Category>> getCategories() {
+        Single<List<Category>> categoriesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            CategoriesService categoriesService = serviceGenerator.createService(CategoriesService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(categoriesService.getCategories(), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                List<Category> categoriesResponse = (List<Category>) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(categoriesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return categoriesResponseSingle;
     }
 }

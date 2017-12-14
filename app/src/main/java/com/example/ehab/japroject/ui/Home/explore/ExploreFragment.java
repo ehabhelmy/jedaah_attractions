@@ -17,9 +17,11 @@ import android.widget.RelativeLayout;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.Datum;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
-import com.example.ehab.japroject.ui.Home.HomeContract;
+import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.TopEventsListAdapter;
+import com.example.ehab.japroject.ui.Home.HomeContract;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
@@ -49,6 +51,9 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @BindView(R.id.topEvents)
     RecyclerView topEvents;
+
+    @BindView(R.id.categories)
+    RecyclerView categories;
 
     @BindView(R.id.nearByEvents)
     RecyclerView nearByEvents;
@@ -161,5 +166,19 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     void openLocationSettings(){
         presenter.openLocationSettings();
     }
+
+
+    @Override
+    public void setupCategories(List<Category> categoryList) {
+        RecyclerView.LayoutManager layoutManager  = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.category_divider));
+        categories.setLayoutManager(layoutManager);
+        categories.addItemDecoration(dividerItemDecoration);
+        CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
+        categoryListAdapter.setData((ArrayList<Category>)categoryList);
+        categories.setAdapter(categoryListAdapter);
+    }
+
 
 }
