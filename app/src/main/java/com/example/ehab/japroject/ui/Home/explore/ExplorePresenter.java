@@ -2,7 +2,6 @@ package com.example.ehab.japroject.ui.Home.explore;
 
 import android.os.Bundle;
 
-import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.category.CategoryCallback;
 import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;

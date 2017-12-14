@@ -1,7 +1,6 @@
 package com.example.ehab.japroject.datalayer;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.TopEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 
 import java.util.List;
