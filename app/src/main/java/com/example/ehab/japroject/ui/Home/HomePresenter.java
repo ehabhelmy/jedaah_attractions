@@ -29,7 +29,7 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void showEvents() {
-
+        jaNavigationManager.showEventsScreen();
     }
 
     @Override
@@ -41,5 +41,11 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     public void locationIsEnabled() {
         ExploreFragment exploreFragment = jaNavigationManager.getCurrentFragment();
         exploreFragment.locationIsEnabled();
+    }
+
+    @Override
+    public void hideNearByEvents() {
+        ExploreFragment exploreFragment = jaNavigationManager.getCurrentFragment();
+        exploreFragment.hideNearByEvents();
     }
 }

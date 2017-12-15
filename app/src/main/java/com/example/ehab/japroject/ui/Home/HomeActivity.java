@@ -48,7 +48,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                     presenter.showExplore();
                     break;
                 case R.id.events :
-                    break;
+                    presenter.showEvents();
                 case R.id.profile :
                     break;
             }
@@ -108,6 +108,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermission = true;
+                }else{
+                    presenter.hideNearByEvents();
                 }
         }
     }

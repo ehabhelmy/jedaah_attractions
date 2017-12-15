@@ -22,7 +22,7 @@ import butterknife.BindView;
  * Created by ehab on 12/11/17.
  */
 
-public class TopEventsViewHolder extends BaseViewHolder<Event> {
+public class EventsViewHolder extends BaseViewHolder<Event> {
 
     @BindView(R.id.eventImage)
     ImageLayout eventImage;
@@ -48,7 +48,7 @@ public class TopEventsViewHolder extends BaseViewHolder<Event> {
     @BindView(R.id.eventRemaining)
     TextView eventRemaining;
 
-    public TopEventsViewHolder(View itemView) {
+    public EventsViewHolder(View itemView) {
         super(itemView);
     }
 

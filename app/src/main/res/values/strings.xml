@@ -14,4 +14,8 @@
     <string name="exploreJeddah">EXPLORE JEDDAH</string>
     <string name="title_categories">CATEGORIES FOR YOU</string>
     <string name="nearbyEvents">NEAR BY EVENTS</string>
+    <string name="allevents">ALL</string>
+    <string name="todayEvents">TODAY</string>
+    <string name="ThisWeekEvents">THIS WEEK</string>
+    <string name="NearByEvents">NEAR BY</string>
 </resources>

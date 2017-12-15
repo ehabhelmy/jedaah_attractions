@@ -18,5 +18,6 @@ public interface HomeContract {
         void showEvents();
         void showProfile();
         void locationIsEnabled();
+        void hideNearByEvents();
     }
 }

@@ -105,25 +105,27 @@
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/exploreNearBy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background"
-            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:paddingBottom="20dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
+            android:paddingTop="10dp">
 
             <TextView
+                style="@style/TitleTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TitleTheme"
                 android:text="@string/nearbyEvents" />
 
             <RelativeLayout
+                android:id="@+id/errorLocationContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/errorLocationContainer"
                 android:visibility="gone">
 
                 <Button
@@ -133,8 +135,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:background="@color/lightBlack"
-                    android:padding="10dp"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="ENABLE LOCATIONS SETTINGS"
                     android:textColor="@color/colorTitle" />
             </RelativeLayout>
@@ -142,7 +144,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/nearByEvents"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </LinearLayout>

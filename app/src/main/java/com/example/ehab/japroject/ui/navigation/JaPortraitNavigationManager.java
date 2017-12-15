@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import com.example.ehab.japroject.ui.Home.HomeActivity;
+import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.util.Constants;
 
@@ -21,7 +22,16 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (exploreFragment == null) {
             exploreFragment = new ExploreFragment();
         }
-        replaceFragment(exploreFragment,false);
+        replaceFragment(exploreFragment,false,EXPLORE);
+    }
+
+    @Override
+    public void showEventsScreen() {
+        EventsFragment eventsFragment = (EventsFragment) fragmentManager.findFragmentByTag(EVENTS);
+        if (eventsFragment == null) {
+            eventsFragment = new EventsFragment();
+        }
+        replaceFragment(eventsFragment,false,EVENTS);
     }
 
     @Override

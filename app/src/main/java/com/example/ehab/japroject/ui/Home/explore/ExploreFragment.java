@@ -1,10 +1,6 @@
 package com.example.ehab.japroject.ui.Home.explore;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,20 +8,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.Datum;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
-import com.example.ehab.japroject.ui.Home.explore.adapter.TopEventsListAdapter;
+import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.HomeContract;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +58,9 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @BindView(R.id.errorLocationContainer)
     RelativeLayout errorLocationContainer;
+
+    @BindView(R.id.exploreNearBy)
+    LinearLayout exploreNearBy;
 
     @Override
     protected void initializeDagger() {
@@ -104,36 +102,28 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @Override
     public void setupTopEvents(List<Event> events) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
-        topEvents.setLayoutManager(layoutManager);
-        topEvents.addItemDecoration(dividerItemDecoration);
-        topEvents.setItemAnimator(new DefaultItemAnimator());
-        TopEventsListAdapter topEventsListAdapter = new TopEventsListAdapter();
-        topEventsListAdapter.setData((ArrayList<Event>) events);
-        topEventsListAdapter.setOnFavouriteListener(model -> {
-            Event event = (Event) model;
-            //TODO : call presenter to send id of the event to the backend
-        });
-        topEvents.setAdapter(topEventsListAdapter);
+        setupRecyclerView(topEvents,events);
     }
 
     @Override
     public void setupNearbyEvents(List<Event> events) {
+        setupRecyclerView(nearByEvents,events);
+    }
+
+    private void setupRecyclerView(RecyclerView recyclerView,List<Event> events) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
-        nearByEvents.setLayoutManager(layoutManager);
-        nearByEvents.addItemDecoration(dividerItemDecoration);
-        nearByEvents.setItemAnimator(new DefaultItemAnimator());
-        TopEventsListAdapter topEventsListAdapter = new TopEventsListAdapter();
-        topEventsListAdapter.setData((ArrayList<Event>) events);
-        topEventsListAdapter.setOnFavouriteListener(model -> {
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        EventsListAdapter eventsListAdapter = new EventsListAdapter();
+        eventsListAdapter.setData((ArrayList<Event>) events);
+        eventsListAdapter.setOnFavouriteListener(model -> {
             Event event = (Event) model;
             //TODO : call presenter to send id of the event to the backend
         });
-        nearByEvents.setAdapter(topEventsListAdapter);
+        recyclerView.setAdapter(eventsListAdapter);
     }
 
     @Override
@@ -178,6 +168,10 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
         categoryListAdapter.setData((ArrayList<Category>)categoryList);
         categories.setAdapter(categoryListAdapter);
+    }
+
+    public void hideNearByEvents() {
+        exploreNearBy.setVisibility(View.GONE);
     }
 
 
