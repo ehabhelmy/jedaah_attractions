@@ -23,7 +23,7 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
         public void onSuccess(EventsResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                     getView().setupTodayEvents(EventsAdapter.convertIntoEventUi(model.getData()));
+                    getView().setupTodayEvents(EventsAdapter.convertIntoEventUi(model.getData()));
                 } else {
                     getView().showError();
                 }
@@ -33,7 +33,7 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
         @Override
         public void onError() {
             if (isViewAlive.get()) {
-                 getView().showError();
+                getView().showError();
             }
         }
     };

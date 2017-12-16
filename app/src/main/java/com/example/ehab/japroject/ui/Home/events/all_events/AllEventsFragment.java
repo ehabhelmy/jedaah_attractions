@@ -23,7 +23,7 @@ import butterknife.BindView;
  * Created by ehab on 12/15/17.
  */
 
-public class AllEventsFragment extends BaseFragment implements AllEventsContract.View{
+public class AllEventsFragment extends BaseFragment implements AllEventsContract.View {
 
     @Inject
     AllEventsPresenter presenter;

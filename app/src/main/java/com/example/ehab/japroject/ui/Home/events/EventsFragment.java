@@ -21,16 +21,13 @@ import butterknife.BindView;
 public class EventsFragment extends BaseFragment implements EventsContract.View {
 
 
-    private EventsViewPagerAdapter eventsViewPagerAdapter;
-
     @Inject
     EventsPresenter presenter;
-
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
-
     @BindView(R.id.eventsViewPager)
     ViewPager eventsViewPager;
+    private EventsViewPagerAdapter eventsViewPagerAdapter;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

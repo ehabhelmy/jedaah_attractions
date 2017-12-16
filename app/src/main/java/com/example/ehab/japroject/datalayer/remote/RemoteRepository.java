@@ -8,10 +8,13 @@ import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 

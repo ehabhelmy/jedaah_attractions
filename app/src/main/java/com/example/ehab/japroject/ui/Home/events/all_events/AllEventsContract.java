@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface AllEventsContract {
 
-    interface View extends BaseView,ErrorView,ProgressView {
+    interface View extends BaseView, ErrorView, ProgressView {
         void setupAllEvents(List<Event> events);
     }
 

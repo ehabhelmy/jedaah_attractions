@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.events.all_events.AllEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.nearby_events.NearByEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragment;

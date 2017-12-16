@@ -20,8 +20,8 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
     private BaseCallback<EventsResponse> eventsResponseBaseCallback = new BaseCallback<EventsResponse>() {
         @Override
         public void onSuccess(EventsResponse model) {
-            if (isViewAlive.get()){
-                if (model.getSuccess()){
+            if (isViewAlive.get()) {
+                if (model.getSuccess()) {
                     getView().setupAllEvents(EventsAdapter.convertIntoEventUi(model.getData()));
                 } else {
                     getView().showError();
@@ -31,7 +31,7 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
 
         @Override
         public void onError() {
-            if (isViewAlive.get()){
+            if (isViewAlive.get()) {
                 getView().showError();
             }
         }
