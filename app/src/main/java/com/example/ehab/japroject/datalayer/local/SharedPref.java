@@ -25,6 +25,8 @@ public class SharedPref<T extends BaseModel> {
     public static final String DATA_KEY = "data-key";
     public static final String TOP_EVENTS = "topEvents";
     public static final String NEARBY_EVENTS = "nearbyEvents";
+    public static final String TADAY_EVENTS = "todayEvents";
+    public static final String WEEK_EVENTS = "weekEvents";
 
     public void saveObject(String key, Object object) {
         SharedPreferences.Editor editor = preferences.edit();

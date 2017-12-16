@@ -11,7 +11,9 @@ import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -70,10 +72,10 @@ public class RemoteRepository implements RemoteSource {
     public DataResponse getData() {
         DataService dataService = serviceGenerator.createService(DataService.class, BASE_URL);
         ServiceResponse serviceResponse = processCall(dataService.getData(), false);
-        if (serviceResponse.getCode() == SUCCESS_CODE){
+        if (serviceResponse.getCode() == SUCCESS_CODE) {
             DataResponse dataResponse = (DataResponse) serviceResponse.getData();
             return dataResponse;
-        }else{
+        } else {
             return null;
         }
     }
@@ -113,7 +115,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             NearByEventsService nearByEventsService = serviceGenerator.createService(NearByEventsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(nearByEventsService.getNearbyEvents(new NearbyEventsRequest(latLng.latitude+"",latLng.longitude+"")), false);
+                            ServiceResponse serviceResponse = processCall(nearByEventsService.getNearbyEvents(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + "")), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventsResponse);
@@ -154,5 +156,56 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return categoriesResponseSingle;
+    }
+
+    @Override
+    public Single<EventsResponse> getTodayEvents() {
+
+        Single<EventsResponse> eventsResponseSingle = Single.create(singleOnSubscribe -> {
+            if (!isConnected(JaApplication.getContext())) {
+                Exception exception = new NetworkErrorException();
+                singleOnSubscribe.onError(exception);
+            } else {
+                try {
+                    TodayEventsService todayEventsService = serviceGenerator.createService(TodayEventsService.class, BASE_URL);
+                    ServiceResponse serviceResponse = processCall(todayEventsService.getTodayEvents(), false);
+                    if (serviceResponse.getCode() == SUCCESS_CODE) {
+                        EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
+                        singleOnSubscribe.onSuccess(eventsResponse);
+                    } else {
+                        Throwable throwable = new NetworkErrorException();
+                        singleOnSubscribe.onError(throwable);
+                    }
+                } catch (Exception e) {
+                    singleOnSubscribe.onError(e);
+                }
+            }
+        });
+        return eventsResponseSingle;
+    }
+
+    @Override
+    public Single<EventsResponse> getWeekEvents() {
+        Single<EventsResponse> eventsResponseSingle = Single.create(singleOnSubscribe -> {
+            if (!isConnected(JaApplication.getContext())) {
+                Exception exception = new NetworkErrorException();
+                singleOnSubscribe.onError(exception);
+            } else {
+                try {
+                    WeekEventsService weekEventsService = serviceGenerator.createService(WeekEventsService.class, BASE_URL);
+                    ServiceResponse serviceResponse = processCall(weekEventsService.getWeekEvents(), false);
+                    if (serviceResponse.getCode() == SUCCESS_CODE) {
+                        EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
+                        singleOnSubscribe.onSuccess(eventsResponse);
+                    } else {
+                        Throwable throwable = new NetworkErrorException();
+                        singleOnSubscribe.onError(throwable);
+                    }
+                } catch (Exception e) {
+                    singleOnSubscribe.onError(e);
+                }
+            }
+        });
+        return eventsResponseSingle;
     }
 }

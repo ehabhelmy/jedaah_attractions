@@ -2,6 +2,8 @@ package com.example.ehab.japroject.di;
 
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
+import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragment;
+import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 
 import javax.inject.Singleton;
@@ -22,5 +24,9 @@ public interface MainComponent {
     void inject(ExploreFragment exploreFragment);
 
     void inject(EventsFragment eventsFragment);
+
+    void inject(TodayEventsFragment todayEventsFragment);
+
+    void inject(WeekEventsFragment weekEventsFragment);
 }
 

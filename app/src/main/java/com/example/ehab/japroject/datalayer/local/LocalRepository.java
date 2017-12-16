@@ -37,13 +37,13 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<EventsResponse> getTopEvents() {
-        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.TOP_EVENTS,EventsResponse.class);
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.TOP_EVENTS, EventsResponse.class);
         Single<EventsResponse> topEventsResponseSingle = Single.create(e -> {
-           if (eventsResponse != null){
-               e.onSuccess(eventsResponse);
-           }else{
-               e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
-           }
+            if (eventsResponse != null) {
+                e.onSuccess(eventsResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
         });
         return topEventsResponseSingle;
     }
@@ -55,11 +55,11 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<EventsResponse> getNearByEvents() {
-        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.NEARBY_EVENTS,EventsResponse.class);
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.NEARBY_EVENTS, EventsResponse.class);
         Single<EventsResponse> NearByEventsResponseSingle = Single.create(e -> {
-            if (eventsResponse != null){
+            if (eventsResponse != null) {
                 e.onSuccess(eventsResponse);
-            }else{
+            } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
@@ -87,5 +87,41 @@ public class LocalRepository implements LocalSource {
     @Override
     public void saveCategories(List<Category> categoriesResponse) {
         sharedPref.saveObject(SharedPref.CATEGORIES, categoriesResponse);
+    }
+
+    @Override
+    public void saveTodayEvents(EventsResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.TADAY_EVENTS, eventsResponse);
+    }
+
+    @Override
+    public Single<EventsResponse> getTodayEvents() {
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(SharedPref.TADAY_EVENTS, EventsResponse.class);
+        Single<EventsResponse> todayEventsResponseSingle = Single.create(e -> {
+            if (eventsResponse != null) {
+                e.onSuccess(eventsResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return todayEventsResponseSingle;
+    }
+
+    @Override
+    public void saveWeekEvents(EventsResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.WEEK_EVENTS, eventsResponse);
+    }
+
+    @Override
+    public Single<EventsResponse> getWeekEvents() {
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(SharedPref.WEEK_EVENTS, EventsResponse.class);
+        Single<EventsResponse> weekEventsResponseSingle = Single.create(e -> {
+            if (eventsResponse != null) {
+                e.onSuccess(eventsResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return weekEventsResponseSingle;
     }
 }
