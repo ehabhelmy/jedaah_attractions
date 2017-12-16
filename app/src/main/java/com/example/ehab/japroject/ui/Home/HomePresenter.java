@@ -39,8 +39,7 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void locationIsEnabled() {
-        ExploreFragment exploreFragment = jaNavigationManager.getCurrentFragment();
-        exploreFragment.locationIsEnabled();
+        jaNavigationManager.getCurrentFragment().locationIsEnabled();
     }
 
     @Override

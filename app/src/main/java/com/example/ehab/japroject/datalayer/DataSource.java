@@ -25,4 +25,6 @@ public interface DataSource {
 
     Single<List<Category>> getCategories();
 
+    Single<EventsResponse> getAllEvents();
+
 }

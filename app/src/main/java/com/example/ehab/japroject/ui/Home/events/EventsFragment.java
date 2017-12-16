@@ -20,6 +20,9 @@ import butterknife.BindView;
 
 public class EventsFragment extends BaseFragment implements EventsContract.View {
 
+
+    private EventsViewPagerAdapter eventsViewPagerAdapter;
+
     @Inject
     EventsPresenter presenter;
 
@@ -32,7 +35,8 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        EventsViewPagerAdapter eventsViewPagerAdapter = new EventsViewPagerAdapter(getActivity().getSupportFragmentManager());
+        eventsViewPagerAdapter = new EventsViewPagerAdapter(getActivity().getSupportFragmentManager());
+        eventsViewPager.setOffscreenPageLimit(4);
         eventsViewPager.setAdapter(eventsViewPagerAdapter);
         tabLayout.setupWithViewPager(eventsViewPager);
     }
@@ -67,5 +71,12 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_events;
+    }
+
+    @Override
+    public void locationIsEnabled() {
+        super.locationIsEnabled();
+        BaseFragment baseFragment = (BaseFragment) eventsViewPagerAdapter.getItem(eventsViewPager.getCurrentItem());
+        baseFragment.locationIsEnabled();
     }
 }

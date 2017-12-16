@@ -30,4 +30,8 @@ public interface LocalSource {
     Single<List<Category>> getCategories();
 
     void saveCategories(List<Category> categoriesResponse);
+
+    Single<EventsResponse> getAllEvents();
+
+    void saveAllEvents(EventsResponse eventsResponse);
 }

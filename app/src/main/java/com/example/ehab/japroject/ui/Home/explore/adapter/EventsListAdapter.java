@@ -16,9 +16,20 @@ import com.example.ehab.japroject.ui.Home.explore.viewholder.EventsViewHolder;
 
 public class EventsListAdapter extends BaseRecyclerViewAdapter<Event> {
 
+    boolean big = false;
+
+    public EventsListAdapter(boolean big) {
+        this.big = big;
+    }
+
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview,parent,false);
+        View view = null;
+        if (!big) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.big_cardview, parent, false);
+        }
         return new EventsViewHolder(view);
     }
 }

@@ -24,18 +24,15 @@ public class EventsViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        BaseFragment baseFragment = null;
-        switch (position) {
-            case 0:
-                baseFragment = new AllEventsFragment();
-            case 1:
-                baseFragment = new TodayEventsFragment();
-            case 2:
-                baseFragment = new WeekEventsFragment();
-            case 3:
-                baseFragment = new NearByEventsFragment();
+        if (position == 0) {
+            return new AllEventsFragment();
+        }else if (position == 1){
+            return new TodayEventsFragment();
+        }else if (position == 2){
+            return new WeekEventsFragment();
+        }else{
+            return new NearByEventsFragment();
         }
-        return baseFragment;
     }
 
     @Override

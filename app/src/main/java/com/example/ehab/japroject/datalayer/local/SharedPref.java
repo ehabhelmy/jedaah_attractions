@@ -20,6 +20,7 @@ public class SharedPref<T extends BaseModel> {
 
     public static final String CATEGORIES = "categories";
     private static final String SHARED_PREF = "ja shared pref";
+    public static final String ALL_EVENTS = "all-events";
     private Context context = JaApplication.getContext();
     private SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE);
     public static final String DATA_KEY = "data-key";

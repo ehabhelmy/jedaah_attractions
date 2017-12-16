@@ -115,4 +115,27 @@ public class DataRepository implements DataSource {
             return localRepository.getCategories();
         }
     }
+
+    @Override
+    public Single<EventsResponse> getAllEvents() {
+        if (isConnected(JaApplication.getContext())){
+            remoteRepository.getTopEvents()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<EventsResponse>() {
+                        @Override
+                        public void onSuccess(EventsResponse eventsResponse) {
+                            localRepository.saveAllEvents(eventsResponse);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
+            return remoteRepository.getAllEvents();
+        } else {
+            return localRepository.getAllEvents();
+        }
+    }
 }

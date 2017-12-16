@@ -23,4 +23,6 @@ public interface RemoteSource {
     Single<EventsResponse> getNearByEvents(LatLng latLng);
 
     Single<List<Category>> getCategories();
+
+    Single<EventsResponse> getAllEvents();
 }

@@ -117,7 +117,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        EventsListAdapter eventsListAdapter = new EventsListAdapter();
+        EventsListAdapter eventsListAdapter = new EventsListAdapter(false);
         eventsListAdapter.setData((ArrayList<Event>) events);
         eventsListAdapter.setOnFavouriteListener(model -> {
             Event event = (Event) model;
@@ -148,6 +148,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         });
     }
 
+    @Override
     public void locationIsEnabled(){
         errorLocationContainer.setVisibility(View.GONE);
         getLatitudeAndLongitude();

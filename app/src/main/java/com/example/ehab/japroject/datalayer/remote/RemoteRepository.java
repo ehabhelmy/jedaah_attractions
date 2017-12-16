@@ -8,6 +8,7 @@ import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
@@ -154,5 +155,31 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return categoriesResponseSingle;
+    }
+
+    @Override
+    public Single<EventsResponse> getAllEvents() {
+        Single<EventsResponse> allEventsSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AllEventsService allEventsService = serviceGenerator.createService(AllEventsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(allEventsService.getAllEvents(), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(eventsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return allEventsSingle;
     }
 }

@@ -88,4 +88,22 @@ public class LocalRepository implements LocalSource {
     public void saveCategories(List<Category> categoriesResponse) {
         sharedPref.saveObject(SharedPref.CATEGORIES, categoriesResponse);
     }
+
+    @Override
+    public Single<EventsResponse> getAllEvents() {
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.ALL_EVENTS,EventsResponse.class);
+        Single<EventsResponse> allEventsResponseSingle = Single.create(e -> {
+            if (eventsResponse != null){
+                e.onSuccess(eventsResponse);
+            }else{
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return allEventsResponseSingle;
+    }
+
+    @Override
+    public void saveAllEvents(EventsResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.ALL_EVENTS,eventsResponse);
+    }
 }

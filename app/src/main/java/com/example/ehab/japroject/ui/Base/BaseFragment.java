@@ -57,6 +57,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         return view;
     }
 
+    public void locationIsEnabled(){
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();
