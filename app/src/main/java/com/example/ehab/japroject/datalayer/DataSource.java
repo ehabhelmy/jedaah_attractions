@@ -1,8 +1,10 @@
 package com.example.ehab.japroject.datalayer;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+
+import java.util.List;
+import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
@@ -26,4 +28,6 @@ public interface DataSource {
     Single<EventsResponse> getTodayEvents();
 
     Single<EventsResponse> getWeekEvents();
+    Single<EventsResponse> getAllEvents();
+
 }

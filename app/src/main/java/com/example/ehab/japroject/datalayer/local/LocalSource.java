@@ -1,10 +1,10 @@
 package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 
 import java.util.List;
+import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 
 import io.reactivex.Single;
 
@@ -38,4 +38,8 @@ public interface LocalSource {
     void saveWeekEvents(EventsResponse eventsResponse);
 
     Single<EventsResponse> getWeekEvents();
+
+    Single<EventsResponse> getAllEvents();
+
+    void saveAllEvents(EventsResponse eventsResponse);
 }

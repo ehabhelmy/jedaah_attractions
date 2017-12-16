@@ -27,4 +27,6 @@ public interface RemoteSource {
     Single<EventsResponse> getTodayEvents();
 
     Single<EventsResponse> getWeekEvents();
+
+    Single<EventsResponse> getAllEvents();
 }

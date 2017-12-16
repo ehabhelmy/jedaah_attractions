@@ -3,12 +3,14 @@ package com.example.ehab.japroject.datalayer;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
+import com.google.android.gms.maps.model.LatLng;
+
+import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
 
 import javax.inject.Inject;
 
@@ -46,7 +48,7 @@ public class DataRepository implements DataSource {
 
     @Override
     public Single<EventsResponse> getTopEvents() {
-        if (isConnected(JaApplication.getContext())) {
+        if (isConnected(JaApplication.getContext())){
             remoteRepository.getTopEvents()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -69,7 +71,7 @@ public class DataRepository implements DataSource {
 
     @Override
     public Single<EventsResponse> getNearByEvents(LatLng latLng) {
-        if (isConnected(JaApplication.getContext())) {
+        if (isConnected(JaApplication.getContext())){
             remoteRepository.getNearByEvents(latLng)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -156,5 +158,28 @@ public class DataRepository implements DataSource {
             return remoteRepository.getWeekEvents();
         }
         return localRepository.getWeekEvents();
+    }
+
+    @Override
+    public Single<EventsResponse> getAllEvents() {
+        if (isConnected(JaApplication.getContext())){
+            remoteRepository.getTopEvents()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<EventsResponse>() {
+                        @Override
+                        public void onSuccess(EventsResponse eventsResponse) {
+                            localRepository.saveAllEvents(eventsResponse);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
+            return remoteRepository.getAllEvents();
+        } else {
+            return localRepository.getAllEvents();
+        }
     }
 }
