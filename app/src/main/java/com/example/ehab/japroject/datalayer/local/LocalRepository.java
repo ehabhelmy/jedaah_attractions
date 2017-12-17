@@ -1,8 +1,8 @@
 package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.util.Constants;
 
 import java.util.List;
@@ -72,9 +72,9 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
-    public Single<List<Category>> getCategories() {
-        List<Category> categoriesResponse = (List<Category>) sharedPref.getCategoryList(SharedPref.CATEGORIES);
-        Single<List<Category>> categoriesResponseSingle = Single.create(e -> {
+    public Single<Category> getCategories() {
+        Category categoriesResponse = (Category) sharedPref.getObject(SharedPref.CATEGORIES,Category.class);
+        Single<Category> categoriesResponseSingle = Single.create(e -> {
             if (categoriesResponse != null) {
                 e.onSuccess(categoriesResponse);
             } else {
@@ -85,7 +85,7 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
-    public void saveCategories(List<Category> categoriesResponse) {
+    public void saveCategories(Category categoriesResponse) {
         sharedPref.saveObject(SharedPref.CATEGORIES, categoriesResponse);
     }
 

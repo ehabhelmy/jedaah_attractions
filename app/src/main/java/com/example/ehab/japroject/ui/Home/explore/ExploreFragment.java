@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
@@ -160,14 +161,14 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
 
     @Override
-    public void setupCategories(List<Category> categoryList) {
+    public void setupCategories(List<Cats> categoryList) {
         RecyclerView.LayoutManager layoutManager  = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.category_divider));
         categories.setLayoutManager(layoutManager);
         categories.addItemDecoration(dividerItemDecoration);
         CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
-        categoryListAdapter.setData((ArrayList<Category>)categoryList);
+        categoryListAdapter.setData((ArrayList<Cats>) categoryList);
         categories.setAdapter(categoryListAdapter);
     }
 

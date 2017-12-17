@@ -1,49 +1,35 @@
+
 package com.example.ehab.japroject.datalayer.pojo.response.category;
+
+import java.util.List;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Romisaa.Attia on 12/12/2017.
- */
+public class Category extends BaseModel{
 
-public class Category extends BaseModel {
-
-    @SerializedName("id")
+    @SerializedName("success")
     @Expose
-    private int id;
-
-    @SerializedName("name")
+    private Boolean success;
+    @SerializedName("data")
     @Expose
-    private String name;
+    private List<Cats> data = null;
 
-    @SerializedName("icon")
-    @Expose
-    private String icon;
-
-    public Integer getId() {
-        return id;
+    public Boolean getSuccess() {
+        return success;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
-    public String getName() {
-        return name;
+    public List<Cats> getData() {
+        return data;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setData(List<Cats> data) {
+        this.data = data;
     }
 
 }

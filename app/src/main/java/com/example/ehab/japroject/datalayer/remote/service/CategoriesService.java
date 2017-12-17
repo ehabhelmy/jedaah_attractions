@@ -6,12 +6,13 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * Created by Romisaa.Attia on 12/12/2017.
  */
 
 public interface CategoriesService {
-    @GET("categories")
-    Call<List<Category>> getCategories();
+    @GET("{lang}/categories")
+    Call<Category> getCategories(@Path("lang") String lang);
 }

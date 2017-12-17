@@ -3,6 +3,7 @@ package com.example.ehab.japroject.usecase.categories;
 import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.category.CategoryCallback;
+import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
 
 import java.util.List;
@@ -24,9 +25,9 @@ public class Categories implements Unsubscribable {
 
     private DataRepository dataRepository;
     private CompositeDisposable compositeDisposable;
-    private Single<List<Category>> categoriesResponseSingle;
+    private Single<Category> categoriesResponseSingle;
     private Disposable disposable;
-    private DisposableSingleObserver<List<Category>> disposableSingleObserver;
+    private DisposableSingleObserver<Category> disposableSingleObserver;
 
     @Inject
     public Categories(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
@@ -34,13 +35,13 @@ public class Categories implements Unsubscribable {
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void getCategories(CategoryCallback<List<Category>> callback) {
+    public void getCategories(BaseCallback<Category> callback) {
 
-        disposableSingleObserver = new DisposableSingleObserver<List<Category>>() {
+        disposableSingleObserver = new DisposableSingleObserver<Category>() {
 
 
             @Override
-            public void onSuccess(List<Category> categories) {
+            public void onSuccess(Category categories) {
                 callback.onSuccess(categories);
             }
 

@@ -1,15 +1,16 @@
 package com.example.ehab.japroject.datalayer.remote.service;
 
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * Created by Romisaa on 12/16/2017.
  */
 
 public interface WeekEventsService {
-    @GET("thisWeekEvents")
-    Call<EventsResponse> getWeekEvents();
+    @GET("{lang}/events/thisWeek/list")
+    Call<EventsResponse> getWeekEvents(@Path("lang") String lang);
 }

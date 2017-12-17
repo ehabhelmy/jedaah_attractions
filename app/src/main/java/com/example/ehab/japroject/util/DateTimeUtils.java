@@ -4,6 +4,7 @@ import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.util.Log;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,7 +49,13 @@ public class DateTimeUtils {
         Date date1 = new Date();
         long diff = date.getTime() - date1.getTime();
         int day = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        return day+"- DAYS";
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        String daysRemaining = numberFormat.format(day);
+        if (Locale.getDefault().getLanguage().equals("ar")){
+            return  daysRemaining+ "- يوم";
+        }else{
+            return daysRemaining + "- Days";
+        }
     }
 
     /**

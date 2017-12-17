@@ -2,7 +2,7 @@ package com.example.ehab.japroject.ui.Home.events.nearby_events;
 
 import android.os.Bundle;
 
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;

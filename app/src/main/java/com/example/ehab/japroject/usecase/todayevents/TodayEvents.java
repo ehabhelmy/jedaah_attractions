@@ -1,7 +1,7 @@
 package com.example.ehab.japroject.usecase.todayevents;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
 

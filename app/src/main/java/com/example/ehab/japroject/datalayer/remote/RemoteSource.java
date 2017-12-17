@@ -1,7 +1,7 @@
 package com.example.ehab.japroject.datalayer.remote;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 
@@ -22,7 +22,7 @@ public interface RemoteSource {
 
     Single<EventsResponse> getNearByEvents(LatLng latLng);
 
-    Single<List<Category>> getCategories();
+    Single<Category> getCategories();
 
     Single<EventsResponse> getTodayEvents();
 

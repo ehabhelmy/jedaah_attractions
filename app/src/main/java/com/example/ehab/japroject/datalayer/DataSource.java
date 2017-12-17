@@ -4,10 +4,9 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 
 import java.util.List;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
-import com.google.android.gms.maps.model.LatLng;
 
-import java.util.List;
+import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.google.android.gms.maps.model.LatLng;
 
 import io.reactivex.Single;
 
@@ -23,7 +22,7 @@ public interface DataSource {
 
     Single<EventsResponse> getNearByEvents(LatLng latLng);
 
-    Single<List<Category>> getCategories();
+    Single<Category> getCategories();
 
     Single<EventsResponse> getTodayEvents();
 

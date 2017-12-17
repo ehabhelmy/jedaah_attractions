@@ -1,5 +1,5 @@
 
-package com.example.ehab.japroject.datalayer.pojo.response;
+package com.example.ehab.japroject.datalayer.pojo.response.events;
 
 import java.util.List;
 

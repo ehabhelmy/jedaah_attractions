@@ -4,7 +4,7 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
-import com.example.ehab.japroject.datalayer.pojo.response.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 
 import java.util.List;
@@ -18,8 +18,6 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
-
-import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
 
 /**
  * Created by ehab on 12/2/17.
@@ -93,15 +91,15 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<List<Category>> getCategories() {
+    public Single<Category> getCategories() {
         if (isConnected(JaApplication.getContext())) {
             remoteRepository.getCategories()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<List<Category>>() {
+                    .subscribeWith(new DisposableSingleObserver<Category>() {
 
                         @Override
-                        public void onSuccess(List<Category> categories) {
+                        public void onSuccess(Category categories) {
                             localRepository.saveCategories(categories);
                         }
 

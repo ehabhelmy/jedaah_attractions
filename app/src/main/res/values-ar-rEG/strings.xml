@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">معالم جده</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="explore">تصفح</string>
+    <string name="events">المناسبات</string>
+    <string name="profile">الملف الشخصى</string>
+    <string name="topEvents">افضل المناسبات</string>
+    <string name="exploreJeddah">تصفح جده</string>
+    <string name="title_categories">الفئات</string>
+    <string name="nearbyEvents">المناسبات القريبه منك</string>
+    <string name="allevents">كل</string>
+    <string name="todayEvents">اليوم</string>
+    <string name="ThisWeekEvents">هذا الاسبوع</string>
+    <string name="NearByEvents">القريبه</string>
+</resources>

@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * Created by ehab on 12/2/17.
@@ -12,5 +13,5 @@ import retrofit2.http.GET;
 public interface DataService {
 
     @GET("/data")
-    Call<DataResponse> getData();
+    Call<DataResponse> getData(@Path("lang") String lang);
 }

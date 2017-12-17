@@ -1,13 +1,9 @@
 package com.example.ehab.japroject.ui.Home.explore.viewholder;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.Datum;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
 import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
