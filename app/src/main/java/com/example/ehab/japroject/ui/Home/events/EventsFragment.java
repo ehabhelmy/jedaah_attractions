@@ -73,7 +73,6 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
     @Override
     public void locationIsEnabled() {
         super.locationIsEnabled();
-        BaseFragment baseFragment = (BaseFragment) eventsViewPagerAdapter.getItem(eventsViewPager.getCurrentItem());
-        baseFragment.locationIsEnabled();
+        eventsViewPagerAdapter.getCurrentFragment().locationIsEnabled();
     }
 }

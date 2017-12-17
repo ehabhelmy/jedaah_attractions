@@ -11,56 +11,56 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:paddingTop="10dp">
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/white"-->
-            <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-            <!--android:orientation="vertical">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--style="@style/TitleTheme"-->
-                <!--android:text="@string/exploreJeddah" />-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TitleTheme"
+                android:text="@string/exploreJeddah" />
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:weightSum="5">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5">
 
 
-            <!--<ImageView-->
-                <!--android:id="@+id/imageView"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1.6"-->
-                <!--android:layout_marginLeft="10.5dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:elevation="1dp"-->
-                <!--app:srcCompat="@drawable/ic_events_main" />-->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:layout_marginLeft="10.5dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="1dp"
+                app:srcCompat="@drawable/ic_events_main" />
 
-            <!--<ImageView-->
-                <!--android:id="@+id/imageView2"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1.6"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="10.5dp"-->
-                <!--android:elevation="1dp"-->
-                <!--app:srcCompat="@drawable/ic_venues_main" />-->
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10.5dp"
+                android:elevation="1dp"
+                app:srcCompat="@drawable/ic_venues_main" />
 
-            <!--<ImageView-->
-                <!--android:id="@+id/imageView3"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1.6"-->
-                <!--android:elevation="1dp"-->
-                <!--android:layout_marginLeft="10.5dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--app:srcCompat="@drawable/ic_attractions_main" />-->
-        <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:elevation="1dp"
+                android:layout_marginLeft="10.5dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/ic_attractions_main" />
+        </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

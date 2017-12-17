@@ -3,9 +3,11 @@ package com.example.ehab.japroject.ui.Home.events;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
+import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.events.all_events.AllEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.nearby_events.NearByEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragment;
@@ -16,6 +18,12 @@ import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
  */
 
 public class EventsViewPagerAdapter extends FragmentPagerAdapter {
+
+    private BaseFragment currentFragment;
+
+    public BaseFragment getCurrentFragment() {
+        return currentFragment;
+    }
 
     public EventsViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -37,6 +45,14 @@ public class EventsViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return 4;
+    }
+
+    @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        if (currentFragment != object) {
+            currentFragment = (BaseFragment) object;
+        }
+        super.setPrimaryItem(container, position, object);
     }
 
     @Override
