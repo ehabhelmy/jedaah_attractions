@@ -31,6 +31,8 @@ public abstract class JaNavigationManager {
 
     public static final String EVENTS = "events";
 
+    public static final String SOCIAL = "social";
+
     public static final int LOCATION_SETTINGS = 2;
 
 
@@ -53,13 +55,18 @@ public abstract class JaNavigationManager {
 
     public abstract void showLocationSettings();
 
+    public abstract void showSocialMediaScreen();
+
     protected void addFragment(BaseFragment fragment,boolean addToBackStack){
 
     }
 
-    protected void replaceFragment(BaseFragment fragment,boolean addToBackStack,String tag){
+    protected void replaceFragment(BaseFragment fragment,boolean addToBackStack,String tag,int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment,tag);
+        if (addToBackStack){
+            fragmentTransaction.addToBackStack(tag);
+        }
+        fragmentTransaction.replace(frame,fragment,tag);
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         fragmentTransaction.commitNowAllowingStateLoss();
     }

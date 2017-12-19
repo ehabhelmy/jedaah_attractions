@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
+import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 import com.example.ehab.japroject.util.Constants;
 
 /**
@@ -22,7 +24,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (exploreFragment == null) {
             exploreFragment = new ExploreFragment();
         }
-        replaceFragment(exploreFragment,false,EXPLORE);
+        replaceFragment(exploreFragment,false,EXPLORE, R.id.frame_layout);
     }
 
     @Override
@@ -31,11 +33,20 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (eventsFragment == null) {
             eventsFragment = new EventsFragment();
         }
-        replaceFragment(eventsFragment,false,EVENTS);
+        replaceFragment(eventsFragment,false,EVENTS,R.id.frame_layout);
     }
 
     @Override
     public void showLocationSettings() {
         getCurrentActivity().startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),LOCATION_SETTINGS);
+    }
+
+    @Override
+    public void showSocialMediaScreen() {
+        SocialMediaFragment socialMediaFragment = (SocialMediaFragment) fragmentManager.findFragmentByTag(SOCIAL);
+        if (socialMediaFragment == null) {
+            socialMediaFragment = new SocialMediaFragment();
+        }
+        replaceFragment(socialMediaFragment,true,SOCIAL,R.id.frame_layout_auth);
     }
 }

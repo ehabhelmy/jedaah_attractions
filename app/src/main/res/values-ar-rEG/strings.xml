@@ -19,4 +19,12 @@
     <string name="todayEvents">اليوم</string>
     <string name="ThisWeekEvents">هذا الاسبوع</string>
     <string name="NearByEvents">القريبه</string>
+    <string name="buyNow">BUY NOW</string>
+    <string name="skip">SKIP</string>
+    <string name="welcome">WELCOME TO</string>
+    <string name="paragraph">askjdhasjkdhasjdhasjdhasjdah , asjdkashjdahsjdhaj ,asdasdasda ,asdasdasd</string>
+    <string name="register">REGISTER</string>
+    <string name="signin">SIGN IN</string>
+    <string name="googleplus">GOOGLE +</string>
+    <string name="facebook">FACEBOOK</string>
 </resources>

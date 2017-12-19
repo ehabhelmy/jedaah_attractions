@@ -6,6 +6,8 @@ import android.support.multidex.MultiDexApplication;
 import com.crashlytics.android.Crashlytics;
 import com.example.ehab.japroject.di.DaggerMainComponent;
 import com.example.ehab.japroject.di.MainComponent;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.squareup.leakcanary.LeakCanary;
 
 import io.fabric.sdk.android.Fabric;
@@ -27,11 +29,12 @@ public class JaApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        // TODO : initialize leak canary and crashlytics and FireBase Analytics
+        // TODO : initialize leak canary and crashlytics and FireBase Analytics and facebook sdk
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
+        AppEventsLogger.activateApp(this);
         mainComponent = DaggerMainComponent.create();
         context = getApplicationContext();
     }

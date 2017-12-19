@@ -11,4 +11,6 @@
     <color name="white">#ffffff</color>
     <color name="background">#F7F7F7</color>
     <color name="categoryBackground">#313438</color>
+    <color name="transparent">#00000000</color>
+    <color name="google">#D34836</color>
 </resources>

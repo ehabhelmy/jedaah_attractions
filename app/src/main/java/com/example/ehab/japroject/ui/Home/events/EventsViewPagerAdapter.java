@@ -37,8 +37,10 @@ public class EventsViewPagerAdapter extends FragmentPagerAdapter {
             return new TodayEventsFragment();
         }else if (position == 2){
             return new WeekEventsFragment();
-        }else{
+        }else if (position == 3){
             return new NearByEventsFragment();
+        }else {
+            return null;
         }
     }
 

@@ -33,7 +33,6 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         eventsViewPagerAdapter = new EventsViewPagerAdapter(getActivity().getSupportFragmentManager());
-        eventsViewPager.setOffscreenPageLimit(4);
         eventsViewPager.setAdapter(eventsViewPagerAdapter);
         tabLayout.setupWithViewPager(eventsViewPager);
     }

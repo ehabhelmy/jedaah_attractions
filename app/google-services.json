@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "53888803660",
+    "project_id": "jeddah-attractions-188909"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53888803660:android:3d1cab4a368b4e4f",
+        "android_client_info": {
+          "package_name": "com.example.ehab.japroject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53888803660-oddhn9jnkloev3q90q7pogg1it7p4kf7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "53888803660-g96d3g0qura15psknsivird6o9hog1tq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ehab.japroject",
+            "certificate_hash": "ed2969b79bc872e42c8f9bc3dffe2adbe60948df"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHXB6wM1kg9kM_7-xgg_RTj6ZNjDjH1lI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
