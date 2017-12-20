@@ -61,5 +61,6 @@ public interface MainComponent {
     void inject(EventOrderFragment eventOrderFragment);
 
     void inject(ProfileFragment profileFragment);
+
 }
 

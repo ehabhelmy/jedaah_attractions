@@ -20,6 +20,7 @@ import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 import com.example.ehab.japroject.util.Constants;
+import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 
 /**
  * Created by ehab on 12/1/17.
@@ -43,6 +44,15 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             eventsFragment = new EventsFragment();
         }
         replaceFragment(eventsFragment,false,EVENTS,R.id.frame_layout);
+    }
+
+    @Override
+    public void showProfileScreen() {
+        ProfileFragment profileFragment = (ProfileFragment) fragmentManager.findFragmentByTag(PROFILE);
+        if (profileFragment == null) {
+            profileFragment = new ProfileFragment();
+        }
+        replaceFragment(profileFragment,false,PROFILE);
     }
 
     @Override

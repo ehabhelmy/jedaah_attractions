@@ -104,7 +104,7 @@ public abstract class JaNavigationManager {
         if (addToBackStack){
             fragmentTransaction.addToBackStack(tag);
         }
-        fragmentTransaction.replace(frame,fragment,tag);
+        fragmentTransaction.add(frame,fragment,tag);
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         fragmentTransaction.commit();
     }
