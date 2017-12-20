@@ -2,19 +2,20 @@ package com.example.ehab.japroject.di;
 
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
-import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragment;
-import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.all_events.AllEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.nearby_events.NearByEventsFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.EventPaymentFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.EventOrderFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
+import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragment;
+import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
+import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 
 import javax.inject.Singleton;
 
@@ -58,5 +59,7 @@ public interface MainComponent {
     void inject(EventPaymentFragment eventPaymentFragment);
 
     void inject(EventOrderFragment eventOrderFragment);
+
+    void inject(ProfileFragment profileFragment);
 }
 
