@@ -1,17 +1,15 @@
 package com.example.ehab.japroject.ui.navigation;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.provider.Settings;
 
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
-import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
+import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
-import com.example.ehab.japroject.util.Constants;
 
 /**
  * Created by ehab on 12/1/17.
