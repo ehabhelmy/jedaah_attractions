@@ -8,11 +8,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerR
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
-
-import java.util.List;
 import com.google.android.gms.maps.model.LatLng;
-
-import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
 
 import javax.inject.Inject;
 
@@ -20,6 +16,8 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
 
 /**
  * Created by ehab on 12/2/17.
@@ -37,7 +35,7 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<DataResponse> getData() {
+    public Single<DataResponse> getData(boolean fresh) {
         //TODO : first check if there is internet connection ..
         //TODO : if there is internet connection then call remoteRepository.getData then call localRepository.saveData(Key,BaseModel)
         //TODO : if there isn't internet connection then call localRepository.getData
@@ -47,8 +45,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<EventsResponse> getTopEvents() {
-        if (isConnected(JaApplication.getContext())){
+    public Single<EventsResponse> getTopEvents(boolean fresh) {
+        if (fresh){
             remoteRepository.getTopEvents()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -70,7 +68,7 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<EventsResponse> getNearByEvents(LatLng latLng) {
+    public Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh) {
         if (isConnected(JaApplication.getContext())){
             remoteRepository.getNearByEvents(latLng)
                     .subscribeOn(Schedulers.io())
@@ -93,8 +91,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<Category> getCategories() {
-        if (isConnected(JaApplication.getContext())) {
+    public Single<Category> getCategories(boolean fresh) {
+        if (fresh) {
             remoteRepository.getCategories()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -117,8 +115,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<EventsResponse> getTodayEvents() {
-        if (isConnected(JaApplication.getContext())) {
+    public Single<EventsResponse> getTodayEvents(boolean fresh) {
+        if (fresh) {
             remoteRepository.getTodayEvents()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -139,8 +137,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<EventsResponse> getWeekEvents() {
-        if (isConnected(JaApplication.getContext())) {
+    public Single<EventsResponse> getWeekEvents(boolean fresh) {
+        if (fresh) {
             remoteRepository.getWeekEvents()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -161,8 +159,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<EventsResponse> getAllEvents() {
-        if (isConnected(JaApplication.getContext())){
+    public Single<EventsResponse> getAllEvents(boolean fresh) {
+        if (fresh){
             remoteRepository.getTopEvents()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

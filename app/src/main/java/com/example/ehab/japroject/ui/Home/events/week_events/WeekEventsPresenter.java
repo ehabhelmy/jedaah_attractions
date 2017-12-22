@@ -24,16 +24,14 @@ public class WeekEventsPresenter extends BasePresenter<WeekEventsContract.View> 
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
                     getView().setupWeekEvents(EventsAdapter.convertIntoEventUi(model.getData()));
-                } else {
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String message) {
             if (isViewAlive.get()) {
-               // getView().showError();
+                getView().showError(message);
             }
         }
     };
@@ -46,7 +44,7 @@ public class WeekEventsPresenter extends BasePresenter<WeekEventsContract.View> 
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        this.weekEvents.getWeekEvents(weekEventsResponseBaseCallback);
+        this.weekEvents.getWeekEvents(weekEventsResponseBaseCallback,true);
     }
 
     @Override

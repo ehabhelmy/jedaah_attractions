@@ -2,9 +2,6 @@ package com.example.ehab.japroject.datalayer;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
-
-import java.util.List;
-
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
@@ -18,19 +15,19 @@ import io.reactivex.Single;
 
 public interface DataSource {
 
-    Single<DataResponse> getData();
+    Single<DataResponse> getData(boolean fresh);
 
-    Single<EventsResponse> getTopEvents();
+    Single<EventsResponse> getTopEvents(boolean fresh);
 
-    Single<EventsResponse> getNearByEvents(LatLng latLng);
+    Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh);
 
-    Single<Category> getCategories();
+    Single<Category> getCategories(boolean fresh);
 
-    Single<EventsResponse> getTodayEvents();
+    Single<EventsResponse> getTodayEvents(boolean fresh);
 
-    Single<EventsResponse> getWeekEvents();
+    Single<EventsResponse> getWeekEvents(boolean fresh);
 
-    Single<EventsResponse> getAllEvents();
+    Single<EventsResponse> getAllEvents(boolean fresh);
 
     Single<EventInnerResponse> getEventDetails(int id);
 

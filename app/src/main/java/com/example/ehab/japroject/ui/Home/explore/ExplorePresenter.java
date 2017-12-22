@@ -3,17 +3,14 @@ package com.example.ehab.japroject.ui.Home.explore;
 import android.os.Bundle;
 
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
-import com.example.ehab.japroject.datalayer.pojo.response.category.CategoryCallback;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
-import com.example.ehab.japroject.usecase.nearbyevents.NearByEvents;
 import com.example.ehab.japroject.usecase.categories.Categories;
+import com.example.ehab.japroject.usecase.nearbyevents.NearByEvents;
 import com.example.ehab.japroject.usecase.topevents.TopEvents;
 import com.google.android.gms.maps.model.LatLng;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -33,16 +30,14 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
                     getView().setupTopEvents(EventsAdapter.convertIntoEventUi(model.getData()));
-                } else {
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String message) {
             if (isViewAlive.get()) {
-                getView().showError();
+                getView().showError(message);
             }
         }
     };
@@ -53,36 +48,31 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
                     getView().setupNearbyEvents(EventsAdapter.convertIntoEventUi(model.getData()));
-                } else {
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String message) {
             if (isViewAlive.get()) {
-                getView().showError();
+                getView().showError(message);
             }
         }
     };
-
     private BaseCallback<Category> categoryBaseCallback = new BaseCallback<Category>() {
         @Override
         public void onSuccess(Category model) {
             if (isViewAlive.get()){
                 if (model.getSuccess()){
                     getView().setupCategories(model.getData());
-                }else {
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String message) {
             if (isViewAlive.get()) {
-                getView().showError();
+                getView().showError(message);
             }
         }
     };
@@ -99,8 +89,8 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     public void initialize(Bundle extras) {
         super.initialize(extras);
         //TODO : should call all related use cases to fetch the data
-        topEvents.getTopEvents(topEventsResponseBaseCallback);
-        categories.getCategories(categoryBaseCallback);
+        topEvents.getTopEvents(topEventsResponseBaseCallback,true);
+        categories.getCategories(categoryBaseCallback,true);
         if (getView().isLocationPermissionGranted()) {
             if (getView().isLocationEnabled()) {
                 getView().getLatitudeAndLongitude();
@@ -126,6 +116,6 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
 
     @Override
     public void loadNearByEventsAfterLocationEnabled(LatLng latLng) {
-        nearByEvents.getNearbyEvents(latLng, nearbyEventsResponseBaseCallback);
+        nearByEvents.getNearbyEvents(latLng, nearbyEventsResponseBaseCallback,true);
     }
 }

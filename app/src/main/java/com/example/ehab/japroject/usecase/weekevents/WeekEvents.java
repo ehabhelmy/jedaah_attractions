@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
+import com.example.ehab.japroject.util.Constants;
 
 import javax.inject.Inject;
 
@@ -32,7 +33,7 @@ public class WeekEvents implements Unsubscribable {
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void getWeekEvents(BaseCallback<EventsResponse> callback) {
+    public void getWeekEvents(BaseCallback<EventsResponse> callback,boolean fresh) {
 
         disposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
             @Override
@@ -42,12 +43,17 @@ public class WeekEvents implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError();
+                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                    callback.onError(e.getMessage());
+                }
+                else {
+                    dataRepository.getCategories(false);
+                }
             }
         };
 
         if (!compositeDisposable.isDisposed()) {
-            weekEventsResponseSingle = dataRepository.getWeekEvents();
+            weekEventsResponseSingle = dataRepository.getWeekEvents(fresh);
             disposable = weekEventsResponseSingle
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
