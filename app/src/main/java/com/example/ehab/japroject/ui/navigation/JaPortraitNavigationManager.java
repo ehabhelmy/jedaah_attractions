@@ -8,6 +8,7 @@ import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
+import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 import com.example.ehab.japroject.util.Constants;
@@ -63,5 +64,14 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     public void goToHomeActivity() {
         Intent intent = new Intent(context,HomeActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void showRegisterationScreen() {
+        RegisterationFragment registerationFragment = (RegisterationFragment) fragmentManager.findFragmentByTag(REGISTERATION);
+        if (registerationFragment == null) {
+            registerationFragment = new RegisterationFragment();
+        }
+        replaceFragment(registerationFragment,true,REGISTERATION,R.id.layout_registeration);
     }
 }

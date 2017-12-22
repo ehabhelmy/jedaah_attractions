@@ -56,12 +56,12 @@ public class SocialMediaFragment extends BaseFragment implements SocialMediaCont
     private AuthenticationContract.View activity;
 
     @OnClick(R.id.facebook)
-    void loginWithFacebook(){
+    void loginWithFacebook() {
         activity.loginWithFacebook();
     }
 
     @OnClick(R.id.google)
-    void loginWithGoogle(){
+    void loginWithGoogle() {
         activity.loginWithGoogle();
     }
 
@@ -71,8 +71,8 @@ public class SocialMediaFragment extends BaseFragment implements SocialMediaCont
     }
 
     @OnClick(R.id.register)
-    void register(){
-
+    void register() {
+        presenter.showRegisterationScreen();
     }
 
     @OnClick(R.id.skip)

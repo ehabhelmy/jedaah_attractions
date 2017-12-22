@@ -1,7 +1,6 @@
 package com.example.ehab.japroject.ui.navigation;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -9,7 +8,6 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseActivity;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
-import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 
 import java.lang.ref.WeakReference;
 
@@ -34,6 +32,8 @@ public abstract class JaNavigationManager {
     public static final String EVENTS = "events";
 
     public static final String SOCIAL = "social";
+
+    public static final String REGISTERATION = "registeration";
 
     public static final int LOCATION_SETTINGS = 2;
 
@@ -63,6 +63,7 @@ public abstract class JaNavigationManager {
 
     public abstract void goToHomeActivity();
 
+    public abstract void showRegisterationScreen();
 
     protected void addFragment(BaseFragment fragment,boolean addToBackStack){
 
@@ -93,6 +94,4 @@ public abstract class JaNavigationManager {
     public void setCurrentActivity(BaseActivity currentActivity) {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
-
-
 }
