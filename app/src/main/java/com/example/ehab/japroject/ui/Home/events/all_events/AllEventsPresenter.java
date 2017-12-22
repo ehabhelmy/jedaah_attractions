@@ -23,16 +23,14 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
                     getView().setupAllEvents(EventsAdapter.convertIntoEventUi(model.getData()));
-                } else {
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String message) {
             if (isViewAlive.get()) {
-                getView().showError();
+                getView().showError(message);
             }
         }
     };
@@ -45,7 +43,7 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        allEvents.getAllEvents(eventsResponseBaseCallback);
+        allEvents.getAllEvents(eventsResponseBaseCallback,true);
     }
 
     @Override

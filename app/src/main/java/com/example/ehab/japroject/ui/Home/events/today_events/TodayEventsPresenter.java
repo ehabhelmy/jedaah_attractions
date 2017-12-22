@@ -24,16 +24,14 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
                     getView().setupTodayEvents(EventsAdapter.convertIntoEventUi(model.getData()));
-                } else {
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String message) {
             if (isViewAlive.get()) {
-                getView().showError();
+                getView().showError(message);
             }
         }
     };
@@ -46,7 +44,7 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        this.todayEvents.getTodayEvents(todayEventsResponseBaseCallback);
+        this.todayEvents.getTodayEvents(todayEventsResponseBaseCallback,true);
     }
 
     @Override

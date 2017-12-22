@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
+import com.example.ehab.japroject.util.Constants;
 import com.google.android.gms.maps.model.LatLng;
 
 import javax.inject.Inject;
@@ -33,7 +34,7 @@ public class NearByEvents implements Unsubscribable {
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void getNearbyEvents(LatLng latLng, BaseCallback<EventsResponse> callback){
+    public void getNearbyEvents(LatLng latLng, BaseCallback<EventsResponse> callback, boolean fresh){
         eventsResponseDisposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
             @Override
             public void onSuccess(EventsResponse eventsResponse) {
@@ -42,11 +43,16 @@ public class NearByEvents implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError();
+                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                    callback.onError(e.getMessage());
+                }
+                else {
+                    dataRepository.getCategories(false);
+                }
             }
         };
         if (!compositeDisposable.isDisposed()){
-            eventsResponseSingle = dataRepository.getNearByEvents(latLng);
+            eventsResponseSingle = dataRepository.getNearByEvents(latLng,fresh);
             disposable = eventsResponseSingle
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

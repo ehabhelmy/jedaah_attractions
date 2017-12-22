@@ -41,7 +41,7 @@ public class EventInner implements Unsubscribable{
 
             @Override
             public void onError(Throwable e) {
-                callback.onError();
+                callback.onError(e.getMessage());
             }
         };
         if (!compositeDisposable.isDisposed()){

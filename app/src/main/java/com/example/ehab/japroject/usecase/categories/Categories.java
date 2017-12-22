@@ -2,11 +2,9 @@ package com.example.ehab.japroject.usecase.categories;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
-import com.example.ehab.japroject.datalayer.pojo.response.category.CategoryCallback;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
-
-import java.util.List;
+import com.example.ehab.japroject.util.Constants;
 
 import javax.inject.Inject;
 
@@ -35,7 +33,7 @@ public class Categories implements Unsubscribable {
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void getCategories(BaseCallback<Category> callback) {
+    public void getCategories(BaseCallback<Category> callback,boolean fresh) {
 
         disposableSingleObserver = new DisposableSingleObserver<Category>() {
 
@@ -47,12 +45,17 @@ public class Categories implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-
+                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                    callback.onError(e.getMessage());
+                }
+                else {
+                    dataRepository.getCategories(false);
+                }
             }
         };
 
         if (!compositeDisposable.isDisposed()) {
-            categoriesResponseSingle = dataRepository.getCategories();
+            categoriesResponseSingle = dataRepository.getCategories(fresh);
             disposable = categoriesResponseSingle
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

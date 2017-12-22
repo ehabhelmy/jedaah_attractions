@@ -30,16 +30,14 @@ public class NearByEventsPresenter extends BasePresenter<NearByEventsContract.Vi
             if (isViewAlive.get()) {
                 if (model.getSuccess()){
                     getView().setupNearByEvents(EventsAdapter.convertIntoEventUi(model.getData()));
-                }else {
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String message) {
             if (isViewAlive.get()){
-                getView().showError();
+                getView().showError(message);
             }
         }
     };
@@ -65,7 +63,7 @@ public class NearByEventsPresenter extends BasePresenter<NearByEventsContract.Vi
 
     @Override
     public void loadNearByEventsAfterLocationEnabled(LatLng latLng) {
-        nearByEvents.getNearbyEvents(latLng, responseBaseCallback);
+        nearByEvents.getNearbyEvents(latLng, responseBaseCallback,true);
     }
 
     @Override

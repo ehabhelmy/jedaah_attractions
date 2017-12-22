@@ -6,7 +6,6 @@ import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerR
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.eventsinner.adapter.EventDetailsAdapter;
-import com.example.ehab.japroject.ui.Home.eventsinner.pojo.EventDetails;
 import com.example.ehab.japroject.usecase.eventinner.EventInner;
 import com.example.ehab.japroject.util.Constants;
 
@@ -26,15 +25,13 @@ public class EventInnerPresenter extends BasePresenter<EventInnerContract.View> 
             if (isViewAlive.get()){
                 if (model.getSuccess()){
                     getView().setupEventsInner(EventDetailsAdapter.convertIntoEventDetailsUi(model.getData()));
-                }else{
-                    getView().showError();
                 }
             }
         }
 
         @Override
-        public void onError() {
-
+        public void onError(String message) {
+            getView().showError(message);
         }
     };
 
