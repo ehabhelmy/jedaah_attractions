@@ -9,6 +9,7 @@ import com.example.ehab.japroject.ui.Home.events.nearby_events.NearByEventsFragm
 import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
+import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 
@@ -46,5 +47,7 @@ public interface MainComponent {
     void inject(EventInnerFragment eventInnerFragment);
 
     void inject(SignInFragment signInFragment);
+
+    void inject(RegisterationFragment registerationFragment);
 }
 

@@ -21,6 +21,9 @@ public class SocialMediaPresenter extends BasePresenter<SocialMediaContract.View
         super.initialize(extras);
     }
 
+    public void showRegisterationScreen(){
+        this.jaNavigationManager.showRegisterationScreen();
+    }
 
     @Override
     public void showSignInScreen() {
