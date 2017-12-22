@@ -55,7 +55,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (signInFragment == null) {
             signInFragment = new SignInFragment();
         }
-        replaceFragment(signInFragment,true,SIGNIN,R.id.frame_layout_auth);
+        replaceFragment(signInFragment,false,SIGNIN,R.id.frame_layout_auth);
     }
 
     @Override
@@ -70,6 +70,6 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (registerationFragment == null) {
             registerationFragment = new RegisterationFragment();
         }
-        replaceFragment(registerationFragment,true,REGISTERATION,R.id.frame_layout_auth);
+        replaceFragment(registerationFragment,false,REGISTERATION,R.id.frame_layout_auth);
     }
 }

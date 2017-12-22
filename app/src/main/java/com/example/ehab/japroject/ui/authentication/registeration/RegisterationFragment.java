@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.ui.authentication.registeration;
 
 
+import android.support.v7.widget.AppCompatImageButton;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class RegisterationFragment extends BaseFragment implements Registeration
     Button register;
 
     @BindView(R.id.add_image)
-    Button addImage;
+    AppCompatImageButton addImage;
 
     @BindView(R.id.profile_image)
     ImageView profileImage;
