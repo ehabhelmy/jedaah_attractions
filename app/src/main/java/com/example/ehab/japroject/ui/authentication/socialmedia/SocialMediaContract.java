@@ -17,5 +17,6 @@ public interface SocialMediaContract {
 
     interface Presenter {
 
+        void showSignInScreen();
     }
 }

@@ -45,7 +45,7 @@ public class AllEvents implements Unsubscribable {
             }
         };
         if (!compositeDisposable.isDisposed()){
-            disposable = dataRepository.getTopEvents()
+            disposable = dataRepository.getAllEvents()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(eventsResponseDisposableSingleObserver);

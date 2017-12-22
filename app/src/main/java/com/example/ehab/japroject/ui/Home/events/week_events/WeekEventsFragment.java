@@ -49,7 +49,7 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
     }
 
     @Override
-    public void showError() {
+    public void showError(String message) {
 
     }
 

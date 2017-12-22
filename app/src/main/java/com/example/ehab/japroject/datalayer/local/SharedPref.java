@@ -21,6 +21,8 @@ public class SharedPref<T extends BaseModel> {
     public static final String CATEGORIES = "categories";
     private static final String SHARED_PREF = "ja shared pref";
     public static final String ALL_EVENTS = "all-events";
+    public static final String USER = "user";
+    public static final String TOKEN = "token";
     private Context context = JaApplication.getContext();
     private SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE);
     public static final String DATA_KEY = "data-key";
@@ -39,6 +41,10 @@ public class SharedPref<T extends BaseModel> {
         String s = preferences.getString(key, null);
         Gson gson = new Gson();
         return gson.fromJson(s, modelClass);
+    }
+
+    public String getString(String key) {
+        return preferences.getString(key,null);
     }
 
     public List<Category> getCategoryList(String key) {

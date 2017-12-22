@@ -69,7 +69,7 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
     }
 
     @Override
-    public void showError() {
+    public void showError(String message) {
 
     }
 

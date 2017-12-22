@@ -1,7 +1,9 @@
 package com.example.ehab.japroject.datalayer.remote;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 
@@ -29,4 +31,9 @@ public interface RemoteSource {
     Single<EventsResponse> getWeekEvents();
 
     Single<EventsResponse> getAllEvents();
+
+    Single<EventInnerResponse> getEventDetails(int id);
+
+    Single<LoginResponse> login(String email, String password);
+
 }

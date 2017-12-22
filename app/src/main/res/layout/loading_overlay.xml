@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loading_overlay_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_85_percent_opacity"
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
+    android:clickable="true"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <com.example.ehab.japroject.ui.widget.LoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="@dimen/view_min_height_large"
+        android:layout_height="@dimen/view_min_height_large"
+        android:padding="@dimen/screen_margin_normal"
+        android:layout_centerVertical="true"
+        app:vav_backgroundColor="@color/transparent"
+        app:vav_circleColor="@color/white"
+        app:vav_stroke="@dimen/animation_stroke_normal"/>
+
+</LinearLayout>

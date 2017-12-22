@@ -49,7 +49,7 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
     }
 
     @Override
-    public void showError() {
+    public void showError(String message) {
 
     }
 

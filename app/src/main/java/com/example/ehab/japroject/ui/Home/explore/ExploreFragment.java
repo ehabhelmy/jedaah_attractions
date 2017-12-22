@@ -81,7 +81,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     }
 
     @Override
-    public void showError() {
+    public void showError(String message) {
 
     }
 

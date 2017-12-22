@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Dynamic text -->
+    <attr name="dynamicText" format="reference"/>
+
+    <!-- Misc -->
+    <attr name="strokeWidth" format="dimension"/>
+    <attr name="fillAmount" format="float"/>
+    <attr name="fillColor" format="color"/>
+
+    <!-- Vodafone default fonts -->
+    <attr name="customTypeface">
+        <enum name="vodafone_regular" value="0"/>
+        <enum name="vodafone_bold" value="1"/>
+    </attr>
+
+    <!-- Vodafone progress bar style types -->
+    <attr name="vodafoneProgressBarStyle">
+        <enum name="normal" value="0"/>
+        <enum name="dotted" value="1"/>
+    </attr>
+
+    <declare-styleable name="VodafoneButton">
+        <attr name="customTypeface"/>
+        <attr name="dynamicText"/>
+    </declare-styleable>
+    <declare-styleable name="VodafoneButtonWithNotification">
+        <attr name="srcImg" format="reference"/>
+        <attr name="customTypeface"/>
+        <attr name="dynamicTextBtn" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="VodafoneTextView">
+        <attr name="customTypeface"/>
+        <attr name="dynamicText"/>
+        <attr name="minTextSize" format="dimension"/>
+        <attr name="precision" format="float"/>
+        <attr name="sizeToFit" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneEditText">
+        <attr name="customTypeface"/>
+        <attr name="dynamicText"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneToggleButton">
+        <attr name="customTypeface"/>
+        <attr name="dynamicText"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneUsageCircle">
+        <attr name="vuc_fillAmount" format="float"/>
+        <attr name="vuc_strokeWidth" format="dimension"/>
+        <attr name="vuc_innerStroke" format="dimension"/>
+        <attr name="vuc_outerStroke" format="dimension"/>
+        <attr name="vuc_fillColor" format="color"/>
+        <attr name="vuc_backgroundColor" format="color"/>
+        <attr name="vuc_text1Style" format="reference"/>
+        <attr name="vuc_text2Style" format="reference"/>
+        <attr name="vuc_image" format="reference"/>
+        <attr name="vuc_circleColor" format="reference"/>
+        <attr name="vuc_minTextSize" format="dimension"/>
+        <attr name="vuc_maxTextSize" format="dimension"/>
+        <attr name="vuc_fontColor" format="color"/>
+        <attr name="vuc_showEndDot" format="boolean"/>
+        <attr name="vuc_showStartDot" format="boolean"/>
+        <attr name="vuc_showTriangle" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneLoadingAnimationView">
+        <attr name="vav_loopAnimation"      format = "boolean"/>
+        <attr name="vav_backgroundColor"    format = "color"/>
+        <attr name="vav_circleColor"        format = "color"/>
+        <attr name="vav_stroke"             format = "dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneBorderButton">
+        <attr name="dynamicText"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="vbb_borderWidth" format="float"/>
+    </declare-styleable>
+
+    <!-- Pager indicator -->
+    <attr name="centered" format="boolean"/>
+    <attr name="selectedColor" format="color"/>
+    <attr name="unselectedColor" format="color"/>
+
+    <declare-styleable name="ViewPagerIndicator">
+        <!-- Style of the circle indicator. -->
+        <attr name="vpiCirclePageIndicatorStyle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneCirclePageIndicator">
+        <!-- Color of the filled circle that represents the current page. -->
+        <attr name="fillColor"/>
+        <!-- Color of the filled circles that represents pages. -->
+        <attr name="pageColor" format="color"/>
+        <!-- Orientation of the indicator. -->
+        <attr name="android:orientation"/>
+        <!-- Radius of the circles. This is also the spacing between circles. -->
+        <attr name="radius" format="dimension"/>
+        <!-- Whether or not the selected indicator snaps to the circles. -->
+        <attr name="snap" format="boolean"/>
+        <!-- Color of the open circles. -->
+        <attr name="strokeColor" format="color"/>
+        <!-- Width of the stroke used to draw the circles. -->
+        <attr name="strokeWidth"/>
+        <!-- View background -->
+        <attr name="android:background"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneBubbleView">
+        <attr name="background_alpha" format="float" />
+        <attr name="text_first_line" format="string" />
+        <attr name="text_second_line" format="string"/>
+        <attr name="text_color_first_line" format="color"/>
+        <attr name="text_color_second_line" format="color"/>
+        <attr name="background_img" format="reference" />
+        <attr name="show_divider" format="boolean" />
+        <attr name="divider_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneBubbleHelpView">
+        <attr name="vb_background_alpha" format="float" />
+        <attr name="vb_dynamic_text" format="string" />
+        <attr name="vb_text_color" format="color"/>
+        <attr name="vb_background_img" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneCircularViewWithText">
+        <attr name="cv_background_color" format="color" />
+        <attr name="cv_background_alpha" format="float" />
+        <attr name="cv_border_width" format="dimension" />
+        <attr name="cv_border_color" format="color" />
+        <attr name="cv_border_alpha" format="float" />
+        <attr name="cv_text_first_line" format="string" />
+        <attr name="cv_text_second_line" format="string"/>
+        <attr name="cv_text_color_first_line" format="color"/>
+        <attr name="cv_text_color_second_line" format="color"/>
+        <attr name="cv_text_size_first_line" format="dimension" />
+        <attr name="cv_text_size_second_line" format="dimension" />
+        <attr name="cv_container_gravity" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneSupportButton">
+        <attr name="sb_isDraggable" format="boolean"/>
+        <attr name="sb_textColor" format="color"/>
+        <attr name="sb_textSize" format="dimension"/>
+        <attr name="sb_minTextSize" format="dimension"/>
+        <attr name="sb_backgroundColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircularImageView">
+        <attr name="civ_border" format="boolean"/>
+        <attr name="civ_borderColor" format="color"/>
+        <attr name="civ_borderWidth" format="dimension"/>
+        <attr name="civ_backgroundColor" format="color"/>
+        <attr name="civ_has_backgroundColor" format="boolean"/>
+        <attr name="civ_selector" format="boolean"/>
+        <attr name="civ_selectorColor" format="color"/>
+        <attr name="civ_selectorStrokeColor" format="color"/>
+        <attr name="civ_selectorStrokeWidth" format="dimension"/>
+        <attr name="civ_shadow" format="boolean"/>
+        <attr name="civ_shadowRadius" format="float"/>
+        <attr name="civ_shadowDx" format="float"/>
+        <attr name="civ_shadowDy" format="float"/>
+        <attr name="civ_shadowColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircularImageViewStyle">
+        <attr name="circularImageViewDefault" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneCircularView">
+        <attr format="integer" name="startDeg"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneTabLayout">
+        <attr name="v_tabSelectedTextColor" format="reference"/>
+        <attr name="v_tabTextColor" format="reference"/>
+        <attr name="v_tabTextBackground" format="reference"/>
+        <attr name="v_tabSelectedLineColor" format="reference"/>
+        <attr name="v_tabLayoutOutLineColor" format="reference"/>
+        <attr name="v_tabSelectedBold" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneDataLimit">
+        <attr name="vdl_text1Left" format="string"/>
+        <attr name="vdl_text2Left" format="string"/>
+        <attr name="vdl_text1Right" format="string"/>
+        <attr name="vdl_text2Right" format="string"/>
+        <attr name="vdl_imageSrc" format="reference"/>
+        <attr name="vdl_hasLimit" format="boolean"/>
+        <attr name="vdl_showButton" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneSearchButton">
+        <attr name="wifi_finder_view" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneTriangleDown">
+        <attr name="tr_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneTitleRhombusView">
+        <attr name="vtr_title" format="reference"/>
+        <attr name="vtr_title_size" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="VodafoneTitleView">
+        <attr name="vt_title" format="reference"/>
+    </declare-styleable>
+
+    <!-- VodafoneWhiteBubbleView -->
+    <declare-styleable name="VodafoneWhiteBubbleView">
+        <attr name="wb_color" format="color"/>
+        <attr name="wb_position" format="enum">
+            <enum name="top_left" value="0"/>
+            <enum name="top_right" value="1"/>
+            <enum name="bottom_left" value="2"/>
+            <enum name="bottom_right" value="3"/>
+        </attr>
+        <attr name="wb_orientation" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="wb_type" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="small" value="1"/>
+        </attr>
+        <attr name="wb_radius" format="dimension"/>
+        <attr name="wb_distance" format="dimension"/>
+        <attr name="wb_marginLeft" format="dimension"/>
+        <attr name="wb_marginTop" format="dimension"/>
+        <attr name="wb_marginRight" format="dimension"/>
+        <attr name="wb_marginBottom" format="dimension"/>
+    </declare-styleable>
+
+    <!-- VodafoneSpeedCheckerView -->
+    <declare-styleable name="VodafoneSpeedCheckerView">
+        <attr name="vsc_fillColor" format="color"/>
+    </declare-styleable>
+
+    <!-- DataChargeView -->
+    <declare-styleable name="ChargeItemView">
+        <attr name="dcv_text" format="reference" />
+        <attr name="dcv_icon" format="reference" />
+        <attr name="dcv_showDivider" format="boolean" />
+    </declare-styleable>
+
+</resources>

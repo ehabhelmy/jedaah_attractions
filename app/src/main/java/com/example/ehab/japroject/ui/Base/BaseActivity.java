@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
+import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.navigation.JaNavigationManager;
 
 import butterknife.ButterKnife;

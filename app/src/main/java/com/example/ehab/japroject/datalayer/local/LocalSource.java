@@ -2,7 +2,9 @@ package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 
 import java.util.List;
 
@@ -42,4 +44,9 @@ public interface LocalSource {
     Single<EventsResponse> getAllEvents();
 
     void saveAllEvents(EventsResponse eventsResponse);
+
+    void saveLoggedUser(LoginResponse loginResponse);
+
+    String getToken();
+
 }

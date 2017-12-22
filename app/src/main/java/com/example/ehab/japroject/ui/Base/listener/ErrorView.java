@@ -5,5 +5,5 @@ package com.example.ehab.japroject.ui.Base.listener;
  */
 
 public interface ErrorView {
-    void showError();
+    void showError(String message);
 }

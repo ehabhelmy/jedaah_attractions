@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.ui.authentication;
 
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
+import com.example.ehab.japroject.usecase.Unsubscribable;
 import com.facebook.CallbackManager;
 
 /**
@@ -12,9 +13,11 @@ public interface AuthenticationContract {
     interface View extends BaseView {
         void loginWithFacebook();
         void loginWithGoogle();
+        void login(String email,String password);
+        void skipAuth();
     }
 
-    interface Presenter {
-
+    interface Presenter extends Unsubscribable{
+        void login(String email,String password);
     }
 }

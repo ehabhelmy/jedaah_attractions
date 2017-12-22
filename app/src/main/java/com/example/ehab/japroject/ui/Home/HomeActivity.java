@@ -132,7 +132,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     }
 
     @Override
-    public void showError() {
+    public void showError(String message) {
 
     }
 

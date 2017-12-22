@@ -6,8 +6,10 @@ import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragmen
 import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.all_events.AllEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.nearby_events.NearByEventsFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
+import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 
 import javax.inject.Singleton;
@@ -40,5 +42,9 @@ public interface MainComponent {
     void inject(SocialMediaFragment socialMediaFragment);
 
     void inject(AuthenticationActivity authenticationActivity);
+
+    void inject(EventInnerFragment eventInnerFragment);
+
+    void inject(SignInFragment signInFragment);
 }
 

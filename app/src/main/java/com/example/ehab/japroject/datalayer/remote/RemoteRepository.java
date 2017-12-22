@@ -4,17 +4,23 @@ import android.accounts.NetworkErrorException;
 import android.support.annotation.NonNull;
 
 import com.example.ehab.japroject.JaApplication;
+import com.example.ehab.japroject.datalayer.pojo.request.LoginRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
+import com.example.ehab.japroject.datalayer.remote.service.EventDetailsService;
+import com.example.ehab.japroject.datalayer.remote.service.LoginService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
+import com.example.ehab.japroject.usecase.eventinner.EventInner;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -235,6 +241,58 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return allEventsSingle;
+    }
+
+    @Override
+    public Single<EventInnerResponse> getEventDetails(int id) {
+        Single<EventInnerResponse> eventInnerResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            EventDetailsService eventDetailsService = serviceGenerator.createService(EventDetailsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(eventDetailsService.getEventDetails(getCurrentLanguage(),id), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                EventInnerResponse eventInnerResponse = (EventInnerResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(eventInnerResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return eventInnerResponseSingle;
+    }
+
+    @Override
+    public Single<LoginResponse> login(String email, String password) {
+        Single<LoginResponse> loginResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            LoginService loginService = serviceGenerator.createService(LoginService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(loginService.login(getCurrentLanguage(),new LoginRequest(email, password)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(loginResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return loginResponseSingle;
     }
 
     private String getCurrentLanguage() {

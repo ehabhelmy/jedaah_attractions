@@ -29,4 +29,8 @@
     <string name="signin">SIGN IN</string>
     <string name="googleplus">GOOGLE +</string>
     <string name="facebook">FACEBOOK</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="forgetPassword">Forget Password ?</string>
+    <string name="join">JOIN NOW</string>
 </resources>

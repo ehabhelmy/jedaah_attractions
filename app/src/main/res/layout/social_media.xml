@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp">
+
+    <ImageView
+        android:id="@+id/socialMediaIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="6dp"
+        android:tint="@color/staticTitle"
+        app:srcCompat="@drawable/ic_location_g" />
+
+    <TextView
+        android:id="@+id/SocialMediaurl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/socialMediaIcon"
+        android:layout_alignTop="@+id/socialMediaIcon"
+        android:layout_marginStart="14dp"
+        android:layout_toEndOf="@+id/socialMediaIcon"
+        android:fontFamily="@font/gotham_medium"
+        android:gravity="center"
+        android:text="12, Al-Aziz , Jeddah"
+        android:textSize="@dimen/titleSize" />
+
+</RelativeLayout>

@@ -11,8 +11,12 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import java.util.Arrays;
 
@@ -33,6 +37,10 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
     @Inject
     CallbackManager callbackManager;
 
+    private GoogleSignInClient mGoogleSignInClient;
+
+    public static final int RC_SIGN_IN = 3;
+
     @Override
     protected void initializeDagger() {
         JaApplication jaApplication = (JaApplication) getApplicationContext();
@@ -46,6 +54,7 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // TODO : call api and send user id to it
+                presenter.login(loginResult.getAccessToken().getUserId(),"");
             }
 
             @Override
@@ -58,6 +67,10 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
 
             }
         });
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
 
@@ -76,6 +89,20 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode,resultCode,data);
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> googleSignInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleGoogleSignIn(googleSignInAccountTask);
+        }
+    }
+
+    private void handleGoogleSignIn(Task<GoogleSignInAccount> googleSignInAccountTask){
+        try {
+            GoogleSignInAccount account = googleSignInAccountTask.getResult(ApiException.class);
+            //account.getIdToken()  ---> call api and send this to the backend to authenticate
+            presenter.login(account.getId(),"");
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -85,6 +112,18 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
 
     @Override
     public void loginWithGoogle() {
-
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
+    @Override
+    public void login(String email, String password) {
+        presenter.login(email,password);
+    }
+
+    @Override
+    public void skipAuth() {
+        jaNavigationManager.goToHomeActivity();
+    }
+
 }

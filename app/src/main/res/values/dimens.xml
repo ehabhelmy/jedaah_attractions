@@ -7,5 +7,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="static_title_size">16sp</dimen>
+    <dimen name="title_inner">24sp</dimen>
     <dimen name="spaceBetweenTitleAndItems">5dp</dimen>
+    <dimen name="view_min_height_large">90dp</dimen>
+    <dimen name="screen_margin_normal">6dp</dimen>
+    <dimen name="animation_stroke_normal">5dp</dimen>
 </resources>

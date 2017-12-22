@@ -29,6 +29,8 @@ public abstract class JaNavigationManager {
 
     public static final String EXPLORE = "explore";
 
+    public static final String SIGNIN = "sign";
+
     public static final String EVENTS = "events";
 
     public static final String SOCIAL = "social";
@@ -57,6 +59,11 @@ public abstract class JaNavigationManager {
 
     public abstract void showSocialMediaScreen();
 
+    public abstract void showSignInScreen();
+
+    public abstract void goToHomeActivity();
+
+
     protected void addFragment(BaseFragment fragment,boolean addToBackStack){
 
     }
@@ -71,8 +78,12 @@ public abstract class JaNavigationManager {
         fragmentTransaction.commitNowAllowingStateLoss();
     }
 
-    public  <F extends BaseFragment> F getCurrentFragment(){
+    public  <F extends BaseFragment> F getCurrentFragmentOnHome(){
         return (F) fragmentManager.findFragmentById(R.id.frame_layout);
+    }
+
+    public  <F extends BaseFragment> F getCurrentFragmentOnAuth(){
+        return (F) fragmentManager.findFragmentById(R.id.frame_layout_auth);
     }
 
     public BaseActivity getCurrentActivity() {
@@ -82,4 +93,6 @@ public abstract class JaNavigationManager {
     public void setCurrentActivity(BaseActivity currentActivity) {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
+
+
 }

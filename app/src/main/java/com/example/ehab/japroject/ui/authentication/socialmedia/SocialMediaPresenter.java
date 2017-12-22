@@ -22,4 +22,8 @@ public class SocialMediaPresenter extends BasePresenter<SocialMediaContract.View
     }
 
 
+    @Override
+    public void showSignInScreen() {
+        jaNavigationManager.showSignInScreen();
+    }
 }

@@ -67,12 +67,17 @@ public class SocialMediaFragment extends BaseFragment implements SocialMediaCont
 
     @OnClick(R.id.signin)
     void login(){
-
+        presenter.showSignInScreen();
     }
 
     @OnClick(R.id.register)
     void register(){
 
+    }
+
+    @OnClick(R.id.skip)
+    void skipLogin(){
+        activity.skipAuth();
     }
 
     @Override
@@ -99,7 +104,13 @@ public class SocialMediaFragment extends BaseFragment implements SocialMediaCont
     }
 
     @Override
-    public void showError() {
+    public void onErrorAuth(String message) {
+        super.onErrorAuth(message);
+        //TODO : show popup error
+    }
+
+    @Override
+    public void showError(String message) {
 
     }
 

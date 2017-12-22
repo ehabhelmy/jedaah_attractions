@@ -4,7 +4,9 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 
 import java.util.List;
@@ -179,5 +181,34 @@ public class DataRepository implements DataSource {
         } else {
             return localRepository.getAllEvents();
         }
+    }
+
+    @Override
+    public Single<EventInnerResponse> getEventDetails(int id) {
+        return remoteRepository.getEventDetails(id);
+    }
+
+    @Override
+    public Single<LoginResponse> login(String email, String password) {
+            remoteRepository.login(email, password)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<LoginResponse>() {
+                        @Override
+                        public void onSuccess(LoginResponse loginResponse) {
+                            localRepository.saveLoggedUser(loginResponse);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
+            return remoteRepository.login(email, password);
+    }
+
+    @Override
+    public String getToken() {
+        return localRepository.getToken();
     }
 }

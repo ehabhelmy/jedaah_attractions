@@ -10,5 +10,5 @@ public interface BaseCallback<M extends BaseModel> {
 
     void onSuccess(M model);
 
-    void onError();
+    void onError(String message);
 }

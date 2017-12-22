@@ -8,6 +8,7 @@ import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
+import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 import com.example.ehab.japroject.util.Constants;
 
@@ -16,7 +17,6 @@ import com.example.ehab.japroject.util.Constants;
  */
 
 public class JaPortraitNavigationManager extends JaNavigationManager {
-
 
     @Override
     public void showExploreScreen() {
@@ -47,6 +47,21 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (socialMediaFragment == null) {
             socialMediaFragment = new SocialMediaFragment();
         }
-        replaceFragment(socialMediaFragment,true,SOCIAL,R.id.frame_layout_auth);
+        replaceFragment(socialMediaFragment,false,SOCIAL,R.id.frame_layout_auth);
+    }
+
+    @Override
+    public void showSignInScreen() {
+        SignInFragment signInFragment = (SignInFragment) fragmentManager.findFragmentByTag(SIGNIN);
+        if (signInFragment == null) {
+            signInFragment = new SignInFragment();
+        }
+        replaceFragment(signInFragment,true,SIGNIN,R.id.frame_layout_auth);
+    }
+
+    @Override
+    public void goToHomeActivity() {
+        Intent intent = new Intent(context,HomeActivity.class);
+        context.startActivity(intent);
     }
 }

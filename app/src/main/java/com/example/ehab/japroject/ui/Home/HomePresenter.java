@@ -39,12 +39,12 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void locationIsEnabled() {
-        jaNavigationManager.getCurrentFragment().locationIsEnabled();
+        jaNavigationManager.getCurrentFragmentOnHome().locationIsEnabled();
     }
 
     @Override
     public void hideNearByEvents() {
-        ExploreFragment exploreFragment = jaNavigationManager.getCurrentFragment();
+        ExploreFragment exploreFragment = jaNavigationManager.getCurrentFragmentOnHome();
         exploreFragment.hideNearByEvents();
     }
 }

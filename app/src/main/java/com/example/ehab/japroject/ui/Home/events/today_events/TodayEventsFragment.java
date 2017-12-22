@@ -49,7 +49,7 @@ public class TodayEventsFragment extends BaseFragment implements TodayEventsCont
     }
 
     @Override
-    public void showError() {
+    public void showError(String message) {
 
     }
 

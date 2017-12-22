@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
+import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.navigation.JaNavigationManager;
 
 import butterknife.ButterKnife;
@@ -58,6 +59,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     }
 
     public void locationIsEnabled(){
+
+    }
+
+    public void onErrorAuth(String message) {
 
     }
 

@@ -58,6 +58,20 @@ public class DateTimeUtils {
         }
     }
 
+    public static String getEventDateTitle(String startDate,String endDate) {
+        Date sDate = convertJSONDateToDate(startDate);
+        Date eDate = convertJSONDateToDate(endDate);
+        Calendar sCalendar = Calendar.getInstance();
+        sCalendar.setTime(sDate);
+        Calendar eCalendar = Calendar.getInstance();
+        eCalendar.setTime(eDate);
+        String sDay = new SimpleDateFormat("dd").format(sCalendar.getTime());
+        String sMonth = new SimpleDateFormat("MMMMM").format(sCalendar.getTime());
+        String eMonth = new SimpleDateFormat("MMMMM").format(eCalendar.getTime());
+        String eDay = new SimpleDateFormat("dd").format(eCalendar.getTime());
+        return sMonth + " " + sDay + " - " + eMonth + " " + eDay;
+    }
+
     /**
      * Returns a Date set to the first possible millisecond of the day, just after midnight. If a null day is passed in, a new Date is created.
      * midnight (00m 00h 00s)

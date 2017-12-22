@@ -3,6 +3,7 @@ package com.example.ehab.japroject.datalayer.local;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.util.Constants;
 
 import java.util.List;
@@ -141,5 +142,16 @@ public class LocalRepository implements LocalSource {
     @Override
     public void saveAllEvents(EventsResponse eventsResponse) {
         sharedPref.saveObject(SharedPref.ALL_EVENTS,eventsResponse);
+    }
+
+    @Override
+    public void saveLoggedUser(LoginResponse loginResponse) {
+        sharedPref.saveObject(SharedPref.USER,loginResponse);
+        //TODO : save token
+    }
+
+    @Override
+    public String getToken() {
+        return sharedPref.getString(SharedPref.TOKEN);
     }
 }

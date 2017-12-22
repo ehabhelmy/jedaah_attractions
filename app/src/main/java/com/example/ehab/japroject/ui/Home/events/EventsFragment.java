@@ -38,7 +38,7 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
     }
 
     @Override
-    public void showError() {
+    public void showError(String message) {
 
     }
 
