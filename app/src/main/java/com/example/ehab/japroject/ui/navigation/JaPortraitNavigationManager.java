@@ -70,6 +70,6 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (registerationFragment == null) {
             registerationFragment = new RegisterationFragment();
         }
-        replaceFragment(registerationFragment,true,REGISTERATION,R.id.layout_registeration);
+        replaceFragment(registerationFragment,true,REGISTERATION,R.id.frame_layout_auth);
     }
 }

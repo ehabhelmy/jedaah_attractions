@@ -107,7 +107,7 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
 
     @Override
     public void loginWithFacebook() {
-        loginManager.logInWithPublishPermissions(this, Arrays.asList("email", "public_profile", "user_birthday"));
+        loginManager.logInWithReadPermissions(this, Arrays.asList("email", "public_profile", "user_birthday"));
     }
 
     @Override
