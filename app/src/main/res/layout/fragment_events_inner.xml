@@ -226,8 +226,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@id/imageView9"
                     android:layout_below="@+id/socialMedia"
-                    android:numColumns="3"
+                    android:numColumns="auto_fit"
                     android:id="@+id/tags"
+                    android:columnWidth="90dp"
                     android:verticalSpacing="24dp"
                     android:horizontalSpacing="10dp"
                     android:stretchMode="spacingWidthUniform">

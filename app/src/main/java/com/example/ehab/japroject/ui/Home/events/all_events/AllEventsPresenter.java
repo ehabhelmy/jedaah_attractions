@@ -50,4 +50,9 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
     public void unSubscribe() {
         allEvents.unSubscribe();
     }
+
+    @Override
+    public void showEventInner(int id) {
+        jaNavigationManager.showEventInner(id);
+    }
 }

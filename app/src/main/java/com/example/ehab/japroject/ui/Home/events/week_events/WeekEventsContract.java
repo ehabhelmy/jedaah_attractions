@@ -19,5 +19,6 @@ public interface WeekEventsContract {
     }
 
     interface Presenter extends Unsubscribable {
+        void showEventInner(int id);
     }
 }

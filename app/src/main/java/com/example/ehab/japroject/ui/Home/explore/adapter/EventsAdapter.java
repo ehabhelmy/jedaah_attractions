@@ -25,6 +25,7 @@ public class EventsAdapter {
             event.setEventMonth(getMonth(convertJSONDateToDate(datum.getStartDate())));
             event.setEventDay(getDay(convertJSONDateToDate(datum.getStartDate())));
             event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate())));
+            event.setId(datum.getId());
             events.add(event);
         }
         return events;

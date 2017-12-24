@@ -194,7 +194,10 @@ public class DataRepository implements DataSource {
                     .subscribeWith(new DisposableSingleObserver<LoginResponse>() {
                         @Override
                         public void onSuccess(LoginResponse loginResponse) {
-                            localRepository.saveLoggedUser(loginResponse);
+                            if (loginResponse.getSuccess()) {
+                                localRepository.saveLoggedUser(loginResponse.getData().getUser());
+                                localRepository.saveToken(loginResponse.getData().getToken());
+                            }
                         }
 
                         @Override

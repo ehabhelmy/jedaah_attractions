@@ -51,4 +51,9 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
     public void unSubscribe() {
         this.todayEvents.unSubscribe();
     }
+
+    @Override
+    public void showEventInner(int id) {
+        jaNavigationManager.showEventInner(id);
+    }
 }

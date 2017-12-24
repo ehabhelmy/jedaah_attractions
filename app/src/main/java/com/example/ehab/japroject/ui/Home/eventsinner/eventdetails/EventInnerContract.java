@@ -1,10 +1,9 @@
-package com.example.ehab.japroject.ui.Home.eventsinner;
+package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails;
 
-import com.example.ehab.japroject.datalayer.pojo.response.eventinner.Data;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.Base.listener.ProgressView;
-import com.example.ehab.japroject.ui.Home.eventsinner.pojo.EventDetails;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDetails;
 import com.example.ehab.japroject.usecase.Unsubscribable;
 
 /**

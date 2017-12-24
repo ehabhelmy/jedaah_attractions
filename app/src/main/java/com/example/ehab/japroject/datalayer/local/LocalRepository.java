@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.util.Constants;
 
 import java.util.List;
@@ -145,9 +146,26 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
-    public void saveLoggedUser(LoginResponse loginResponse) {
-        sharedPref.saveObject(SharedPref.USER,loginResponse);
-        //TODO : save token
+    public void saveLoggedUser(User user) {
+        sharedPref.saveObject(SharedPref.USER,user);
+    }
+
+    @Override
+    public Single<User> getUserProfile() {
+        User user = (User) sharedPref.getObject(SharedPref.USER,User.class);
+        Single<User> userSingle = Single.create(e -> {
+            if (user != null) {
+                e.onSuccess(user);
+            }else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return userSingle;
+    }
+
+    @Override
+    public void saveToken(String token) {
+        sharedPref.saveObject(SharedPref.TOKEN,token);
     }
 
     @Override

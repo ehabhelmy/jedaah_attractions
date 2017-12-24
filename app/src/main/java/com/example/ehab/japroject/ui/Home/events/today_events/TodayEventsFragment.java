@@ -76,6 +76,9 @@ public class TodayEventsFragment extends BaseFragment implements TodayEventsCont
             Event event = (Event) model;
             //TODO : call presenter to send id of the event to the backend
         });
+        eventsListAdapter.setOnViewListener(id -> {
+            todayEventsPresenter.showEventInner(id);
+        });
         recyclerView.setAdapter(eventsListAdapter);
     }
 }

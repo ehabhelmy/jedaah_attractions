@@ -36,7 +36,11 @@ public class Login implements Unsubscribable {
         loginResponseDisposableSingleObserver = new DisposableSingleObserver<LoginResponse>() {
             @Override
             public void onSuccess(LoginResponse loginResponse) {
-                callback.onSuccess(loginResponse);
+                if (loginResponse.getSuccess()) {
+                    callback.onSuccess(loginResponse);
+                }else {
+                    callback.onError(loginResponse.getMsg().getMsg());
+                }
             }
 
             @Override

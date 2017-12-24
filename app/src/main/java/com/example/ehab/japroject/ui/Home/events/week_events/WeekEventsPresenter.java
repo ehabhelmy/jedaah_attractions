@@ -51,4 +51,9 @@ public class WeekEventsPresenter extends BasePresenter<WeekEventsContract.View> 
     public void unSubscribe() {
         this.weekEvents.unSubscribe();
     }
+
+    @Override
+    public void showEventInner(int id) {
+        jaNavigationManager.showEventInner(id);
+    }
 }

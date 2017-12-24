@@ -25,6 +25,8 @@
         android:layout_toEndOf="@+id/socialMediaIcon"
         android:fontFamily="@font/gotham_medium"
         android:gravity="center"
+        android:autoLink="web"
+        android:linksClickable="true"
         android:text="12, Al-Aziz , Jeddah"
         android:textSize="@dimen/titleSize" />
 

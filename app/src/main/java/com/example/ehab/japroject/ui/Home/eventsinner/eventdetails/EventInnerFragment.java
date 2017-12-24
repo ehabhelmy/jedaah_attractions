@@ -1,11 +1,13 @@
-package com.example.ehab.japroject.ui.Home.eventsinner;
+package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails;
 
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -13,9 +15,11 @@ import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.eventinner.Data;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
-import com.example.ehab.japroject.ui.Home.eventsinner.pojo.EventDetails;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.ImagePagerAdapter;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.TagAdapter;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.SocialMediaAdapter;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDetails;
 import com.like.LikeButton;
 
 import javax.inject.Inject;
@@ -80,6 +84,8 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
     @Inject
     EventInnerPresenter presenter;
 
+    private Double latitude,longitude;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -92,7 +98,7 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
     }
 
     @OnClick(R.id.buyNow)
-    void openbuyView(){
+    void openBuyView(){
 
     }
 
@@ -131,7 +137,50 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
 
     @Override
     public void setupEventsInner(EventDetails data) {
+        latitude = data.getLatitude();
+        longitude = data.getLongitude();
+        eventTitle.setText(data.getEventTitle());
+        eventMonth.setText(data.getEventMonth());
+        eventDay.setText(data.getEventDay());
+        dayRemaining.setText(data.getEventDatRemaining());
+        categories.setText(data.getCategoriesText());
+        likeButton.setLiked(data.isIsliked());
+        likes.setText(data.getInterested());
+        eventAddress.setText(data.getEventAddress());
+        eventDate.setText(data.getEventDatetitle());
+        eventPrice.setText(data.getEventPrice());
+        eventDescription.setText(data.getEventDescription());
+        for (String date : data.getEventDateDays()) {
+            eventSchedule.addView(createTextView(date));
+        }
+        SocialMediaAdapter adapter = new SocialMediaAdapter();
+        adapter.setData(data.getSocialMedia());
+        socialMedia.setAdapter(adapter);
+        TagAdapter tagAdapter = new TagAdapter(this.getContext());
+        tags.setAdapter(tagAdapter);
+        ImagePagerAdapter imagePagerAdapter = new ImagePagerAdapter(this.getContext());
+        imagePagerAdapter.setImageURLS(data.getImageURLS());
+        imageViewPager.setAdapter(imagePagerAdapter);
+    }
 
+    private TextView createTextView(String day) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0,0,0,convertFromDpToPixel());
+        TextView dDay = new TextView(this.getContext());
+        dDay.setText(day);
+        dDay.setLayoutParams(params);
+        dDay.setTextSize(getResources().getDimension(R.dimen.cardsubtitle));
+        return dDay;
+    }
 
+    private int convertFromDpToPixel(){
+        Resources r = this.getContext().getResources();
+        int px = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                2,
+                r.getDisplayMetrics()
+        );
+        return px;
     }
 }

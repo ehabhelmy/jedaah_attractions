@@ -6,7 +6,8 @@ import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragmen
 import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.all_events.AllEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.nearby_events.NearByEventsFragment;
-import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
@@ -49,5 +50,7 @@ public interface MainComponent {
     void inject(SignInFragment signInFragment);
 
     void inject(RegisterationFragment registerationFragment);
+
+    void inject(EventInnerActivity eventInnerActivity);
 }
 

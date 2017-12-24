@@ -31,5 +31,8 @@ public class NearByEventsContract {
         void loadNearByEventsAfterLocationEnabled(LatLng latLng);
 
         void openLocationSettings();
+
+        void showEventInner(int id);
+
     }
 }

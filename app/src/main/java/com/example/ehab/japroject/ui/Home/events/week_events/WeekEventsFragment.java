@@ -76,6 +76,9 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
             Event event = (Event) model;
             //TODO : call presenter to send id of the event to the backend
         });
+        eventsListAdapter.setOnViewListener(id -> {
+            weekEventsPresenter.showEventInner(id);
+        });
         recyclerView.setAdapter(eventsListAdapter);
     }
 }

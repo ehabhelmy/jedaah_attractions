@@ -19,5 +19,6 @@ public interface AuthenticationContract {
 
     interface Presenter extends Unsubscribable{
         void login(String email,String password);
+        void goToHomeActivity();
     }
 }

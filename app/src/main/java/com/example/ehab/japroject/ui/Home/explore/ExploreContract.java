@@ -31,5 +31,6 @@ public interface ExploreContract {
     interface Presenter extends Unsubscribable{
         void openLocationSettings();
         void loadNearByEventsAfterLocationEnabled(LatLng latLng);
+        void showEventInner(int id);
     }
 }

@@ -118,4 +118,9 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     public void loadNearByEventsAfterLocationEnabled(LatLng latLng) {
         nearByEvents.getNearbyEvents(latLng, nearbyEventsResponseBaseCallback,true);
     }
+
+    @Override
+    public void showEventInner(int id) {
+        jaNavigationManager.showEventInner(id);
+    }
 }

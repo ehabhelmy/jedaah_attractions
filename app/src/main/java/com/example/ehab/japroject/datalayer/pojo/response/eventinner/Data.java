@@ -75,6 +75,12 @@ public class Data extends BaseModel {
     @SerializedName("interested")
     @Expose
     private Integer interested;
+    @SerializedName("lat")
+    @Expose
+    private String latitude;
+    @SerializedName("lng")
+    @Expose
+    private String longitude;
 
     public Integer getId() {
         return id;
@@ -252,4 +258,19 @@ public class Data extends BaseModel {
         this.interested = interested;
     }
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 }

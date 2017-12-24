@@ -19,6 +19,6 @@ public interface TodayEventsContract {
     }
 
     interface Presenter extends Unsubscribable {
-
+        void showEventInner(int id);
     }
 }

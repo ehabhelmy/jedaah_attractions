@@ -1,5 +1,6 @@
 package com.example.ehab.japroject.ui.Home.explore.viewholder;
 
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,6 +20,9 @@ import butterknife.BindView;
  */
 
 public class EventsViewHolder extends BaseViewHolder<Event> {
+
+    @BindView(R.id.eventCardView)
+    CardView eventContainer;
 
     @BindView(R.id.eventImage)
     ImageLayout eventImage;
@@ -67,6 +71,9 @@ public class EventsViewHolder extends BaseViewHolder<Event> {
             public void unLiked(LikeButton likeButton) {
 
             }
+        });
+        eventContainer.setOnClickListener(v -> {
+            onViewListener.onViewClicked(baseModel.getId());
         });
     }
 }

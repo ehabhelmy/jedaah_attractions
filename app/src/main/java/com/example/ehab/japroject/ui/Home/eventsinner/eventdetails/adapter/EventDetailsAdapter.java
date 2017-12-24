@@ -1,15 +1,13 @@
-package com.example.ehab.japroject.ui.Home.eventsinner.adapter;
+package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter;
 
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.Data;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTag;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.SocialMedium;
-import com.example.ehab.japroject.datalayer.pojo.response.events.Datum;
-import com.example.ehab.japroject.ui.Home.eventsinner.pojo.EventDetails;
-import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDetails;
+
 import static com.example.ehab.japroject.util.DateTimeUtils.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.ehab.japroject.util.DateTimeUtils.convertJSONDateToDate;
 import static com.example.ehab.japroject.util.DateTimeUtils.getDay;
@@ -35,6 +33,8 @@ public class EventDetailsAdapter {
         eventDetails.setSocialMedia((ArrayList<SocialMedium>) data.getSocialMedia());
         eventDetails.setEventTags((ArrayList<EventTag>) data.getEventTags());
         eventDetails.setEventDescription(data.getDescription());
+        eventDetails.setLatitude(Double.parseDouble(data.getLatitude()));
+        eventDetails.setLongitude(Double.parseDouble(data.getLongitude()));
         StringBuilder cat = null;
         for (int i = 0 ; i < data.getCategories().size() ; i++ ) {
             cat.append(data.getCategories().get(i).getName());
@@ -48,6 +48,7 @@ public class EventDetailsAdapter {
         days.add("Firday, 13 nov 3pm : 5pm");
         days.add("Firday, 13 nov 3pm : 5pm");
         eventDetails.setEventDateDays(days);
+        eventDetails.setImageURLS((ArrayList<String>) data.getGallery());
         return eventDetails;
     }
 }

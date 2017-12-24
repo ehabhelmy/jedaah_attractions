@@ -1,7 +1,6 @@
-package com.example.ehab.japroject.ui.Home.eventsinner.pojo;
+package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
-import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventDay;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTag;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.SocialMedium;
 
@@ -27,7 +26,17 @@ public class EventDetails extends BaseModel {
     private ArrayList<EventTag> eventTags;
     private String eventPrice;
     private String eventDescription;
+    private Double latitude;
+    private Double longitude;
+    private ArrayList<String> imageURLS;
 
+    public ArrayList<String> getImageURLS() {
+        return imageURLS;
+    }
+
+    public void setImageURLS(ArrayList<String> imageURLS) {
+        this.imageURLS = imageURLS;
+    }
 
     public String getEventTitle() {
         return eventTitle;
@@ -139,5 +148,21 @@ public class EventDetails extends BaseModel {
 
     public void setEventDescription(String eventDescription) {
         this.eventDescription = eventDescription;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

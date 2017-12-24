@@ -70,4 +70,9 @@ public class NearByEventsPresenter extends BasePresenter<NearByEventsContract.Vi
     public void openLocationSettings() {
         jaNavigationManager.showLocationSettings();
     }
+
+    @Override
+    public void showEventInner(int id) {
+        jaNavigationManager.showEventInner(id);
+    }
 }

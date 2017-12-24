@@ -48,4 +48,9 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationContrac
     public void login(String id, String password) {
         login.login(loginResponseBaseCallback,id,password);
     }
+
+    @Override
+    public void goToHomeActivity() {
+        jaNavigationManager.goToHomeActivity();
+    }
 }

@@ -15,11 +15,12 @@ public class Event extends BaseModel {
     private String eventRemaining;
     private String eventAddress;
     private String eventLikes;
+    private int id;
 
     public Event() {
     }
 
-    public Event(String eventImage, String eventName, String eventMonth, String eventDay, String eventRemaining, String eventAddress, String eventLikes) {
+    public Event(int id ,String eventImage, String eventName, String eventMonth, String eventDay, String eventRemaining, String eventAddress, String eventLikes) {
         this.eventImage = eventImage;
         this.eventName = eventName;
         this.eventMonth = eventMonth;
@@ -27,6 +28,15 @@ public class Event extends BaseModel {
         this.eventRemaining = eventRemaining;
         this.eventAddress = eventAddress;
         this.eventLikes = eventLikes;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEventImage() {

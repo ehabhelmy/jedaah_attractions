@@ -123,7 +123,7 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
 
     @Override
     public void skipAuth() {
-        jaNavigationManager.goToHomeActivity();
+        presenter.goToHomeActivity();
     }
 
 }

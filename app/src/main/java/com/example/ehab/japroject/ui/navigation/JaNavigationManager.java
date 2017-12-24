@@ -35,6 +35,8 @@ public abstract class JaNavigationManager {
 
     public static final String REGISTERATION = "registeration";
 
+    public static final String EVENT_DETAILS = "eventDetails";
+
     public static final int LOCATION_SETTINGS = 2;
 
 
@@ -65,6 +67,11 @@ public abstract class JaNavigationManager {
 
     public abstract void showRegisterationScreen();
 
+    public abstract void showEventDetails(int id);
+
+    public abstract void showEventInner(int id);
+
+
     protected void addFragment(BaseFragment fragment,boolean addToBackStack){
 
     }
@@ -94,4 +101,5 @@ public abstract class JaNavigationManager {
     public void setCurrentActivity(BaseActivity currentActivity) {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
+
 }

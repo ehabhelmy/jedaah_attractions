@@ -108,6 +108,9 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
             Event event = (Event) model;
             //TODO : call presenter to send id of the event to the backend
         });
+        eventsListAdapter.setOnViewListener(id -> {
+            presenter.showEventInner(id);
+        });
         eventsList.setAdapter(eventsListAdapter);
     }
 

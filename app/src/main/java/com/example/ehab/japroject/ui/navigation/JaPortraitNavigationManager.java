@@ -1,15 +1,19 @@
 package com.example.ehab.japroject.ui.navigation;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings;
 
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
+import com.example.ehab.japroject.util.Constants;
 
 /**
  * Created by ehab on 12/1/17.
@@ -71,5 +75,26 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             registerationFragment = new RegisterationFragment();
         }
         replaceFragment(registerationFragment,false,REGISTERATION,R.id.frame_layout_auth);
+    }
+
+    @Override
+    public void showEventDetails(int id) {
+        EventInnerFragment eventInnerFragment = (EventInnerFragment) fragmentManager.findFragmentByTag(EVENT_DETAILS);
+        if (eventInnerFragment == null) {
+            eventInnerFragment = new EventInnerFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constants.EVENT_ID,id);
+            eventInnerFragment.setArguments(bundle);
+        }
+        replaceFragment(eventInnerFragment,false,EVENT_DETAILS,R.id.frame_layout_inner);
+    }
+
+    @Override
+    public void showEventInner(int id) {
+        Intent intent = new Intent(context,EventInnerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.EVENT_ID,id);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 }

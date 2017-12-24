@@ -39,4 +39,5 @@ public abstract class BasePresenter<T extends BaseView> {
     public void finalizeView() {
         isViewAlive.set(false);
     }
+
 }

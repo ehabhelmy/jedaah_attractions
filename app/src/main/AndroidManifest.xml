@@ -27,6 +27,11 @@
         <activity android:name=".ui.Home.HomeActivity">
 
         </activity>
+
+        <activity android:name=".ui.Home.eventsinner.EventInnerActivity">
+
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="d8d813b2ac8c7c7e9b61cbb0359a8de4af26d604" />

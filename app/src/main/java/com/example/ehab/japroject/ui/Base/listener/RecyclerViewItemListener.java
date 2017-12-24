@@ -10,7 +10,7 @@ public interface RecyclerViewItemListener {
 
     @FunctionalInterface
     interface onViewListener {
-        void onViewClicked(BaseModel model);
+        void onViewClicked(int id);
     }
 
     @FunctionalInterface

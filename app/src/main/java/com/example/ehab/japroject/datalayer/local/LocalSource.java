@@ -5,6 +5,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 
 import java.util.List;
 
@@ -45,7 +46,11 @@ public interface LocalSource {
 
     void saveAllEvents(EventsResponse eventsResponse);
 
-    void saveLoggedUser(LoginResponse loginResponse);
+    void saveLoggedUser(User user);
+
+    Single<User> getUserProfile();
+
+    void saveToken(String token);
 
     String getToken();
 
