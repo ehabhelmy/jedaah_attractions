@@ -17,6 +17,6 @@ public interface EventInnerContract {
     }
 
     interface Presenter extends Unsubscribable{
-
+        void openNavigationView(double lat,double lng);
     }
 }

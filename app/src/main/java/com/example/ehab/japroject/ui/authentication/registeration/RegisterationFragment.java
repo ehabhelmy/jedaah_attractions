@@ -1,18 +1,35 @@
 package com.example.ehab.japroject.ui.authentication.registeration;
 
 
-import android.support.v7.widget.AppCompatImageButton;
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatEditText;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
+import com.example.ehab.japroject.ui.authentication.AuthenticationContract;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Romisaa on 12/20/2017.
@@ -20,27 +37,40 @@ import butterknife.BindView;
 
 public class RegisterationFragment extends BaseFragment implements RegisterationContract.View {
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE};
+
+    private AuthenticationContract.View activity;
+
     @BindView(R.id.username)
-    TextView userName;
+    AppCompatEditText userName;
 
     @BindView(R.id.email)
-    TextView email;
+    AppCompatEditText email;
 
     @BindView(R.id.password)
-    TextView password;
+    AppCompatEditText password;
 
-    @BindView(R.id.register)
-    Button register;
+    @BindView(R.id.number)
+    AppCompatEditText mobileNumber;
 
     @BindView(R.id.add_image)
-    AppCompatImageButton addImage;
+    ImageButton addImage;
 
     @BindView(R.id.profile_image)
     ImageView profileImage;
 
+    @BindView(R.id.registerNow)
+    Button register;
+
     @Inject
     RegisterationPresenter presenter;
 
+    private Uri uri;
 
     @Override
     protected void initializeDagger() {
@@ -54,6 +84,23 @@ public class RegisterationFragment extends BaseFragment implements Registeration
         super.presenter = presenter;
         presenter.setView(this);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        addImage.setOnClickListener(view1 -> {
+            verifyStoragePermissions(getActivity());
+        });
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
 
     @Override
     protected int getLayoutId() {
@@ -72,6 +119,74 @@ public class RegisterationFragment extends BaseFragment implements Registeration
 
     @Override
     public void showError(String message) {
+        Log.i("Registeration Activity",message);
+    }
 
+    @OnClick(R.id.registerNow)
+    void register() {
+        this.presenter.register(userName.getText().toString()
+                , email.getText().toString()
+                , password.getText().toString()
+                , mobileNumber.getText().toString(), uri);
+    }
+
+    @OnClick(R.id.signIn)
+    void showSignIn(){
+        presenter.showSignIn();
+    }
+
+    @OnClick(R.id.skip_tv)
+    void skipAuth(){
+        activity.skipAuth();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (AuthenticationContract.View) context;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            uri = data.getData();
+            profileImage.setImageURI(data.getData());
+        }
+    }
+
+    private void verifyStoragePermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }else{
+            openGallery();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_EXTERNAL_STORAGE :
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openGallery();
+                }else{
+                    //TODO : show error and disable functionality
+                    showErrorYouCantUploadImage();
+                }
+        }
+    }
+
+    private void showErrorYouCantUploadImage() {
+        new AlertDialog.Builder(getContext())
+                .setMessage("You can't update your profile image")
+                .show();
     }
 }
+
+
+

@@ -37,16 +37,19 @@ public class AllEvents implements Unsubscribable {
         eventsResponseDisposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
             @Override
             public void onSuccess(EventsResponse eventsResponse) {
+                if (fresh) {
+                    dataRepository.saveAllEvents(eventsResponse);
+                }
                 callback.onSuccess(eventsResponse);
             }
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
                     callback.onError(e.getMessage());
                 }
                 else {
-                    dataRepository.getCategories(false);
+                    dataRepository.getAllEvents(false);
                 }
             }
         };

@@ -52,4 +52,9 @@ public class SignInPresenter extends BasePresenter<SignInContract.View> implemen
     public void resetPassword(String newPassword) {
 
     }
+
+    @Override
+    public void showRegisterScreen() {
+        jaNavigationManager.showRegisterationScreen();
+    }
 }

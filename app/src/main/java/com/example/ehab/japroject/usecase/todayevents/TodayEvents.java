@@ -38,16 +38,19 @@ public class TodayEvents implements Unsubscribable {
         disposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
             @Override
             public void onSuccess(EventsResponse eventsResponse) {
+                if (fresh){
+                    dataRepository.saveTodayEvents(eventsResponse);
+                }
                 callback.onSuccess(eventsResponse);
             }
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
                     callback.onError(e.getMessage());
                 }
                 else {
-                    dataRepository.getCategories(false);
+                    dataRepository.getTodayEvents(false);
                 }
             }
         };

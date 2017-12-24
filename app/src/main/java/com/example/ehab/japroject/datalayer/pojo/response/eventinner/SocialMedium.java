@@ -5,7 +5,7 @@ import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SocialMedium extends BaseModel {
+public class SocialMedium extends BaseModel{
 
     @SerializedName("id")
     @Expose

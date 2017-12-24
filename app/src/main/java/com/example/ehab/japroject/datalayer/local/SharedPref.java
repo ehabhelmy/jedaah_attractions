@@ -30,6 +30,7 @@ public class SharedPref<T extends BaseModel> {
     public static final String NEARBY_EVENTS = "nearbyEvents";
     public static final String TADAY_EVENTS = "todayEvents";
     public static final String WEEK_EVENTS = "weekEvents";
+    public static final String REGISTERED_USER = "registeredUser";
 
     public void saveObject(String key, Object object) {
         SharedPreferences.Editor editor = preferences.edit();

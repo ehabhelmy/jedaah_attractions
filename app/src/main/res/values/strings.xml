@@ -32,5 +32,8 @@
     <string name="email">Email Address</string>
     <string name="password">Password</string>
     <string name="forgetPassword">Forget Password ?</string>
+    <string name="username">Username</string>
+    <string name="emailAdress">Email Adress</string>
+    <string name="mobileNumber">Mobile Number (Optional)</string>
     <string name="join">JOIN NOW</string>
 </resources>

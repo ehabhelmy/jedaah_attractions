@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.pojo.request.LoginRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
+import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
@@ -17,22 +18,28 @@ import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.EventDetailsService;
 import com.example.ehab.japroject.datalayer.remote.service.LoginService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.RegisterationService;
 import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
-import com.example.ehab.japroject.usecase.eventinner.EventInner;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
 
 import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 
+import static com.example.ehab.japroject.datalayer.remote.ServiceError.FALSE_CODE;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.NETWORK_ERROR;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.SUCCESS_CODE;
 import static com.example.ehab.japroject.util.Constants.BASE_URL;
@@ -80,10 +87,10 @@ public class RemoteRepository implements RemoteSource {
     public DataResponse getData() {
         DataService dataService = serviceGenerator.createService(DataService.class, BASE_URL);
         ServiceResponse serviceResponse = processCall(dataService.getData(getCurrentLanguage()), false);
-        if (serviceResponse.getCode() == SUCCESS_CODE){
+        if (serviceResponse.getCode() == SUCCESS_CODE) {
             DataResponse dataResponse = (DataResponse) serviceResponse.getData();
             return dataResponse;
-        }else{
+        } else {
             return null;
         }
     }
@@ -123,7 +130,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             NearByEventsService nearByEventsService = serviceGenerator.createService(NearByEventsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(nearByEventsService.getNearbyEvents(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""),getCurrentLanguage()), false);
+                            ServiceResponse serviceResponse = processCall(nearByEventsService.getNearbyEvents(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""), getCurrentLanguage()), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventsResponse);
@@ -252,7 +259,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             EventDetailsService eventDetailsService = serviceGenerator.createService(EventDetailsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(eventDetailsService.getEventDetails(getCurrentLanguage(),id), false);
+                            ServiceResponse serviceResponse = processCall(eventDetailsService.getEventDetails(getCurrentLanguage(), id), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 EventInnerResponse eventInnerResponse = (EventInnerResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventInnerResponse);
@@ -278,7 +285,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             LoginService loginService = serviceGenerator.createService(LoginService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(loginService.login(getCurrentLanguage(),new LoginRequest(email, password)), false);
+                            ServiceResponse serviceResponse = processCall(loginService.login(getCurrentLanguage(), new LoginRequest(email, password)), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(loginResponse);
@@ -293,6 +300,54 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return loginResponseSingle;
+    }
+
+    @Override
+    public Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image) {
+        Single<RegisterationResponse> registerationResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            serviceGenerator.setCONTENT_TYPE_VALUE("multipart/form-data");
+                            RegisterationService registerationService = serviceGenerator.createService(RegisterationService.class, BASE_URL);
+                            serviceGenerator.setCONTENT_TYPE_VALUE("application/json");
+                            RequestBody requestName = RequestBody.create(MediaType.parse("text/plain"), "Ali");
+                            RequestBody requestUserName = RequestBody.create(MediaType.parse("text/plain"), userName);
+                            RequestBody requestEmail = RequestBody.create(MediaType.parse("text/plain"), email);
+                            RequestBody requestPassword = RequestBody.create(MediaType.parse("text/plain"), password);
+                            RequestBody requestMobile = null;
+                            if (mobile != null) {
+                                requestMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
+                            }
+                            MultipartBody.Part requestImagePart = null;
+                            if (image != null) {
+                                RequestBody requestImage = RequestBody.create(MediaType.parse("image/*"), image);
+                                requestImagePart =
+                                        MultipartBody.Part.createFormData("profile_image", image.getName(), requestImage);
+                            }
+                            ServiceResponse serviceResponse = processCall(registerationService.register(getCurrentLanguage(),
+                                    requestName,
+                                    requestUserName,
+                                    requestEmail,
+                                    requestPassword,
+                                    requestMobile,
+                                    requestImagePart), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE) {
+                                RegisterationResponse registerationResponse = (RegisterationResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(registerationResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return registerationResponseSingle;
     }
 
     private String getCurrentLanguage() {

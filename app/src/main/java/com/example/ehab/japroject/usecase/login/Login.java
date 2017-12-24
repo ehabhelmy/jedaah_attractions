@@ -37,6 +37,8 @@ public class Login implements Unsubscribable {
             @Override
             public void onSuccess(LoginResponse loginResponse) {
                 if (loginResponse.getSuccess()) {
+                    dataRepository.saveLoggedUser(loginResponse.getData().getUser());
+                    dataRepository.saveToken(loginResponse.getData().getToken());
                     callback.onSuccess(loginResponse);
                 }else {
                     callback.onError(loginResponse.getMsg().getMsg());

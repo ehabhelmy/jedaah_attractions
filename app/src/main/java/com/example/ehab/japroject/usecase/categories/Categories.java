@@ -36,16 +36,17 @@ public class Categories implements Unsubscribable {
     public void getCategories(BaseCallback<Category> callback,boolean fresh) {
 
         disposableSingleObserver = new DisposableSingleObserver<Category>() {
-
-
             @Override
             public void onSuccess(Category categories) {
+                if (fresh){
+                    dataRepository.saveCategories(categories);
+                }
                 callback.onSuccess(categories);
             }
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
                     callback.onError(e.getMessage());
                 }
                 else {

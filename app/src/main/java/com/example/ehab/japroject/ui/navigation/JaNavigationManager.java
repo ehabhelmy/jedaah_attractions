@@ -71,19 +71,17 @@ public abstract class JaNavigationManager {
 
     public abstract void showEventInner(int id);
 
+    public abstract void openNavigationView(double lat, double lng);
 
-    protected void addFragment(BaseFragment fragment,boolean addToBackStack){
 
-    }
-
-    protected void replaceFragment(BaseFragment fragment,boolean addToBackStack,String tag,int frame){
+    protected void addFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack){
             fragmentTransaction.addToBackStack(tag);
         }
-        fragmentTransaction.replace(frame,fragment,tag);
+        fragmentTransaction.add(frame,fragment,tag);
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
-        fragmentTransaction.commitNowAllowingStateLoss();
+        fragmentTransaction.commit();
     }
 
     public  <F extends BaseFragment> F getCurrentFragmentOnHome(){

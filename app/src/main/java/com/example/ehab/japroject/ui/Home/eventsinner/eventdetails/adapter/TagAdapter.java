@@ -1,6 +1,9 @@
 package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +50,16 @@ public class TagAdapter extends BaseAdapter {
         return 0;
     }
 
+    private int convertFromDpToPixel(){
+        Resources r = context.getResources();
+        int px = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                10,
+                r.getDisplayMetrics()
+        );
+        return px;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
@@ -60,6 +73,8 @@ public class TagAdapter extends BaseAdapter {
         ImageView tagIcon = view.findViewById(R.id.tagIcon);
         TextView tagName = view.findViewById(R.id.tagType);
         tagName.setText(tags.get(position).getName());
+        view.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_rectangle_grey));
+        view.setPadding(convertFromDpToPixel(),convertFromDpToPixel(),convertFromDpToPixel(),convertFromDpToPixel());
         Picasso.with(context).load(tags.get(position).getIcon()).placeholder(R.drawable.ic_type_g).error(R.drawable.ic_type_g).into(tagIcon);
         return view;
     }

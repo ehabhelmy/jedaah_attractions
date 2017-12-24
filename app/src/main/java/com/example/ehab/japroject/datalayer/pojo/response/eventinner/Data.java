@@ -7,7 +7,7 @@ import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Data extends BaseModel {
+public class Data extends BaseModel{
 
     @SerializedName("id")
     @Expose
@@ -77,10 +77,13 @@ public class Data extends BaseModel {
     private Integer interested;
     @SerializedName("lat")
     @Expose
-    private String latitude;
+    private String lat;
     @SerializedName("lng")
     @Expose
-    private String longitude;
+    private String lng;
+    @SerializedName("is_liked")
+    @Expose
+    private Integer isLiked;
 
     public Integer getId() {
         return id;
@@ -258,19 +261,28 @@ public class Data extends BaseModel {
         this.interested = interested;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public String getLat() {
+        return lat;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setLat(String lat) {
+        this.lat = lat;
     }
 
-    public String getLongitude() {
-        return longitude;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
+
+    public Integer getIsLiked() {
+        return isLiked;
+    }
+
+    public void setIsLiked(Integer isLiked) {
+        this.isLiked = isLiked;
+    }
+
 }

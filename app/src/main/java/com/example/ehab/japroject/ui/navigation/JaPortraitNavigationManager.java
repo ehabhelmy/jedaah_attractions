@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.ui.navigation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 
@@ -27,7 +28,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (exploreFragment == null) {
             exploreFragment = new ExploreFragment();
         }
-        replaceFragment(exploreFragment,false,EXPLORE, R.id.frame_layout);
+        addFragment(exploreFragment,false,EXPLORE, R.id.frame_layout);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (eventsFragment == null) {
             eventsFragment = new EventsFragment();
         }
-        replaceFragment(eventsFragment,false,EVENTS,R.id.frame_layout);
+        addFragment(eventsFragment,false,EVENTS,R.id.frame_layout);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (socialMediaFragment == null) {
             socialMediaFragment = new SocialMediaFragment();
         }
-        replaceFragment(socialMediaFragment,false,SOCIAL,R.id.frame_layout_auth);
+        addFragment(socialMediaFragment,false,SOCIAL,R.id.frame_layout_auth);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (signInFragment == null) {
             signInFragment = new SignInFragment();
         }
-        replaceFragment(signInFragment,false,SIGNIN,R.id.frame_layout_auth);
+        addFragment(signInFragment,false,SIGNIN,R.id.frame_layout_auth);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (registerationFragment == null) {
             registerationFragment = new RegisterationFragment();
         }
-        replaceFragment(registerationFragment,false,REGISTERATION,R.id.frame_layout_auth);
+        addFragment(registerationFragment,false,REGISTERATION,R.id.frame_layout_auth);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             bundle.putInt(Constants.EVENT_ID,id);
             eventInnerFragment.setArguments(bundle);
         }
-        replaceFragment(eventInnerFragment,false,EVENT_DETAILS,R.id.frame_layout_inner);
+        addFragment(eventInnerFragment,false,EVENT_DETAILS,R.id.frame_layout_inner);
     }
 
     @Override
@@ -95,6 +96,14 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.EVENT_ID,id);
         intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void openNavigationView(double lat, double lng) {
+        Uri uri=Uri.parse("google.navigation:q="+lat+","+lng+"&mode=d");
+        Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+        intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
     }
 }

@@ -105,12 +105,13 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
 
     @OnClick(R.id.join)
     void goToRegisterScreen(){
-
+        presenter.showRegisterScreen();
     }
 
     @OnClick(R.id.signin)
     void login(){
         //TODO : call presenter and send the email and password
+        presenter.login(email.getText().toString().trim(),password.getText().toString().trim());
     }
 
     @Override

@@ -19,5 +19,6 @@ public interface SignInContract  {
         void login(String email,String password);
         void getResetPasswordCode();
         void resetPassword(String newPassword);
+        void showRegisterScreen();
     }
 }

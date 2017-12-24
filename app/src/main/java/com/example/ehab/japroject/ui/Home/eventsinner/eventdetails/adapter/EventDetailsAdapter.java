@@ -8,6 +8,7 @@ import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDet
 import static com.example.ehab.japroject.util.DateTimeUtils.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.ehab.japroject.util.DateTimeUtils.convertJSONDateToDate;
 import static com.example.ehab.japroject.util.DateTimeUtils.getDay;
@@ -20,7 +21,8 @@ import static com.example.ehab.japroject.util.DateTimeUtils.getMonth;
 
 public class EventDetailsAdapter {
 
-    public static EventDetails convertIntoEventDetailsUi(Data data) {
+    public static EventDetails convertIntoEventDetailsUi(List<Data> data1) {
+        Data data = data1.get(0);
         EventDetails eventDetails = new EventDetails();
         eventDetails.setEventTitle(data.getTitle());
         eventDetails.setInterested(data.getInterested()+"");
@@ -33,16 +35,21 @@ public class EventDetailsAdapter {
         eventDetails.setSocialMedia((ArrayList<SocialMedium>) data.getSocialMedia());
         eventDetails.setEventTags((ArrayList<EventTag>) data.getEventTags());
         eventDetails.setEventDescription(data.getDescription());
-        eventDetails.setLatitude(Double.parseDouble(data.getLatitude()));
-        eventDetails.setLongitude(Double.parseDouble(data.getLongitude()));
-        StringBuilder cat = null;
+        eventDetails.setLatitude(Double.parseDouble(data.getLat()));
+        eventDetails.setLongitude(Double.parseDouble(data.getLng()));
+        StringBuilder cat = new StringBuilder();
         for (int i = 0 ; i < data.getCategories().size() ; i++ ) {
             cat.append(data.getCategories().get(i).getName());
-            cat.append("|");
+            cat.append(" | ");
             cat.append(data.getSubCategories().get(i));
+            cat.append(",");
         }
         eventDetails.setCategoriesText(cat.toString());
-        eventDetails.setIsliked(true);
+        if (data.getIsLiked() == 1) {
+            eventDetails.setIsliked(true);
+        }else {
+            eventDetails.setIsliked(false);
+        }
         ArrayList<String> days = new ArrayList<>();
         days.add("Firday, 13 nov 3pm : 5pm");
         days.add("Firday, 13 nov 3pm : 5pm");

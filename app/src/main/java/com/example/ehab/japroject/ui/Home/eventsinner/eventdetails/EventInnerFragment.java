@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,58 +36,74 @@ import butterknife.OnClick;
 
 public class EventInnerFragment extends BaseFragment implements EventInnerContract.View {
 
+    @Nullable
     @BindView(R.id.imageViewPager)
     ViewPager imageViewPager;
 
+    @Nullable
     @BindView(R.id.favourite)
     LikeButton likeButton;
 
+    @Nullable
     @BindView(R.id.eventMonth)
     TextView eventMonth;
 
+    @Nullable
     @BindView(R.id.eventDay)
     TextView eventDay;
 
+    @Nullable
     @BindView(R.id.eventDayRemaining)
     TextView dayRemaining;
 
+    @Nullable
     @BindView(R.id.eventTitle)
     TextView eventTitle;
 
+    @Nullable
     @BindView(R.id.categories)
     TextView categories;
 
+    @Nullable
     @BindView(R.id.likes)
     TextView likes;
 
+    @Nullable
     @BindView(R.id.eventAddress)
     TextView eventAddress;
 
+    @Nullable
     @BindView(R.id.directions)
     TextView directions;
 
+    @Nullable
     @BindView(R.id.eventDate)
     TextView eventDate;
 
+    @Nullable
     @BindView(R.id.eventSchedule)
     LinearLayout eventSchedule;
 
+    @Nullable
     @BindView(R.id.socialMedia)
     RecyclerView socialMedia;
 
+    @Nullable
     @BindView(R.id.tags)
     GridView tags;
 
+    @Nullable
     @BindView(R.id.eventDescription)
     TextView eventDescription;
 
+    @Nullable
     @BindView(R.id.eventPrice)
     TextView eventPrice;
 
     @Inject
     EventInnerPresenter presenter;
 
-    private Double latitude,longitude;
+    private double latitude,longitude;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -92,9 +111,20 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
         directions.setPaintFlags(directions.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @OnClick(R.id.directions)
     void openMapsInNavigationMode() {
-
+        presenter.openNavigationView(latitude,longitude);
     }
 
     @OnClick(R.id.buyNow)
@@ -137,8 +167,8 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
 
     @Override
     public void setupEventsInner(EventDetails data) {
-        latitude = data.getLatitude();
-        longitude = data.getLongitude();
+        latitude = data.getLatitude().doubleValue();
+        longitude = data.getLongitude().doubleValue();
         eventTitle.setText(data.getEventTitle());
         eventMonth.setText(data.getEventMonth());
         eventDay.setText(data.getEventDay());
@@ -155,8 +185,10 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
         }
         SocialMediaAdapter adapter = new SocialMediaAdapter();
         adapter.setData(data.getSocialMedia());
+        socialMedia.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false));
         socialMedia.setAdapter(adapter);
         TagAdapter tagAdapter = new TagAdapter(this.getContext());
+        tagAdapter.setTags(data.getEventTags());
         tags.setAdapter(tagAdapter);
         ImagePagerAdapter imagePagerAdapter = new ImagePagerAdapter(this.getContext());
         imagePagerAdapter.setImageURLS(data.getImageURLS());
@@ -170,7 +202,9 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
         TextView dDay = new TextView(this.getContext());
         dDay.setText(day);
         dDay.setLayoutParams(params);
-        dDay.setTextSize(getResources().getDimension(R.dimen.cardsubtitle));
+        float denisty = getResources().getDisplayMetrics().density;
+        float textSize = getResources().getDimension(R.dimen.cardsubtitle) / denisty;
+        dDay.setTextSize(textSize);
         return dDay;
     }
 

@@ -2,13 +2,17 @@ package com.example.ehab.japroject.datalayer;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
+import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.File;
 
 import javax.inject.Inject;
 
@@ -47,20 +51,6 @@ public class DataRepository implements DataSource {
     @Override
     public Single<EventsResponse> getTopEvents(boolean fresh) {
         if (fresh){
-            remoteRepository.getTopEvents()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<EventsResponse>() {
-                        @Override
-                        public void onSuccess(EventsResponse eventsResponse) {
-                            localRepository.saveTopEvents(eventsResponse);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
             return remoteRepository.getTopEvents();
         } else {
             return localRepository.getTopEvents();
@@ -69,21 +59,7 @@ public class DataRepository implements DataSource {
 
     @Override
     public Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh) {
-        if (isConnected(JaApplication.getContext())){
-            remoteRepository.getNearByEvents(latLng)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<EventsResponse>() {
-                        @Override
-                        public void onSuccess(EventsResponse eventsResponse) {
-                            localRepository.saveNearByEvents(eventsResponse);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
+        if (fresh){
             return remoteRepository.getNearByEvents(latLng);
         } else {
             return localRepository.getNearByEvents();
@@ -93,21 +69,6 @@ public class DataRepository implements DataSource {
     @Override
     public Single<Category> getCategories(boolean fresh) {
         if (fresh) {
-            remoteRepository.getCategories()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<Category>() {
-
-                        @Override
-                        public void onSuccess(Category categories) {
-                            localRepository.saveCategories(categories);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
             return remoteRepository.getCategories();
         } else {
             return localRepository.getCategories();
@@ -117,64 +78,24 @@ public class DataRepository implements DataSource {
     @Override
     public Single<EventsResponse> getTodayEvents(boolean fresh) {
         if (fresh) {
-            remoteRepository.getTodayEvents()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<EventsResponse>() {
-                        @Override
-                        public void onSuccess(EventsResponse eventsResponse) {
-                            localRepository.saveTodayEvents(eventsResponse);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
             return remoteRepository.getTodayEvents();
+        }else {
+            return localRepository.getTodayEvents();
         }
-        return localRepository.getTodayEvents();
     }
 
     @Override
     public Single<EventsResponse> getWeekEvents(boolean fresh) {
         if (fresh) {
-            remoteRepository.getWeekEvents()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<EventsResponse>() {
-                        @Override
-                        public void onSuccess(EventsResponse eventsResponse) {
-                            localRepository.saveWeekEvents(eventsResponse);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
             return remoteRepository.getWeekEvents();
+        }else {
+            return localRepository.getWeekEvents();
         }
-        return localRepository.getWeekEvents();
     }
 
     @Override
     public Single<EventsResponse> getAllEvents(boolean fresh) {
         if (fresh){
-            remoteRepository.getTopEvents()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<EventsResponse>() {
-                        @Override
-                        public void onSuccess(EventsResponse eventsResponse) {
-                            localRepository.saveAllEvents(eventsResponse);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
             return remoteRepository.getAllEvents();
         } else {
             return localRepository.getAllEvents();
@@ -188,23 +109,6 @@ public class DataRepository implements DataSource {
 
     @Override
     public Single<LoginResponse> login(String email, String password) {
-            remoteRepository.login(email, password)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<LoginResponse>() {
-                        @Override
-                        public void onSuccess(LoginResponse loginResponse) {
-                            if (loginResponse.getSuccess()) {
-                                localRepository.saveLoggedUser(loginResponse.getData().getUser());
-                                localRepository.saveToken(loginResponse.getData().getToken());
-                            }
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
             return remoteRepository.login(email, password);
     }
 
@@ -212,4 +116,50 @@ public class DataRepository implements DataSource {
     public String getToken() {
         return localRepository.getToken();
     }
+
+    @Override
+    public Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image) {
+        return remoteRepository.register(userName, email, password, mobile, image);
+    }
+
+    @Override
+    public void saveTopEvents(EventsResponse eventsResponse) {
+        localRepository.saveTopEvents(eventsResponse);
+    }
+
+    @Override
+    public void saveNearByEvents(EventsResponse eventsResponse) {
+        localRepository.saveNearByEvents(eventsResponse);
+    }
+
+    @Override
+    public void saveCategories(Category categoriesResponse) {
+        localRepository.saveCategories(categoriesResponse);
+    }
+
+    @Override
+    public void saveTodayEvents(EventsResponse eventsResponse) {
+        localRepository.saveTodayEvents(eventsResponse);
+    }
+
+    @Override
+    public void saveWeekEvents(EventsResponse eventsResponse) {
+        localRepository.saveWeekEvents(eventsResponse);
+    }
+
+    @Override
+    public void saveAllEvents(EventsResponse eventsResponse) {
+        localRepository.saveAllEvents(eventsResponse);
+    }
+
+    @Override
+    public void saveLoggedUser(User user) {
+        localRepository.saveLoggedUser(user);
+    }
+
+    @Override
+    public void saveToken(String token) {
+        localRepository.saveToken(token);
+    }
+
 }

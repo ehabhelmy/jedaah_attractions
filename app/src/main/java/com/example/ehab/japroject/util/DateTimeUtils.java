@@ -66,8 +66,8 @@ public class DateTimeUtils {
         Calendar eCalendar = Calendar.getInstance();
         eCalendar.setTime(eDate);
         String sDay = new SimpleDateFormat("dd").format(sCalendar.getTime());
-        String sMonth = new SimpleDateFormat("MMMMM").format(sCalendar.getTime());
-        String eMonth = new SimpleDateFormat("MMMMM").format(eCalendar.getTime());
+        String sMonth = new SimpleDateFormat("MMMM").format(sCalendar.getTime());
+        String eMonth = new SimpleDateFormat("MMMM").format(eCalendar.getTime());
         String eDay = new SimpleDateFormat("dd").format(eCalendar.getTime());
         return sMonth + " " + sDay + " - " + eMonth + " " + eDay;
     }

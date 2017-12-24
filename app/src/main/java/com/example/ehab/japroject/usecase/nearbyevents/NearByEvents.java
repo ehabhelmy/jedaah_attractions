@@ -38,16 +38,19 @@ public class NearByEvents implements Unsubscribable {
         eventsResponseDisposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
             @Override
             public void onSuccess(EventsResponse eventsResponse) {
+                if (fresh){
+                    dataRepository.saveNearByEvents(eventsResponse);
+                }
                 callback.onSuccess(eventsResponse);
             }
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
                     callback.onError(e.getMessage());
                 }
                 else {
-                    dataRepository.getCategories(false);
+                    dataRepository.getNearByEvents(latLng,false);
                 }
             }
         };

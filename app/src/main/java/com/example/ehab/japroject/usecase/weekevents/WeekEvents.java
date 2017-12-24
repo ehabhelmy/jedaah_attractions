@@ -43,11 +43,11 @@ public class WeekEvents implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
                     callback.onError(e.getMessage());
                 }
                 else {
-                    dataRepository.getCategories(false);
+                    dataRepository.getWeekEvents(false);
                 }
             }
         };

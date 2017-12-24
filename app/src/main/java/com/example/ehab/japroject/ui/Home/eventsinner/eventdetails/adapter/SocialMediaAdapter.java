@@ -21,4 +21,5 @@ public class SocialMediaAdapter extends BaseRecyclerViewAdapter<SocialMedium> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.social_media, parent, false);
         return new SocialMediaViewHolder(view);
     }
+
 }

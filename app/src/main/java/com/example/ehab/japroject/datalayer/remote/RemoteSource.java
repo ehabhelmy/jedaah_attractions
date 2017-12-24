@@ -1,13 +1,14 @@
 package com.example.ehab.japroject.datalayer.remote;
 
+import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.google.android.gms.maps.model.LatLng;
-import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 
-import java.util.List;
+import java.io.File;
 
 import io.reactivex.Single;
 
@@ -36,4 +37,5 @@ public interface RemoteSource {
 
     Single<LoginResponse> login(String email, String password);
 
+    Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image);
 }

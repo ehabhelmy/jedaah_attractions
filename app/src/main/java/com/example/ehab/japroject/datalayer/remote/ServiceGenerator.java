@@ -27,7 +27,7 @@ public class ServiceGenerator {
     private final int TIMEOUT_READ = 30;   //In seconds
     private final String CONTENT_TYPE = "Content-Type";
     private final String API_KEY = "apikey";
-    private final String CONTENT_TYPE_VALUE = "application/json";
+    private String CONTENT_TYPE_VALUE = "application/json";
     private final String API_KEY_VALUE = "0bac85d8945140b3bc8dde8aff16e329";
 
     private OkHttpClient.Builder okHttpBuilder;
@@ -64,4 +64,7 @@ public class ServiceGenerator {
         return chain.proceed(request);
     };
 
+    public void setCONTENT_TYPE_VALUE(String CONTENT_TYPE_VALUE) {
+        this.CONTENT_TYPE_VALUE = CONTENT_TYPE_VALUE;
+    }
 }

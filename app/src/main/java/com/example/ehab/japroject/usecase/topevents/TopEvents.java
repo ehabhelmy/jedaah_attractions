@@ -39,16 +39,19 @@ public class TopEvents implements Unsubscribable {
             @Override
             public void onSuccess(EventsResponse eventsResponse) {
                 //TODO : check if the data is valid
+                if (fresh){
+                    dataRepository.saveTopEvents(eventsResponse);
+                }
                 callback.onSuccess(eventsResponse);
             }
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
                     callback.onError(e.getMessage());
                 }
                 else {
-                    dataRepository.getCategories(false);
+                    dataRepository.getTopEvents(false);
                 }
             }
         };

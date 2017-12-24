@@ -1,5 +1,6 @@
 package com.example.ehab.japroject.datalayer.remote.service;
 
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 
 import retrofit2.Call;
@@ -12,5 +13,5 @@ import retrofit2.http.Path;
 
 public interface EventDetailsService {
     @GET("{lang}/events/{id}")
-    Call<EventsResponse> getEventDetails(@Path("lang") String lang, @Path("id") int id);
+    Call<EventInnerResponse> getEventDetails(@Path("lang") String lang, @Path("id") int id);
 }

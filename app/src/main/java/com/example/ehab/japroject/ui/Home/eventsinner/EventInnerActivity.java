@@ -14,6 +14,7 @@ public class EventInnerActivity extends BaseActivity implements EventInnerActivi
 
     @Inject
     EventInnerActivityPresenter presenter;
+
     @Override
     protected void initializeDagger() {
         JaApplication jaApplication = (JaApplication) getApplicationContext();

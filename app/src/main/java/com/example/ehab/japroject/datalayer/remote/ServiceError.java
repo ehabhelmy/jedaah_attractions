@@ -12,6 +12,7 @@ public class ServiceError {
     private static final int GROUP_500 = 5;
     private static final int VALUE_100 = 100;
     public static final int SUCCESS_CODE = 202;
+    public static final int FALSE_CODE = 406;
     public static final int ERROR_CODE = 400;
     private String description;
     private int code;

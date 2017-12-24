@@ -52,4 +52,9 @@ public class EventInnerPresenter extends BasePresenter<EventInnerContract.View> 
     public void unSubscribe() {
         eventInner.unSubscribe();
     }
+
+    @Override
+    public void openNavigationView(double lat, double lng) {
+        jaNavigationManager.openNavigationView(lat,lng);
+    }
 }

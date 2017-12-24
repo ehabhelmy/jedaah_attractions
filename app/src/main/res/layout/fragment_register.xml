@@ -4,8 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/layout_registeration"
+    android:background="@color/cardview_dark_background"
     tools:context="com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment">
+
+    <include
+        layout="@layout/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,15 +25,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Register" />
+            android:fontFamily="@font/gotham_bold"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/skip_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:layout_alignBaseline="@+id/register_tv"
+            android:layout_alignBottom="@+id/register_tv"
             android:layout_alignParentEnd="true"
-            android:text="Skip" />
+            android:text="@string/skip"
+            android:textColor="@color/google"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
@@ -37,11 +49,11 @@
 
         <com.example.ehab.japroject.ui.widget.CircularImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/ic_launcher_background" />
 
         <ImageButton
             android:id="@+id/add_image"
@@ -54,42 +66,59 @@
     </RelativeLayout>
 
 
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/username"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:backgroundTint="@color/white" />
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Username"/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:hint="@string/emailAdress"
+        android:textColorHint="@color/white"
+        app:backgroundTint="@color/white" />
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Email Adress"/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/password"
+        android:textColor="@color/white"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        app:backgroundTint="@color/white" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Password"/>
-
-        <EditText
-            android:id="@+id/number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Mobile Number (Optional)"/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:textColor="@color/white"
+        android:ems="10"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/mobileNumber"
+        android:textColorHint="@color/white"
+        app:backgroundTint="@color/white" />
 
 
     <CheckBox
@@ -99,15 +128,16 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:textColor="@color/white"
         android:text="Subscribe to Jeddah Attractions monthly online Newsletter." />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/registerNow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/register_button"
         android:fontFamily="@font/gotham_bold"
-        android:text="REGISTER"
+        android:text="@string/register"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -125,10 +155,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alreay have an account " />
+            android:textColor="@color/white"
+            android:text="Already have an account " />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/signIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorTitle"
@@ -139,7 +170,8 @@
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" ?" />
+            android:textColor="@color/white"
+            android:text="?" />
 
     </LinearLayout>
 

@@ -5,7 +5,7 @@ import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EventTag extends BaseModel {
+public class EventTag extends BaseModel{
 
     @SerializedName("name")
     @Expose
