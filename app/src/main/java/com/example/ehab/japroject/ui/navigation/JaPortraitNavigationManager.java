@@ -20,7 +20,6 @@ import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 import com.example.ehab.japroject.util.Constants;
-import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 
 /**
  * Created by ehab on 12/1/17.
@@ -52,16 +51,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (profileFragment == null) {
             profileFragment = new ProfileFragment();
         }
-        replaceFragment(profileFragment,false,PROFILE);
-    }
-
-    @Override
-    public void showProfileScreen() {
-        ProfileFragment profileFragment = (ProfileFragment) fragmentManager.findFragmentByTag(PROFILE);
-        if (profileFragment == null) {
-            profileFragment = new ProfileFragment();
-        }
-        addFragment(profileFragment,false,PROFILE,R.id.frame_layout);
+        replaceFragment(profileFragment,false,PROFILE,R.id.frame_layout);
     }
 
     @Override
@@ -125,7 +115,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
 
     @Override
     public void openNavigationView(double lat, double lng) {
-        Uri uri=Uri.parse("google.navigation:q="+lat+","+lng+"&mode=d");
+        Uri uri= Uri.parse("google.navigation:q="+lat+","+lng+"&mode=d");
         Intent intent=new Intent(Intent.ACTION_VIEW,uri);
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);

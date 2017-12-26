@@ -1,6 +1,5 @@
 package com.example.ehab.japroject.ui.Home.explore;
 
-import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 import com.example.ehab.japroject.ui.Base.listener.ErrorView;

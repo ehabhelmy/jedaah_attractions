@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
-import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.navigation.JaNavigationManager;
 
 import butterknife.ButterKnife;

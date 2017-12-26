@@ -10,10 +10,13 @@ import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.EventOrderFr
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
+import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
-import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
+import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 

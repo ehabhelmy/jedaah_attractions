@@ -1,6 +1,11 @@
 package com.example.ehab.japroject.ui.Home.profile;
 
+import android.os.Bundle;
+
+import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
+import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
+import com.example.ehab.japroject.usecase.profile.Profile;
 
 import javax.inject.Inject;
 
@@ -10,8 +15,33 @@ import javax.inject.Inject;
 
 public class ProfilePresenter extends BasePresenter<ProfileContract.View> implements ProfileContract.Presenter {
 
+    private Profile profile;
+
+    private BaseCallback<ProfileResponse> profileResponseBaseCallback = new BaseCallback<ProfileResponse>() {
+        @Override
+        public void onSuccess(ProfileResponse model) {
+            if (isViewAlive.get()) {
+                if (model.getSuccess()) {
+                    getView().updateProfileFragment(model.getData());
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            getView().showError(message);
+        }
+    };
+
     @Inject
-    public ProfilePresenter() {
+    public ProfilePresenter(Profile profile) {
+        this.profile = profile;
+        this.profile.getProfile(profileResponseBaseCallback, true);
+    }
+
+    @Override
+    public void initialize(Bundle extras) {
+        super.initialize(extras);
     }
 
     @Override

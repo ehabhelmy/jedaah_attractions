@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
-import com.example.ehab.japroject.usecase.login.Login;
 import com.example.ehab.japroject.usecase.sociallogin.SocialLogin;
 
 import javax.inject.Inject;

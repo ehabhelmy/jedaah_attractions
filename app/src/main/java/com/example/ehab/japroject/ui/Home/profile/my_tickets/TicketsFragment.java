@@ -38,17 +38,17 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
     }
 
     @Override
-    public void showError() {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }
 
     @Override
     public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String message) {
 
     }
 }

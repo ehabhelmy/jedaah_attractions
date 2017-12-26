@@ -13,6 +13,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerR
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
@@ -20,6 +21,7 @@ import com.example.ehab.japroject.datalayer.remote.service.EventDetailsService;
 import com.example.ehab.japroject.datalayer.remote.service.LikeService;
 import com.example.ehab.japroject.datalayer.remote.service.LoginService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.ProfileService;
 import com.example.ehab.japroject.datalayer.remote.service.RegisterationService;
 import com.example.ehab.japroject.datalayer.remote.service.SocialLoginService;
 import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
@@ -35,8 +37,6 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleOnSubscribe;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -306,7 +306,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<LoginResponse> sociaLogin(String facebookId,String googleId, String email) {
+    public Single<LoginResponse> sociaLogin(String facebookId, String googleId, String email) {
         Single<LoginResponse> loginResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -314,7 +314,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             SocialLoginService loginService = serviceGenerator.createService(SocialLoginService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(loginService.socialLogin(getCurrentLanguage(), new LoginRequest(email,facebookId,googleId)), false);
+                            ServiceResponse serviceResponse = processCall(loginService.socialLogin(getCurrentLanguage(), new LoginRequest(email, facebookId, googleId)), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(loginResponse);
@@ -403,6 +403,32 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return likeResponseSingle;
+    }
+
+    @Override
+    public Single<ProfileResponse> getProfile(String token) {
+        Single<ProfileResponse> profileResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            ProfileService profileService = serviceGenerator.createService(ProfileService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(ProfileService.getProfile(getCurrentLanguage(), "bearer " + token ), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                ProfileResponse profileResponse = (ProfileResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(profileResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return profileResponseSingle;
     }
 
     private String getCurrentLanguage() {

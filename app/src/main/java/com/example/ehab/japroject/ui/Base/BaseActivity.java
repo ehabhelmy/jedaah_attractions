@@ -1,11 +1,9 @@
 package com.example.ehab.japroject.ui.Base;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
-import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.navigation.JaNavigationManager;
 
 import butterknife.ButterKnife;

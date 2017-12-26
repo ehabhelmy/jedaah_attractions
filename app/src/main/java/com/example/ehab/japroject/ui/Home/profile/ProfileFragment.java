@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
+import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 
 import javax.inject.Inject;
@@ -34,6 +35,12 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
 
     @BindView(R.id.edit)
     TextView editTextView;
+
+    @BindView(R.id.username)
+    TextView userName;
+
+    @BindView(R.id.id)
+    TextView id;
 
     private ProfileViewPagerAdapter profileViewPagerAdapter;
 
@@ -66,11 +73,6 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     }
 
     @Override
-    public void showError() {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }
@@ -78,5 +80,16 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     @Override
     public void hideLoading() {
 
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public void updateProfileFragment(ProfileResponse model) {
+        userName.setText(model.getData().getName());
+        id.setText(model.getData().getId());
     }
 }
