@@ -22,7 +22,7 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
         public void onSuccess(ProfileResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                    getView().updateProfileFragment(model.getData());
+                    getView().updateProfileFragment(model);
                 }
             }
         }

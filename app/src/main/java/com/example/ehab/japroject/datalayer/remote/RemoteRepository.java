@@ -414,7 +414,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             ProfileService profileService = serviceGenerator.createService(ProfileService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(ProfileService.getProfile(getCurrentLanguage(), "bearer " + token ), false);
+                            ServiceResponse serviceResponse = processCall(profileService.getProfile(getCurrentLanguage(), "bearer " + token ), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 ProfileResponse profileResponse = (ProfileResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(profileResponse);
