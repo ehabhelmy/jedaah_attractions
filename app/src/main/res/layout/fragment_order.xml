@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlack"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:textSize="@dimen/title_inner"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="@string/checkOut" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textView"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/static_title_size"
+            android:text="@string/cancel" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/staticTitle"
+            android:text="@string/event" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="11dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="Amr Diab Concert" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView26"
+            android:layout_below="@+id/textView26"
+            android:layout_marginTop="24dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/staticTitle"
+            android:text="@string/personalInfo" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView27"
+            android:layout_below="@+id/textView27"
+            android:layout_marginTop="11dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="Ehab Mahmoud Helmy" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView28"
+            android:layout_below="@+id/textView28"
+            android:layout_marginTop="2dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="ehab.helmy@spade.studio" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView29"
+            android:layout_below="@+id/textView29"
+            android:layout_marginTop="2dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="01004576935" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView30"
+            android:layout_below="@+id/textView30"
+            android:layout_marginTop="2dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="1231231293812948918249" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView31"
+            android:layout_below="@+id/textView31"
+            android:layout_marginTop="24dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/staticTitle"
+            android:text="@string/paymentMethod" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView32"
+            android:layout_below="@+id/textView32"
+            android:layout_marginTop="11dp"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="Credit Card" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignEnd="@+id/textView25"
+            android:layout_alignTop="@+id/textView32"
+            android:layout_marginEnd="12dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/static_title_size"
+            android:background="@drawable/rounded_rectangle_stroke_black"
+            android:text="@string/change" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+</LinearLayout>

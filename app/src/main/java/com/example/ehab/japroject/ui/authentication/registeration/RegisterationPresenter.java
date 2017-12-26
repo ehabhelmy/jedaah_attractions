@@ -29,14 +29,16 @@ public class RegisterationPresenter extends BasePresenter<RegisterationContract.
     private BaseCallback<Data> callback = new BaseCallback<Data>() {
         @Override
         public void onSuccess(Data model) {
-            //TODO GO TO AUTHENTICATION ACTIVITY
+            if (isViewAlive.get()){
+                getView().hideLoading();
+            }
             jaNavigationManager.showSignInScreen();
-            Log.i("Registeration Presenter", "Success");
         }
 
         @Override
         public void onError(String message) {
             if (isViewAlive.get()) {
+                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -57,6 +59,9 @@ public class RegisterationPresenter extends BasePresenter<RegisterationContract.
         File imageFile = null;
         if (image != null) {
             imageFile = new File(getRealPathFromURI(image));
+        }
+        if (isViewAlive.get()){
+            getView().showLoading();
         }
         registeration.register(userName, email, password, mobile, imageFile, callback);
     }

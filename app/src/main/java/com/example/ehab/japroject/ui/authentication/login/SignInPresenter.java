@@ -17,12 +17,16 @@ public class SignInPresenter extends BasePresenter<SignInContract.View> implemen
     private BaseCallback<LoginResponse> loginResponseBaseCallback = new BaseCallback<LoginResponse>() {
         @Override
         public void onSuccess(LoginResponse model) {
+            if (isViewAlive.get()){
+                getView().hideLoading();
+            }
             jaNavigationManager.goToHomeActivity();
         }
 
         @Override
         public void onError(String message) {
             if (isViewAlive.get()){
+                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -40,6 +44,7 @@ public class SignInPresenter extends BasePresenter<SignInContract.View> implemen
 
     @Override
     public void login(String email, String password) {
+        getView().showLoading();
         login.login(loginResponseBaseCallback,email,password);
     }
 

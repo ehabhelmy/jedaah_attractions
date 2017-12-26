@@ -7,6 +7,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
@@ -109,7 +110,12 @@ public class DataRepository implements DataSource {
 
     @Override
     public Single<LoginResponse> login(String email, String password) {
-            return remoteRepository.login(email, password);
+        return remoteRepository.login(email, password);
+    }
+
+    @Override
+    public Single<LoginResponse> sociaLogin(String facebookId,String googleId, String email) {
+        return remoteRepository.sociaLogin(facebookId,googleId, email);
     }
 
     @Override
@@ -120,6 +126,11 @@ public class DataRepository implements DataSource {
     @Override
     public Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image) {
         return remoteRepository.register(userName, email, password, mobile, image);
+    }
+
+    @Override
+    public Single<LikeResponse> like(int id) {
+        return remoteRepository.like(id ,getToken());
     }
 
     @Override

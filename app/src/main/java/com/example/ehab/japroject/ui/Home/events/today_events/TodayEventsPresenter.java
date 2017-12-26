@@ -3,9 +3,11 @@ package com.example.ehab.japroject.ui.Home.events.today_events;
 import android.os.Bundle;
 
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
+import com.example.ehab.japroject.usecase.like.Like;
 import com.example.ehab.japroject.usecase.todayevents.TodayEvents;
 
 import javax.inject.Inject;
@@ -17,6 +19,7 @@ import javax.inject.Inject;
 public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View> implements TodayEventsContract.Presenter {
 
     private TodayEvents todayEvents;
+    private Like like;
 
     private BaseCallback<EventsResponse> todayEventsResponseBaseCallback = new BaseCallback<EventsResponse>() {
         @Override
@@ -35,10 +38,24 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
             }
         }
     };
+    private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
+        @Override
+        public void onSuccess(LikeResponse model) {
+            // do nothing
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()){
+                getView().showError(message);
+            }
+        }
+    };
 
     @Inject
-    public TodayEventsPresenter(TodayEvents todayEvents) {
+    public TodayEventsPresenter(TodayEvents todayEvents,Like like) {
         this.todayEvents = todayEvents;
+        this.like = like;
     }
 
     @Override
@@ -55,5 +72,10 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
     @Override
     public void showEventInner(int id) {
         jaNavigationManager.showEventInner(id);
+    }
+
+    @Override
+    public void like(int id) {
+        like.like(id,likeResponseBaseCallback);
     }
 }

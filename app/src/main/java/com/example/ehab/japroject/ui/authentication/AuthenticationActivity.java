@@ -9,6 +9,8 @@ import com.example.ehab.japroject.ui.Base.BaseActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -17,6 +19,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -54,7 +59,21 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // TODO : call api and send user id to it
-                presenter.login(loginResult.getAccessToken().getUserId(),"");
+                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        try {
+                            String email = object.getString("email");
+                            presenter.socialLogin(loginResult.getAccessToken().getUserId(),null,email);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                graphRequest.setParameters(parameters);
+                graphRequest.executeAsync();
             }
 
             @Override
@@ -99,7 +118,7 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
         try {
             GoogleSignInAccount account = googleSignInAccountTask.getResult(ApiException.class);
             //account.getIdToken()  ---> call api and send this to the backend to authenticate
-            presenter.login(account.getId(),"");
+            presenter.socialLogin(null,account.getId(),account.getEmail());
         } catch (ApiException e) {
             e.printStackTrace();
         }
@@ -114,11 +133,6 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
     public void loginWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void login(String email, String password) {
-        presenter.login(email,password);
     }
 
     @Override

@@ -64,12 +64,12 @@ public class EventsViewHolder extends BaseViewHolder<Event> {
         favourite.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                onFavouriteListener.onFavouriteClicked(baseModel);
+                onFavouriteListener.onFavouriteClicked(baseModel.getId());
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
-
+                onFavouriteListener.onFavouriteClicked(baseModel.getId());
             }
         });
         eventContainer.setOnClickListener(v -> {

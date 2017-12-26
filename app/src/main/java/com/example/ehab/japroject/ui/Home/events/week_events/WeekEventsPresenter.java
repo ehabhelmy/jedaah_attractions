@@ -3,9 +3,11 @@ package com.example.ehab.japroject.ui.Home.events.week_events;
 import android.os.Bundle;
 
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
+import com.example.ehab.japroject.usecase.like.Like;
 import com.example.ehab.japroject.usecase.weekevents.WeekEvents;
 
 import javax.inject.Inject;
@@ -17,6 +19,7 @@ import javax.inject.Inject;
 public class WeekEventsPresenter extends BasePresenter<WeekEventsContract.View> implements WeekEventsContract.Presenter{
 
     private WeekEvents weekEvents;
+    private Like like;
 
     private BaseCallback<EventsResponse> weekEventsResponseBaseCallback = new BaseCallback<EventsResponse>() {
         @Override
@@ -36,9 +39,24 @@ public class WeekEventsPresenter extends BasePresenter<WeekEventsContract.View> 
         }
     };
 
+    private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
+        @Override
+        public void onSuccess(LikeResponse model) {
+            // do nothing
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()){
+                getView().showError(message);
+            }
+        }
+    };
+
     @Inject
-    public WeekEventsPresenter(WeekEvents weekEvents) {
+    public WeekEventsPresenter(WeekEvents weekEvents,Like like) {
         this.weekEvents = weekEvents;
+        this.like = like;
     }
 
     @Override
@@ -55,5 +73,10 @@ public class WeekEventsPresenter extends BasePresenter<WeekEventsContract.View> 
     @Override
     public void showEventInner(int id) {
         jaNavigationManager.showEventInner(id);
+    }
+
+    @Override
+    public void like(int id) {
+        like.like(id,likeResponseBaseCallback);
     }
 }

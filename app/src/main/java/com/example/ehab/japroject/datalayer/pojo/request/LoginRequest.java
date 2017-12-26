@@ -15,7 +15,33 @@ public class LoginRequest extends BaseModel {
         this.password = password;
     }
 
+    public LoginRequest(String email, String facebook_id, String google_id) {
+        this.email = email;
+        this.facebook_id = facebook_id;
+        this.google_id = google_id;
+    }
+
     private String password;
+
+    private String facebook_id;
+
+    private String google_id;
+
+    public String getFacebook_id() {
+        return facebook_id;
+    }
+
+    public void setFacebook_id(String facebook_id) {
+        this.facebook_id = facebook_id;
+    }
+
+    public String getGoogle_id() {
+        return google_id;
+    }
+
+    public void setGoogle_id(String google_id) {
+        this.google_id = google_id;
+    }
 
     public String getEmail() {
         return email;

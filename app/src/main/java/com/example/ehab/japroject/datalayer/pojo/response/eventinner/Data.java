@@ -83,7 +83,7 @@ public class Data extends BaseModel{
     private String lng;
     @SerializedName("is_liked")
     @Expose
-    private Integer isLiked;
+    private boolean isLiked;
 
     public Integer getId() {
         return id;
@@ -277,11 +277,11 @@ public class Data extends BaseModel{
         this.lng = lng;
     }
 
-    public Integer getIsLiked() {
+    public boolean getIsLiked() {
         return isLiked;
     }
 
-    public void setIsLiked(Integer isLiked) {
+    public void setIsLiked(boolean isLiked) {
         this.isLiked = isLiked;
     }
 

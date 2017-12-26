@@ -6,6 +6,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.login.Login;
+import com.example.ehab.japroject.usecase.sociallogin.SocialLogin;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,7 @@ import javax.inject.Inject;
 
 public class AuthenticationPresenter extends BasePresenter<AuthenticationContract.View> implements AuthenticationContract.Presenter {
 
-    private Login login;
+    private SocialLogin socialLogin;
     private BaseCallback<LoginResponse> loginResponseBaseCallback = new BaseCallback<LoginResponse>() {
         @Override
         public void onSuccess(LoginResponse model) {
@@ -29,8 +30,8 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationContrac
     };
 
     @Inject
-    public AuthenticationPresenter(Login login) {
-        this.login = login;
+    public AuthenticationPresenter(SocialLogin login) {
+        this.socialLogin = login;
     }
 
     @Override
@@ -41,12 +42,12 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationContrac
 
     @Override
     public void unSubscribe() {
-        login.unSubscribe();
+        socialLogin.unSubscribe();
     }
 
     @Override
-    public void login(String id, String password) {
-        login.login(loginResponseBaseCallback,id,password);
+    public void socialLogin(String facebookId,String googleId, String email) {
+        socialLogin.socialLogin(facebookId,googleId,email,loginResponseBaseCallback);
     }
 
     @Override

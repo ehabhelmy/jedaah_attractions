@@ -36,4 +36,23 @@
     <string name="emailAdress">Email Adress</string>
     <string name="mobileNumber">Mobile Number (Optional)</string>
     <string name="join">JOIN NOW</string>
+    <string name="buynow">Buy Now</string>
+    <string name="personalInfo">PERSONAL INFO</string>
+    <string name="name">NAME</string>
+    <string name="emailaddress">EMAIL ADDRESS</string>
+    <string name="mobilenumber">MOBILE NUMBER</string>
+    <string name="nationalId">NATIONAL ID</string>
+    <string name="paymentMethod">PAYMENT METHOD</string>
+    <string name="choosePayment">Choose the payment method</string>
+    <string name="suitsYou">that suits you</string>
+    <string name="creditCard">Credit Card</string>
+    <string name="cash">Cash on delivery</string>
+    <string name="payLater">Pay later</string>
+    <string name="maxTickets">Max Tickets</string>
+    <string name="unlimited">Unlimited</string>
+    <string name="next">NEXT</string>
+    <string name="checkOut">Checkout</string>
+    <string name="cancel">CANCEL</string>
+    <string name="event">EVENT</string>
+    <string name="change">CHANGE</string>
 </resources>

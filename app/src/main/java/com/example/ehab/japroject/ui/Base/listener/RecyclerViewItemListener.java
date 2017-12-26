@@ -15,7 +15,7 @@ public interface RecyclerViewItemListener {
 
     @FunctionalInterface
     interface onFavouriteListener {
-        void onFavouriteClicked(BaseModel model);
+        void onFavouriteClicked(int id);
     }
 
 }

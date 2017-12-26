@@ -45,11 +45,7 @@ public class EventDetailsAdapter {
             cat.append(",");
         }
         eventDetails.setCategoriesText(cat.toString());
-        if (data.getIsLiked() == 1) {
-            eventDetails.setIsliked(true);
-        }else {
-            eventDetails.setIsliked(false);
-        }
+        eventDetails.setIsliked(data.getIsLiked());
         ArrayList<String> days = new ArrayList<>();
         days.add("Firday, 13 nov 3pm : 5pm");
         days.add("Firday, 13 nov 3pm : 5pm");

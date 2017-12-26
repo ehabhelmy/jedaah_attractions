@@ -11,14 +11,17 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.EventDetailsService;
+import com.example.ehab.japroject.datalayer.remote.service.LikeService;
 import com.example.ehab.japroject.datalayer.remote.service.LoginService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.RegisterationService;
+import com.example.ehab.japroject.datalayer.remote.service.SocialLoginService;
 import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
@@ -303,6 +306,32 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
+    public Single<LoginResponse> sociaLogin(String facebookId,String googleId, String email) {
+        Single<LoginResponse> loginResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            SocialLoginService loginService = serviceGenerator.createService(SocialLoginService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(loginService.socialLogin(getCurrentLanguage(), new LoginRequest(email,facebookId,googleId)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(loginResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return loginResponseSingle;
+    }
+
+    @Override
     public Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image) {
         Single<RegisterationResponse> registerationResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
@@ -348,6 +377,32 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return registerationResponseSingle;
+    }
+
+    @Override
+    public Single<LikeResponse> like(int id, String token) {
+        Single<LikeResponse> likeResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            LikeService likeService = serviceGenerator.createService(LikeService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(likeService.like(getCurrentLanguage(), id,token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                LikeResponse likeResponse = (LikeResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(likeResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return likeResponseSingle;
     }
 
     private String getCurrentLanguage() {

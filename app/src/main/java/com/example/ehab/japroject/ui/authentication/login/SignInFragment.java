@@ -61,7 +61,11 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
 
     @Override
     public void showError(String message) {
-
+        if (message !=  null) {
+            showPopUp(message);
+        }else {
+            showPopUp("Server Error");
+        }
     }
 
     @Override
@@ -117,6 +121,10 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
     @Override
     public void onErrorAuth(String message) {
         super.onErrorAuth(message);
-        //TODO : show error popup
+        if (message !=  null) {
+            showPopUp(message);
+        }else {
+            showPopUp("Server Error");
+        }
     }
 }

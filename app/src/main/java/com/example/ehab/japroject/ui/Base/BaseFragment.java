@@ -1,5 +1,6 @@
 package com.example.ehab.japroject.ui.Base;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -92,7 +93,13 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     protected void showPopUp(String message) {
         new AlertDialog.Builder(this.getContext())
                 .setMessage(message)
-                .setTitle("Login Failure")
+                .setTitle("Failure")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
                 .show();
     }
 }

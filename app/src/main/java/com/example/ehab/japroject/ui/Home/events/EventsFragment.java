@@ -39,7 +39,11 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
 
     @Override
     public void showError(String message) {
-
+        if (message !=  null) {
+            showPopUp(message);
+        }else {
+            showPopUp("Server Error");
+        }
     }
 
     @Override

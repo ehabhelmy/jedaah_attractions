@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:background="@color/lightBlack"
+        >
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:textSize="@dimen/title_inner"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/white"
+            android:text="@string/buynow" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gotham_medium"
+            android:gravity="center"
+            android:text="@string/personalInfo"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/static_title_size" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/daysRemaining"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/categoryBackground"
+            android:text="@string/name" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_below="@+id/textView3"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:backgroundTint="@color/white"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText"
+            android:layout_below="@+id/editText"
+            android:layout_marginTop="11dp"
+            android:textSize="@dimen/daysRemaining"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/categoryBackground"
+            android:text="@string/emailaddress" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView5"
+            android:layout_below="@+id/textView5"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:backgroundTint="@color/white"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText2"
+            android:layout_below="@+id/editText2"
+            android:layout_marginTop="11dp"
+            android:textSize="@dimen/daysRemaining"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/categoryBackground"
+            android:text="@string/mobilenumber" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView7"
+            android:layout_below="@+id/textView7"
+            android:ems="10"
+            android:layout_marginEnd="32dp"
+            android:inputType="phone"
+            app:backgroundTint="@color/white"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText3"
+            android:layout_below="@+id/editText3"
+            android:layout_marginTop="11dp"
+            android:textSize="@dimen/daysRemaining"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/categoryBackground"
+            android:text="@string/nationalId" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editText4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_alignStart="@+id/textView8"
+            android:layout_below="@+id/textView8"
+            android:ems="10"
+            android:inputType="number"
+            app:backgroundTint="@color/white"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/static_title_size"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/paymentMethod" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView24"
+            android:gravity="center"
+            android:text="@string/suitsYou" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView10"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="43dp"
+            app:srcCompat="@drawable/ic_creditcard_active" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/imageView4"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/ic_cod_active" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/imageView5"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="64dp"
+            android:layout_marginStart="69dp"
+            app:srcCompat="@drawable/ic_paylater_active" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView4"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="14dp"
+            android:layout_toStartOf="@+id/button2"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/creditCard"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/cash" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView11"
+            android:layout_marginTop="8dp"
+            android:layout_toStartOf="@+id/textView24"
+            android:fontFamily="@font/gotham_book"
+            android:text="@string/maxTickets"
+            android:textSize="@dimen/daysRemaining" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView13"
+            android:layout_below="@+id/textView13"
+            android:layout_marginTop="9dp"
+            android:textColor="@color/outerText"
+            android:textSize="@dimen/cardsubtitle"
+            android:gravity="center"
+            android:layout_alignEnd="@id/textView13"
+            android:text="@string/unlimited" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView11"
+            android:layout_alignBottom="@+id/textView11"
+            android:layout_alignStart="@+id/button2"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/cash"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/cash" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView13"
+            android:layout_alignBottom="@+id/textView13"
+            android:layout_alignStart="@+id/imageView5"
+            android:fontFamily="@font/gotham_book"
+            android:text="@string/maxTickets"
+            android:textSize="@dimen/daysRemaining" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView14"
+            android:layout_alignStart="@+id/textView16"
+            android:textColor="@color/outerText"
+            android:textSize="@dimen/cardsubtitle"
+            android:gravity="center"
+            android:layout_alignEnd="@id/textView16"
+            android:text="@string/unlimited" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView15"
+            android:layout_alignStart="@+id/imageView6"
+            android:fontFamily="@font/gotham_medium"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/cash"
+            android:text="@string/payLater" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView16"
+            android:layout_alignStart="@+id/textView21"
+            android:fontFamily="@font/gotham_book"
+            android:textSize="@dimen/daysRemaining"
+            android:text="@string/maxTickets" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView17"
+            android:layout_alignStart="@+id/textView22"
+            android:textColor="@color/outerText"
+            android:textSize="@dimen/cardsubtitle"
+            android:gravity="center"
+            android:layout_alignEnd="@id/textView22"
+            android:text="@string/unlimited" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView17"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/static_title_size"
+            android:background="@drawable/rounded_rectangle_green"
+            android:text="@string/next" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView9"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="@string/choosePayment" />
+    </RelativeLayout>
+</LinearLayout>
+</ScrollView>

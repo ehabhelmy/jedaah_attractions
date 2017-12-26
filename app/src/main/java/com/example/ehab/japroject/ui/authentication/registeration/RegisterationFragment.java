@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
@@ -67,6 +69,12 @@ public class RegisterationFragment extends BaseFragment implements Registeration
     @BindView(R.id.registerNow)
     Button register;
 
+    @BindView(R.id.registerContainer)
+    RelativeLayout registerContainer;
+
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
+
     @Inject
     RegisterationPresenter presenter;
 
@@ -109,17 +117,23 @@ public class RegisterationFragment extends BaseFragment implements Registeration
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
+        registerContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
+        registerContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showError(String message) {
-        Log.i("Registeration Activity",message);
+        if (message !=  null) {
+            showPopUp(message);
+        }else {
+            showPopUp("Server Error");
+        }
     }
 
     @OnClick(R.id.registerNow)

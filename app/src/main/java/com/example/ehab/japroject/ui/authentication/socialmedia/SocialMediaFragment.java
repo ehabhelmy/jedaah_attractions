@@ -111,7 +111,11 @@ public class SocialMediaFragment extends BaseFragment implements SocialMediaCont
 
     @Override
     public void showError(String message) {
-
+        if (message !=  null) {
+            showPopUp(message);
+        }else {
+            showPopUp("Server Error");
+        }
     }
 
     @Override

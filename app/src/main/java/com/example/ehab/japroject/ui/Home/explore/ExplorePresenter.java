@@ -4,10 +4,12 @@ import android.os.Bundle;
 
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
 import com.example.ehab.japroject.usecase.categories.Categories;
+import com.example.ehab.japroject.usecase.like.Like;
 import com.example.ehab.japroject.usecase.nearbyevents.NearByEvents;
 import com.example.ehab.japroject.usecase.topevents.TopEvents;
 import com.google.android.gms.maps.model.LatLng;
@@ -23,6 +25,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     private TopEvents topEvents;
     private NearByEvents nearByEvents;
     private Categories categories;
+    private Like like;
 
     private BaseCallback<EventsResponse> topEventsResponseBaseCallback = new BaseCallback<EventsResponse>() {
         @Override
@@ -77,12 +80,26 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         }
     };
 
+    private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
+        @Override
+        public void onSuccess(LikeResponse model) {
+            // do nothing
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()){
+                getView().showError(message);
+            }
+        }
+    };
 
     @Inject
-    public ExplorePresenter(TopEvents topEvents, NearByEvents nearByEvents,Categories categories) {
+    public ExplorePresenter(TopEvents topEvents, NearByEvents nearByEvents,Categories categories,Like like) {
         this.topEvents = topEvents;
         this.nearByEvents = nearByEvents;
         this.categories = categories;
+        this.like = like;
     }
 
     @Override
@@ -122,5 +139,10 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     @Override
     public void showEventInner(int id) {
         jaNavigationManager.showEventInner(id);
+    }
+
+    @Override
+    public void like(int id) {
+        like.like(id,likeResponseBaseCallback);
     }
 }

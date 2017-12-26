@@ -13,12 +13,11 @@ public interface AuthenticationContract {
     interface View extends BaseView {
         void loginWithFacebook();
         void loginWithGoogle();
-        void login(String email,String password);
         void skipAuth();
     }
 
     interface Presenter extends Unsubscribable{
-        void login(String email,String password);
+        void socialLogin(String facebookId,String googleId,String email);
         void goToHomeActivity();
     }
 }

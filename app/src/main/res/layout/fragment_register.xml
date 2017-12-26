@@ -16,6 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/registerContainer"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp">
@@ -61,7 +62,7 @@
             android:layout_height="30dp"
             android:layout_alignBottom="@id/profile_image"
             android:layout_alignRight="@id/profile_image"
-            android:src="@android:drawable/ic_menu_add" />
+            app:srcCompat="@drawable/ic_add_image_profile" />
 
     </RelativeLayout>
 

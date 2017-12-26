@@ -20,5 +20,6 @@ public interface AllEventsContract {
 
     interface Presenter extends Unsubscribable {
         void showEventInner(int id);
+        void like(int id);
     }
 }

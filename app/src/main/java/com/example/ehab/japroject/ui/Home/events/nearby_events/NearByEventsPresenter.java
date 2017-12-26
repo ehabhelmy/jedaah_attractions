@@ -3,9 +3,11 @@ package com.example.ehab.japroject.ui.Home.events.nearby_events;
 import android.os.Bundle;
 
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
+import com.example.ehab.japroject.usecase.like.Like;
 import com.example.ehab.japroject.usecase.nearbyevents.NearByEvents;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -18,10 +20,12 @@ import javax.inject.Inject;
 public class NearByEventsPresenter extends BasePresenter<NearByEventsContract.View> implements NearByEventsContract.Presenter {
 
     private NearByEvents nearByEvents;
+    private Like like;
 
     @Inject
-    public NearByEventsPresenter(NearByEvents nearByEvents) {
+    public NearByEventsPresenter(NearByEvents nearByEvents,Like like) {
         this.nearByEvents = nearByEvents;
+        this.like = like;
     }
 
     private BaseCallback<EventsResponse> responseBaseCallback = new BaseCallback<EventsResponse>() {
@@ -32,6 +36,20 @@ public class NearByEventsPresenter extends BasePresenter<NearByEventsContract.Vi
                     getView().setupNearByEvents(EventsAdapter.convertIntoEventUi(model.getData()));
                 }
             }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()){
+                getView().showError(message);
+            }
+        }
+    };
+
+    private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
+        @Override
+        public void onSuccess(LikeResponse model) {
+            // do nothing
         }
 
         @Override
@@ -74,5 +92,10 @@ public class NearByEventsPresenter extends BasePresenter<NearByEventsContract.Vi
     @Override
     public void showEventInner(int id) {
         jaNavigationManager.showEventInner(id);
+    }
+
+    @Override
+    public void like(int id) {
+        like.like(id,likeResponseBaseCallback);
     }
 }

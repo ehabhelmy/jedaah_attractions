@@ -34,5 +34,7 @@ public class NearByEventsContract {
 
         void showEventInner(int id);
 
+        void like(int id);
+
     }
 }

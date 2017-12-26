@@ -50,7 +50,11 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
 
     @Override
     public void showError(String message) {
-
+        if (message !=  null) {
+            showPopUp(message);
+        }else {
+            showPopUp("Server Error");
+        }
     }
 
     @Override
@@ -72,9 +76,9 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         EventsListAdapter eventsListAdapter = new EventsListAdapter(true);
         eventsListAdapter.setData((ArrayList<Event>) events);
-        eventsListAdapter.setOnFavouriteListener(model -> {
-            Event event = (Event) model;
+        eventsListAdapter.setOnFavouriteListener(id -> {
             //TODO : call presenter to send id of the event to the backend
+            weekEventsPresenter.like(id);
         });
         eventsListAdapter.setOnViewListener(id -> {
             weekEventsPresenter.showEventInner(id);
