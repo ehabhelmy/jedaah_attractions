@@ -61,7 +61,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (profileFragment == null) {
             profileFragment = new ProfileFragment();
         }
-        replaceFragment(profileFragment,false,PROFILE);
+        addFragment(profileFragment,false,PROFILE,R.id.frame_layout);
     }
 
     @Override
