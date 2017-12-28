@@ -1,6 +1,5 @@
 package com.example.ehab.japroject.datalayer;
 
-import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
@@ -10,6 +9,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
+import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -18,11 +18,6 @@ import java.io.File;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
-
-import static com.example.ehab.japroject.util.NetworkUtils.isConnected;
 
 /**
  * Created by ehab on 12/2/17.
@@ -171,6 +166,20 @@ public class DataRepository implements DataSource {
     @Override
     public void saveToken(String token) {
         localRepository.saveToken(token);
+    }
+
+    @Override
+    public Single<ProfileResponse> getProfile(boolean fresh) {
+        if (fresh){
+            return remoteRepository.getProfile(localRepository.getToken());
+        } else {
+            return localRepository.getProfile();
+        }
+    }
+
+    @Override
+    public void saveProfile(ProfileResponse profileResponse) {
+        localRepository.saveProfile(profileResponse);
     }
 
 }

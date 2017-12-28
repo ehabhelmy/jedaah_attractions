@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -49,7 +48,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                     break;
                 case R.id.events :
                     presenter.showEvents();
+                    break;
                 case R.id.profile :
+                    presenter.showProfile();
                     break;
             }
             return true;

@@ -8,6 +8,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
+import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
@@ -62,4 +63,7 @@ public interface DataSource {
 
     void saveToken(String token);
 
+    Single<ProfileResponse> getProfile(boolean fresh);
+
+    void saveProfile(ProfileResponse profileResponse);
 }

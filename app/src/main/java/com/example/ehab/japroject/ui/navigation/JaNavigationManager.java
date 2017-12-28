@@ -43,6 +43,8 @@ public abstract class JaNavigationManager {
 
     public static final String ORDER = "order";
 
+    public static final String PROFILE = "profile";
+
     public static final int LOCATION_SETTINGS = 2;
 
 
@@ -62,6 +64,8 @@ public abstract class JaNavigationManager {
     public abstract void showExploreScreen();
 
     public abstract void showEventsScreen();
+
+    public abstract void showProfileScreen();
 
     public abstract void showLocationSettings();
 
@@ -95,7 +99,7 @@ public abstract class JaNavigationManager {
         fragmentTransaction.commit();
     }
 
-    protected void addFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
+    protected void replaceFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack){
             fragmentTransaction.addToBackStack(tag);

@@ -7,6 +7,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerR
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.usecase.login.Login;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -44,4 +45,6 @@ public interface RemoteSource {
     Single<LoginResponse> register(String userName, String email, String password, String mobile, File image);
 
     Single<LikeResponse> like(int id , String token);
+
+    Single<ProfileResponse> getProfile(String token);
 }
