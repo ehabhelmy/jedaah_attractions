@@ -3,7 +3,9 @@ package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.Data;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventDay;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTag;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTicket;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.SocialMedium;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.TicketDate;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.OrderEventDay;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDetails;
@@ -26,8 +28,7 @@ import static com.example.ehab.japroject.util.DateTimeUtils.getEventDateOrder;
 
 public class EventDetailsAdapter {
 
-    public static EventDetails convertIntoEventDetailsUi(List<Data> data1) {
-        Data data = data1.get(0);
+    public static EventDetails convertIntoEventDetailsUi(Data data) {
         EventDetails eventDetails = new EventDetails();
         eventDetails.setEventTitle(data.getTitle());
         eventDetails.setInterested(data.getInterested()+"");
@@ -61,17 +62,19 @@ public class EventDetailsAdapter {
         return eventDetails;
     }
 
-    public static PaymentData setupPaymentPojo(List<Data> data1){
-        Data data = data1.get(0);
+    public static PaymentData setupPaymentPojo(Data data){
         PaymentData paymentData = new PaymentData();
+        paymentData.setEventId(data.getId());
+        paymentData.setTickets((ArrayList<EventTicket>) data.getEventTickets());
         paymentData.setVipPrice(data.getEndPrice());
         paymentData.setRegularPrice(data.getStartPrice());
+        paymentData.setTicketDates((ArrayList<TicketDate>) data.getTicketDates());
         ArrayList<OrderEventDay> orderEventDays = new ArrayList<>();
-        for (EventDay eventDay: data.getEventDays()) {
+        for (TicketDate ticketDate: data.getTicketDates()) {
             OrderEventDay orderEventDay = new OrderEventDay();
-            orderEventDay.setMonth(getMonth(convertJSONDateToDate(eventDay.getStartDate())));
-            orderEventDay.setDay(getDay(convertJSONDateToDate(eventDay.getStartDate())));
-            orderEventDay.setTime(getEventDateOrder(eventDay));
+            orderEventDay.setMonth(getMonth(convertJSONDateToDate(ticketDate.getDate())));
+            orderEventDay.setDay(getDay(convertJSONDateToDate(ticketDate.getDate())));
+            orderEventDay.setTime(getEventDateOrder(ticketDate));
             orderEventDays.add(orderEventDay);
         }
         paymentData.setEventDateDays(orderEventDays);
@@ -93,7 +96,7 @@ public class EventDetailsAdapter {
         }
         paymentData.setCashTickets(data.getMaxOfCashTickets());
         paymentData.setPayLaterTickets(data.getMaxOfPayLaterTickets());
-        if (data.getNational() != null) {
+        if (data.getNationalId() == 1) {
             paymentData.setNationalRequired(true);
         }else {
             paymentData.setNationalRequired(false);

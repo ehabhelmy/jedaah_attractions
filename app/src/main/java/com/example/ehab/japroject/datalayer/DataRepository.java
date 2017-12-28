@@ -9,6 +9,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
+import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 import com.google.android.gms.maps.model.LatLng;
@@ -126,6 +127,11 @@ public class DataRepository implements DataSource {
     @Override
     public Single<LikeResponse> like(int id) {
         return remoteRepository.like(id ,getToken());
+    }
+
+    @Override
+    public Single<OrderResponse> order(String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total) {
+        return remoteRepository.order(getToken(),name,email,mobileNumber,numberOfTickets,paymentMethod,eventId,ticketId,dateId,nationalId,total);
     }
 
     @Override

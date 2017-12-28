@@ -16,7 +16,7 @@ public abstract class BaseRecyclerViewAdapter<M extends BaseModel> extends Recyc
 
     private RecyclerViewItemListener.onViewListener onViewListener;
     private RecyclerViewItemListener.onFavouriteListener onFavouriteListener;
-    private ArrayList<M> data;
+    protected ArrayList<M> data;
 
     @Override
     public  abstract BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType);

@@ -142,6 +142,6 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             bundle.putParcelable(Constants.EVENT_ORDER,eventOrder);
             eventOrderFragment.setArguments(bundle);
         }
-        addFragment(eventOrderFragment,true,ORDER,R.id.frame_layout_inner);
+        replaceFragment(eventOrderFragment,true,ORDER,R.id.frame_layout_inner);
     }
 }

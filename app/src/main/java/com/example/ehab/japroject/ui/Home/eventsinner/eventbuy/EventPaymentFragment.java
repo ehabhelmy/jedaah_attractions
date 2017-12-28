@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTicket;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.TicketDate;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
@@ -77,6 +79,12 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
 
     private String vipPrice,regularPrice;
 
+    private int eventId;
+
+    private ArrayList<EventTicket> eventTickets;
+
+    private ArrayList<TicketDate> ticketDates;
+
     private ArrayList<OrderEventDay> eventDateDays;
 
     private boolean nationalEnabled;
@@ -141,6 +149,9 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
         eventOrder.setVipPrice(vipPrice);
         eventOrder.setRegularPrice(regularPrice);
         eventOrder.setEventDateDays(eventDateDays);
+        eventOrder.setEventId(eventId);
+        eventOrder.setEventtickets(eventTickets);
+        eventOrder.setTicketDates(ticketDates);
         if (nationalEnabled) {
             eventOrder.setNational(nationalEditText.getText().toString().trim());
         }
@@ -192,6 +203,9 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
         regularPrice = paymentData.getRegularPrice();
         eventDateDays = paymentData.getEventDateDays();
         cashTickets = paymentData.getCashTickets();
+        eventTickets = paymentData.getTickets();
+        eventId = paymentData.getEventId();
+        ticketDates = paymentData.getTicketDates();
         payLaterTickets = paymentData.getPayLaterTickets();
         nationalEnabled = true;
         if (!paymentData.isNationalRequired()) {

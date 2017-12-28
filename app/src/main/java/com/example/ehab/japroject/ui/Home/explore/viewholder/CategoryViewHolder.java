@@ -9,6 +9,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
 import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -34,5 +35,10 @@ public class CategoryViewHolder extends BaseViewHolder<Cats> {
         categoryName.setText(baseModel.getName());
         Picasso.with(categoryImage.getContext()).load(baseModel.getIcon()).
                 placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(categoryImage);
+    }
+
+    @Override
+    public void bind(Cats baseModel, int position, TicketListener ticketListener) {
+
     }
 }

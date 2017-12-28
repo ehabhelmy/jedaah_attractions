@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
 import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
 import com.example.ehab.japroject.ui.widget.ImageLayout;
 import com.like.LikeButton;
@@ -75,5 +76,10 @@ public class EventsViewHolder extends BaseViewHolder<Event> {
         eventContainer.setOnClickListener(v -> {
             onViewListener.onViewClicked(baseModel.getId());
         });
+    }
+
+    @Override
+    public void bind(Event baseModel, int position, TicketListener ticketListener) {
+
     }
 }

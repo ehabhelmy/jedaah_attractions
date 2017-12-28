@@ -5,6 +5,7 @@ import android.text.format.Time;
 import android.util.Log;
 
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventDay;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.TicketDate;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -94,11 +95,11 @@ public class DateTimeUtils {
         return date + "at " + startTime + " - " + endTime;
     }
 
-    public static String getEventDateOrder(EventDay eventDay) {
+    public static String getEventDateOrder(TicketDate ticketDate) {
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date sDate = null;
         try {
-            sDate = format1.parse(eventDay.getStartDate() + " " + eventDay.getStartTime());
+            sDate = format1.parse(ticketDate.getDate() + " " + ticketDate.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }

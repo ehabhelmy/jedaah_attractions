@@ -1,11 +1,11 @@
 
-package com.example.ehab.japroject.datalayer.pojo.response.eventinner;
+package com.example.ehab.japroject.datalayer.pojo.response.order;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EventInnerResponse extends BaseModel{
+public class OrderResponse extends BaseModel {
 
     @SerializedName("success")
     @Expose
@@ -13,6 +13,9 @@ public class EventInnerResponse extends BaseModel{
     @SerializedName("data")
     @Expose
     private Data data;
+    @SerializedName("msg")
+    @Expose
+    private Msg msg;
 
     public Boolean getSuccess() {
         return success;
@@ -28,6 +31,14 @@ public class EventInnerResponse extends BaseModel{
 
     public void setData(Data data) {
         this.data = data;
+    }
+
+    public Msg getMsg() {
+        return msg;
+    }
+
+    public void setMsg(Msg msg) {
+        this.msg = msg;
     }
 
 }

@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 
 import butterknife.ButterKnife;
 
@@ -20,4 +21,6 @@ public abstract class BaseViewHolder<M extends BaseModel> extends RecyclerView.V
     }
 
     public abstract void bind(M baseModel, RecyclerViewItemListener.onViewListener onViewListener,RecyclerViewItemListener.onFavouriteListener onFavouriteListener);
+    public abstract void bind(M baseModel, int position, TicketListener ticketListener);
+
 }

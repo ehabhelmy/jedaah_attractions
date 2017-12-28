@@ -7,12 +7,23 @@ import com.google.gson.annotations.SerializedName;
 
 public class EventTag extends BaseModel{
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("icon")
+    @SerializedName("image")
     @Expose
-    private String icon;
+    private String image;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -22,12 +33,12 @@ public class EventTag extends BaseModel{
         this.name = name;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getImage() {
+        return image;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

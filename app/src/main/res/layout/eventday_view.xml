@@ -45,5 +45,5 @@
         android:fontFamily="@font/gotham_medium"
         android:text="Wed 7:30 PM"
         android:textColor="@color/outerText"
-        android:textSize="@dimen/static_title_size" />
+        android:textSize="@dimen/cash" />
 </RelativeLayout>

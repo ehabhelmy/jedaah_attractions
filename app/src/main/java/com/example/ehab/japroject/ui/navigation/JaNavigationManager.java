@@ -99,12 +99,12 @@ public abstract class JaNavigationManager {
         fragmentTransaction.commit();
     }
 
-    protected void replaceFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
+    protected void addFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack){
             fragmentTransaction.addToBackStack(tag);
         }
-        fragmentTransaction.replace(frame,fragment,tag);
+        fragmentTransaction.add(frame,fragment,tag);
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         fragmentTransaction.commit();
     }

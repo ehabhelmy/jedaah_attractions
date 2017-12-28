@@ -65,5 +65,5 @@
     <string name="done">DONE</string>
     <string name="ticketsType">TICKETS TYPE</string>
     <string name="numberTickets">NUMBER OF TICKETS</string>
-    <string name="ViewOrEditProfile"><a href="View or edit Profile"></a></string>
+    <string name="ViewOrEditProfile">View or edit Profile</string>
 </resources>

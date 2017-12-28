@@ -22,16 +22,14 @@ public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return new TicketsFragment();
-        } else if (position == 1) {
-            return new LikedEventsFragment();
         } else {
-            return new LikedDirectoryFragment();
+            return new LikedEventsFragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -41,8 +39,6 @@ public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
                 return "MY TICKETS";
             case 1:
                 return "LIKED EVENTS";
-            case 2:
-                return "LIKED DIRECTORY";
             default:
                 return null;
         }

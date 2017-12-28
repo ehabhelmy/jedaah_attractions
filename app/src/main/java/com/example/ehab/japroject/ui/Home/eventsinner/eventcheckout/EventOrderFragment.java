@@ -1,6 +1,9 @@
 package com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout;
 
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -11,9 +14,17 @@ import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTicket;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.TicketDate;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.EventDaysAdapter;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.EventTicketsAdapter;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.OrderEventDay;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.viewholder.TicketViewHolder;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -30,7 +41,15 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     EventOrderPresenter presenter;
 
     private int counter = 1;
-    private int vipprice,regularprice;
+    private int price;
+    private String numberOfTickets;
+    private int ticketId;
+    private int dateId;
+    private String eventId;
+    private boolean national;
+    private ArrayList<EventTicket> tickets;
+    private EventTicketsAdapter eventTicketsAdapter;
+    private ArrayList<TicketDate> days;
 
     @BindView(R.id.eventTitle)
     TextView eventTitleTextView;
@@ -56,23 +75,17 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     @BindView(R.id.eventGrid)
     GridView daysGridView;
 
-    @BindView(R.id.vipCheckbox)
-    CheckBox vipCheckBox;
-
-    @BindView(R.id.regularCheckBox)
-    CheckBox regularCheckBox;
-
-    @BindView(R.id.vipPrice)
-    TextView vipPrice;
-
-    @BindView(R.id.regularPrice)
-    TextView regularPrice;
-
     @BindView(R.id.numTickets)
     TextView numTickets;
 
     @BindView(R.id.totalPrice)
     TextView totalPrice;
+
+    @BindView(R.id.ticketsList)
+    RecyclerView ticketsList;
+
+    @BindView(R.id.ticketsNumber)
+    TextView ticketsNumberTextView;
 
     @Override
     public void showError(String message) {
@@ -113,31 +126,30 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
 
     @OnClick(R.id.done)
     void order(){
-
+        if (national) {
+            presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", nationalIdTextView.getText().toString().trim(), totalPrice.getText().toString().replace("SAR","").trim());
+        }else {
+            presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", null, totalPrice.getText().toString().replace("SAR","").trim());
+        }
     }
 
     @OnClick(R.id.imagePlus)
     void incrementQuantity(){
         counter++;
         quantity.setText(counter+"");
-        if (vipCheckBox.isChecked()) {
-            totalPrice.setText(counter*vipprice+" SAR");
-        }
-        if (regularCheckBox.isChecked()){
-            totalPrice.setText(counter*regularprice+" SAR");
-        }
+        setPriceTotal();
     }
 
     @OnClick(R.id.imageMinus)
     void decrementQuantity(){
         counter--;
         quantity.setText(counter+"");
-        if (vipCheckBox.isChecked()) {
-            totalPrice.setText(counter*vipprice+" SAR");
-        }
-        if (regularCheckBox.isChecked()){
-            totalPrice.setText(counter*regularprice+" SAR");
-        }
+        setPriceTotal();
+    }
+
+    private void setPriceTotal() {
+        ticketsNumberTextView.setText(counter+" ticket");
+        totalPrice.setText(counter*price+" SAR");
     }
 
     @Override
@@ -151,42 +163,57 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
         nameTextView.setText(eventOrder.getName());
         emailTextView.setText(eventOrder.getEmail());
         mobileTextView.setText(eventOrder.getMobile());
+        eventId = eventOrder.getEventId()+"";
         if (eventOrder.getNational() == null) {
+            national = false;
             nationalIdTextView.setVisibility(View.GONE);
         }else {
+            national = true;
             nationalIdTextView.setText(eventOrder.getNational());
         }
         paymentMethod.setText(eventOrder.getPaymentMethod());
-        vipPrice.setText(eventOrder.getVipPrice());
-        vipprice = Integer.parseInt(eventOrder.getVipPrice());
-        regularprice = Integer.parseInt(eventOrder.getRegularPrice());
-        regularPrice.setText(eventOrder.getRegularPrice());
         numTickets.setText("Only "+eventOrder.getTickets()+" tickets are available");
         totalPrice.setText("");
-        vipCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        tickets = eventOrder.getEventtickets();
+        eventTicketsAdapter = new EventTicketsAdapter();
+        eventTicketsAdapter.setData(eventOrder.getEventtickets());
+        eventTicketsAdapter.setTicketListener(new TicketListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    regularCheckBox.setChecked(false);
+            public void onTicketChecked(int position) {
+                for (int i = 0 ; i < tickets.size() ; i++) {
+                    if (i == position) {
+                        price = Integer.parseInt(tickets.get(position).getPrice());
+                        numTickets.setText("Only "+tickets.get(position).getNumberOfTickets()+" tickets are available");
+                        ticketId = tickets.get(position).getId();
+                        setPriceTotal();
+                    }else {
+                        TicketViewHolder ticketViewHolder = (TicketViewHolder) ticketsList.findViewHolderForAdapterPosition(i);
+                        ticketViewHolder.uncheck();
+                    }
                 }
             }
         });
-        regularCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    vipCheckBox.setChecked(false);
-                }
-            }
-        });
+        ticketsList.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
+        ticketsList.addItemDecoration(dividerItemDecoration);
+        ticketsList.setAdapter(eventTicketsAdapter);
         EventDaysAdapter adapter = new EventDaysAdapter(this.getContext());
+        days = eventOrder.getTicketDates();
         adapter.setDays(eventOrder.getEventDateDays());
         daysGridView.setAdapter(adapter);
         daysGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RelativeLayout layout = view.findViewById(R.id.eventDayContainer);
-                layout.setBackground(ContextCompat.getDrawable(view.getContext(),R.drawable.rounded_rectangle_black));
+                for (int i = 0 ; i < daysGridView.getChildCount() ; i++) {
+                    if (i == position) {
+                        view.setBackground(ContextCompat.getDrawable(view.getContext(),R.drawable.rounded_rectangle_black));
+                        dateId = days.get(position).getId();
+                    }else {
+                        View view1 = daysGridView.getChildAt(i);
+                        view1.setBackground(ContextCompat.getDrawable(view.getContext(),R.drawable.rounded_rectangle_grey));
+                    }
+                }
             }
         });
     }

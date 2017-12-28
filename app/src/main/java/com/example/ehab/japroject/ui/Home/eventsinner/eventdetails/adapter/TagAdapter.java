@@ -75,7 +75,7 @@ public class TagAdapter extends BaseAdapter {
         tagName.setText(tags.get(position).getName());
         view.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_rectangle_grey));
         view.setPadding(convertFromDpToPixel(),convertFromDpToPixel(),convertFromDpToPixel(),convertFromDpToPixel());
-        Picasso.with(context).load(tags.get(position).getIcon()).placeholder(R.drawable.ic_type_g).error(R.drawable.ic_type_g).into(tagIcon);
+        Picasso.with(context).load(tags.get(position).getImage()).placeholder(R.drawable.ic_type_g).error(R.drawable.ic_type_g).into(tagIcon);
         return view;
     }
 }

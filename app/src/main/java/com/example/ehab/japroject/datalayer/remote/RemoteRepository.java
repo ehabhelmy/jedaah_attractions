@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.pojo.request.LoginRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
+import com.example.ehab.japroject.datalayer.pojo.request.order.OrderRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
@@ -13,6 +14,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerR
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
@@ -21,6 +23,7 @@ import com.example.ehab.japroject.datalayer.remote.service.EventDetailsService;
 import com.example.ehab.japroject.datalayer.remote.service.LikeService;
 import com.example.ehab.japroject.datalayer.remote.service.LoginService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.OrderService;
 import com.example.ehab.japroject.datalayer.remote.service.ProfileService;
 import com.example.ehab.japroject.datalayer.remote.service.RegisterationService;
 import com.example.ehab.japroject.datalayer.remote.service.SocialLoginService;
@@ -42,6 +45,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 
+import static com.example.ehab.japroject.datalayer.remote.ServiceError.ERROR_CODE;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.FALSE_CODE;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.NETWORK_ERROR;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.SUCCESS_CODE;
@@ -429,6 +433,32 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return profileResponseSingle;
+    }
+
+    @Override
+    public Single<OrderResponse> order(String token,String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total) {
+        Single<OrderResponse> orderResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            OrderService orderService = serviceGenerator.createService(OrderService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(orderService.order(getCurrentLanguage(), "bearer " + token,new OrderRequest(name,email,mobileNumber,numberOfTickets,paymentMethod,eventId,ticketId,dateId,nationalId,total)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == ERROR_CODE) {
+                                OrderResponse orderResponse = (OrderResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(orderResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return orderResponseSingle;
     }
 
     private String getCurrentLanguage() {

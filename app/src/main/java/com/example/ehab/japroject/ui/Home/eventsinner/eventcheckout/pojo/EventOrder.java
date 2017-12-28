@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTicket;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.TicketDate;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,9 @@ public class EventOrder extends BaseModel implements Parcelable{
     private String vipPrice;
     private String regularPrice;
     private String tickets;
+    private int eventId;
+    private ArrayList<EventTicket> Eventtickets;
+    private ArrayList<TicketDate> ticketDates;
 
     public EventOrder() {
     }
@@ -38,6 +43,9 @@ public class EventOrder extends BaseModel implements Parcelable{
         vipPrice = in.readString();
         regularPrice = in.readString();
         tickets = in.readString();
+        eventId = in.readInt();
+        Eventtickets = in.createTypedArrayList(EventTicket.CREATOR);
+        ticketDates = in.createTypedArrayList(TicketDate.CREATOR);
     }
 
     public static final Creator<EventOrder> CREATOR = new Creator<EventOrder>() {
@@ -51,6 +59,30 @@ public class EventOrder extends BaseModel implements Parcelable{
             return new EventOrder[size];
         }
     };
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public ArrayList<EventTicket> getEventtickets() {
+        return Eventtickets;
+    }
+
+    public void setEventtickets(ArrayList<EventTicket> eventtickets) {
+        Eventtickets = eventtickets;
+    }
+
+    public ArrayList<TicketDate> getTicketDates() {
+        return ticketDates;
+    }
+
+    public void setTicketDates(ArrayList<TicketDate> ticketDates) {
+        this.ticketDates = ticketDates;
+    }
 
     public String getEventTitle() {
         return eventTitle;
@@ -149,5 +181,8 @@ public class EventOrder extends BaseModel implements Parcelable{
         dest.writeString(vipPrice);
         dest.writeString(regularPrice);
         dest.writeString(tickets);
+        dest.writeInt(eventId);
+        dest.writeTypedList(Eventtickets);
+        dest.writeTypedList(ticketDates);
     }
 }

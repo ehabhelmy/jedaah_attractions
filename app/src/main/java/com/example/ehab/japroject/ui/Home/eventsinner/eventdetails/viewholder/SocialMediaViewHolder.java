@@ -8,6 +8,7 @@ import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.SocialMedium;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
 import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -44,5 +45,10 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
         }else {
             Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.ic_website_g).error(R.drawable.ic_website_g).into(socialMediaIcon);
         }
+    }
+
+    @Override
+    public void bind(SocialMedium baseModel, int position, TicketListener ticketListener) {
+
     }
 }

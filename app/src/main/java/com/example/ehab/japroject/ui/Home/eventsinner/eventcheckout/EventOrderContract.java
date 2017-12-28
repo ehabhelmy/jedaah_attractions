@@ -18,6 +18,6 @@ public interface EventOrderContract {
 
     interface Presenter extends Unsubscribable {
         void showPayment();
-        void order();
+        void order(String name,String email,String mobileNumber,String numberOfTickets, String paymentMethod, String eventId,String ticketId,String dateId, String nationalId, String total);
     }
 }

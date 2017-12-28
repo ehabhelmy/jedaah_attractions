@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/change"
+        android:id="@+id/change11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/lightBlack"
@@ -190,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="2"
-            android:columnWidth="170dp"
+            android:columnWidth="160dp"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
             android:stretchMode="spacingWidthUniform">
@@ -209,134 +209,142 @@
             android:textColor="@color/staticTitle"
             android:textSize="@dimen/static_title_size" />
 
-        <RelativeLayout
-            android:id="@+id/vipContainer"
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/ticketsList"
             android:layout_alignStart="@+id/textView35"
             android:layout_below="@+id/textView35"
-            android:layout_marginTop="11dp"
-            android:background="@color/background"
-            android:padding="10dp">
+            android:layout_marginTop="11dp" />
 
-            <CheckBox
-                android:id="@+id/vipCheckbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:fontFamily="@font/gotham_medium"
-                android:text="@string/vip"
-                android:textColor="@color/colorTitle"
-                android:textSize="@dimen/static_title_size" />
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/vipContainer"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@+id/textView35"-->
+            <!--android:layout_below="@+id/textView35"-->
+            <!--android:layout_marginTop="11dp"-->
+            <!--android:background="@color/background"-->
+            <!--android:padding="10dp">-->
 
-            <TextView
-                android:id="@+id/textView39"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/vipCheckbox"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp"
-                android:layout_toStartOf="@+id/vipPrice"
-                android:fontFamily="@font/gotham_book"
-                android:text="@string/vipSubtitle"
-                android:textColor="@color/outerText"
-                android:textSize="@dimen/daysRemaining" />
+            <!--<CheckBox-->
+                <!--android:id="@+id/vipCheckbox"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:fontFamily="@font/gotham_medium"-->
+                <!--android:text="@string/vip"-->
+                <!--android:textColor="@color/colorTitle"-->
+                <!--android:textSize="@dimen/static_title_size" />-->
 
-            <TextView
-                android:id="@+id/textView40"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/vipCheckbox"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/vipCheckbox"
-                android:layout_marginEnd="18dp"
-                android:fontFamily="@font/gotham_medium"
-                android:gravity="bottom"
-                android:text="SAR"
-                android:textSize="@dimen/cash" />
+            <!--<TextView-->
+                <!--android:id="@+id/textView39"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/vipCheckbox"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toStartOf="@+id/vipPrice"-->
+                <!--android:fontFamily="@font/gotham_book"-->
+                <!--android:text="@string/vipSubtitle"-->
+                <!--android:textColor="@color/outerText"-->
+                <!--android:textSize="@dimen/daysRemaining" />-->
 
-            <TextView
-                android:id="@+id/vipPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView40"
-                android:layout_alignTop="@+id/textView40"
-                android:layout_marginTop="8dp"
-                android:layout_toStartOf="@+id/textView40"
-                android:fontFamily="@font/gotham_medium"
-                android:gravity="center"
-                android:text="250"
-                android:textSize="@dimen/static_title_size" />
-        </RelativeLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/textView40"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/vipCheckbox"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignTop="@+id/vipCheckbox"-->
+                <!--android:layout_marginEnd="18dp"-->
+                <!--android:fontFamily="@font/gotham_medium"-->
+                <!--android:gravity="bottom"-->
+                <!--android:text="SAR"-->
+                <!--android:textSize="@dimen/cash" />-->
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView35"
-            android:layout_below="@+id/vipContainer"
-            android:layout_marginTop="11dp"
-            android:background="@color/background"
-            android:padding="10dp">
+            <!--<TextView-->
+                <!--android:id="@+id/vipPrice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/textView40"-->
+                <!--android:layout_alignTop="@+id/textView40"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toStartOf="@+id/textView40"-->
+                <!--android:fontFamily="@font/gotham_medium"-->
+                <!--android:gravity="center"-->
+                <!--android:text="250"-->
+                <!--android:textSize="@dimen/static_title_size" />-->
+        <!--</RelativeLayout>-->
 
-            <CheckBox
-                android:id="@+id/regularCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:fontFamily="@font/gotham_medium"
-                android:text="@string/regular"
-                android:textColor="@color/colorTitle"
-                android:textSize="@dimen/static_title_size" />
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/relativeLayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignStart="@+id/textView35"-->
+            <!--android:layout_below="@+id/vipContainer"-->
+            <!--android:layout_marginTop="11dp"-->
+            <!--android:background="@color/background"-->
+            <!--android:padding="10dp">-->
 
-            <TextView
-                android:id="@+id/textView393"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/regularCheckBox"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp"
-                android:layout_toStartOf="@+id/regularPrice"
-                android:fontFamily="@font/gotham_book"
-                android:text="@string/regSubtitle"
-                android:textColor="@color/outerText"
-                android:textSize="@dimen/daysRemaining" />
+            <!--<CheckBox-->
+                <!--android:id="@+id/regularCheckBox"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:fontFamily="@font/gotham_medium"-->
+                <!--android:text="@string/regular"-->
+                <!--android:textColor="@color/colorTitle"-->
+                <!--android:textSize="@dimen/static_title_size" />-->
 
-            <TextView
-                android:id="@+id/textView403"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/regularCheckBox"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/regularCheckBox"
-                android:layout_marginEnd="18dp"
-                android:fontFamily="@font/gotham_medium"
-                android:gravity="bottom"
-                android:text="SAR"
-                android:textSize="@dimen/cash" />
+            <!--<TextView-->
+                <!--android:id="@+id/textView393"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/regularCheckBox"-->
+                <!--android:layout_marginStart="30dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toStartOf="@+id/regularPrice"-->
+                <!--android:fontFamily="@font/gotham_book"-->
+                <!--android:text="@string/regSubtitle"-->
+                <!--android:textColor="@color/outerText"-->
+                <!--android:textSize="@dimen/daysRemaining" />-->
 
-            <TextView
-                android:id="@+id/regularPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView403"
-                android:layout_alignTop="@+id/textView403"
-                android:layout_marginTop="8dp"
-                android:layout_toStartOf="@+id/textView403"
-                android:fontFamily="@font/gotham_medium"
-                android:gravity="center"
-                android:text="250"
-                android:textSize="@dimen/static_title_size" />
-        </RelativeLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/textView403"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/regularCheckBox"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignTop="@+id/regularCheckBox"-->
+                <!--android:layout_marginEnd="18dp"-->
+                <!--android:fontFamily="@font/gotham_medium"-->
+                <!--android:gravity="bottom"-->
+                <!--android:text="SAR"-->
+                <!--android:textSize="@dimen/cash" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/regularPrice"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignBottom="@+id/textView403"-->
+                <!--android:layout_alignTop="@+id/textView403"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_toStartOf="@+id/textView403"-->
+                <!--android:fontFamily="@font/gotham_medium"-->
+                <!--android:gravity="center"-->
+                <!--android:text="250"-->
+                <!--android:textSize="@dimen/static_title_size" />-->
+        <!--</RelativeLayout>-->
 
         <TextView
             android:id="@+id/textView42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/relativeLayout"
-            android:layout_below="@+id/relativeLayout"
+            android:layout_alignStart="@+id/ticketsList"
+            android:layout_below="@+id/ticketsList"
             android:layout_marginTop="19dp"
             android:fontFamily="@font/gotham_medium"
             android:text="@string/numberTickets"
@@ -423,7 +431,7 @@
                 android:textSize="@dimen/title_inner" />
 
             <TextView
-                android:id="@+id/textView47"
+                android:id="@+id/ticketsNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView46"

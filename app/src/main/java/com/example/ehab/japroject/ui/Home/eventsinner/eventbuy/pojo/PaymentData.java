@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTicket;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.TicketDate;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.OrderEventDay;
 
 import java.util.ArrayList;
@@ -24,6 +26,9 @@ public class PaymentData extends BaseModel implements Parcelable {
     private String vipPrice;
     private String regularPrice;
     private String eventTitle;
+    private int eventId;
+    private ArrayList<EventTicket> tickets;
+    private ArrayList<TicketDate> ticketDates;
 
     public PaymentData() {
     }
@@ -39,6 +44,9 @@ public class PaymentData extends BaseModel implements Parcelable {
         vipPrice = in.readString();
         regularPrice = in.readString();
         eventTitle = in.readString();
+        eventId = in.readInt();
+        tickets = in.createTypedArrayList(EventTicket.CREATOR);
+        ticketDates = in.createTypedArrayList(TicketDate.CREATOR);
     }
 
     public static final Creator<PaymentData> CREATOR = new Creator<PaymentData>() {
@@ -52,6 +60,30 @@ public class PaymentData extends BaseModel implements Parcelable {
             return new PaymentData[size];
         }
     };
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public ArrayList<EventTicket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(ArrayList<EventTicket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public ArrayList<TicketDate> getTicketDates() {
+        return ticketDates;
+    }
+
+    public void setTicketDates(ArrayList<TicketDate> ticketDates) {
+        this.ticketDates = ticketDates;
+    }
 
     public ArrayList<OrderEventDay> getEventDateDays() {
         return eventDateDays;
@@ -150,5 +182,8 @@ public class PaymentData extends BaseModel implements Parcelable {
         dest.writeString(vipPrice);
         dest.writeString(regularPrice);
         dest.writeString(eventTitle);
+        dest.writeInt(eventId);
+        dest.writeTypedList(tickets);
+        dest.writeTypedList(ticketDates);
     }
 }

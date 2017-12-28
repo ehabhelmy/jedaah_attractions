@@ -22,7 +22,7 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
         public void onSuccess(ProfileResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                    getView().updateProfileFragment(model);
+                    getView().updateProfileFragment(model.getData());
                 }
             }
         }
@@ -36,16 +36,16 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
     @Inject
     public ProfilePresenter(Profile profile) {
         this.profile = profile;
-        this.profile.getProfile(profileResponseBaseCallback, true);
     }
 
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
+        profile.getProfile(profileResponseBaseCallback, true);
     }
 
     @Override
     public void unSubscribe() {
-
+        profile.unSubscribe();
     }
 }

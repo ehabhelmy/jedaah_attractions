@@ -1,8 +1,6 @@
 
 package com.example.ehab.japroject.datalayer.pojo.response.eventinner;
 
-import android.content.Intent;
-
 import java.util.List;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
@@ -50,6 +48,12 @@ public class Data extends BaseModel{
     @SerializedName("event_tags")
     @Expose
     private List<EventTag> eventTags = null;
+    @SerializedName("event_tickets")
+    @Expose
+    private List<EventTicket> eventTickets = null;
+    @SerializedName("ticket_dates")
+    @Expose
+    private List<TicketDate> ticketDates = null;
     @SerializedName("description")
     @Expose
     private String description;
@@ -74,9 +78,15 @@ public class Data extends BaseModel{
     @SerializedName("max_of_cash_tickets")
     @Expose
     private Integer maxOfCashTickets;
+    @SerializedName("national_id")
+    @Expose
+    private Integer nationalId;
     @SerializedName("interested")
     @Expose
     private Integer interested;
+    @SerializedName("going")
+    @Expose
+    private Integer going;
     @SerializedName("lat")
     @Expose
     private String lat;
@@ -85,18 +95,7 @@ public class Data extends BaseModel{
     private String lng;
     @SerializedName("is_liked")
     @Expose
-    private boolean isLiked;
-    @SerializedName("national")
-    @Expose
-    private Integer national;
-
-    public Integer getNational() {
-        return national;
-    }
-
-    public void setNational(Integer national) {
-        this.national = national;
-    }
+    private Boolean isLiked;
 
     public Integer getId() {
         return id;
@@ -202,6 +201,22 @@ public class Data extends BaseModel{
         this.eventTags = eventTags;
     }
 
+    public List<EventTicket> getEventTickets() {
+        return eventTickets;
+    }
+
+    public void setEventTickets(List<EventTicket> eventTickets) {
+        this.eventTickets = eventTickets;
+    }
+
+    public List<TicketDate> getTicketDates() {
+        return ticketDates;
+    }
+
+    public void setTicketDates(List<TicketDate> ticketDates) {
+        this.ticketDates = ticketDates;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -266,12 +281,28 @@ public class Data extends BaseModel{
         this.maxOfCashTickets = maxOfCashTickets;
     }
 
+    public Integer getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(Integer nationalId) {
+        this.nationalId = nationalId;
+    }
+
     public Integer getInterested() {
         return interested;
     }
 
     public void setInterested(Integer interested) {
         this.interested = interested;
+    }
+
+    public Integer getGoing() {
+        return going;
+    }
+
+    public void setGoing(Integer going) {
+        this.going = going;
     }
 
     public String getLat() {
@@ -290,11 +321,11 @@ public class Data extends BaseModel{
         this.lng = lng;
     }
 
-    public boolean getIsLiked() {
+    public Boolean getIsLiked() {
         return isLiked;
     }
 
-    public void setIsLiked(boolean isLiked) {
+    public void setIsLiked(Boolean isLiked) {
         this.isLiked = isLiked;
     }
 
