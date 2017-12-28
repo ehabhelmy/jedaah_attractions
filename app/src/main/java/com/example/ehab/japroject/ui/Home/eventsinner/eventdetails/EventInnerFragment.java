@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.ImagePagerAdapter;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.TagAdapter;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.SocialMediaAdapter;
@@ -105,6 +106,8 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
 
     private double latitude,longitude;
 
+    private PaymentData paymentData;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -129,7 +132,7 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
 
     @OnClick(R.id.buyNow)
     void openBuyView(){
-
+        presenter.openPaymentView(paymentData);
     }
 
 
@@ -197,6 +200,11 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
         ImagePagerAdapter imagePagerAdapter = new ImagePagerAdapter(this.getContext());
         imagePagerAdapter.setImageURLS(data.getImageURLS());
         imageViewPager.setAdapter(imagePagerAdapter);
+    }
+
+    @Override
+    public void savePaymentDetails(PaymentData paymentData) {
+        this.paymentData = paymentData;
     }
 
     private TextView createTextView(String day) {

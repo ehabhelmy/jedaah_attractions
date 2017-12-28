@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -68,6 +69,11 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
         }
     }
 
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(email.getWindowToken(), 0);
+    }
+
     @Override
     public void showLoading() {
         loadingView.setVisibility(View.VISIBLE);
@@ -109,12 +115,14 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
 
     @OnClick(R.id.join)
     void goToRegisterScreen(){
+        hideKeyboard();
         presenter.showRegisterScreen();
     }
 
     @OnClick(R.id.signin)
     void login(){
         //TODO : call presenter and send the email and password
+        hideKeyboard();
         presenter.login(email.getText().toString().trim(),password.getText().toString().trim());
     }
 

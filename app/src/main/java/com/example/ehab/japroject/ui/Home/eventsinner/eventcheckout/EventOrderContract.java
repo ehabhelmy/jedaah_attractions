@@ -1,22 +1,23 @@
-package com.example.ehab.japroject.ui.Home.eventsinner.eventbuy;
+package com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout;
 
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.Base.listener.ProgressView;
-import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
+import com.example.ehab.japroject.usecase.Unsubscribable;
 
 /**
- * Created by ehab on 12/25/17.
+ * Created by ehab on 12/27/17.
  */
 
-public interface EventPaymentContract {
+public interface EventOrderContract {
 
     interface View extends BaseView,ErrorView,ProgressView {
-        void setupPaymentView(PaymentData paymentData);
+        void setupOrderView(EventOrder eventOrder);
     }
 
-    interface Presenter {
-        void showOrderView(EventOrder eventOrder);
+    interface Presenter extends Unsubscribable {
+        void showPayment();
+        void order();
     }
 }

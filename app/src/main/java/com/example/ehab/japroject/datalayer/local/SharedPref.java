@@ -48,6 +48,12 @@ public class SharedPref<T extends BaseModel> {
         return preferences.getString(key,null);
     }
 
+    public void saveString(String key,String value) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key,value);
+        editor.commit();
+    }
+
     public List<Category> getCategoryList(String key) {
         String s = preferences.getString(key, null);
         Type typeOfObjectsList = new TypeToken<List<Category>>() {

@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.datalayer.remote.service;
 
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -17,11 +18,11 @@ import retrofit2.http.Path;
 public interface RegisterationService {
     @Multipart
     @POST("{lang}/register")
-    Call<RegisterationResponse> register(@Path("lang") String lang,
-                                         @Part("name") RequestBody name,
-                                         @Part("username") RequestBody username,
-                                         @Part("email") RequestBody email,
-                                         @Part("password") RequestBody password,
-                                         @Part("mobile_number") RequestBody mobile_number,
-                                         @Part MultipartBody.Part profile_image);
+    Call<LoginResponse> register(@Path("lang") String lang,
+                                 @Part("name") RequestBody name,
+                                 @Part("username") RequestBody username,
+                                 @Part("email") RequestBody email,
+                                 @Part("password") RequestBody password,
+                                 @Part("mobile_number") RequestBody mobile_number,
+                                 @Part MultipartBody.Part profile_image);
 }

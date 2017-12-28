@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -80,6 +81,11 @@ public class RegisterationFragment extends BaseFragment implements Registeration
 
     private Uri uri;
 
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(email.getWindowToken(), 0);
+    }
+
     @Override
     protected void initializeDagger() {
 
@@ -138,6 +144,7 @@ public class RegisterationFragment extends BaseFragment implements Registeration
 
     @OnClick(R.id.registerNow)
     void register() {
+        hideKeyboard();
         this.presenter.register(userName.getText().toString()
                 , email.getText().toString()
                 , password.getText().toString()
@@ -146,6 +153,7 @@ public class RegisterationFragment extends BaseFragment implements Registeration
 
     @OnClick(R.id.signIn)
     void showSignIn(){
+        hideKeyboard();
         presenter.showSignIn();
     }
 

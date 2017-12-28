@@ -164,7 +164,7 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public void saveToken(String token) {
-        sharedPref.saveObject(SharedPref.TOKEN,token);
+        sharedPref.saveString(SharedPref.TOKEN,token);
     }
 
     @Override

@@ -8,8 +8,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.ehab.japroject.JaApplication;
-import com.example.ehab.japroject.datalayer.pojo.request.registeration.Data;
-import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.Data;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.registeration.Registeration;
@@ -32,7 +31,7 @@ public class RegisterationPresenter extends BasePresenter<RegisterationContract.
             if (isViewAlive.get()){
                 getView().hideLoading();
             }
-            jaNavigationManager.showSignInScreen();
+            jaNavigationManager.goToHomeActivity();
         }
 
         @Override

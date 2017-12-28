@@ -4,6 +4,8 @@ import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.util.Log;
 
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventDay;
+
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -70,6 +72,41 @@ public class DateTimeUtils {
         String eMonth = new SimpleDateFormat("MMMM").format(eCalendar.getTime());
         String eDay = new SimpleDateFormat("dd").format(eCalendar.getTime());
         return sMonth + " " + sDay + " - " + eMonth + " " + eDay;
+    }
+
+    public static String getEventDays(EventDay eventDay) {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date sDate = null;
+        Date eDate = null;
+        try {
+            sDate = format1.parse(eventDay.getStartDate() + " " + eventDay.getStartTime());
+            eDate = format1.parse(eventDay.getStartDate() + " " + eventDay.getEndTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar sCalendar = Calendar.getInstance();
+        sCalendar.setTime(sDate);
+        Calendar eCalendar = Calendar.getInstance();
+        eCalendar.setTime(eDate);
+        String date = new SimpleDateFormat("EEEE, MMMM dd").format(sCalendar.getTime());
+        String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+        String endTime = new SimpleDateFormat("hh:mm aaa").format(eCalendar.getTime());
+        return date + "at " + startTime + " - " + endTime;
+    }
+
+    public static String getEventDateOrder(EventDay eventDay) {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date sDate = null;
+        try {
+            sDate = format1.parse(eventDay.getStartDate() + " " + eventDay.getStartTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar sCalendar = Calendar.getInstance();
+        sCalendar.setTime(sDate);
+        String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
+        String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+        return date +" "+ startTime;
     }
 
     /**

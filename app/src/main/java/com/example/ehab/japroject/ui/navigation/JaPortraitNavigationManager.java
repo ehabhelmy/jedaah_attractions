@@ -9,6 +9,10 @@ import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Home.HomeActivity;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.EventPaymentFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.EventOrderFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
@@ -28,7 +32,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (exploreFragment == null) {
             exploreFragment = new ExploreFragment();
         }
-        addFragment(exploreFragment,false,EXPLORE, R.id.frame_layout);
+        replaceFragment(exploreFragment,false,EXPLORE, R.id.frame_layout);
     }
 
     @Override
@@ -37,7 +41,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (eventsFragment == null) {
             eventsFragment = new EventsFragment();
         }
-        addFragment(eventsFragment,false,EVENTS,R.id.frame_layout);
+        replaceFragment(eventsFragment,false,EVENTS,R.id.frame_layout);
     }
 
     @Override
@@ -51,7 +55,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (socialMediaFragment == null) {
             socialMediaFragment = new SocialMediaFragment();
         }
-        addFragment(socialMediaFragment,false,SOCIAL,R.id.frame_layout_auth);
+        replaceFragment(socialMediaFragment,false,SOCIAL,R.id.frame_layout_auth);
     }
 
     @Override
@@ -60,7 +64,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (signInFragment == null) {
             signInFragment = new SignInFragment();
         }
-        addFragment(signInFragment,false,SIGNIN,R.id.frame_layout_auth);
+        replaceFragment(signInFragment,false,SIGNIN,R.id.frame_layout_auth);
     }
 
     @Override
@@ -75,7 +79,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (registerationFragment == null) {
             registerationFragment = new RegisterationFragment();
         }
-        addFragment(registerationFragment,false,REGISTERATION,R.id.frame_layout_auth);
+        replaceFragment(registerationFragment,false,REGISTERATION,R.id.frame_layout_auth);
     }
 
     @Override
@@ -87,7 +91,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             bundle.putInt(Constants.EVENT_ID,id);
             eventInnerFragment.setArguments(bundle);
         }
-        addFragment(eventInnerFragment,false,EVENT_DETAILS,R.id.frame_layout_inner);
+        replaceFragment(eventInnerFragment,false,EVENT_DETAILS,R.id.frame_layout_inner);
     }
 
     @Override
@@ -105,5 +109,29 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Intent intent=new Intent(Intent.ACTION_VIEW,uri);
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
+    }
+
+    @Override
+    public void openPaymentView(PaymentData paymentData) {
+        EventPaymentFragment eventPaymentFragment = (EventPaymentFragment) fragmentManager.findFragmentByTag(PAYMENT);
+        if (eventPaymentFragment == null) {
+            eventPaymentFragment = new EventPaymentFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.EVENT_PAYMENT,paymentData);
+            eventPaymentFragment.setArguments(bundle);
+        }
+        replaceFragment(eventPaymentFragment,false,PAYMENT,R.id.frame_layout_inner);
+    }
+
+    @Override
+    public void showOrderView(EventOrder eventOrder) {
+        EventOrderFragment eventOrderFragment = (EventOrderFragment) fragmentManager.findFragmentByTag(ORDER);
+        if (eventOrderFragment == null) {
+            eventOrderFragment = new EventOrderFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.EVENT_ORDER,eventOrder);
+            eventOrderFragment.setArguments(bundle);
+        }
+        addFragment(eventOrderFragment,true,ORDER,R.id.frame_layout_inner);
     }
 }

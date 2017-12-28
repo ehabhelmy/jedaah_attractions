@@ -8,6 +8,8 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseActivity;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
 
 import java.lang.ref.WeakReference;
 
@@ -36,6 +38,10 @@ public abstract class JaNavigationManager {
     public static final String REGISTERATION = "registeration";
 
     public static final String EVENT_DETAILS = "eventDetails";
+
+    public static final String PAYMENT = "payment";
+
+    public static final String ORDER = "order";
 
     public static final int LOCATION_SETTINGS = 2;
 
@@ -73,13 +79,28 @@ public abstract class JaNavigationManager {
 
     public abstract void openNavigationView(double lat, double lng);
 
+    public abstract void openPaymentView(PaymentData paymentData);
+
+    public abstract void showOrderView(EventOrder eventOrder);
+
+
+
+    protected void replaceFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (addToBackStack){
+            fragmentTransaction.addToBackStack(tag);
+        }
+        fragmentTransaction.replace(frame,fragment,tag);
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+        fragmentTransaction.commit();
+    }
 
     protected void addFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack){
             fragmentTransaction.addToBackStack(tag);
         }
-        fragmentTransaction.add(frame,fragment,tag);
+        fragmentTransaction.replace(frame,fragment,tag);
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         fragmentTransaction.commit();
     }
@@ -99,5 +120,6 @@ public abstract class JaNavigationManager {
     public void setCurrentActivity(BaseActivity currentActivity) {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
+
 
 }

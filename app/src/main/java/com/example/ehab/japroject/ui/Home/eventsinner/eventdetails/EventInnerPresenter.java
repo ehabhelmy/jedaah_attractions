@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.EventDetailsAdapter;
 import com.example.ehab.japroject.usecase.eventinner.EventInner;
 import com.example.ehab.japroject.util.Constants;
@@ -25,6 +26,7 @@ public class EventInnerPresenter extends BasePresenter<EventInnerContract.View> 
             if (isViewAlive.get()){
                 if (model.getSuccess()){
                     getView().setupEventsInner(EventDetailsAdapter.convertIntoEventDetailsUi(model.getData()));
+                    getView().savePaymentDetails(EventDetailsAdapter.setupPaymentPojo(model.getData()));
                 }
             }
         }
@@ -56,5 +58,10 @@ public class EventInnerPresenter extends BasePresenter<EventInnerContract.View> 
     @Override
     public void openNavigationView(double lat, double lng) {
         jaNavigationManager.openNavigationView(lat,lng);
+    }
+
+    @Override
+    public void openPaymentView(PaymentData paymentData) {
+        jaNavigationManager.openPaymentView(paymentData);
     }
 }

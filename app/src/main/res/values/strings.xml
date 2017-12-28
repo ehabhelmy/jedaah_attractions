@@ -55,4 +55,14 @@
     <string name="cancel">CANCEL</string>
     <string name="event">EVENT</string>
     <string name="change">CHANGE</string>
+    <string name="pickEventDay">PICK EVENT DAY</string>
+    <string name="vip">VIP</string>
+    <string name="vipSubtitle">Lasdhasdhasjkdhas , asdasdass ,asdasasd ,asdasdasdsa ,asdasdas ,asdasdas ,asdasdasdasdasdasdasdasdas ,asdasdas</string>
+    <string name="regSubtitle">Lasdhasjdhasjkdhasjkdhasjkdhajkshjk ,asdiasdauishdus ,asdasudayhsus ,asdyausdayus ,asdasyduaisya ,asdasudyuas</string>
+    <string name="regular">Regural</string>
+    <string name="hint">Hint :</string>
+    <string name="total">TOTAL</string>
+    <string name="done">DONE</string>
+    <string name="ticketsType">TICKETS TYPE</string>
+    <string name="numberTickets">NUMBER OF TICKETS</string>
 </resources>

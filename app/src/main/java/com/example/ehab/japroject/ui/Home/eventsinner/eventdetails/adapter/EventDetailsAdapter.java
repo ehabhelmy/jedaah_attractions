@@ -1,8 +1,11 @@
 package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter;
 
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.Data;
+import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventDay;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTag;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.SocialMedium;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.OrderEventDay;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDetails;
 
 import static com.example.ehab.japroject.util.DateTimeUtils.*;
@@ -14,6 +17,8 @@ import static com.example.ehab.japroject.util.DateTimeUtils.convertJSONDateToDat
 import static com.example.ehab.japroject.util.DateTimeUtils.getDay;
 import static com.example.ehab.japroject.util.DateTimeUtils.getDaysRemaining;
 import static com.example.ehab.japroject.util.DateTimeUtils.getMonth;
+import static com.example.ehab.japroject.util.DateTimeUtils.getEventDays;
+import static com.example.ehab.japroject.util.DateTimeUtils.getEventDateOrder;
 
 /**
  * Created by ehab on 12/20/17.
@@ -46,12 +51,53 @@ public class EventDetailsAdapter {
         }
         eventDetails.setCategoriesText(cat.toString());
         eventDetails.setIsliked(data.getIsLiked());
+        ArrayList<EventDay> eventDays = (ArrayList<EventDay>) data.getEventDays();
         ArrayList<String> days = new ArrayList<>();
-        days.add("Firday, 13 nov 3pm : 5pm");
-        days.add("Firday, 13 nov 3pm : 5pm");
-        days.add("Firday, 13 nov 3pm : 5pm");
+        for (EventDay eventDay: eventDays) {
+            days.add(getEventDays(eventDay));
+        }
         eventDetails.setEventDateDays(days);
         eventDetails.setImageURLS((ArrayList<String>) data.getGallery());
         return eventDetails;
+    }
+
+    public static PaymentData setupPaymentPojo(List<Data> data1){
+        Data data = data1.get(0);
+        PaymentData paymentData = new PaymentData();
+        paymentData.setVipPrice(data.getEndPrice());
+        paymentData.setRegularPrice(data.getStartPrice());
+        ArrayList<OrderEventDay> orderEventDays = new ArrayList<>();
+        for (EventDay eventDay: data.getEventDays()) {
+            OrderEventDay orderEventDay = new OrderEventDay();
+            orderEventDay.setMonth(getMonth(convertJSONDateToDate(eventDay.getStartDate())));
+            orderEventDay.setDay(getDay(convertJSONDateToDate(eventDay.getStartDate())));
+            orderEventDay.setTime(getEventDateOrder(eventDay));
+            orderEventDays.add(orderEventDay);
+        }
+        paymentData.setEventDateDays(orderEventDays);
+        paymentData.setEventTitle(data.getTitle());
+        if (data.getCreditCard() == 1 ) {
+            paymentData.setCreditCard(true);
+        }else {
+            paymentData.setCreditCard(false);
+        }
+        if (data.getCashOnDelivery() == 1 ) {
+            paymentData.setCash(true);
+        }else {
+            paymentData.setCash(false);
+        }
+        if (data.getPayLater() == 1 ) {
+            paymentData.setPayLater(true);
+        }else {
+            paymentData.setPayLater(false);
+        }
+        paymentData.setCashTickets(data.getMaxOfCashTickets());
+        paymentData.setPayLaterTickets(data.getMaxOfPayLaterTickets());
+        if (data.getNational() != null) {
+            paymentData.setNationalRequired(true);
+        }else {
+            paymentData.setNationalRequired(false);
+        }
+        return paymentData;
     }
 }

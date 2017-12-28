@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/change"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/lightBlack"
@@ -17,22 +23,22 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
-            android:textSize="@dimen/title_inner"
             android:fontFamily="@font/gotham_medium"
+            android:text="@string/checkOut"
             android:textColor="@color/white"
-            android:text="@string/checkOut" />
+            android:textSize="@dimen/title_inner" />
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/textView"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/gotham_medium"
+            android:text="@string/cancel"
             android:textColor="@color/white"
-            android:textSize="@dimen/static_title_size"
-            android:text="@string/cancel" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
             android:id="@+id/textView3"
@@ -42,124 +48,423 @@
             android:layout_below="@+id/textView"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="@string/event"
             android:textColor="@color/staticTitle"
-            android:text="@string/event" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/eventTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView3"
             android:layout_below="@+id/textView3"
             android:layout_marginTop="11dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="Amr Diab Concert"
             android:textColor="@color/white"
-            android:text="Amr Diab Concert" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView26"
-            android:layout_below="@+id/textView26"
+            android:layout_alignStart="@+id/eventTitle"
+            android:layout_below="@+id/eventTitle"
             android:layout_marginTop="24dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="@string/personalInfo"
             android:textColor="@color/staticTitle"
-            android:text="@string/personalInfo" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView27"
             android:layout_below="@+id/textView27"
             android:layout_marginTop="11dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="Ehab Mahmoud Helmy"
             android:textColor="@color/white"
-            android:text="Ehab Mahmoud Helmy" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView28"
-            android:layout_below="@+id/textView28"
+            android:layout_alignStart="@+id/name"
+            android:layout_below="@+id/name"
             android:layout_marginTop="2dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="ehab.helmy@spade.studio"
             android:textColor="@color/white"
-            android:text="ehab.helmy@spade.studio" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
-            android:id="@+id/textView30"
+            android:id="@+id/mobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView29"
-            android:layout_below="@+id/textView29"
+            android:layout_alignStart="@+id/email"
+            android:layout_below="@+id/email"
             android:layout_marginTop="2dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="01004576935"
             android:textColor="@color/white"
-            android:text="01004576935" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/nationalId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView30"
-            android:layout_below="@+id/textView30"
+            android:layout_alignStart="@+id/mobile"
+            android:layout_below="@+id/mobile"
             android:layout_marginTop="2dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="1231231293812948918249"
             android:textColor="@color/white"
-            android:text="1231231293812948918249" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
             android:id="@+id/textView32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView31"
-            android:layout_below="@+id/textView31"
+            android:layout_alignStart="@+id/nationalId"
+            android:layout_below="@+id/nationalId"
             android:layout_marginTop="24dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="@string/paymentMethod"
             android:textColor="@color/staticTitle"
-            android:text="@string/paymentMethod" />
+            android:textSize="@dimen/static_title_size" />
 
         <TextView
-            android:id="@+id/textView33"
+            android:id="@+id/paymentMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView32"
             android:layout_below="@+id/textView32"
             android:layout_marginTop="11dp"
-            android:textSize="@dimen/static_title_size"
             android:fontFamily="@font/gotham_medium"
+            android:text="Credit Card"
             android:textColor="@color/white"
-            android:text="Credit Card" />
+            android:textSize="@dimen/static_title_size" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/change"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_alignEnd="@+id/textView25"
+            android:layout_alignEnd="@+id/cancel"
             android:layout_alignTop="@+id/textView32"
             android:layout_marginEnd="12dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/static_title_size"
             android:background="@drawable/rounded_rectangle_stroke_black"
-            android:text="@string/change" />
+            android:text="@string/change"
+            android:textColor="@color/white"
+            android:textSize="@dimen/static_title_size" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="19dp"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/pickEventDay"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/static_title_size" />
+
+        <com.example.ehab.japroject.ui.widget.StaticGridView
+            android:gravity="center"
+            android:id="@+id/eventGrid"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView34"
+            android:layout_marginTop="11dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2"
+            android:columnWidth="170dp"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="spacingWidthUniform">
+
+        </com.example.ehab.japroject.ui.widget.StaticGridView>
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView34"
+            android:layout_below="@+id/eventGrid"
+            android:layout_marginTop="19dp"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/ticketsType"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/static_title_size" />
+
+        <RelativeLayout
+            android:id="@+id/vipContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView35"
+            android:layout_below="@+id/textView35"
+            android:layout_marginTop="11dp"
+            android:background="@color/background"
+            android:padding="10dp">
+
+            <CheckBox
+                android:id="@+id/vipCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/gotham_medium"
+                android:text="@string/vip"
+                android:textColor="@color/colorTitle"
+                android:textSize="@dimen/static_title_size" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vipCheckbox"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@+id/vipPrice"
+                android:fontFamily="@font/gotham_book"
+                android:text="@string/vipSubtitle"
+                android:textColor="@color/outerText"
+                android:textSize="@dimen/daysRemaining" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/vipCheckbox"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/vipCheckbox"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/gotham_medium"
+                android:gravity="bottom"
+                android:text="SAR"
+                android:textSize="@dimen/cash" />
+
+            <TextView
+                android:id="@+id/vipPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView40"
+                android:layout_alignTop="@+id/textView40"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@+id/textView40"
+                android:fontFamily="@font/gotham_medium"
+                android:gravity="center"
+                android:text="250"
+                android:textSize="@dimen/static_title_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView35"
+            android:layout_below="@+id/vipContainer"
+            android:layout_marginTop="11dp"
+            android:background="@color/background"
+            android:padding="10dp">
+
+            <CheckBox
+                android:id="@+id/regularCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/gotham_medium"
+                android:text="@string/regular"
+                android:textColor="@color/colorTitle"
+                android:textSize="@dimen/static_title_size" />
+
+            <TextView
+                android:id="@+id/textView393"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/regularCheckBox"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@+id/regularPrice"
+                android:fontFamily="@font/gotham_book"
+                android:text="@string/regSubtitle"
+                android:textColor="@color/outerText"
+                android:textSize="@dimen/daysRemaining" />
+
+            <TextView
+                android:id="@+id/textView403"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/regularCheckBox"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/regularCheckBox"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/gotham_medium"
+                android:gravity="bottom"
+                android:text="SAR"
+                android:textSize="@dimen/cash" />
+
+            <TextView
+                android:id="@+id/regularPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView403"
+                android:layout_alignTop="@+id/textView403"
+                android:layout_marginTop="8dp"
+                android:layout_toStartOf="@+id/textView403"
+                android:fontFamily="@font/gotham_medium"
+                android:gravity="center"
+                android:text="250"
+                android:textSize="@dimen/static_title_size" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/relativeLayout"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_marginTop="19dp"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/numberTickets"
+            android:textColor="@color/staticTitle"
+            android:textSize="@dimen/static_title_size" />
+
+        <ImageButton
+            android:id="@+id/imageMinus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView42"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="64dp"
+            app:srcCompat="@drawable/ic_minus_ic" />
+
+        <ImageButton
+            android:id="@+id/imagePlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/imageMinus"
+            android:layout_marginEnd="64dp"
+            app:srcCompat="@drawable/ic_plus_ic" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageMinus"
+            android:layout_alignBottom="@+id/imageMinus"
+            android:fontFamily="@font/gotham_book"
+            android:gravity="center"
+            android:text="1"
+            android:textSize="@dimen/title_inner" />
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView34"
+            android:layout_below="@+id/imageMinus"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/hint"
+            android:textColor="@color/google"
+            android:textSize="@dimen/cash" />
+
+        <TextView
+            android:id="@+id/numTickets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/relativeLayout2"
+            android:layout_alignBottom="@+id/textView44"
+            android:layout_alignTop="@+id/textView44"
+            android:layout_toEndOf="@+id/textView44"
+            android:fontFamily="@font/gotham_book"
+            android:gravity="center"
+            android:text="Only 3 tickets are available"
+            android:textColor="@color/outerText"
+            android:textSize="@dimen/cardsubtitle" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView44"
+            android:layout_marginTop="12dp"
+            android:background="@color/background"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="38dp"
+                android:fontFamily="@font/gotham_bold"
+                android:text="@string/total"
+                android:textColor="@color/colorTitle"
+                android:textSize="@dimen/title_inner" />
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView46"
+                android:layout_alignBottom="@+id/textView46"
+                android:layout_marginStart="2dp"
+                android:layout_toEndOf="@+id/textView46"
+                android:fontFamily="@font/gotham_book"
+                android:gravity="center"
+                android:text="1 ticket"
+                android:textColor="@color/outerText"
+                android:textSize="@dimen/cardsubtitle" />
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView46"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/textView46"
+                android:layout_marginEnd="29dp"
+                android:fontFamily="@font/gotham_bold"
+                android:gravity="center"
+                android:text="250 SAR"
+                android:textSize="@dimen/title_inner" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_rectangle_green"
+            android:text="@string/done"
+            android:textColor="@color/white"
+            android:textSize="@dimen/static_title_size" />
 
     </RelativeLayout>
 </LinearLayout>
+</ScrollView>

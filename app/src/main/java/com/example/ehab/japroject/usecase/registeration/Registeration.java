@@ -1,8 +1,8 @@
 package com.example.ehab.japroject.usecase.registeration;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
-import com.example.ehab.japroject.datalayer.pojo.request.registeration.Data;
-import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.login.Data;
+import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
 
@@ -25,9 +25,9 @@ public class Registeration implements Unsubscribable {
 
     private DataRepository dataRepository;
     private CompositeDisposable compositeDisposable;
-    private Single<RegisterationResponse> registerationResponseSingle;
+    private Single<LoginResponse> registerationResponseSingle;
     private Disposable disposable;
-    private DisposableSingleObserver<RegisterationResponse> registerationResponseDisposableSingleObserver;
+    private DisposableSingleObserver<LoginResponse> registerationResponseDisposableSingleObserver;
 
     @Inject
     public Registeration(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
@@ -42,13 +42,15 @@ public class Registeration implements Unsubscribable {
                          File image,
                          BaseCallback<Data> callback) {
 
-        registerationResponseDisposableSingleObserver = new DisposableSingleObserver<RegisterationResponse>() {
+        registerationResponseDisposableSingleObserver = new DisposableSingleObserver<LoginResponse>() {
             @Override
-            public void onSuccess(RegisterationResponse registerationResponse) {
-                if (registerationResponse.getSuccess()) {
-                    callback.onSuccess(registerationResponse.getData());
+            public void onSuccess(LoginResponse loginResponse) {
+                if (loginResponse.getSuccess()) {
+                    dataRepository.saveToken(loginResponse.getData().getToken());
+                    dataRepository.saveLoggedUser(loginResponse.getData().getUser());
+                    callback.onSuccess(loginResponse.getData());
                 }else {
-                    callback.onError(registerationResponse.getMsg().getErrors().getEmail().get(0));
+                    callback.onError(loginResponse.getMsg().getMsg());
                 }
             }
 

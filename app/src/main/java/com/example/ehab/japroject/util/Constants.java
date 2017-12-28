@@ -11,4 +11,6 @@ public class Constants {
     public static final int ERROR_UNDEFINED = -1;
     public static final String ERROR_NOT_CACHED = "can't find it in cache";
     public static final String EVENT_ID = "eventID";
+    public static final String EVENT_PAYMENT = "eventPayment";
+    public static final String EVENT_ORDER = "eventOrder";
 }

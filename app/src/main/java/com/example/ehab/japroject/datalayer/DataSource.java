@@ -42,7 +42,7 @@ public interface DataSource {
 
     String getToken();
 
-    Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image);
+    Single<LoginResponse> register(String userName, String email, String password, String mobile, File image);
 
     Single<LikeResponse> like(int id);
 

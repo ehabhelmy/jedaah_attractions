@@ -124,7 +124,7 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image) {
+    public Single<LoginResponse> register(String userName, String email, String password, String mobile, File image) {
         return remoteRepository.register(userName, email, password, mobile, image);
     }
 

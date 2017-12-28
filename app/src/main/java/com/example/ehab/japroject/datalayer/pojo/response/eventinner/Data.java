@@ -1,6 +1,8 @@
 
 package com.example.ehab.japroject.datalayer.pojo.response.eventinner;
 
+import android.content.Intent;
+
 import java.util.List;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
@@ -84,6 +86,17 @@ public class Data extends BaseModel{
     @SerializedName("is_liked")
     @Expose
     private boolean isLiked;
+    @SerializedName("national")
+    @Expose
+    private Integer national;
+
+    public Integer getNational() {
+        return national;
+    }
+
+    public void setNational(Integer national) {
+        this.national = national;
+    }
 
     public Integer getId() {
         return id;

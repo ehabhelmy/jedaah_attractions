@@ -7,11 +7,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="3">
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@mipmap/myimage"
+        android:background="@color/lightBlack"
         android:layout_weight="1.7">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_login_reg_bg">
 
         <TextView
             android:id="@+id/skip"
@@ -27,6 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 <android.support.constraint.ConstraintLayout
     android:background="@color/colorTitle"
     android:layout_width="match_parent"

@@ -332,8 +332,8 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<RegisterationResponse> register(String userName, String email, String password, String mobile, File image) {
-        Single<RegisterationResponse> registerationResponseSingle = Single.create(singleOnSubscribe -> {
+    public Single<LoginResponse> register(String userName, String email, String password, String mobile, File image) {
+        Single<LoginResponse> registerationResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
                         singleOnSubscribe.onError(exception);
@@ -364,8 +364,8 @@ public class RemoteRepository implements RemoteSource {
                                     requestMobile,
                                     requestImagePart), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE) {
-                                RegisterationResponse registerationResponse = (RegisterationResponse) serviceResponse.getData();
-                                singleOnSubscribe.onSuccess(registerationResponse);
+                                LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(loginResponse);
                             } else {
                                 Throwable throwable = new NetworkErrorException();
                                 singleOnSubscribe.onError(throwable);
@@ -388,7 +388,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             LikeService likeService = serviceGenerator.createService(LikeService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(likeService.like(getCurrentLanguage(), id,token), false);
+                            ServiceResponse serviceResponse = processCall(likeService.like(getCurrentLanguage(), id,"bearer "+token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 LikeResponse likeResponse = (LikeResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(likeResponse);
