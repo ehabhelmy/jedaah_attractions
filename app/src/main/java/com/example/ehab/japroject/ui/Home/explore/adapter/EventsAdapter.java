@@ -21,7 +21,7 @@ public class EventsAdapter {
             event.setEventImage(datum.getImage());
             event.setEventName(datum.getTitle());
             event.setEventAddress(datum.getAddress());
-            event.setEventLikes("22 Interested - 230 Going");
+            event.setEventLikes(datum.getInterested()+ " Interested -"+datum.getGoing()+" Going");
             event.setEventMonth(getMonth(convertJSONDateToDate(datum.getStartDate())));
             event.setEventDay(getDay(convertJSONDateToDate(datum.getStartDate())));
             event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate())));

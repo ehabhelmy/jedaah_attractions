@@ -43,6 +43,10 @@ public interface LocalSource {
 
     void saveAllEvents(EventsResponse eventsResponse);
 
+    Single<EventsResponse> getLikedEvents();
+
+    void saveLikedEvents(EventsResponse eventsResponse);
+
     void saveLoggedUser(User user);
 
     Single<User> getUserProfile();

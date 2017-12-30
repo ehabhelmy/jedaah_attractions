@@ -3,6 +3,7 @@ package com.example.ehab.japroject.ui.Home.events;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 import com.example.ehab.japroject.JaApplication;
@@ -17,7 +18,7 @@ import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
  * Created by ehab on 12/15/17.
  */
 
-public class EventsViewPagerAdapter extends FragmentPagerAdapter {
+public class EventsViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private BaseFragment currentFragment;
 

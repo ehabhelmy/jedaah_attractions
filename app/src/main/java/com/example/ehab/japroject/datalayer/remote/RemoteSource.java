@@ -5,6 +5,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.history.upcoming.HistoryEvents;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
@@ -37,6 +38,8 @@ public interface RemoteSource {
 
     Single<EventsResponse> getAllEvents();
 
+    Single<EventsResponse> getLikedEvents(String token);
+
     Single<EventInnerResponse> getEventDetails(int id);
 
     Single<LoginResponse> login(String email, String password);
@@ -51,4 +54,7 @@ public interface RemoteSource {
 
     Single<OrderResponse> order(String token,String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total);
 
+    Single<HistoryEvents> getUpcomingEvents(String token);
+
+    Single<HistoryEvents> getPastEvents(String token);
 }

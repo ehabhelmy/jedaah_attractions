@@ -81,4 +81,8 @@ public class RegisterationPresenter extends BasePresenter<RegisterationContract.
         return result;
     }
 
+    @Override
+    public void unSubscribe() {
+        registeration.unSubscribe();
+    }
 }

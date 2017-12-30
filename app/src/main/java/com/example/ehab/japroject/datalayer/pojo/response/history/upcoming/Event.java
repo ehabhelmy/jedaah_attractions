@@ -1,11 +1,11 @@
 
-package com.example.ehab.japroject.datalayer.pojo.response.events;
+package com.example.ehab.japroject.datalayer.pojo.response.history.upcoming;
 
 import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Datum extends BaseModel {
+public class Event extends BaseModel{
 
     @SerializedName("id")
     @Expose
@@ -22,31 +22,6 @@ public class Datum extends BaseModel {
     @SerializedName("end_date")
     @Expose
     private String endDate;
-    @SerializedName("address")
-    @Expose
-    private String address;
-    @SerializedName("interested")
-    @Expose
-    private Integer interested;
-    @SerializedName("going")
-    @Expose
-    private Integer going;
-
-    public Integer getInterested() {
-        return interested;
-    }
-
-    public void setInterested(Integer interested) {
-        this.interested = interested;
-    }
-
-    public Integer getGoing() {
-        return going;
-    }
-
-    public void setGoing(Integer going) {
-        this.going = going;
-    }
 
     public Integer getId() {
         return id;
@@ -86,14 +61,6 @@ public class Datum extends BaseModel {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
 }

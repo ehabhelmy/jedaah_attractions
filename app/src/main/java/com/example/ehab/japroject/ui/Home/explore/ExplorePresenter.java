@@ -124,6 +124,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         topEvents.unSubscribe();
         categories.unSubscribe();
         nearByEvents.unSubscribe();
+        like.unSubscribe();
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.history.upcoming.HistoryEvents;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
@@ -36,6 +37,8 @@ public interface DataSource {
 
     Single<EventsResponse> getAllEvents(boolean fresh);
 
+    Single<EventsResponse> getLikedEvents(boolean fresh);
+
     Single<EventInnerResponse> getEventDetails(int id);
 
     Single<LoginResponse> login(String email,String password);
@@ -50,6 +53,10 @@ public interface DataSource {
 
     Single<OrderResponse> order(String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total);
 
+    Single<HistoryEvents> getUpcomingEvents();
+
+    Single<HistoryEvents> getPastEvents();
+
     void saveTopEvents(EventsResponse eventsResponse);
 
     void saveNearByEvents(EventsResponse eventsResponse);
@@ -61,6 +68,8 @@ public interface DataSource {
     void saveWeekEvents(EventsResponse eventsResponse);
 
     void saveAllEvents(EventsResponse eventsResponse);
+
+    void saveLikedEvents(EventsResponse eventsResponse);
 
     void saveLoggedUser(User user);
 

@@ -144,6 +144,24 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
+    public Single<EventsResponse> getLikedEvents() {
+        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.LIKED_EVENTS,EventsResponse.class);
+        Single<EventsResponse> likedEventsResponseSingle = Single.create(e -> {
+            if (eventsResponse != null){
+                e.onSuccess(eventsResponse);
+            }else{
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return likedEventsResponseSingle;
+    }
+
+    @Override
+    public void saveLikedEvents(EventsResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.LIKED_EVENTS,eventsResponse);
+    }
+
+    @Override
     public void saveLoggedUser(User user) {
         sharedPref.saveObject(SharedPref.USER,user);
     }

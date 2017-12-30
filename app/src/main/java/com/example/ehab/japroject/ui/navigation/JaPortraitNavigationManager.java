@@ -16,6 +16,7 @@ import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOr
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
+import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
@@ -80,6 +81,12 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     @Override
     public void goToHomeActivity() {
         Intent intent = new Intent(context,HomeActivity.class);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void goToAuthActivity() {
+        Intent intent = new Intent(context,AuthenticationActivity.class);
         context.startActivity(intent);
     }
 

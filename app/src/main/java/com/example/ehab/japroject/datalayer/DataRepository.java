@@ -6,6 +6,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.history.upcoming.HistoryEvents;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
@@ -100,6 +101,15 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<EventsResponse> getLikedEvents(boolean fresh) {
+        if (fresh) {
+            return remoteRepository.getLikedEvents(getToken());
+        } else {
+            return localRepository.getLikedEvents();
+        }
+    }
+
+    @Override
     public Single<EventInnerResponse> getEventDetails(int id) {
         return remoteRepository.getEventDetails(id);
     }
@@ -135,6 +145,16 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<HistoryEvents> getUpcomingEvents() {
+        return remoteRepository.getUpcomingEvents(getToken());
+    }
+
+    @Override
+    public Single<HistoryEvents> getPastEvents() {
+        return remoteRepository.getPastEvents(getToken());
+    }
+
+    @Override
     public void saveTopEvents(EventsResponse eventsResponse) {
         localRepository.saveTopEvents(eventsResponse);
     }
@@ -162,6 +182,11 @@ public class DataRepository implements DataSource {
     @Override
     public void saveAllEvents(EventsResponse eventsResponse) {
         localRepository.saveAllEvents(eventsResponse);
+    }
+
+    @Override
+    public void saveLikedEvents(EventsResponse eventsResponse) {
+        localRepository.saveLikedEvents(eventsResponse);
     }
 
     @Override

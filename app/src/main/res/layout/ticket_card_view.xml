@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TicketCardView"
+    android:layout_width="match_parent"
+    android:layout_height="360dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:paddingBottom="20dp"
+        android:background="@color/white">
+
+        <com.example.ehab.japroject.ui.widget.ImageLayout
+            android:id="@+id/ticketImage"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@mipmap/myimage">
+
+            <TextView
+                android:id="@+id/eventTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_medium"
+                android:text="Amr Diab Concert"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_inner"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="21dp" />
+        </com.example.ehab.japroject.ui.widget.ImageLayout>
+
+        <RelativeLayout
+            android:id="@+id/eventDayContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_rectangle_black"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="112dp"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="93dp">
+
+
+            <TextView
+                android:id="@+id/eventMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/gotham_medium"
+                android:text="NOV"
+                android:textColor="@color/colorTitle"
+                android:textSize="@dimen/daysRemaining" />
+
+            <TextView
+                android:id="@+id/eventDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/eventMonth"
+                android:layout_alignStart="@+id/eventMonth"
+                android:layout_below="@+id/eventMonth"
+                android:fontFamily="@font/gotham_medium"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="13"
+                android:textColor="@color/colorTitle"
+                android:textSize="@dimen/cash" />
+
+            <TextView
+                android:id="@+id/eventTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6dp"
+                android:layout_toEndOf="@+id/eventMonth"
+                android:fontFamily="@font/gotham_medium"
+                android:text="Wed 7:30 PM"
+                android:textColor="@color/outerText"
+                android:textSize="@dimen/daysRemaining" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/eventDayContainer"
+            android:layout_below="@+id/eventDayContainer"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/gotham_bold"
+            android:textSize="@dimen/cash"
+            android:textColor="@color/outerText"
+            android:text="@string/paymentMethod" />
+
+        <TextView
+            android:id="@+id/paymentMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/eventDayContainer"
+            android:layout_below="@+id/textView8"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/gotham_book"
+            android:textSize="@dimen/daysRemaining"
+            android:textColor="@color/lightBlack"
+            android:text="Cash" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/paymentMethod"
+            android:layout_below="@+id/paymentMethod"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/gotham_bold"
+            android:text="@string/orderNumber"
+            android:textColor="@color/outerText"
+            android:textSize="@dimen/cash" />
+
+        <TextView
+            android:id="@+id/orderNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView17"
+            android:layout_below="@+id/textView17"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/gotham_book"
+            android:textSize="@dimen/daysRemaining"
+            android:textColor="@color/lightBlack"
+            android:text="32456" />
+
+        <FrameLayout
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/textView8"
+            android:background="@color/background"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/frameLayout">
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/frameLayout"
+            android:layout_marginStart="23dp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:fontFamily="@font/gotham_bold"
+            android:textSize="@dimen/cash"
+            android:textColor="@color/outerText"
+            android:text="@string/ticketsType" />
+
+        <TextView
+            android:id="@+id/ticketType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView25"
+            android:layout_alignTop="@+id/paymentMethod"
+            android:fontFamily="@font/gotham_book"
+            android:textSize="@dimen/daysRemaining"
+            android:textColor="@color/lightBlack"
+            android:text="VIP" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/ticketType"
+            android:layout_alignTop="@+id/textView17"
+            android:fontFamily="@font/gotham_bold"
+            android:textSize="@dimen/cash"
+            android:textColor="@color/outerText"
+            android:text="@string/orderStatus" />
+
+        <TextView
+            android:id="@+id/orderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/orderNumber"
+            android:layout_alignBottom="@+id/orderNumber"
+            android:layout_alignStart="@+id/textView28"
+            android:fontFamily="@font/gotham_book"
+            android:text="in progress"
+            android:textColor="@color/lightBlack"
+            android:textSize="@dimen/daysRemaining" />
+
+    </RelativeLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="10dp">
+
+
+            <TextView
+                android:id="@+id/numberTickets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham_medium"
+                android:text="2 Tickets"
+                android:textColor="@color/colorTitle"
+                android:textSize="@dimen/titleSize" />
+
+            <TextView
+                android:id="@+id/ticketsPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="6dp"
+                android:fontFamily="@font/gotham_book"
+                android:text="250 SAR"
+                android:textColor="@color/lightBlack"
+                android:textSize="@dimen/titleSize" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

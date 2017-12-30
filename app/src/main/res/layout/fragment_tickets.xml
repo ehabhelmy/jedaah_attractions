@@ -1,12 +1,53 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context="com.example.ehab.japroject.ui.Home.profile.my_tickets.TicketsFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ticketsList"/>
+        android:padding="10dp">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/cash"
+        android:textColor="@color/outerText"
+        android:fontFamily="@font/gotham_book"
+        android:text="@string/upcomingEvents" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView30"
+            android:layout_marginTop="15dp"
+            android:id="@+id/upcomingList"/>
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/upcomingList"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/cash"
+            android:textColor="@color/outerText"
+            android:fontFamily="@font/gotham_book"
+            android:text="@string/pastEvents" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView31"
+            android:layout_marginTop="15dp"
+            android:id="@+id/pastList"/>
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

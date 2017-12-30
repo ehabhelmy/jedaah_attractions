@@ -56,4 +56,8 @@
     <string name="total">TOTAL</string>
     <string name="done">DONE</string>
     <string name="numerTickets">NUMBER OF TICKETS</string>
+    <string name="orderNumber">ORDER NUMBER</string>
+    <string name="orderStatus">ORDER STATUS</string>
+    <string name="upcomingEvents">UPCOMING EVENTS</string>
+    <string name="pastEvents">PAST EVENTS</string>
 </resources>

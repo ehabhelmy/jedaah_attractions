@@ -110,6 +110,21 @@ public class DateTimeUtils {
         return date +" "+ startTime;
     }
 
+    public static String getEventDateHistory(com.example.ehab.japroject.datalayer.pojo.response.history.upcoming.TicketDate ticketDate) {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date sDate = null;
+        try {
+            sDate = format1.parse(ticketDate.getDate() + " " + ticketDate.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar sCalendar = Calendar.getInstance();
+        sCalendar.setTime(sDate);
+        String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
+        String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+        return date +" "+ startTime;
+    }
+
     /**
      * Returns a Date set to the first possible millisecond of the day, just after midnight. If a null day is passed in, a new Date is created.
      * midnight (00m 00h 00s)

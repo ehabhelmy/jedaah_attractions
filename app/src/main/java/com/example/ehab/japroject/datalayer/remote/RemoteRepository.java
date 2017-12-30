@@ -12,6 +12,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.history.upcoming.HistoryEvents;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
@@ -21,14 +22,17 @@ import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.EventDetailsService;
 import com.example.ehab.japroject.datalayer.remote.service.LikeService;
+import com.example.ehab.japroject.datalayer.remote.service.LikedEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.LoginService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.OrderService;
+import com.example.ehab.japroject.datalayer.remote.service.PastEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.ProfileService;
 import com.example.ehab.japroject.datalayer.remote.service.RegisterationService;
 import com.example.ehab.japroject.datalayer.remote.service.SocialLoginService;
 import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.UpcomingEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -258,6 +262,32 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
+    public Single<EventsResponse> getLikedEvents(String token) {
+        Single<EventsResponse> likedEventsSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            LikedEventsService likedEventsService = serviceGenerator.createService(LikedEventsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(likedEventsService.getLikedEvents(getCurrentLanguage(),"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(eventsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return likedEventsSingle;
+    }
+
+    @Override
     public Single<EventInnerResponse> getEventDetails(int id) {
         Single<EventInnerResponse> eventInnerResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
@@ -459,6 +489,58 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return orderResponseSingle;
+    }
+
+    @Override
+    public Single<HistoryEvents> getUpcomingEvents(String token) {
+        Single<HistoryEvents> historyEventsSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            UpcomingEventsService upcomingEventsService = serviceGenerator.createService(UpcomingEventsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(upcomingEventsService.getUpcomingEvents(getCurrentLanguage(),"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                HistoryEvents historyEvents = (HistoryEvents) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(historyEvents);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return historyEventsSingle;
+    }
+
+    @Override
+    public Single<HistoryEvents> getPastEvents(String token) {
+        Single<HistoryEvents> historyEventsSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            PastEventsService pastEventsService = serviceGenerator.createService(PastEventsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(pastEventsService.getPastEvents(getCurrentLanguage(),"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                HistoryEvents historyEvents = (HistoryEvents) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(historyEvents);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return historyEventsSingle;
     }
 
     private String getCurrentLanguage() {

@@ -32,12 +32,6 @@ public class LikedDirectoryFragment extends BaseFragment implements LikedDirecto
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_liked_directory, container, false);
-    }
-
-    @Override
     public void showLoading() {
 
     }

@@ -75,6 +75,8 @@ public abstract class JaNavigationManager {
 
     public abstract void goToHomeActivity();
 
+    public abstract void goToAuthActivity();
+
     public abstract void showRegisterationScreen();
 
     public abstract void showEventDetails(int id);

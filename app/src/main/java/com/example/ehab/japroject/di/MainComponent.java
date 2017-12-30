@@ -14,11 +14,14 @@ import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
+import com.example.ehab.japroject.ui.Home.profile.liked_events.LikedEventsFragment;
+import com.example.ehab.japroject.ui.Home.profile.my_tickets.TicketsFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
+import com.example.ehab.japroject.ui.splash.SplashActivity;
 
 import javax.inject.Singleton;
 
@@ -64,6 +67,12 @@ public interface MainComponent {
     void inject(EventOrderFragment eventOrderFragment);
 
     void inject(ProfileFragment profileFragment);
+
+    void inject(LikedEventsFragment likedEventsFragment);
+
+    void inject(TicketsFragment ticketsFragment);
+
+    void inject(SplashActivity splashActivity);
 
 }
 

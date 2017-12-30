@@ -1,4 +1,4 @@
-package com.example.ehab.japroject.usecase.weekevents;
+package com.example.ehab.japroject.usecase.likedevents;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -16,30 +16,29 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Romisaa on 12/16/2017.
+ * Created by ehab on 12/29/17.
  */
 
-public class WeekEvents implements Unsubscribable {
+public class LikedEvents implements Unsubscribable {
 
     private DataRepository dataRepository;
-    private Disposable disposable;
     private CompositeDisposable compositeDisposable;
-    private Single<EventsResponse> weekEventsResponseSingle;
-    private DisposableSingleObserver<EventsResponse> disposableSingleObserver;
+    private Single<EventsResponse> eventsResponseSingle;
+    private Disposable disposable;
+    private DisposableSingleObserver<EventsResponse> eventsResponseDisposableSingleObserver;
 
     @Inject
-    public WeekEvents(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
+    public LikedEvents(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
         this.dataRepository = dataRepository;
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void getWeekEvents(BaseCallback<EventsResponse> callback,boolean fresh) {
-
-        disposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
+    public void getLikedEvents(BaseCallback<EventsResponse> callback, boolean fresh) {
+        eventsResponseDisposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
             @Override
             public void onSuccess(EventsResponse eventsResponse) {
-                if (fresh){
-                    dataRepository.saveWeekEvents(eventsResponse);
+                if (fresh) {
+                    dataRepository.saveLikedEvents(eventsResponse);
                 }
                 callback.onSuccess(eventsResponse);
             }
@@ -50,24 +49,24 @@ public class WeekEvents implements Unsubscribable {
                     callback.onError(e.getMessage());
                 }
                 else {
-                    dataRepository.getWeekEvents(false);
+                    dataRepository.getLikedEvents(false);
                 }
             }
         };
-
         if (!compositeDisposable.isDisposed()) {
-            weekEventsResponseSingle = dataRepository.getWeekEvents(fresh);
-            disposable = weekEventsResponseSingle
+            eventsResponseSingle = dataRepository.getLikedEvents(true);
+            disposable = eventsResponseSingle
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(disposableSingleObserver);
+                    .subscribeWith(eventsResponseDisposableSingleObserver);
             compositeDisposable.add(disposable);
         }
     }
 
+
     @Override
     public void unSubscribe() {
-        if (!compositeDisposable.isDisposed()) {
+        if (!compositeDisposable.isDisposed()){
             compositeDisposable.remove(disposable);
         }
     }
