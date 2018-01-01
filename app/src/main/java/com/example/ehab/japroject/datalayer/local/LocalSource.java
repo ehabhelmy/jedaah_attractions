@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
@@ -39,9 +40,9 @@ public interface LocalSource {
 
     Single<EventsResponse> getWeekEvents();
 
-    Single<EventsResponse> getAllEvents();
+    Single<AllEventsResponse> getAllEvents();
 
-    void saveAllEvents(EventsResponse eventsResponse);
+    void saveAllEvents(AllEventsResponse eventsResponse);
 
     Single<EventsResponse> getLikedEvents();
 

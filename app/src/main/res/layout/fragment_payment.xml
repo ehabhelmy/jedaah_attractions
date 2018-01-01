@@ -11,12 +11,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlack">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
-        android:background="@color/lightBlack"
-        >
+        android:background="@drawable/ic_payment_bg">
 
 
         <TextView
@@ -141,7 +145,7 @@
             android:textColor="@color/white"
             app:backgroundTint="@color/white" />
     </RelativeLayout>
-
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

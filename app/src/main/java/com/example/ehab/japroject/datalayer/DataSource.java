@@ -2,6 +2,7 @@ package com.example.ehab.japroject.datalayer;
 
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -35,7 +36,7 @@ public interface DataSource {
 
     Single<EventsResponse> getWeekEvents(boolean fresh);
 
-    Single<EventsResponse> getAllEvents(boolean fresh);
+    Single<AllEventsResponse> getAllEvents(boolean fresh,String newUrl);
 
     Single<EventsResponse> getLikedEvents(boolean fresh);
 
@@ -67,7 +68,7 @@ public interface DataSource {
 
     void saveWeekEvents(EventsResponse eventsResponse);
 
-    void saveAllEvents(EventsResponse eventsResponse);
+    void saveAllEvents(AllEventsResponse eventsResponse);
 
     void saveLikedEvents(EventsResponse eventsResponse);
 

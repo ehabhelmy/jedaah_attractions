@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.usecase.allevents;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
@@ -23,9 +24,11 @@ public class AllEvents implements Unsubscribable {
 
     private DataRepository dataRepository;
     private CompositeDisposable compositeDisposable;
-    private Single<EventsResponse> eventsResponseSingle;
+    private Single<AllEventsResponse> eventsResponseSingle;
     private Disposable disposable;
-    private DisposableSingleObserver<EventsResponse> eventsResponseDisposableSingleObserver;
+    private DisposableSingleObserver<AllEventsResponse> eventsResponseDisposableSingleObserver;
+    private String eventsURL;
+    public boolean freshData = true;
 
     @Inject
     public AllEvents(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
@@ -33,14 +36,17 @@ public class AllEvents implements Unsubscribable {
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void getAllEvents(BaseCallback<EventsResponse> callback, boolean fresh){
-        eventsResponseDisposableSingleObserver = new DisposableSingleObserver<EventsResponse>() {
+    public void getAllEvents(BaseCallback<AllEventsResponse> callback, boolean fresh){
+        eventsResponseDisposableSingleObserver = new DisposableSingleObserver<AllEventsResponse>() {
             @Override
-            public void onSuccess(EventsResponse eventsResponse) {
+            public void onSuccess(AllEventsResponse eventsResponse) {
                 if (fresh) {
                     dataRepository.saveAllEvents(eventsResponse);
                 }
                 callback.onSuccess(eventsResponse);
+                if (freshData) {
+                    eventsURL = eventsResponse.getData().getNextPageUrl();
+                }
             }
 
             @Override
@@ -49,12 +55,13 @@ public class AllEvents implements Unsubscribable {
                     callback.onError(e.getMessage());
                 }
                 else {
-                    dataRepository.getAllEvents(false);
+                    dataRepository.getAllEvents(false,null);
+                    freshData = false;
                 }
             }
         };
         if (!compositeDisposable.isDisposed()){
-            disposable = dataRepository.getAllEvents(fresh)
+            disposable = dataRepository.getAllEvents(fresh,eventsURL)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(eventsResponseDisposableSingleObserver);

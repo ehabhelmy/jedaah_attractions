@@ -9,6 +9,7 @@ import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.order.OrderRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -236,17 +237,23 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<EventsResponse> getAllEvents() {
-        Single<EventsResponse> allEventsSingle = Single.create(singleOnSubscribe -> {
+    public Single<AllEventsResponse> getAllEvents(String newURL) {
+        Single<AllEventsResponse> allEventsSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
                         singleOnSubscribe.onError(exception);
                     } else {
                         try {
                             AllEventsService allEventsService = serviceGenerator.createService(AllEventsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage()), false);
+                            ServiceResponse serviceResponse = null;
+                            if (newURL == null) {
+                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),1), false);
+                            }else {
+                                char page = newURL.charAt(newURL.length() - 1);
+                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),Character.getNumericValue(page)), false);
+                            }
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
-                                EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
+                                AllEventsResponse eventsResponse = (AllEventsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventsResponse);
                             } else {
                                 Throwable throwable = new NetworkErrorException();
@@ -323,7 +330,7 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             LoginService loginService = serviceGenerator.createService(LoginService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(loginService.login(getCurrentLanguage(), new LoginRequest(email, password)), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE) {
                                 LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(loginResponse);
                             } else {

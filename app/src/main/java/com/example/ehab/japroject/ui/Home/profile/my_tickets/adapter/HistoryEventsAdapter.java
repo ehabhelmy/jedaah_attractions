@@ -5,6 +5,7 @@ import com.example.ehab.japroject.ui.Home.profile.my_tickets.pojo.HistoryEventsU
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.ehab.japroject.util.DateTimeUtils.convertJSONDateToDate;
 import static com.example.ehab.japroject.util.DateTimeUtils.getDay;
@@ -33,7 +34,11 @@ public class HistoryEventsAdapter {
             historyEventsUi.setTicketType(datum.getEventTicket().getType());
             historyEventsUi.setOrderNumber(datum.getOrderNumber()+"");
             historyEventsUi.setOrderStatus(datum.getOrderStatus());
-            historyEventsUi.setNumberTickets(datum.getNumberOfTickets()+" Tickets");
+            if (Locale.getDefault().getLanguage().equals("ar")) {
+                historyEventsUi.setNumberTickets(datum.getNumberOfTickets()+" تذكره");
+            }else {
+                historyEventsUi.setNumberTickets(datum.getNumberOfTickets()+" Tickets");
+            }
             historyEventsUi.setTicketsPrice(datum.getNumberOfTickets().intValue() * Integer.parseInt(datum.getEventTicket().getPrice()) + " SAR");
             historyEventsUis.add(historyEventsUi);
         }

@@ -3,6 +3,7 @@ package com.example.ehab.japroject.datalayer;
 import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -92,9 +93,9 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<EventsResponse> getAllEvents(boolean fresh) {
+    public Single<AllEventsResponse> getAllEvents(boolean fresh,String newUrl) {
         if (fresh){
-            return remoteRepository.getAllEvents();
+            return remoteRepository.getAllEvents(newUrl);
         } else {
             return localRepository.getAllEvents();
         }
@@ -180,7 +181,7 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public void saveAllEvents(EventsResponse eventsResponse) {
+    public void saveAllEvents(AllEventsResponse eventsResponse) {
         localRepository.saveAllEvents(eventsResponse);
     }
 

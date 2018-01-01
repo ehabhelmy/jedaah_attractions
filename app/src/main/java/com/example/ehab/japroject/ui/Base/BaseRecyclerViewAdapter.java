@@ -60,4 +60,9 @@ public abstract class BaseRecyclerViewAdapter<M extends BaseModel> extends Recyc
         this.data = data;
         notifyDataSetChanged();
     }
+
+    public void addData(ArrayList<M> data1) {
+        data.addAll(data1);
+        notifyDataSetChanged();
+    }
 }

@@ -16,10 +16,12 @@ public interface AllEventsContract {
 
     interface View extends BaseView, ErrorView, ProgressView {
         void setupAllEvents(List<Event> events);
+        void addEvents(List<Event> events);
     }
 
     interface Presenter extends Unsubscribable {
         void showEventInner(int id);
         void like(int id);
+        void addEvents();
     }
 }

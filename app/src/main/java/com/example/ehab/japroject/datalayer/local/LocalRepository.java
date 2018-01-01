@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
@@ -126,9 +127,9 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
-    public Single<EventsResponse> getAllEvents() {
-        EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.ALL_EVENTS,EventsResponse.class);
-        Single<EventsResponse> allEventsResponseSingle = Single.create(e -> {
+    public Single<AllEventsResponse> getAllEvents() {
+        AllEventsResponse eventsResponse = (AllEventsResponse) sharedPref.getObject(sharedPref.ALL_EVENTS,AllEventsResponse.class);
+        Single<AllEventsResponse> allEventsResponseSingle = Single.create(e -> {
             if (eventsResponse != null){
                 e.onSuccess(eventsResponse);
             }else{
@@ -139,7 +140,7 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
-    public void saveAllEvents(EventsResponse eventsResponse) {
+    public void saveAllEvents(AllEventsResponse eventsResponse) {
         sharedPref.saveObject(SharedPref.ALL_EVENTS,eventsResponse);
     }
 

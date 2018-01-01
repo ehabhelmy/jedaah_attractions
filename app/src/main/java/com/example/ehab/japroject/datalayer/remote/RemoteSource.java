@@ -2,6 +2,7 @@ package com.example.ehab.japroject.datalayer.remote;
 
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -36,7 +37,7 @@ public interface RemoteSource {
 
     Single<EventsResponse> getWeekEvents();
 
-    Single<EventsResponse> getAllEvents();
+    Single<AllEventsResponse> getAllEvents(String newURL);
 
     Single<EventsResponse> getLikedEvents(String token);
 

@@ -62,7 +62,7 @@ public class RegisterationFragment extends BaseFragment implements Registeration
     AppCompatEditText mobileNumber;
 
     @BindView(R.id.add_image)
-    ImageButton addImage;
+    ImageView addImage;
 
     @BindView(R.id.profile_image)
     ImageView profileImage;

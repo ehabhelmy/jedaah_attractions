@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">JAProject</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="facebook_app_id">202726053622168</string>
     <string name="fb_login_protocol_scheme">fb202726053622168</string>
     <string name="title_activity_main">MainActivity</string>

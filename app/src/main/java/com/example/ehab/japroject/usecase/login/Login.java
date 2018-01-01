@@ -47,7 +47,7 @@ public class Login implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError(e.getMessage());
+                callback.onError("No Data Connection");
             }
         };
         if (!compositeDisposable.isDisposed()){

@@ -1,5 +1,7 @@
 package com.example.ehab.japroject.usecase.eventinner;
 
+import android.accounts.NetworkErrorException;
+
 import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
@@ -41,7 +43,11 @@ public class EventInner implements Unsubscribable{
 
             @Override
             public void onError(Throwable e) {
-                callback.onError(e.getMessage());
+                if (e instanceof NetworkErrorException) {
+                    callback.onError("No data Connection");
+                }else {
+                    callback.onError(e.getMessage());
+                }
             }
         };
         if (!compositeDisposable.isDisposed()){

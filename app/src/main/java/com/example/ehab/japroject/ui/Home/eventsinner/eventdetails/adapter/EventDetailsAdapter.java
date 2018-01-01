@@ -14,6 +14,7 @@ import static com.example.ehab.japroject.util.DateTimeUtils.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.ehab.japroject.util.DateTimeUtils.convertJSONDateToDate;
 import static com.example.ehab.japroject.util.DateTimeUtils.getDay;
@@ -31,7 +32,11 @@ public class EventDetailsAdapter {
     public static EventDetails convertIntoEventDetailsUi(Data data) {
         EventDetails eventDetails = new EventDetails();
         eventDetails.setEventTitle(data.getTitle());
-        eventDetails.setInterested(data.getInterested()+ " Interested" + data.getGoing()+ " Going");
+        if (Locale.getDefault().getLanguage().equals("ar")){
+            eventDetails.setInterested(data.getInterested()+ " - مهتم" + data.getGoing()+ " ذاهب");
+        }else {
+            eventDetails.setInterested(data.getInterested()+ " Interested - " + data.getGoing()+ " Going");
+        }
         eventDetails.setEventPrice(data.getStartPrice()+" - "+data.getEndPrice());
         eventDetails.setEventMonth(getMonth(convertJSONDateToDate(data.getStartDate())));
         eventDetails.setEventDay(getDay(convertJSONDateToDate(data.getStartDate())));

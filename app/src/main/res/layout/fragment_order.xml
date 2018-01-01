@@ -9,11 +9,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlack">
+
     <RelativeLayout
         android:id="@+id/change11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightBlack"
+        android:background="@drawable/ic_payment_bg"
         android:paddingBottom="20dp">
 
         <TextView
@@ -162,6 +167,7 @@
             android:textSize="@dimen/static_title_size" />
 
     </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -351,7 +357,7 @@
             android:textColor="@color/staticTitle"
             android:textSize="@dimen/static_title_size" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imageMinus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -361,7 +367,7 @@
             android:layout_marginStart="64dp"
             app:srcCompat="@drawable/ic_minus_ic" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imagePlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

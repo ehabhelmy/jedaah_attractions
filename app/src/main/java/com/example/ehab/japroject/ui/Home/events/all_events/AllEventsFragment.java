@@ -1,14 +1,18 @@
 package com.example.ehab.japroject.ui.Home.events.all_events;
 
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
+import com.example.ehab.japroject.ui.Home.events.all_events.adapter.AllEventsListAdapter;
+import com.example.ehab.japroject.ui.Home.events.all_events.listener.OnLoadMoreListener;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
 
@@ -30,6 +34,9 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
 
     @BindView(R.id.eventsList)
     RecyclerView eventsList;
+
+    private List<Event> events;
+    private AllEventsListAdapter eventsListAdapter;
 
     @Override
     protected void initializeDagger() {
@@ -75,7 +82,8 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
         eventsList.setLayoutManager(layoutManager);
         eventsList.addItemDecoration(dividerItemDecoration);
         eventsList.setItemAnimator(new DefaultItemAnimator());
-        EventsListAdapter eventsListAdapter = new EventsListAdapter(true);
+        this.events = events;
+        eventsListAdapter = new AllEventsListAdapter();
         eventsListAdapter.setData((ArrayList<Event>) events);
         eventsListAdapter.setOnFavouriteListener(id -> {
             //TODO : call presenter to send id of the event to the backend
@@ -84,6 +92,27 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
         eventsListAdapter.setOnViewListener(id -> {
             presenter.showEventInner(id);
         });
+        eventsListAdapter.setupLoadingRecyclerView(eventsList);
+        eventsListAdapter.setOnLoadMoreListener(() -> {
+            if (events.size() <= 9) {
+                events.add(null);
+                eventsListAdapter.notifyItemInserted(events.size() - 1);
+                presenter.addEvents();
+            } else {
+                Toast.makeText(getActivity(), "No More Events", Toast.LENGTH_SHORT).show();
+            }
+        });
         eventsList.setAdapter(eventsListAdapter);
     }
+
+    @Override
+    public void addEvents(List<Event> events) {
+        this.events.remove(this.events.size() - 1);
+        //eventsList.removeViewAt(events.size() - 1);
+        eventsListAdapter.notifyItemRemoved(this.events.size());
+        eventsListAdapter.addData((ArrayList<Event>) events);
+        eventsListAdapter.setLoading(false);
+    }
+
+
 }

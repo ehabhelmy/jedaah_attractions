@@ -2,6 +2,7 @@ package com.example.ehab.japroject.ui.Home.events.all_events;
 
 import android.os.Bundle;
 
+import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
@@ -20,12 +21,17 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
 
     private AllEvents allEvents;
     private Like like;
-    private BaseCallback<EventsResponse> eventsResponseBaseCallback = new BaseCallback<EventsResponse>() {
+    private boolean firstFetch = true;
+    private BaseCallback<AllEventsResponse> eventsResponseBaseCallback = new BaseCallback<AllEventsResponse>() {
         @Override
-        public void onSuccess(EventsResponse model) {
+        public void onSuccess(AllEventsResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                    getView().setupAllEvents(EventsAdapter.convertIntoEventUi(model.getData()));
+                    if (firstFetch) {
+                        getView().setupAllEvents(EventsAdapter.convertIntoEventUiAll(model.getData().getEvents()));
+                    }else {
+                        getView().addEvents(EventsAdapter.convertIntoEventUiAll(model.getData().getEvents()));
+                    }
                 }
             }
         }
@@ -76,5 +82,11 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
     @Override
     public void like(int id) {
         like.like(id,likeResponseBaseCallback);
+    }
+
+    @Override
+    public void addEvents() {
+        firstFetch = false;
+        allEvents.getAllEvents(eventsResponseBaseCallback,true);
     }
 }

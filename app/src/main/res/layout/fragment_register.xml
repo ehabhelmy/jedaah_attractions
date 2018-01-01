@@ -60,15 +60,16 @@
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_profile_default" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/add_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignBottom="@id/profile_image"
-            android:layout_alignRight="@id/profile_image"
-            app:srcCompat="@drawable/ic_add_image_profile" />
+            android:layout_alignEnd="@id/profile_image"
+            android:tint="@color/staticTitle"
+            app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
     </RelativeLayout>
 

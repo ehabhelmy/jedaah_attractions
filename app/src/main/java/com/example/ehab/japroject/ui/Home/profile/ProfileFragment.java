@@ -4,6 +4,7 @@ package com.example.ehab.japroject.ui.Home.profile;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
@@ -101,7 +103,12 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
 
     @OnClick(R.id.share)
     void saveProfilePhoto(){
-        saveUserCard(getBitmapFromView(profileCard));
+        new AlertDialog.Builder(this.getContext())
+                .setTitle("Take Screen shot")
+                .setMessage("Save your ID card ?")
+                .setPositiveButton("OK", (dialog, which) -> saveUserCard(getBitmapFromView(profileCard)))
+                .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 
     @Override
@@ -123,7 +130,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     public void updateProfileFragment(Data model) {
         userName.setText(model.getName());
         id.setText("JA ID : "+model.getId());
-        Picasso.with(this.getContext()).load(model.getProfileImage()).placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background).into(profileImageView);
+        Picasso.with(this.getContext()).load(model.getProfileImage()).placeholder(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
     }
 
     public Bitmap getBitmapFromView(View view) {
