@@ -87,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/id"
                 android:layout_below="@+id/id"
+                android:visibility="gone"
                 android:text="View or edit Profile"
                 android:layout_marginTop="1dp"
                 android:textColor="@color/colorTitle"

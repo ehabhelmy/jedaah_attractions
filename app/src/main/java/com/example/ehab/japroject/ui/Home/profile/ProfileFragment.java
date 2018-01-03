@@ -20,6 +20,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -130,7 +131,9 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     public void updateProfileFragment(Data model) {
         userName.setText(model.getName());
         id.setText("JA ID : "+model.getId());
-        Picasso.with(this.getContext()).load(model.getProfileImage()).placeholder(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
+        if (!TextUtils.isEmpty(model.getProfileImage())) {
+            Picasso.with(this.getContext()).load(model.getProfileImage()).placeholder(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
+        }
     }
 
     public Bitmap getBitmapFromView(View view) {

@@ -156,4 +156,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     public boolean isLocationServicesEnabled() {
         return locationdEnabled;
     }
+
+    @Override
+    public void openEventsList() {
+        bottomNavigationView.setSelectedItemId(R.id.events);
+        presenter.showEvents();
+    }
 }

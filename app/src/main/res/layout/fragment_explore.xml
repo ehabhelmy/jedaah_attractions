@@ -30,35 +30,45 @@
             android:weightSum="5">
 
 
-            <ImageView
-                android:id="@+id/imageView"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.6"
-                android:layout_marginStart="10.5dp"
-                android:layout_marginBottom="10dp"
-                android:elevation="1dp"
+                android:padding="10dp"
+                android:id="@id/events"
+                android:background="@color/background">
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_events_main" />
-
-            <ImageView
-                android:id="@+id/imageView2"
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.6"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="10.5dp"
-                android:elevation="1dp"
-                app:srcCompat="@drawable/ic_venues_main" />
-
-            <ImageView
-                android:id="@+id/imageView3"
+                android:layout_marginStart="10dp"
+                android:padding="10dp"
+                android:background="@color/background">
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_venues_main" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.6"
-                android:elevation="1dp"
-                android:layout_marginStart="10.5dp"
-                android:layout_marginBottom="10dp"
-                app:srcCompat="@drawable/ic_attractions_main" />
+                android:layout_marginStart="10dp"
+                android:padding="10dp"
+                android:background="@color/background">
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_attractions_main" />
+            </LinearLayout>
         </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -67,19 +77,21 @@
             android:background="@color/background"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"
-            android:paddingStart="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 style="@style/TitleTheme"
                 android:text="@string/topEvents" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/topEvents"
                 android:layout_width="match_parent"
+                android:paddingStart="16dp"
+                android:clipToPadding="false"
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
@@ -89,19 +101,21 @@
             android:background="@color/lightBlack"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"
-            android:paddingStart="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 style="@style/TitleTheme"
                 android:text="@string/title_categories" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/categories"
                 android:layout_width="match_parent"
+                android:paddingStart="16dp"
+                android:clipToPadding="false"
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
@@ -113,13 +127,13 @@
             android:background="@color/background"
             android:orientation="vertical"
             android:paddingBottom="20dp"
-            android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingTop="10dp">
 
             <TextView
                 style="@style/TitleTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:text="@string/nearbyEvents" />
 
             <RelativeLayout
@@ -144,6 +158,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/nearByEvents"
                 android:layout_width="match_parent"
+                android:paddingStart="16dp"
+                android:clipToPadding="false"
                 android:layout_height="match_parent" />
 
         </LinearLayout>

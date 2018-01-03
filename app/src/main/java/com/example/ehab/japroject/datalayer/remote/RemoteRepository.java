@@ -52,6 +52,7 @@ import retrofit2.Call;
 
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.ERROR_CODE;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.FALSE_CODE;
+import static com.example.ehab.japroject.datalayer.remote.ServiceError.INVALID_CODE;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.NETWORK_ERROR;
 import static com.example.ehab.japroject.datalayer.remote.ServiceError.SUCCESS_CODE;
 import static com.example.ehab.japroject.util.Constants.BASE_URL;
@@ -330,7 +331,7 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             LoginService loginService = serviceGenerator.createService(LoginService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(loginService.login(getCurrentLanguage(), new LoginRequest(email, password)), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE) {
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE || serviceResponse.getCode() == INVALID_CODE) {
                                 LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(loginResponse);
                             } else {

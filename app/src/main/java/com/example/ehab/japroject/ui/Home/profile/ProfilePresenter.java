@@ -29,7 +29,8 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
 
         @Override
         public void onError(String message) {
-            getView().showError(message);
+            jaNavigationManager.goToAuthActivity();
+            //getView().showError(message);
         }
     };
 

@@ -74,6 +74,7 @@ public class TodayEventsFragment extends BaseFragment implements TodayEventsCont
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(dividerItemDecoration);
         EventsListAdapter eventsListAdapter = new EventsListAdapter(true);
         eventsListAdapter.setData((ArrayList<Event>) events);
         eventsListAdapter.setOnFavouriteListener(id -> {

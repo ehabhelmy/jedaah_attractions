@@ -89,6 +89,11 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         }
     }
 
+    @OnClick(R.id.events)
+    void openEventListing(){
+        activity.openEventsList();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

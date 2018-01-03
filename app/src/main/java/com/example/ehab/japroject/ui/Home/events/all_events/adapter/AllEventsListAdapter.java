@@ -59,7 +59,7 @@ public class AllEventsListAdapter extends BaseRecyclerViewAdapter<Event> {
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
         if (viewType == VIEW_TYPE_ITEM) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.big_cardview, parent, false);
             return new EventsViewHolder(view);
         }else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.loading_progress_bar, parent, false);

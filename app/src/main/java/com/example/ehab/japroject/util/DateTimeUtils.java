@@ -38,7 +38,7 @@ public class DateTimeUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         String monthName = new SimpleDateFormat("MMM").format(calendar.getTime());
-        return monthName;
+        return monthName.toUpperCase();
     }
 
     public static String getDay(Date date){
@@ -57,7 +57,7 @@ public class DateTimeUtils {
         if (Locale.getDefault().getLanguage().equals("ar")){
             return  daysRemaining+ "- يوم";
         }else{
-            return daysRemaining + "- Days";
+            return daysRemaining + "- DAYS";
         }
     }
 

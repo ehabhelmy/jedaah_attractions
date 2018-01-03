@@ -12,6 +12,7 @@ public interface HomeContract {
     interface View extends BaseView,ProgressView,ErrorView{
         boolean isLocationPermissionGranted();
         boolean isLocationServicesEnabled();
+        void openEventsList();
     }
     interface Presenter{
         void showExplore();

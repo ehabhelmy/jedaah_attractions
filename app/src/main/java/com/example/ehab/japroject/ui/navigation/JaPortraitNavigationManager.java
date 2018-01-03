@@ -20,6 +20,7 @@ import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
 import com.example.ehab.japroject.ui.authentication.socialmedia.SocialMediaFragment;
+import com.example.ehab.japroject.ui.splash.SplashActivity;
 import com.example.ehab.japroject.util.Constants;
 
 /**
@@ -81,12 +82,16 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     @Override
     public void goToHomeActivity() {
         Intent intent = new Intent(context,HomeActivity.class);
+        getCurrentActivity().finish();
         context.startActivity(intent);
     }
 
     @Override
     public void goToAuthActivity() {
         Intent intent = new Intent(context,AuthenticationActivity.class);
+        if (getCurrentActivity() instanceof HomeActivity || getCurrentActivity() instanceof SplashActivity) {
+            getCurrentActivity().finish();
+        }
         context.startActivity(intent);
     }
 

@@ -14,6 +14,7 @@ public class ServiceError {
     public static final int SUCCESS_CODE = 202;
     public static final int FALSE_CODE = 406;
     public static final int ERROR_CODE = 400;
+    public static final int INVALID_CODE = 401;
     private String description;
     private int code;
 

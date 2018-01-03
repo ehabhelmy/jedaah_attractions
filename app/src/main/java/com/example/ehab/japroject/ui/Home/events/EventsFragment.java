@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
@@ -35,6 +37,15 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
         eventsViewPagerAdapter = new EventsViewPagerAdapter(getActivity().getSupportFragmentManager());
         eventsViewPager.setAdapter(eventsViewPagerAdapter);
         tabLayout.setupWithViewPager(eventsViewPager);
+        setupCustomTabs();
+    }
+
+    private void setupCustomTabs() {
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            //noinspection ConstantConditions
+            TextView tv=(TextView) LayoutInflater.from(this.getContext()).inflate(R.layout.custom_tab_item,null);
+            tabLayout.getTabAt(i).setCustomView(tv);
+        }
     }
 
     @Override

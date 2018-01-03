@@ -24,12 +24,6 @@ public class SplashPresenter extends BasePresenter<SplashContract.View> implemen
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        new Handler().postDelayed(() -> {
-            if (token.getToken() == null) {
-               jaNavigationManager.goToAuthActivity();
-            }else {
-                jaNavigationManager.goToHomeActivity();
-            }
-        },4000);
+        new Handler().postDelayed(() -> jaNavigationManager.goToAuthActivity(),4000);
     }
 }
