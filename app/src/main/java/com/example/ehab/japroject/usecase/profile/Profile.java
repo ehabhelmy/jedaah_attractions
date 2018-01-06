@@ -46,12 +46,12 @@ public class Profile implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                //if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
                     callback.onError(e.getMessage());
-                }
-                else {
-                    dataRepository.getProfile(false);
-                }
+               // }
+//                else {
+//                    dataRepository.getProfile(false);
+//                }
             }
         };
         if (!compositeDisposable.isDisposed()) {

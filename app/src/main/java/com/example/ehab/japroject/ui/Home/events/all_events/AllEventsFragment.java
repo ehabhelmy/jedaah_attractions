@@ -15,6 +15,7 @@ import com.example.ehab.japroject.ui.Home.events.all_events.adapter.AllEventsLis
 import com.example.ehab.japroject.ui.Home.events.all_events.listener.OnLoadMoreListener;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
+import com.example.ehab.japroject.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +58,9 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
 
     @Override
     public void showError(String message) {
-        if (message !=  null) {
-            showPopUp(message);
-        }else {
+        if (message.equals(Constants.NO_TOKEN)) {
+            showLoginRequiredError();
+        } else {
             showPopUp("Server Error");
         }
     }
@@ -113,6 +114,4 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
         eventsListAdapter.addData((ArrayList<Event>) events);
         eventsListAdapter.setLoading(false);
     }
-
-
 }

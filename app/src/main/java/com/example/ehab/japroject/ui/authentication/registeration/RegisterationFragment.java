@@ -4,6 +4,7 @@ package com.example.ehab.japroject.ui.authentication.registeration;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -145,10 +147,18 @@ public class RegisterationFragment extends BaseFragment implements Registeration
     @OnClick(R.id.registerNow)
     void register() {
         hideKeyboard();
-        this.presenter.register(userName.getText().toString()
-                , email.getText().toString()
-                , password.getText().toString()
-                , mobileNumber.getText().toString(), uri);
+        if (TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(email.getText()) || TextUtils.isEmpty(password.getText())) {
+            new AlertDialog.Builder(this.getActivity())
+                    .setTitle("Data Required")
+                    .setMessage("You need to fill all the data")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                    .show();
+        }else {
+            this.presenter.register(userName.getText().toString()
+                    , email.getText().toString()
+                    , password.getText().toString()
+                    , mobileNumber.getText().toString(), uri);
+        }
     }
 
     @OnClick(R.id.signIn)

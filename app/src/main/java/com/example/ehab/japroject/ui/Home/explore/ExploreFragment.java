@@ -20,6 +20,7 @@ import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.HomeContract;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
+import com.example.ehab.japroject.util.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -82,9 +83,9 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @Override
     public void showError(String message) {
-        if (message !=  null) {
-            showPopUp(message);
-        }else {
+        if (message.equals(Constants.NO_TOKEN)) {
+            showLoginRequiredError();
+        } else {
             showPopUp("Server Error");
         }
     }

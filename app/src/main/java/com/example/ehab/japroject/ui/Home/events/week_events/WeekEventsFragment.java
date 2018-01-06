@@ -11,6 +11,7 @@ import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
+import com.example.ehab.japroject.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +51,9 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
 
     @Override
     public void showError(String message) {
-        if (message !=  null) {
-            showPopUp(message);
-        }else {
+        if (message.equals(Constants.NO_TOKEN)) {
+            showLoginRequiredError();
+        } else {
             showPopUp("Server Error");
         }
     }

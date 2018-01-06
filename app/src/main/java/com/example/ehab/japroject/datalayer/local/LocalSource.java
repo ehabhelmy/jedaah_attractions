@@ -56,6 +56,8 @@ public interface LocalSource {
 
     String getToken();
 
+    void clearToken();
+
     Single<ProfileResponse> getProfile();
 
     void saveProfile(ProfileResponse profileResponse);

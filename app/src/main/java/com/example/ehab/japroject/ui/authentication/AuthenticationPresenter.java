@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
+import com.example.ehab.japroject.usecase.login.Token;
 import com.example.ehab.japroject.usecase.sociallogin.SocialLogin;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 public class AuthenticationPresenter extends BasePresenter<AuthenticationContract.View> implements AuthenticationContract.Presenter {
 
     private SocialLogin socialLogin;
+    private Token token;
     private BaseCallback<LoginResponse> loginResponseBaseCallback = new BaseCallback<LoginResponse>() {
         @Override
         public void onSuccess(LoginResponse model) {
@@ -29,8 +31,9 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationContrac
     };
 
     @Inject
-    public AuthenticationPresenter(SocialLogin login) {
+    public AuthenticationPresenter(SocialLogin login,Token token) {
         this.socialLogin = login;
+        this.token = token;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class AuthenticationPresenter extends BasePresenter<AuthenticationContrac
 
     @Override
     public void goToHomeActivity() {
+        token.clearToken();
         jaNavigationManager.goToHomeActivity();
     }
 }

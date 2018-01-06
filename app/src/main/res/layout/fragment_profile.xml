@@ -108,7 +108,9 @@
             android:id="@+id/profile_tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="scrollable"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorTitle" />
 
         <FrameLayout

@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 
 /**
@@ -12,5 +13,5 @@ import retrofit2.http.Path;
 
 public interface TodayEventsService {
     @GET("{lang}/events/today/list")
-    Call<EventsResponse> getTodayEvents(@Path("lang") String lang);
+    Call<EventsResponse> getTodayEvents(@Path("lang") String lang,@Header("Authorization") String token);
 }

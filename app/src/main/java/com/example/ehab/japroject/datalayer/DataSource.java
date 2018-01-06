@@ -48,6 +48,8 @@ public interface DataSource {
 
     String getToken();
 
+    void clearToken();
+
     Single<LoginResponse> register(String userName, String email, String password, String mobile, File image);
 
     Single<LikeResponse> like(int id);

@@ -37,7 +37,7 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
         eventsViewPagerAdapter = new EventsViewPagerAdapter(getActivity().getSupportFragmentManager());
         eventsViewPager.setAdapter(eventsViewPagerAdapter);
         tabLayout.setupWithViewPager(eventsViewPager);
-        setupCustomTabs();
+        //setupCustomTabs();
     }
 
     private void setupCustomTabs() {

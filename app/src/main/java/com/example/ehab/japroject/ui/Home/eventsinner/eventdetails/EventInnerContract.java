@@ -21,5 +21,6 @@ public interface EventInnerContract {
     interface Presenter extends Unsubscribable{
         void openNavigationView(double lat,double lng);
         void openPaymentView(PaymentData paymentData);
+        void like();
     }
 }

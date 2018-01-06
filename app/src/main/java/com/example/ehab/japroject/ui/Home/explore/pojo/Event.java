@@ -16,11 +16,12 @@ public class Event extends BaseModel {
     private String eventAddress;
     private String eventLikes;
     private int id;
+    private boolean isLiked;
 
     public Event() {
     }
 
-    public Event(int id ,String eventImage, String eventName, String eventMonth, String eventDay, String eventRemaining, String eventAddress, String eventLikes) {
+    public Event(int id ,String eventImage, String eventName, String eventMonth, String eventDay, String eventRemaining, String eventAddress, String eventLikes,boolean isLiked) {
         this.eventImage = eventImage;
         this.eventName = eventName;
         this.eventMonth = eventMonth;
@@ -29,6 +30,15 @@ public class Event extends BaseModel {
         this.eventAddress = eventAddress;
         this.eventLikes = eventLikes;
         this.id = id;
+        this.isLiked = isLiked;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
     }
 
     public int getId() {

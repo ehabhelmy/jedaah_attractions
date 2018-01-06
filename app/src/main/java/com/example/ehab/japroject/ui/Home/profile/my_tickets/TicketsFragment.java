@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
@@ -41,6 +42,15 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
 
     @BindView(R.id.pastList)
     RecyclerView pastList;
+
+    @BindView(R.id.noEvents)
+    TextView noEvents;
+
+    @BindView(R.id.textView30)
+    TextView upcomingEvents;
+
+    @BindView(R.id.textView31)
+    TextView pastEvents;
 
     @Override
     protected void initializeDagger() {
@@ -77,12 +87,24 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
 
     @Override
     public void setupUpcomingList(List<HistoryEventsUi> data) {
-        setupRecyclerView(upcomingList,data, HistoryListAdapter.HistoryType.UPCOMING.name());
+        if (data.size() == 0) {
+            upcomingEvents.setVisibility(View.GONE);
+            upcomingList.setVisibility(View.GONE);
+            noEvents.setVisibility(View.VISIBLE);
+        }else {
+            setupRecyclerView(upcomingList, data, HistoryListAdapter.HistoryType.UPCOMING.name());
+        }
     }
 
     @Override
     public void setupPastList(List<HistoryEventsUi> data) {
-        setupRecyclerView(pastList,data, HistoryListAdapter.HistoryType.PAST.name());
+        if (data.size() == 0) {
+            pastEvents.setVisibility(View.GONE);
+            pastList.setVisibility(View.GONE);
+            noEvents.setVisibility(View.VISIBLE);
+        }else {
+            setupRecyclerView(pastList, data, HistoryListAdapter.HistoryType.PAST.name());
+        }
     }
     private void setupRecyclerView(RecyclerView recyclerView,List<HistoryEventsUi> data,String type) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);

@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
+import com.example.ehab.japroject.util.Constants;
 
 import javax.inject.Inject;
 
@@ -52,11 +53,15 @@ public class Like implements Unsubscribable {
         };
         if (!compositeDisposable.isDisposed()){
             likeResponseSingle = dataRepository.like(id);
-            disposable = likeResponseSingle
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(likeResponseDisposableSingleObserver);
-            compositeDisposable.add(disposable);
+            if (likeResponseSingle == null) {
+                callback.onError(Constants.NO_TOKEN);
+            }else {
+                disposable = likeResponseSingle
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(likeResponseDisposableSingleObserver);
+                compositeDisposable.add(disposable);
+            }
         }
     }
 

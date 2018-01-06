@@ -31,6 +31,17 @@ public class Event extends BaseModel{
     @SerializedName("going")
     @Expose
     private Integer going;
+    @SerializedName("is_liked")
+    @Expose
+    private boolean isLiked;
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
 
     public Integer getId() {
         return id;

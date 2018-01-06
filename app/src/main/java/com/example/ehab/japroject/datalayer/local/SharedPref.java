@@ -53,7 +53,7 @@ public class SharedPref<T extends BaseModel> {
     public void saveString(String key,String value) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key,value);
-        editor.commit();
+        editor.apply();
     }
 
     public List<Category> getCategoryList(String key) {
@@ -62,6 +62,12 @@ public class SharedPref<T extends BaseModel> {
         }.getType();
         List<Category> categoriesList = new Gson().fromJson(s, typeOfObjectsList);
         return categoriesList;
+    }
+
+    public void clearToken(){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(TOKEN);
+        editor.apply();
     }
 
 

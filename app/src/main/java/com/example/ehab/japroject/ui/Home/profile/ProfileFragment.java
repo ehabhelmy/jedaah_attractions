@@ -111,6 +111,15 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+    @OnClick(R.id.settings)
+    void logout() {
+        new AlertDialog.Builder(this.getContext())
+                .setTitle("Log Out")
+                .setMessage("Are you sure you want to logout ?")
+                .setPositiveButton("Yes", (dialog, which) -> presenter.logOut())
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
 
     @Override
     public void showLoading() {

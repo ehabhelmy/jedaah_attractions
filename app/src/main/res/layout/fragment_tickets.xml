@@ -10,6 +10,16 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/noEvents"
+            android:textSize="@dimen/title_inner"
+            android:fontFamily="@font/gotham_bold"
+            android:text="@string/noevents"/>
+
     <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"

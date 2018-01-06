@@ -5,4 +5,5 @@ package com.example.ehab.japroject.ui.Base.listener;
  */
 
 public interface BaseView {
+
 }

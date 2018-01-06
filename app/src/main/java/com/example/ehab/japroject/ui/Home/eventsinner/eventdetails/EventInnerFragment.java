@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
@@ -24,6 +25,7 @@ import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.Image
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.TagAdapter;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.SocialMediaAdapter;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDetails;
+import com.example.ehab.japroject.util.Constants;
 import com.like.LikeButton;
 
 import javax.inject.Inject;
@@ -101,6 +103,12 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
     @BindView(R.id.eventPrice)
     TextView eventPrice;
 
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
+
+    @BindView(R.id.eventInnerContainer)
+    ScrollView scrollView;
+
     @Inject
     EventInnerPresenter presenter;
 
@@ -125,6 +133,11 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
         super.onCreate(savedInstanceState);
     }
 
+    @OnClick(R.id.favourite)
+    void like() {
+        presenter.like();
+    }
+
     @OnClick(R.id.directions)
     void openMapsInNavigationMode() {
         presenter.openNavigationView(latitude,longitude);
@@ -138,21 +151,23 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
 
     @Override
     public void showError(String message) {
-        if (message !=  null) {
-            showPopUp(message);
-        }else {
+        if (message.equals(Constants.NO_TOKEN)) {
+            showLoginRequiredError();
+        } else {
             showPopUp("Server Error");
         }
     }
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        scrollView.setVisibility(View.VISIBLE);
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override

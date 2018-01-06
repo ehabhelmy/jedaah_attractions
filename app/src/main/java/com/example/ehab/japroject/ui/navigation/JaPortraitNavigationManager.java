@@ -83,7 +83,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     public void goToHomeActivity() {
         Intent intent = new Intent(context,HomeActivity.class);
         getCurrentActivity().finish();
-        context.startActivity(intent);
+        getCurrentActivity().startActivity(intent);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         if (getCurrentActivity() instanceof HomeActivity || getCurrentActivity() instanceof SplashActivity) {
             getCurrentActivity().finish();
         }
-        context.startActivity(intent);
+        getCurrentActivity().startActivity(intent);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.EVENT_ID,id);
         intent.putExtras(bundle);
-        context.startActivity(intent);
+        getCurrentActivity().startActivity(intent);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Uri uri= Uri.parse("google.navigation:q="+lat+","+lng+"&mode=d");
         Intent intent=new Intent(Intent.ACTION_VIEW,uri);
         intent.setPackage("com.google.android.apps.maps");
-        context.startActivity(intent);
+        getCurrentActivity().startActivity(intent);
     }
 
     @Override

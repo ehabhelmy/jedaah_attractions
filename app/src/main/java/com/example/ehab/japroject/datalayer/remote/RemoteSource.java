@@ -27,17 +27,17 @@ public interface RemoteSource {
     // all apis in the application
     DataResponse getData();
 
-    Single<EventsResponse> getTopEvents();
+    Single<EventsResponse> getTopEvents(String token);
 
-    Single<EventsResponse> getNearByEvents(LatLng latLng);
+    Single<EventsResponse> getNearByEvents(LatLng latLng,String token);
 
     Single<Category> getCategories();
 
-    Single<EventsResponse> getTodayEvents();
+    Single<EventsResponse> getTodayEvents(String token);
 
-    Single<EventsResponse> getWeekEvents();
+    Single<EventsResponse> getWeekEvents(String token);
 
-    Single<AllEventsResponse> getAllEvents(String newURL);
+    Single<AllEventsResponse> getAllEvents(String newURL,String token);
 
     Single<EventsResponse> getLikedEvents(String token);
 

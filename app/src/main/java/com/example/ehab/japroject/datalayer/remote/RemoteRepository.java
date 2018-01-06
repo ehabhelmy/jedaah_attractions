@@ -109,7 +109,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<EventsResponse> getTopEvents() {
+    public Single<EventsResponse> getTopEvents(String token) {
         Single<EventsResponse> topEventsSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -117,7 +117,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             TopEventsService topEventsService = serviceGenerator.createService(TopEventsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(topEventsService.getTopEvents(getCurrentLanguage()), false);
+                            ServiceResponse serviceResponse = processCall(topEventsService.getTopEvents(getCurrentLanguage(),token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventsResponse);
@@ -135,7 +135,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<EventsResponse> getNearByEvents(LatLng latLng) {
+    public Single<EventsResponse> getNearByEvents(LatLng latLng,String token) {
         Single<EventsResponse> nearByEventsSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -143,7 +143,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             NearByEventsService nearByEventsService = serviceGenerator.createService(NearByEventsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(nearByEventsService.getNearbyEvents(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""), getCurrentLanguage()), false);
+                            ServiceResponse serviceResponse = processCall(nearByEventsService.getNearbyEvents(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""), getCurrentLanguage(),token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventsResponse);
@@ -187,7 +187,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<EventsResponse> getTodayEvents() {
+    public Single<EventsResponse> getTodayEvents(String token) {
 
         Single<EventsResponse> eventsResponseSingle = Single.create(singleOnSubscribe -> {
             if (!isConnected(JaApplication.getContext())) {
@@ -196,7 +196,7 @@ public class RemoteRepository implements RemoteSource {
             } else {
                 try {
                     TodayEventsService todayEventsService = serviceGenerator.createService(TodayEventsService.class, BASE_URL);
-                    ServiceResponse serviceResponse = processCall(todayEventsService.getTodayEvents(getCurrentLanguage()), false);
+                    ServiceResponse serviceResponse = processCall(todayEventsService.getTodayEvents(getCurrentLanguage(),token), false);
                     if (serviceResponse.getCode() == SUCCESS_CODE) {
                         EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
                         singleOnSubscribe.onSuccess(eventsResponse);
@@ -213,7 +213,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<EventsResponse> getWeekEvents() {
+    public Single<EventsResponse> getWeekEvents(String token) {
         Single<EventsResponse> eventsResponseSingle = Single.create(singleOnSubscribe -> {
             if (!isConnected(JaApplication.getContext())) {
                 Exception exception = new NetworkErrorException();
@@ -221,7 +221,7 @@ public class RemoteRepository implements RemoteSource {
             } else {
                 try {
                     WeekEventsService weekEventsService = serviceGenerator.createService(WeekEventsService.class, BASE_URL);
-                    ServiceResponse serviceResponse = processCall(weekEventsService.getWeekEvents(getCurrentLanguage()), false);
+                    ServiceResponse serviceResponse = processCall(weekEventsService.getWeekEvents(getCurrentLanguage(),token), false);
                     if (serviceResponse.getCode() == SUCCESS_CODE) {
                         EventsResponse eventsResponse = (EventsResponse) serviceResponse.getData();
                         singleOnSubscribe.onSuccess(eventsResponse);
@@ -238,7 +238,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<AllEventsResponse> getAllEvents(String newURL) {
+    public Single<AllEventsResponse> getAllEvents(String newURL,String token) {
         Single<AllEventsResponse> allEventsSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -248,10 +248,10 @@ public class RemoteRepository implements RemoteSource {
                             AllEventsService allEventsService = serviceGenerator.createService(AllEventsService.class, BASE_URL);
                             ServiceResponse serviceResponse = null;
                             if (newURL == null) {
-                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),1), false);
+                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),1,token), false);
                             }else {
                                 char page = newURL.charAt(newURL.length() - 1);
-                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),Character.getNumericValue(page)), false);
+                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),Character.getNumericValue(page),token), false);
                             }
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 AllEventsResponse eventsResponse = (AllEventsResponse) serviceResponse.getData();
@@ -384,7 +384,7 @@ public class RemoteRepository implements RemoteSource {
                             serviceGenerator.setCONTENT_TYPE_VALUE("multipart/form-data");
                             RegisterationService registerationService = serviceGenerator.createService(RegisterationService.class, BASE_URL);
                             serviceGenerator.setCONTENT_TYPE_VALUE("application/json");
-                            RequestBody requestName = RequestBody.create(MediaType.parse("text/plain"), "Ali");
+                            RequestBody requestName = RequestBody.create(MediaType.parse("text/plain"), userName);
                             RequestBody requestUserName = RequestBody.create(MediaType.parse("text/plain"), userName);
                             RequestBody requestEmail = RequestBody.create(MediaType.parse("text/plain"), email);
                             RequestBody requestPassword = RequestBody.create(MediaType.parse("text/plain"), password);

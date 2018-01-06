@@ -18,5 +18,6 @@ public interface ProfileContract {
     }
 
     interface Presenter extends Unsubscribable {
+        void logOut();
     }
 }

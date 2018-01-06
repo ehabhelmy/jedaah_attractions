@@ -9,7 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tabLayout"
-        app:tabSelectedTextColor="@color/colorTitle"/>
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorTitle" />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"

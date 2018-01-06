@@ -191,6 +191,11 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
+    public void clearToken() {
+        sharedPref.clearToken();
+    }
+
+    @Override
     public Single<ProfileResponse> getProfile() {
         ProfileResponse profileResponse = (ProfileResponse) sharedPref.getObject(SharedPref.PROFILE, ProfileResponse.class);
         Single<ProfileResponse> profileResponseSingle = Single.create(e -> {

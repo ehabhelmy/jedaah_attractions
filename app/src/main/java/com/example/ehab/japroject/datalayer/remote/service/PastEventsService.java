@@ -12,6 +12,6 @@ import retrofit2.http.Path;
  */
 
 public interface PastEventsService {
-    @GET("{lang}/history/orders/past")
+    @GET("{lang}/history/orders/passed")
     Call<HistoryEvents> getPastEvents(@Path("lang") String lang, @Header("Authorization") String token);
 }

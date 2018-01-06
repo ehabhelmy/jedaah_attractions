@@ -55,9 +55,9 @@ public class DateTimeUtils {
         NumberFormat numberFormat = NumberFormat.getInstance();
         String daysRemaining = numberFormat.format(day);
         if (Locale.getDefault().getLanguage().equals("ar")){
-            return  daysRemaining+ "- يوم";
+            return  daysRemaining+ "+ يوم";
         }else{
-            return daysRemaining + "- DAYS";
+            return daysRemaining + "+ DAYS";
         }
     }
 

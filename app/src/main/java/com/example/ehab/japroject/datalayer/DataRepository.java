@@ -50,7 +50,7 @@ public class DataRepository implements DataSource {
     @Override
     public Single<EventsResponse> getTopEvents(boolean fresh) {
         if (fresh){
-            return remoteRepository.getTopEvents();
+            return remoteRepository.getTopEvents(getToken());
         } else {
             return localRepository.getTopEvents();
         }
@@ -59,7 +59,7 @@ public class DataRepository implements DataSource {
     @Override
     public Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh) {
         if (fresh){
-            return remoteRepository.getNearByEvents(latLng);
+            return remoteRepository.getNearByEvents(latLng,getToken());
         } else {
             return localRepository.getNearByEvents();
         }
@@ -77,7 +77,7 @@ public class DataRepository implements DataSource {
     @Override
     public Single<EventsResponse> getTodayEvents(boolean fresh) {
         if (fresh) {
-            return remoteRepository.getTodayEvents();
+            return remoteRepository.getTodayEvents(getToken());
         }else {
             return localRepository.getTodayEvents();
         }
@@ -86,7 +86,7 @@ public class DataRepository implements DataSource {
     @Override
     public Single<EventsResponse> getWeekEvents(boolean fresh) {
         if (fresh) {
-            return remoteRepository.getWeekEvents();
+            return remoteRepository.getWeekEvents(getToken());
         }else {
             return localRepository.getWeekEvents();
         }
@@ -95,7 +95,7 @@ public class DataRepository implements DataSource {
     @Override
     public Single<AllEventsResponse> getAllEvents(boolean fresh,String newUrl) {
         if (fresh){
-            return remoteRepository.getAllEvents(newUrl);
+            return remoteRepository.getAllEvents(newUrl,getToken());
         } else {
             return localRepository.getAllEvents();
         }
@@ -131,12 +131,20 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public void clearToken() {
+        localRepository.clearToken();
+    }
+
+    @Override
     public Single<LoginResponse> register(String userName, String email, String password, String mobile, File image) {
         return remoteRepository.register(userName, email, password, mobile, image);
     }
 
     @Override
     public Single<LikeResponse> like(int id) {
+        if (getToken() == null) {
+            return null;
+        }
         return remoteRepository.like(id ,getToken());
     }
 
@@ -202,11 +210,7 @@ public class DataRepository implements DataSource {
 
     @Override
     public Single<ProfileResponse> getProfile(boolean fresh) {
-        if (fresh){
-            return remoteRepository.getProfile(localRepository.getToken());
-        } else {
-            return localRepository.getProfile();
-        }
+        return remoteRepository.getProfile(localRepository.getToken());
     }
 
     @Override

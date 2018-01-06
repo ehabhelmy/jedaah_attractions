@@ -34,7 +34,7 @@ public class CategoryViewHolder extends BaseViewHolder<Cats> {
     public void bind(Cats baseModel, RecyclerViewItemListener.onViewListener onViewListener, RecyclerViewItemListener.onFavouriteListener onFavouriteListener) {
         categoryName.setText(baseModel.getName());
         Picasso.with(categoryImage.getContext()).load(baseModel.getIcon()).
-                placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(categoryImage);
+                placeholder(R.drawable.ic_ca_cafe_ic).error(R.drawable.ic_ca_cafe_ic).into(categoryImage);
     }
 
     @Override

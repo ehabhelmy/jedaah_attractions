@@ -61,6 +61,7 @@ public class EventsViewHolder extends BaseViewHolder<Event> {
         eventMonth.setText(baseModel.getEventMonth());
         eventDay.setText(baseModel.getEventDay());
         eventRemaining.setText(baseModel.getEventRemaining());
+        favourite.setLiked(baseModel.isLiked());
         Picasso.with(eventImage.getContext()).load(baseModel.getEventImage()).placeholder(R.mipmap.myimage).error(R.mipmap.myimage).into(eventImage);
         favourite.setOnLikeListener(new OnLikeListener() {
             @Override

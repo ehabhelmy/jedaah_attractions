@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
+import com.example.ehab.japroject.usecase.login.Token;
 import com.example.ehab.japroject.usecase.profile.Profile;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 public class ProfilePresenter extends BasePresenter<ProfileContract.View> implements ProfileContract.Presenter {
 
     private Profile profile;
+    private Token token;
 
     private BaseCallback<ProfileResponse> profileResponseBaseCallback = new BaseCallback<ProfileResponse>() {
         @Override
@@ -35,8 +37,9 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
     };
 
     @Inject
-    public ProfilePresenter(Profile profile) {
+    public ProfilePresenter(Profile profile,Token token) {
         this.profile = profile;
+        this.token = token;
     }
 
     @Override
@@ -48,5 +51,11 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
     @Override
     public void unSubscribe() {
         profile.unSubscribe();
+    }
+
+    @Override
+    public void logOut() {
+        token.clearToken();
+        jaNavigationManager.goToAuthActivity();
     }
 }

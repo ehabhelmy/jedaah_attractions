@@ -16,6 +16,7 @@ import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.HomeContract;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
+import com.example.ehab.japroject.util.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -31,7 +32,7 @@ import butterknife.OnClick;
  * Created by ehab on 12/15/17.
  */
 
-public class NearByEventsFragment extends BaseFragment implements NearByEventsContract.View{
+public class NearByEventsFragment extends BaseFragment implements NearByEventsContract.View {
 
     @Inject
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -70,9 +71,9 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
 
     @Override
     public void showError(String message) {
-        if (message !=  null) {
-            showPopUp(message);
-        }else {
+        if (message.equals(Constants.NO_TOKEN)) {
+            showLoginRequiredError();
+        } else {
             showPopUp("Server Error");
         }
     }
@@ -94,7 +95,7 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
     }
 
     @OnClick(R.id.enableLocationSettings)
-    void openLocationSettings(){
+    void openLocationSettings() {
         presenter.openLocationSettings();
     }
 
@@ -132,15 +133,16 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
     public void showErrorLocationNotEnabled() {
         errorLocationContainer.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void getLatitudeAndLongitude() {
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
-            presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(),location1.getLongitude()));
+            presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
         });
     }
 
     @Override
-    public void locationIsEnabled(){
+    public void locationIsEnabled() {
         errorLocationContainer.setVisibility(View.GONE);
         getLatitudeAndLongitude();
     }

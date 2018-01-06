@@ -5,7 +5,10 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/eventCardView"
     card_view:cardElevation="0dp"
-    android:layout_height="300dp">
+    card_view:cardCornerRadius="0.5dp"
+    card_view:cardPreventCornerOverlap="false"
+    card_view:cardUseCompatPadding="true"
+    android:layout_height="250dp">
 
 
     <LinearLayout
@@ -30,6 +33,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/circle"
+                app:icon_size="20dp"
                 app:anim_scale_factor="2"
                 app:circle_end_color="@color/staticTitle"
                 app:circle_start_color="@color/staticTitle"

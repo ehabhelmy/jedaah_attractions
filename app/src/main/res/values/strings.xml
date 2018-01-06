@@ -67,4 +67,6 @@
     <string name="orderStatus">ORDER STATUS</string>
     <string name="upcomingEvents">UPCOMING EVENTS</string>
     <string name="pastEvents">PAST EVENTS</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="noevents">NO EVENTS IN YOUR HISTORY</string>
 </resources>

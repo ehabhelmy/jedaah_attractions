@@ -31,6 +31,7 @@ public class EventsAdapter {
             event.setEventDay(getDay(convertJSONDateToDate(datum.getStartDate())));
             event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate())));
             event.setId(datum.getId());
+            event.setLiked(datum.isLiked());
             events.add(event);
         }
         return events;
@@ -42,6 +43,7 @@ public class EventsAdapter {
             Event event = new Event();
             event.setEventImage(datum.getImage());
             event.setEventName(datum.getTitle());
+            event.setLiked(datum.isLiked());
             event.setEventAddress(datum.getAddress());
             if (Locale.getDefault().getLanguage().equals("ar")){
                 event.setEventLikes(datum.getInterested()+ " مهتم -"+datum.getGoing()+" ذاهب");

@@ -5,7 +5,10 @@
     android:id="@+id/eventCardView"
     android:layout_width="300dp"
     card_view:cardElevation="0dp"
-    android:layout_height="300dp">
+    card_view:cardCornerRadius="0.5dp"
+    card_view:cardPreventCornerOverlap="false"
+    card_view:cardUseCompatPadding="true"
+    android:layout_height="250dp">
 
 
     <LinearLayout
@@ -19,7 +22,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/eventImage"
             android:background="@mipmap/myimage"
-            android:layout_weight="2">
+            android:layout_weight="1.8">
 
             <com.like.LikeButton
                 android:id="@+id/favourite"
@@ -29,6 +32,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/circle"
+                app:icon_size="20dp"
                 app:anim_scale_factor="2"
                 app:circle_end_color="@color/staticTitle"
                 app:circle_start_color="@color/staticTitle"
@@ -45,7 +49,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:orientation="horizontal"
             android:weightSum="6">
 

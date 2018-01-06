@@ -142,7 +142,9 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
 
     @OnClick(R.id.imageMinus)
     void decrementQuantity(){
-        counter--;
+        if (!(counter == 1)) {
+            counter--;
+        }
         quantity.setText(counter+"");
         setPriceTotal();
     }

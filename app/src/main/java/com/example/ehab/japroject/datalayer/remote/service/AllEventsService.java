@@ -5,6 +5,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -14,5 +15,5 @@ import retrofit2.http.Query;
 
 public interface AllEventsService {
     @GET("{lang}/events")
-    Call<AllEventsResponse> getAllEvents(@Path("lang") String lang, @Query("page") int pageNumber);
+    Call<AllEventsResponse> getAllEvents(@Path("lang") String lang, @Query("page") int pageNumber, @Header("Authorization") String token);
 }

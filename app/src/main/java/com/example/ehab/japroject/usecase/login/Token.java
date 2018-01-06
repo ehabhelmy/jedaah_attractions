@@ -20,4 +20,8 @@ public class Token {
     public String getToken() {
         return dataRepository.getToken();
     }
+
+    public void clearToken() {
+        dataRepository.clearToken();
+    }
 }

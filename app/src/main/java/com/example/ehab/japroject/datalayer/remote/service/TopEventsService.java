@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 
 /**
@@ -12,5 +13,5 @@ import retrofit2.http.Path;
 
 public interface TopEventsService {
     @GET("{lang}/events/top/list")
-    Call<EventsResponse> getTopEvents(@Path("lang") String lang);
+    Call<EventsResponse> getTopEvents(@Path("lang") String lang,@Header("Authorization") String token);
 }

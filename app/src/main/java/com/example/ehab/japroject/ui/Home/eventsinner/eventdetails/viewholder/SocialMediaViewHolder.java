@@ -1,5 +1,7 @@
 package com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.viewholder;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +38,11 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
     @Override
     public void bind(SocialMedium baseModel, RecyclerViewItemListener.onViewListener onViewListener, RecyclerViewItemListener.onFavouriteListener onFavouriteListener) {
         socialMediaUrl.setText(baseModel.getUrl());
+        socialMediaUrl.setOnClickListener(view -> {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(baseModel.getUrl()));
+            socialMediaUrl.getContext().startActivity(i);
+        });
         if (baseModel.getName().equals(SocialMedia.Facebook.name())) {
             Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.ic_facebook_g).error(R.drawable.ic_facebook_g).into(socialMediaIcon);
         }else if (baseModel.getName().equals(SocialMedia.Twitter.name())){

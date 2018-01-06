@@ -65,4 +65,6 @@
     <string name="orderStatus">اخبار الحجز</string>
     <string name="upcomingEvents">المناسبات القادمه</string>
     <string name="pastEvents">المناسبات السابقه</string>
+    <string name="description">التفاصيل</string>
+    <string name="noevents">لا يوجد مناسبات فى تاريخك</string>
 </resources>
