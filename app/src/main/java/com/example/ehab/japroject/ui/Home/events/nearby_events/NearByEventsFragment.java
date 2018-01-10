@@ -1,6 +1,9 @@
 package com.example.ehab.japroject.ui.Home.events.nearby_events;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -50,6 +53,9 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
 
     @BindView(R.id.errorLocationContainerNew)
     RelativeLayout errorLocationContainer;
+
+    @BindView(R.id.noEvents)
+    RelativeLayout noEvents;
 
 
     @Override
@@ -101,22 +107,27 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
 
     @Override
     public void setupNearByEvents(List<Event> events) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
-        eventsList.setLayoutManager(layoutManager);
-        eventsList.addItemDecoration(dividerItemDecoration);
-        eventsList.setItemAnimator(new DefaultItemAnimator());
-        EventsListAdapter eventsListAdapter = new EventsListAdapter(true);
-        eventsListAdapter.setData((ArrayList<Event>) events);
-        eventsListAdapter.setOnFavouriteListener(id -> {
-            //TODO : call presenter to send id of the event to the backend
-            presenter.like(id);
-        });
-        eventsListAdapter.setOnViewListener(id -> {
-            presenter.showEventInner(id);
-        });
-        eventsList.setAdapter(eventsListAdapter);
+        if (events.size() > 0) {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
+            eventsList.setLayoutManager(layoutManager);
+            eventsList.addItemDecoration(dividerItemDecoration);
+            eventsList.setItemAnimator(new DefaultItemAnimator());
+            EventsListAdapter eventsListAdapter = new EventsListAdapter(true);
+            eventsListAdapter.setData((ArrayList<Event>) events);
+            eventsListAdapter.setOnFavouriteListener(id -> {
+                //TODO : call presenter to send id of the event to the backend
+                presenter.like(id);
+            });
+            eventsListAdapter.setOnViewListener(id -> {
+                presenter.showEventInner(id);
+            });
+            eventsList.setAdapter(eventsListAdapter);
+        }else {
+            eventsList.setVisibility(View.GONE);
+            noEvents.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -136,8 +147,20 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
 
     @Override
     public void getLatitudeAndLongitude() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
-            presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
+            if (location1 != null) {
+                presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
+            }
         });
     }
 

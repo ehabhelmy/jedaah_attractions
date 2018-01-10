@@ -5,6 +5,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
@@ -31,6 +33,9 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
 
     @BindView(R.id.eventsList)
     RecyclerView recyclerView;
+
+    @BindView(R.id.noEvents)
+    RelativeLayout noEvents;
 
     @Override
     protected void initializeDagger() {
@@ -70,21 +75,26 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
 
     @Override
     public void setupWeekEvents(List<Event> events) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        EventsListAdapter eventsListAdapter = new EventsListAdapter(true);
-        eventsListAdapter.setData((ArrayList<Event>) events);
-        eventsListAdapter.setOnFavouriteListener(id -> {
-            //TODO : call presenter to send id of the event to the backend
-            weekEventsPresenter.like(id);
-        });
-        eventsListAdapter.setOnViewListener(id -> {
-            weekEventsPresenter.showEventInner(id);
-        });
-        recyclerView.setAdapter(eventsListAdapter);
+        if (events.size() > 0) {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.addItemDecoration(dividerItemDecoration);
+            EventsListAdapter eventsListAdapter = new EventsListAdapter(true);
+            eventsListAdapter.setData((ArrayList<Event>) events);
+            eventsListAdapter.setOnFavouriteListener(id -> {
+                //TODO : call presenter to send id of the event to the backend
+                weekEventsPresenter.like(id);
+            });
+            eventsListAdapter.setOnViewListener(id -> {
+                weekEventsPresenter.showEventInner(id);
+            });
+            recyclerView.setAdapter(eventsListAdapter);
+        }else {
+            recyclerView.setVisibility(View.GONE);
+            noEvents.setVisibility(View.VISIBLE);
+        }
     }
 }

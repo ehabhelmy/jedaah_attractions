@@ -54,6 +54,9 @@ public class DateTimeUtils {
         int day = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
         NumberFormat numberFormat = NumberFormat.getInstance();
         String daysRemaining = numberFormat.format(day);
+        if (daysRemaining.equals("0")){
+            return "";
+        }
         if (Locale.getDefault().getLanguage().equals("ar")){
             return  daysRemaining+ "+ يوم";
         }else{
@@ -76,7 +79,7 @@ public class DateTimeUtils {
     }
 
     public static String getEventDays(EventDay eventDay) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
         Date sDate = null;
         Date eDate = null;
         try {
@@ -92,7 +95,7 @@ public class DateTimeUtils {
         String date = new SimpleDateFormat("EEEE, MMMM dd").format(sCalendar.getTime());
         String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
         String endTime = new SimpleDateFormat("hh:mm aaa").format(eCalendar.getTime());
-        return date + "at " + startTime + " - " + endTime;
+        return date + " at " + startTime + " - " + endTime;
     }
 
     public static String getEventDateOrder(TicketDate ticketDate) {

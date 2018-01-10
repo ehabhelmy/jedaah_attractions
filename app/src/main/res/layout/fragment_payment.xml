@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@drawable/ic_payment_bg"
+    android:background="@drawable/payment_bg"
     android:layout_height="match_parent">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -59,7 +59,7 @@
             android:layout_marginTop="16dp"
             android:textSize="@dimen/daysRemaining"
             android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/categoryBackground"
+            android:textColor="@color/outerText"
             android:text="@string/name" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -83,7 +83,7 @@
             android:layout_marginTop="11dp"
             android:textSize="@dimen/daysRemaining"
             android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/categoryBackground"
+            android:textColor="@color/outerText"
             android:text="@string/emailaddress" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -107,7 +107,7 @@
             android:layout_marginTop="11dp"
             android:textSize="@dimen/daysRemaining"
             android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/categoryBackground"
+            android:textColor="@color/outerText"
             android:text="@string/mobilenumber" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -131,7 +131,7 @@
             android:layout_marginTop="11dp"
             android:textSize="@dimen/daysRemaining"
             android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/categoryBackground"
+            android:textColor="@color/outerText"
             android:text="@string/nationalId" />
 
         <android.support.v7.widget.AppCompatEditText
@@ -172,146 +172,146 @@
             android:layout_below="@+id/textView24"
             android:gravity="center"
             android:text="@string/suitsYou" />
-
-        <ImageView
-            android:id="@+id/creditImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/paymentContainer"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView10"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="43dp"
-            app:srcCompat="@drawable/ic_creditcard_active" />
-
-        <ImageView
-            android:id="@+id/cashImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignTop="@+id/creditImage"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/ic_cod_active" />
-
-        <ImageView
-            android:id="@+id/paylaterImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignTop="@+id/cashImage"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="44dp"
-            android:layout_marginStart="69dp"
-            app:srcCompat="@drawable/ic_paylater_active" />
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="43dp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/creditContainer"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/creditImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/creditcard_deactivated" />
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gotham_medium"
+                    android:text="@string/creditCard"
+                    android:gravity="center"
+                    android:textColor="@color/staticTitle"
+                    android:textSize="@dimen/cash" />
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/next"
-            android:layout_below="@+id/creditImage"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/gotham_medium"
-            android:text="@string/creditCard"
-            android:textColor="@color/staticTitle"
-            android:textSize="@dimen/cash" />
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/gotham_book"
+                    android:text="@string/maxTickets"
+                    android:textSize="@dimen/daysRemaining" />
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView11"
-            android:layout_alignEnd="@+id/textView11"
-            android:layout_below="@+id/textView11"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/gotham_book"
-            android:text="@string/maxTickets"
-            android:textSize="@dimen/daysRemaining" />
+                <TextView
+                    android:id="@+id/creditAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/outerText"
+                    android:textSize="@dimen/cardsubtitle"
+                    android:gravity="center"
+                    android:text="@string/unlimited" />
 
-        <TextView
-            android:id="@+id/creditAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView13"
-            android:layout_below="@+id/textView13"
-            android:layout_marginTop="9dp"
-            android:textColor="@color/outerText"
-            android:textSize="@dimen/cardsubtitle"
-            android:gravity="center"
-            android:layout_alignEnd="@id/textView13"
-            android:text="@string/unlimited" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/cashContainer"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/cashImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/cod_deactivated" />
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/gotham_medium"
+                    android:text="@string/cash"
+                    android:textColor="@color/staticTitle"
+                    android:textSize="@dimen/cash" />
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView11"
-            android:layout_alignBottom="@+id/textView11"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/gotham_medium"
-            android:text="@string/cash"
-            android:textColor="@color/staticTitle"
-            android:textSize="@dimen/cash" />
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/gotham_book"
+                    android:text="@string/maxTickets"
+                    android:textSize="@dimen/daysRemaining" />
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView13"
-            android:layout_alignBottom="@+id/textView13"
-            android:layout_alignStart="@+id/cashImage"
-            android:fontFamily="@font/gotham_book"
-            android:text="@string/maxTickets"
-            android:textSize="@dimen/daysRemaining" />
+                <TextView
+                    android:id="@+id/cashAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/outerText"
+                    android:textSize="@dimen/cardsubtitle"
+                    android:gravity="center"
+                    android:text="@string/unlimited" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/payLaterContainer"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/paylaterImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/paylater_deactivated" />
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/gotham_medium"
+                    android:textColor="@color/staticTitle"
+                    android:textSize="@dimen/cash"
+                    android:text="@string/payLater" />
 
-        <TextView
-            android:id="@+id/cashAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/creditAmount"
-            android:layout_alignStart="@+id/textView16"
-            android:textColor="@color/outerText"
-            android:textSize="@dimen/cardsubtitle"
-            android:gravity="center"
-            android:layout_alignEnd="@id/textView16"
-            android:text="@string/unlimited" />
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/gotham_book"
+                    android:textSize="@dimen/daysRemaining"
+                    android:text="@string/maxTickets" />
 
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView15"
-            android:layout_alignStart="@+id/paylaterImage"
-            android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/staticTitle"
-            android:textSize="@dimen/cash"
-            android:text="@string/payLater" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView16"
-            android:layout_alignStart="@+id/textView21"
-            android:fontFamily="@font/gotham_book"
-            android:textSize="@dimen/daysRemaining"
-            android:text="@string/maxTickets" />
-
-        <TextView
-            android:id="@+id/paylaterAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/cashAmount"
-            android:layout_alignEnd="@id/textView22"
-            android:layout_alignStart="@+id/textView22"
-            android:gravity="center"
-            android:text="@string/unlimited"
-            android:textColor="@color/outerText"
-            android:textSize="@dimen/cardsubtitle" />
+                <TextView
+                    android:id="@+id/paylaterAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/unlimited"
+                    android:textColor="@color/outerText"
+                    android:textSize="@dimen/cardsubtitle" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cashAmount"
+            android:layout_below="@+id/paymentContainer"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp"
             android:layout_marginEnd="32dp"

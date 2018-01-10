@@ -33,9 +33,9 @@ public class EventDetailsAdapter {
         EventDetails eventDetails = new EventDetails();
         eventDetails.setEventTitle(data.getTitle());
         if (Locale.getDefault().getLanguage().equals("ar")){
-            eventDetails.setInterested(data.getInterested()+ " - مهتم" + data.getGoing()+ " ذاهب");
+            eventDetails.setInterested((data.getInterested() != 0 ? data.getInterested():"")+ " مهتم -"+(data.getGoing() !=0 ? data.getGoing():"")+" ذاهب");
         }else {
-            eventDetails.setInterested(data.getInterested()+ " Interested - " + data.getGoing()+ " Going");
+            eventDetails.setInterested((data.getInterested() != 0 ? data.getInterested():"")+ " Interested -"+(data.getGoing() !=0 ? data.getGoing():"")+" Going");
         }
         eventDetails.setEventPrice(data.getStartPrice()+" - "+data.getEndPrice());
         eventDetails.setEventMonth(getMonth(convertJSONDateToDate(data.getStartDate())));
@@ -43,17 +43,22 @@ public class EventDetailsAdapter {
         eventDetails.setEventDatRemaining(getDaysRemaining(convertJSONDateToDate(data.getStartDate())));
         eventDetails.setEventAddress(data.getAddress());
         eventDetails.setEventDatetitle(getEventDateTitle(data.getStartDate(),data.getEndDate()));
-        eventDetails.setSocialMedia((ArrayList<SocialMedium>) data.getSocialMedia());
+        eventDetails.setSocialMedia(data.getSocialMedia() != null ? (ArrayList<SocialMedium>) data.getSocialMedia() : new ArrayList<>());
         eventDetails.setEventTags((ArrayList<EventTag>) data.getEventTags());
         eventDetails.setEventDescription(data.getDescription());
         eventDetails.setLatitude(Double.parseDouble(data.getLat()));
         eventDetails.setLongitude(Double.parseDouble(data.getLng()));
         StringBuilder cat = new StringBuilder();
         for (int i = 0 ; i < data.getCategories().size() ; i++ ) {
-            cat.append(data.getCategories().get(i).getName());
-            cat.append(" | ");
-            cat.append(data.getSubCategories().get(i));
-            cat.append(",");
+            cat.append(data.getCategories().get(i).getName() != null ? data.getCategories().get(i).getName():"");
+            try {
+                cat.append(" | ");
+                cat.append(data.getSubCategories().get(i));
+            }catch (Exception e){
+                cat.append("");
+            }finally {
+                cat.append(" , ");
+            }
         }
         eventDetails.setCategoriesText(cat.toString());
         eventDetails.setIsliked(data.getIsLiked());
@@ -63,7 +68,10 @@ public class EventDetailsAdapter {
             days.add(getEventDays(eventDay));
         }
         eventDetails.setEventDateDays(days);
-        eventDetails.setImageURLS((ArrayList<String>) data.getGallery());
+        //eventDetails.setImageURLS((ArrayList<String>) data.getGallery());
+        ArrayList<String> images = new ArrayList<>();
+        images.add(data.getImage());
+        eventDetails.setImageURLS(images);
         return eventDetails;
     }
 

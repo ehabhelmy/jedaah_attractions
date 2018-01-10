@@ -14,6 +14,18 @@ public class Msg extends BaseModel {
     @Expose
     private String msg;
 
+    @SerializedName("errors")
+    @Expose
+    private Errors errors;
+
+    public Errors getErrors() {
+        return errors;
+    }
+
+    public void setErrors(Errors errors) {
+        this.errors = errors;
+    }
+
     public String getMsg() {
         return msg;
     }

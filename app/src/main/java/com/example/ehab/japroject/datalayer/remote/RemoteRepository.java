@@ -37,6 +37,10 @@ import com.example.ehab.japroject.datalayer.remote.service.UpcomingEventsService
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,6 +91,9 @@ public class RemoteRepository implements RemoteSource {
             if (response.isSuccessful()) {
                 return new ServiceResponse(responseCode, isVoid ? null : response.body());
             } else {
+                if (responseCode == 406 || responseCode == 401){
+                    return new ServiceResponse(responseCode,isVoid ? null : gson.fromJson(response.errorBody().string(),LoginResponse.class));
+                }
                 ServiceError ServiceError;
                 ServiceError = new ServiceError(response.message(), responseCode);
                 return new ServiceResponse(ServiceError);
@@ -247,12 +254,8 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             AllEventsService allEventsService = serviceGenerator.createService(AllEventsService.class, BASE_URL);
                             ServiceResponse serviceResponse = null;
-                            if (newURL == null) {
-                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),1,token), false);
-                            }else {
-                                char page = newURL.charAt(newURL.length() - 1);
-                                serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),Character.getNumericValue(page),token), false);
-                            }
+                            char page = newURL.charAt(newURL.length() - 1);
+                            serviceResponse = processCall(allEventsService.getAllEvents(getCurrentLanguage(),Character.getNumericValue(page),token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 AllEventsResponse eventsResponse = (AllEventsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventsResponse);
@@ -331,7 +334,7 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             LoginService loginService = serviceGenerator.createService(LoginService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(loginService.login(getCurrentLanguage(), new LoginRequest(email, password)), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE || serviceResponse.getCode() == INVALID_CODE) {
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getServiceError().getCode() == FALSE_CODE || serviceResponse.getCode() == INVALID_CODE) {
                                 LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(loginResponse);
                             } else {
@@ -357,7 +360,7 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             SocialLoginService loginService = serviceGenerator.createService(SocialLoginService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(loginService.socialLogin(getCurrentLanguage(), new LoginRequest(email, facebookId, googleId)), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE || serviceResponse.getCode() == INVALID_CODE) {
                                 LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(loginResponse);
                             } else {

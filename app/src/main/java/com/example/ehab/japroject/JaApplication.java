@@ -29,11 +29,11 @@ public class JaApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        // TODO : initialize leak canary and crashlytics and FireBase Analytics and facebook sdk
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
+//        // TODO : initialize leak canary and crashlytics and FireBase Analytics and facebook sdk
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            return;
+//        }
+//        LeakCanary.install(this);
         AppEventsLogger.activateApp(this);
         mainComponent = DaggerMainComponent.create();
         context = getApplicationContext();

@@ -42,8 +42,8 @@
                 app:layout_constraintHorizontal_bias="0.974"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:like_drawable="@drawable/ic_like_full_g"
-                app:unlike_drawable="@drawable/ic_like_empty" />
+                app:like_drawable="@drawable/like_full_g"
+                app:unlike_drawable="@drawable/like_empty_g" />
         </com.example.ehab.japroject.ui.widget.ImageLayout>
 
         <LinearLayout
@@ -112,36 +112,37 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="@color/outerText"
-                        app:srcCompat="@drawable/ic_pin_grey_small"/>
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/pin_grey_small"/>
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="@dimen/daysRemaining"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/address"
+                        android:layout_marginStart="5dp"
                         android:fontFamily="@font/gotham_book"
                         android:textColor="@color/outerText"
                         android:id="@+id/eventAddress"
                         android:text="12, Al-Aziz , Jeddah" />
                 </LinearLayout>
-                
+
 
                 <TextView
                     android:id="@+id/eventInterested"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="7dp"
                     android:textSize="@dimen/cardsubtitle"
                     android:fontFamily="@font/gotham_book"
                     android:textColor="@color/outerText"
                     android:gravity="center"
                     android:text="22 Interested - 230 Going" />
-
             </LinearLayout>
 
         </LinearLayout>

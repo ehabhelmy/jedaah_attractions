@@ -1,6 +1,9 @@
 package com.example.ehab.japroject.ui.Home.explore;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,6 +23,7 @@ import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.HomeContract;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
+import com.example.ehab.japroject.usecase.registeration.Registeration;
 import com.example.ehab.japroject.util.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
@@ -58,11 +62,20 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @BindView(R.id.enableLocationSettings)
     Button enableLocationSettings;
 
-    @BindView(R.id.errorLocationContainer)
+    @BindView(R.id.errorLocationContainerNew)
     RelativeLayout errorLocationContainer;
 
     @BindView(R.id.exploreNearBy)
     LinearLayout exploreNearBy;
+
+    @BindView(R.id.noTopEvents)
+    RelativeLayout noTopEvents;
+
+    @BindView(R.id.noCatogories)
+    RelativeLayout noCatogories;
+
+    @BindView(R.id.noNearEvents)
+    RelativeLayout noNearEvents;
 
     @Override
     protected void initializeDagger() {
@@ -91,7 +104,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     }
 
     @OnClick(R.id.events)
-    void openEventListing(){
+    void openEventListing() {
         activity.openEventsList();
     }
 
@@ -113,15 +126,25 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @Override
     public void setupTopEvents(List<Event> events) {
-        setupRecyclerView(topEvents,events);
+        if (events.size() > 0) {
+            setupRecyclerView(topEvents, events);
+        }else {
+            noTopEvents.setVisibility(View.VISIBLE);
+            topEvents.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void setupNearbyEvents(List<Event> events) {
-        setupRecyclerView(nearByEvents,events);
+        if (events.size() > 0) {
+            setupRecyclerView(nearByEvents, events);
+        }else {
+            noNearEvents.setVisibility(View.VISIBLE);
+            nearByEvents.setVisibility(View.GONE);
+        }
     }
 
-    private void setupRecyclerView(RecyclerView recyclerView,List<Event> events) {
+    private void setupRecyclerView(RecyclerView recyclerView, List<Event> events) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
@@ -157,8 +180,20 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @Override
     public void getLatitudeAndLongitude() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
-          presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(),location1.getLongitude()));
+            if (location1 != null) {
+                presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
+            }
         });
     }
 
@@ -175,14 +210,19 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @Override
     public void setupCategories(List<Cats> categoryList) {
-        RecyclerView.LayoutManager layoutManager  = new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.category_divider));
-        categories.setLayoutManager(layoutManager);
-        categories.addItemDecoration(dividerItemDecoration);
-        CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
-        categoryListAdapter.setData((ArrayList<Cats>) categoryList);
-        categories.setAdapter(categoryListAdapter);
+        if (categoryList.size() > 0) {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.category_divider));
+            categories.setLayoutManager(layoutManager);
+            categories.addItemDecoration(dividerItemDecoration);
+            CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
+            categoryListAdapter.setData((ArrayList<Cats>) categoryList);
+            categories.setAdapter(categoryListAdapter);
+        }else {
+            categories.setVisibility(View.GONE);
+            noCatogories.setVisibility(View.VISIBLE);
+        }
     }
 
     public void hideNearByEvents() {

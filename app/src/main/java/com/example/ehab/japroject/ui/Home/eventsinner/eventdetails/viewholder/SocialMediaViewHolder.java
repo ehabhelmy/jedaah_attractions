@@ -44,13 +44,11 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
             socialMediaUrl.getContext().startActivity(i);
         });
         if (baseModel.getName().equals(SocialMedia.Facebook.name())) {
-            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.ic_facebook_g).error(R.drawable.ic_facebook_g).into(socialMediaIcon);
-        }else if (baseModel.getName().equals(SocialMedia.Twitter.name())){
-            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.ic_type_g).error(R.drawable.ic_type_g).into(socialMediaIcon);
+            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.facebook_g).error(R.drawable.facebook_g).into(socialMediaIcon);
         }else if(baseModel.getName().equals(SocialMedia.Instagram.name())){
-            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.ic_instagram_g).error(R.drawable.ic_instagram_g).into(socialMediaIcon);
+            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g).into(socialMediaIcon);
         }else {
-            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.ic_website_g).error(R.drawable.ic_website_g).into(socialMediaIcon);
+            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.website_g).error(R.drawable.website_g).into(socialMediaIcon);
         }
     }
 

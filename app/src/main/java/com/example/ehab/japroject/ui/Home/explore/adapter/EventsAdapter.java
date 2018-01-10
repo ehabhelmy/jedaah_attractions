@@ -23,9 +23,9 @@ public class EventsAdapter {
             event.setEventName(datum.getTitle());
             event.setEventAddress(datum.getAddress());
             if (Locale.getDefault().getLanguage().equals("ar")){
-                event.setEventLikes(datum.getInterested()+ " مهتم -"+datum.getGoing()+" ذاهب");
+                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested():"")+ " مهتم -"+(datum.getGoing() !=0 ? datum.getGoing():"")+" ذاهب");
             }else {
-                event.setEventLikes(datum.getInterested()+ " Interested -"+datum.getGoing()+" Going");
+                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested():"")+ " Interested -"+(datum.getGoing() !=0 ? datum.getGoing():"")+" Going");
             }
             event.setEventMonth(getMonth(convertJSONDateToDate(datum.getStartDate())));
             event.setEventDay(getDay(convertJSONDateToDate(datum.getStartDate())));

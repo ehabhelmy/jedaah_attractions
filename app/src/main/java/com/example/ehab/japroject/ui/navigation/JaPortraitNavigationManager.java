@@ -14,6 +14,7 @@ import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.EventOrderFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
@@ -87,10 +88,12 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     }
 
     @Override
-    public void goToAuthActivity() {
+    public void goToAuthActivity(String token) {
         Intent intent = new Intent(context,AuthenticationActivity.class);
-        if (getCurrentActivity() instanceof HomeActivity || getCurrentActivity() instanceof SplashActivity) {
-            getCurrentActivity().finish();
+        if (token == null) {
+            if (getCurrentActivity() instanceof HomeActivity || getCurrentActivity() instanceof SplashActivity) {
+                getCurrentActivity().finish();
+            }
         }
         getCurrentActivity().startActivity(intent);
     }
@@ -155,5 +158,19 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             eventOrderFragment.setArguments(bundle);
         }
         replaceFragment(eventOrderFragment,true,ORDER,R.id.frame_layout_inner);
+    }
+
+    @Override
+    public void goBackToOrderView() {
+        fragmentManager.popBackStack();
+    }
+
+    @Override
+    public void showEventOrderSuccess() {
+        EventOrderSuccessFragment eventOrderSuccessFragment = (EventOrderSuccessFragment) fragmentManager.findFragmentByTag(ORDER_SUCCESS);
+        if (eventOrderSuccessFragment == null) {
+            eventOrderSuccessFragment = new EventOrderSuccessFragment();
+        }
+        replaceFragment(eventOrderSuccessFragment,true,ORDER_SUCCESS,R.id.frame_layout_inner);
     }
 }

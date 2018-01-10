@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingBottom="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -34,40 +35,90 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.6"
+                android:orientation="vertical"
                 android:padding="10dp"
                 android:id="@id/events"
-                android:background="@color/background">
+                android:background="@drawable/rounded_rect_light_grey">
             <ImageView
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_ca_food_ic" />
+                android:layout_gravity="center"
+                app:srcCompat="@mipmap/events_ic_2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/daysRemaining"
+                    android:fontFamily="@font/gotham_bold"
+                    android:textColor="@color/colorTitle"
+                    android:text="@string/Events"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1.6"
                 android:layout_marginStart="10dp"
                 android:padding="10dp"
-                android:background="@color/background">
+                android:orientation="vertical"
+                android:background="@drawable/rounded_rect_light_grey">
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_ca_food_ic" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@mipmap/venues_ic" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/cardsubtitle"
+                    android:fontFamily="@font/gotham_book"
+                    android:textColor="#000000"
+                    android:text="@string/comingSoon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/daysRemaining"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="@string/venues"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1.6"
+                android:orientation="vertical"
                 android:layout_marginStart="10dp"
                 android:padding="10dp"
-                android:background="@color/background">
+                android:background="@drawable/rounded_rect_light_grey">
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_ca_food_ic" />
+                    android:layout_gravity="center"
+                    app:srcCompat="@mipmap/attractions_ic_1" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/cardsubtitle"
+                    android:fontFamily="@font/gotham_book"
+                    android:textColor="#000000"
+                    android:text="@string/comingSoon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/daysRemaining"
+                    android:fontFamily="@font/gotham_bold"
+                    android:text="@string/attractions"/>
             </LinearLayout>
         </LinearLayout>
         </LinearLayout>
@@ -93,6 +144,33 @@
                 android:paddingStart="16dp"
                 android:clipToPadding="false"
                 android:layout_height="match_parent"/>
+            <RelativeLayout
+                android:id="@+id/noTopEvents"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    app:srcCompat="@mipmap/no_events_ic" />
+
+                <TextView
+                    android:id="@+id/textView262"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_below="@+id/imageView22"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="27dp"
+                    android:textSize="@dimen/static_title_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:textColor="@color/staticTitle"
+                    android:text="@string/nothingScheduled" />
+            </RelativeLayout>
 
         </LinearLayout>
         <LinearLayout
@@ -117,6 +195,33 @@
                 android:paddingStart="16dp"
                 android:clipToPadding="false"
                 android:layout_height="match_parent"/>
+            <RelativeLayout
+                android:id="@+id/noCatogories"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    app:srcCompat="@mipmap/no_events_ic" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_below="@+id/imageView11"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="27dp"
+                    android:textSize="@dimen/static_title_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:textColor="@color/staticTitle"
+                    android:text="@string/nothingScheduled" />
+            </RelativeLayout>
 
         </LinearLayout>
 
@@ -137,22 +242,75 @@
                 android:text="@string/nearbyEvents" />
 
             <RelativeLayout
-                android:id="@+id/errorLocationContainer"
+                android:id="@+id/errorLocationContainerNew"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:textSize="@dimen/static_title_size"
+                    android:fontFamily="@font/gotham_book"
+                    android:text="@string/want_to_know" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_alignStart="@+id/textView14"
+                    android:layout_below="@+id/textView14"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/static_title_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:textColor="@color/staticTitle"
+                    android:text="@string/your_nearby" />
+
+                <Button
+                    android:id="@+id/enableLocationSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_rectangle_green"
+                    android:text="@string/allowLocation"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/textView23"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="22dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/noNearEvents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
-                <Button
-                    android:id="@+id/enableLocationSettings"
+                <ImageView
+                    android:id="@+id/imageView212"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:background="@color/lightBlack"
+                    app:srcCompat="@mipmap/no_events_ic" />
+
+                <TextView
+                    android:id="@+id/textView267"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:padding="10dp"
-                    android:text="ENABLE LOCATIONS SETTINGS"
-                    android:textColor="@color/colorTitle" />
+                    android:layout_below="@+id/imageView212"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="27dp"
+                    android:textSize="@dimen/static_title_size"
+                    android:fontFamily="@font/gotham_bold"
+                    android:textColor="@color/staticTitle"
+                    android:text="@string/nothingScheduled" />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView

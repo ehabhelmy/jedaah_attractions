@@ -24,4 +24,9 @@ public class EventInnerActivityPresenter extends BasePresenter<EventInnerActivit
             jaNavigationManager.showEventDetails(extras.getInt(Constants.EVENT_ID));
         }
     }
+
+    @Override
+    public void goToHomeActivity() {
+        jaNavigationManager.goToHomeActivity();
+    }
 }

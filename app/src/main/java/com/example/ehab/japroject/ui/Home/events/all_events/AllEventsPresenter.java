@@ -27,11 +27,15 @@ public class AllEventsPresenter extends BasePresenter<AllEventsContract.View> im
         @Override
         public void onSuccess(AllEventsResponse model) {
             if (isViewAlive.get()) {
-                if (model.getSuccess()) {
-                    if (firstFetch) {
-                        getView().setupAllEvents(EventsAdapter.convertIntoEventUiAll(model.getData().getEvents()));
-                    }else {
-                        getView().addEvents(EventsAdapter.convertIntoEventUiAll(model.getData().getEvents()));
+                if (model == null) {
+                    getView().addEvents(null);
+                } else {
+                    if (model.getSuccess()) {
+                        if (firstFetch) {
+                            getView().setupAllEvents(EventsAdapter.convertIntoEventUiAll(model.getData().getEvents()));
+                        } else {
+                            getView().addEvents(EventsAdapter.convertIntoEventUiAll(model.getData().getEvents()));
+                        }
                     }
                 }
             }

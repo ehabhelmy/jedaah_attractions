@@ -32,7 +32,11 @@ public class LikedEventsPresenter extends BasePresenter<LikedEventsContract.View
         public void onSuccess(EventsResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                    getView().setupAllEvents(EventsAdapter.convertIntoEventUi(model.getData()));
+                    if (model.getData().size() > 0) {
+                        getView().setupAllEvents(EventsAdapter.convertIntoEventUi(model.getData()));
+                    }else {
+                        getView().showNoEvents();
+                    }
                 }
             }
         }

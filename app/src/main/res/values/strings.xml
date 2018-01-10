@@ -69,4 +69,16 @@
     <string name="pastEvents">PAST EVENTS</string>
     <string name="description">DESCRIPTION</string>
     <string name="noevents">NO EVENTS IN YOUR HISTORY</string>
+    <string name="noLikedEvents">NO LIKED EVENTS FOUND</string>
+    <string name="comingSoon">COMING SOON</string>
+    <string name="Events">EVENTS</string>
+    <string name="venues">VENUES</string>
+    <string name="attractions">ATTRACTIONS</string>
+    <string name="want_to_know">Want to know all</string>
+    <string name="your_nearby">YOUR NEAR BY EVENTS</string>
+    <string name="allowLocation">ALLOW LOCATION ACCESS</string>
+    <string name="nothingScheduled">NOTHING SCHEDULED YET</string>
+    <string name="thankyou">THANK YOU</string>
+    <string name="paymentDone">Payment done successfully. Thank you for booking through Jeddah Attractions</string>
+    <string name="bookMore">BOOK MORE FOR SAME EVENT</string>
 </resources>

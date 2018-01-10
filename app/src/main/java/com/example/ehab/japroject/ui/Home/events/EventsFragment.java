@@ -31,6 +31,7 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
     ViewPager eventsViewPager;
     private EventsViewPagerAdapter eventsViewPagerAdapter;
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

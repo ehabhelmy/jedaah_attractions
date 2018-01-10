@@ -6,6 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.ehab.japroject.JaApplication;
@@ -35,6 +37,9 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
 
     @BindView(R.id.eventsList)
     RecyclerView eventsList;
+
+    @BindView(R.id.noEvents)
+    RelativeLayout noEvents;
 
     private List<Event> events;
     private AllEventsListAdapter eventsListAdapter;
@@ -77,33 +82,38 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
 
     @Override
     public void setupAllEvents(List<Event> events) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
-        eventsList.setLayoutManager(layoutManager);
-        eventsList.addItemDecoration(dividerItemDecoration);
-        eventsList.setItemAnimator(new DefaultItemAnimator());
-        this.events = events;
-        eventsListAdapter = new AllEventsListAdapter();
-        eventsListAdapter.setData((ArrayList<Event>) events);
-        eventsListAdapter.setOnFavouriteListener(id -> {
-            //TODO : call presenter to send id of the event to the backend
-            presenter.like(id);
-        });
-        eventsListAdapter.setOnViewListener(id -> {
-            presenter.showEventInner(id);
-        });
-        eventsListAdapter.setupLoadingRecyclerView(eventsList);
-        eventsListAdapter.setOnLoadMoreListener(() -> {
-            if (events.size() <= 9) {
-                events.add(null);
-                eventsListAdapter.notifyItemInserted(events.size() - 1);
-                presenter.addEvents();
-            } else {
-                Toast.makeText(getActivity(), "No More Events", Toast.LENGTH_SHORT).show();
-            }
-        });
-        eventsList.setAdapter(eventsListAdapter);
+        if (events.size() > 0) {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
+            eventsList.setLayoutManager(layoutManager);
+            eventsList.addItemDecoration(dividerItemDecoration);
+            eventsList.setItemAnimator(new DefaultItemAnimator());
+            this.events = events;
+            eventsListAdapter = new AllEventsListAdapter();
+            eventsListAdapter.setData((ArrayList<Event>) events);
+            eventsListAdapter.setOnFavouriteListener(id -> {
+                //TODO : call presenter to send id of the event to the backend
+                presenter.like(id);
+            });
+            eventsListAdapter.setOnViewListener(id -> {
+                presenter.showEventInner(id);
+            });
+            eventsListAdapter.setupLoadingRecyclerView(eventsList);
+            eventsListAdapter.setOnLoadMoreListener(() -> {
+                if (events.size() <= 9) {
+                    events.add(null);
+                    eventsListAdapter.notifyItemInserted(events.size() - 1);
+                    presenter.addEvents();
+                } else {
+                    Toast.makeText(getActivity(), "No More Events", Toast.LENGTH_SHORT).show();
+                }
+            });
+            eventsList.setAdapter(eventsListAdapter);
+        }else {
+            eventsList.setVisibility(View.GONE);
+            noEvents.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -111,7 +121,9 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
         this.events.remove(this.events.size() - 1);
         //eventsList.removeViewAt(events.size() - 1);
         eventsListAdapter.notifyItemRemoved(this.events.size());
-        eventsListAdapter.addData((ArrayList<Event>) events);
         eventsListAdapter.setLoading(false);
+        if (events != null) {
+            eventsListAdapter.addData((ArrayList<Event>) events);
+        }
     }
 }

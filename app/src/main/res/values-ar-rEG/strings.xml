@@ -67,4 +67,9 @@
     <string name="pastEvents">المناسبات السابقه</string>
     <string name="description">التفاصيل</string>
     <string name="noevents">لا يوجد مناسبات فى تاريخك</string>
+    <string name="noLikedEvents">لا يوجد مناسبات محببه</string>
+    <string name="comingSoon">COMING SOON</string>
+    <string name="Events">EVENTS</string>
+    <string name="venues">VENUES</string>
+    <string name="attractions">ATTRACTIONS</string>
 </resources>

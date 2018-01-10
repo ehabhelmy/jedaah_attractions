@@ -34,6 +34,7 @@ public class AllEvents implements Unsubscribable {
     public AllEvents(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
         this.dataRepository = dataRepository;
         this.compositeDisposable = compositeDisposable;
+        eventsURL = "http://dev.spade.studio/jada/public/api/v1/en/events?page=1";
     }
 
     public void getAllEvents(BaseCallback<AllEventsResponse> callback, boolean fresh){
@@ -61,11 +62,15 @@ public class AllEvents implements Unsubscribable {
             }
         };
         if (!compositeDisposable.isDisposed()){
-            disposable = dataRepository.getAllEvents(fresh,eventsURL)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(eventsResponseDisposableSingleObserver);
-            compositeDisposable.add(disposable);
+            if (eventsURL != null) {
+                disposable = dataRepository.getAllEvents(fresh, eventsURL)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(eventsResponseDisposableSingleObserver);
+                compositeDisposable.add(disposable);
+            }else {
+                callback.onSuccess(null);
+            }
         }
     }
 

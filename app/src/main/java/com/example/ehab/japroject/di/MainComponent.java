@@ -12,6 +12,7 @@ import com.example.ehab.japroject.ui.Home.events.today_events.TodayEventsFragmen
 import com.example.ehab.japroject.ui.Home.events.week_events.WeekEventsFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
+import com.example.ehab.japroject.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 import com.example.ehab.japroject.ui.Home.profile.liked_events.LikedEventsFragment;
@@ -73,6 +74,8 @@ public interface MainComponent {
     void inject(TicketsFragment ticketsFragment);
 
     void inject(SplashActivity splashActivity);
+
+    void inject(EventOrderSuccessFragment orderSuccessFragment);
 
 }
 

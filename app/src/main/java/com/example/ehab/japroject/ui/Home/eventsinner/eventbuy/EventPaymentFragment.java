@@ -5,12 +5,14 @@ import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTicket;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.TicketDate;
+import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
@@ -28,7 +30,8 @@ import butterknife.OnClick;
  * Created by ehab on 12/25/17.
  */
 
-public class EventPaymentFragment extends BaseFragment implements EventPaymentContract.View {
+public class
+EventPaymentFragment extends BaseFragment implements EventPaymentContract.View {
 
     @Inject
     EventPaymentPresenter presenter;
@@ -69,6 +72,15 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
     @BindView(R.id.next)
     Button nextBtn;
 
+    @BindView(R.id.creditContainer)
+    LinearLayout creditContainer;
+
+    @BindView(R.id.cashContainer)
+    LinearLayout cashContainer;
+
+    @BindView(R.id.payLaterContainer)
+    LinearLayout payLaterContainer;
+
     private String paymentType;
 
     private String eventTitle;
@@ -91,16 +103,16 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
 
     private boolean credit,cash,paylater;
 
-    private boolean creditToggle = true, cashToggle = true , payLaterToggle = true;
+    private boolean creditToggle = false, cashToggle = false , payLaterToggle = false;
 
     @OnClick(R.id.creditImage)
     void creditSelected(){
         if (credit) {
             if (creditToggle) {
-                crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_creditcard_deactivated));
+                crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.creditcard_deactivated));
                 creditToggle = false;
             }else {
-                crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_creditcard_active));
+                crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.creditcard_active));
                 creditToggle = true;
                 tickets = "Unlimited";
                 paymentType = "Credit Card";
@@ -112,10 +124,10 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
     void cashSelected(){
         if (cash) {
             if (cashToggle) {
-                cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_cod_deactivated));
+                cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_deactivated));
                 cashToggle = false;
             }else {
-                cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_cod_active));
+                cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_active));
                 cashToggle = true;
                 tickets = cashTickets+"";
                 paymentType = "Cash on delivery";
@@ -127,10 +139,10 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
     void payLaterSelected(){
         if (paylater) {
             if (payLaterToggle) {
-                payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_paylater_deactivated));
+                payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_deactivated));
                 payLaterToggle = false;
             }else {
-                payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_paylater_active));
+                payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_active));
                 payLaterToggle = true;
                 tickets = payLaterTickets+"";
                 paymentType = "Pay Later";
@@ -213,30 +225,40 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
             nationalEnabled = false;
         }
         if (!paymentData.isCreditCard()) {
-            crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_creditcard_deactivated));
-            creditAmountTextView.setText(0+"");
-            credit = false;
+            creditContainer.setVisibility(View.GONE);
+//            crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_creditcard_deactivated));
+//            creditAmountTextView.setText(0+"");
+//            credit = false;
         }else {
             credit = true;
             paymentType = "Credit Card";
         }
         if (!paymentData.isCash()) {
-            cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_cod_deactivated));
-            cashAmountTextView.setText(0+"");
-            cash = false;
+            cashContainer.setVisibility(View.GONE);
+//            cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_cod_deactivated));
+//            cashAmountTextView.setText(0+"");
+//            cash = false;
         }else {
             cashAmountTextView.setText(paymentData.getCashTickets()+"");
             cash = true;
             paymentType = "Cash on delivery";
         }
         if (!paymentData.isPayLater()) {
-            payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_paylater_deactivated));
-            payLaterTextView.setText(0+"");
-            paylater = false;
+            payLaterContainer.setVisibility(View.GONE);
+//            payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.ic_paylater_deactivated));
+//            payLaterTextView.setText(0+"");
+//            paylater = false;
         }else {
             payLaterTextView.setText(paymentData.getPayLaterTickets()+"");
             paylater = true;
             paymentType = "Pay Later";
         }
+    }
+
+    @Override
+    public void setupUserData(User user) {
+        nameEditText.setText(user.getName());
+        emailEditText.setText(user.getEmail());
+        mobileEditText.setText(user.getMobileNumber());
     }
 }

@@ -45,6 +45,8 @@ public abstract class JaNavigationManager {
 
     public static final String PROFILE = "profile";
 
+    public static final String ORDER_SUCCESS = "orderSuccess";
+
     public static final int LOCATION_SETTINGS = 2;
 
 
@@ -75,7 +77,7 @@ public abstract class JaNavigationManager {
 
     public abstract void goToHomeActivity();
 
-    public abstract void goToAuthActivity();
+    public abstract void goToAuthActivity(String token);
 
     public abstract void showRegisterationScreen();
 
@@ -89,7 +91,9 @@ public abstract class JaNavigationManager {
 
     public abstract void showOrderView(EventOrder eventOrder);
 
+    public abstract void goBackToOrderView();
 
+    public abstract void showEventOrderSuccess();
 
     protected void replaceFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -126,6 +130,5 @@ public abstract class JaNavigationManager {
     public void setCurrentActivity(BaseActivity currentActivity) {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
-
 
 }

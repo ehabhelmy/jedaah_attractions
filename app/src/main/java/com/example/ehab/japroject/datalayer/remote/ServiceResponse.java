@@ -19,6 +19,11 @@ public class ServiceResponse {
         this.code = code;
     }
 
+    public ServiceResponse(ServiceError serviceError, Object data) {
+        this.serviceError = serviceError;
+        this.data = data;
+    }
+
     public ServiceResponse(Object data) {
         this.data = data;
     }

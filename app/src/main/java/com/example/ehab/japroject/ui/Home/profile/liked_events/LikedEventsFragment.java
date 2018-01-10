@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
@@ -35,6 +36,8 @@ public class LikedEventsFragment extends BaseFragment implements LikedEventsCont
 
     @BindView(R.id.eventsList)
     RecyclerView eventsList;
+    @BindView(R.id.noEvents)
+    TextView noEvents;
 
     private EventsListAdapter eventsListAdapter;
 
@@ -52,7 +55,7 @@ public class LikedEventsFragment extends BaseFragment implements LikedEventsCont
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_events_list;
+        return R.layout.fragment_liked_events;
     }
 
 
@@ -99,5 +102,11 @@ public class LikedEventsFragment extends BaseFragment implements LikedEventsCont
             presenter.showEventInner(id);
         });
         eventsList.setAdapter(eventsListAdapter);
+    }
+
+    @Override
+    public void showNoEvents() {
+        eventsList.setVisibility(View.GONE);
+        noEvents.setVisibility(View.VISIBLE);
     }
 }

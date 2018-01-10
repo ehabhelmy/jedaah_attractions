@@ -76,6 +76,8 @@ public interface DataSource {
 
     void saveLoggedUser(User user);
 
+    Single<User> getLoggedUser();
+
     void saveToken(String token);
 
     Single<ProfileResponse> getProfile(boolean fresh);

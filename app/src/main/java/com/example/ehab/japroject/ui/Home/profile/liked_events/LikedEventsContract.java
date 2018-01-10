@@ -16,6 +16,7 @@ public class LikedEventsContract {
 
     interface View extends BaseView, ErrorView, ProgressView {
         void setupAllEvents(List<Event> events);
+        void showNoEvents();
     }
 
     interface Presenter extends Unsubscribable {

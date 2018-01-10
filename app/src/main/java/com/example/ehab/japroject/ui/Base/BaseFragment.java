@@ -107,7 +107,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
                 .setMessage("You need to login to use this feature")
                 .setTitle("Login Required")
                 .setPositiveButton("OK", (dialog, which) -> {
-                    jaNavigationManager.goToAuthActivity();
+                    jaNavigationManager.goToAuthActivity(null);
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> {
                     dialog.dismiss();

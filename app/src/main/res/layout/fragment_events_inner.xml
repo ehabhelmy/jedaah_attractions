@@ -45,8 +45,8 @@
                     app:dots_secondary_color="@color/staticTitle"
                     app:icon_size="25dp"
                     app:icon_type="heart"
-                    app:like_drawable="@drawable/ic_like_full"
-                    app:unlike_drawable="@drawable/ic_like_empty" />
+                    app:like_drawable="@drawable/like_full_g"
+                    app:unlike_drawable="@drawable/like_empty_g" />
 
                 <TextView
                     android:id="@+id/eventMonth"
@@ -140,8 +140,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="6dp"
-                    android:tint="@color/staticTitle"
-                    app:srcCompat="@drawable/ic_location_g" />
+                    app:srcCompat="@drawable/location_g" />
 
                 <TextView
                     android:id="@+id/eventAddress"
@@ -173,14 +172,12 @@
                     android:layout_alignStart="@+id/imageView7"
                     android:layout_below="@+id/directions"
                     android:layout_marginTop="10dp"
-                    android:tint="@color/staticTitle"
-                    app:srcCompat="@drawable/events_ic" />
+                    app:srcCompat="@drawable/dates_g" />
 
                 <TextView
                     android:id="@+id/eventDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView9"
                     android:layout_alignStart="@+id/directions"
                     android:layout_alignTop="@+id/imageView9"
                     android:fontFamily="@font/gotham_book"
@@ -269,8 +266,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="18dp"
-            android:tint="@color/staticTitle"
-            app:srcCompat="@drawable/ic_ticket_g" />
+            app:srcCompat="@drawable/ticket_g" />
 
         <TextView
             android:id="@+id/eventPrice"

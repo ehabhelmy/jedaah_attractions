@@ -13,6 +13,6 @@ public interface EventInnerActivityContract {
     }
 
     interface Presenter {
-
+        void goToHomeActivity();
     }
 }

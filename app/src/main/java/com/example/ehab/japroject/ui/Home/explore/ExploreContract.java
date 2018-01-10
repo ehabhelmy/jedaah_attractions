@@ -24,7 +24,7 @@ public interface ExploreContract {
         void showErrorLocationNotEnabled();
         void getLatitudeAndLongitude();
         void setupCategories(List<Cats> categories);
-
+        void hideNearByEvents();
     }
 
     interface Presenter extends Unsubscribable{

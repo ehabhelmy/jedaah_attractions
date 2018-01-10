@@ -89,7 +89,7 @@ public class EventInnerPresenter extends BasePresenter<EventInnerContract.View> 
     @Override
     public void openPaymentView(PaymentData paymentData) {
         if (token.getToken() == null) {
-            jaNavigationManager.goToAuthActivity();
+            jaNavigationManager.goToAuthActivity(token.getToken());
         }else {
             jaNavigationManager.openPaymentView(paymentData);
         }

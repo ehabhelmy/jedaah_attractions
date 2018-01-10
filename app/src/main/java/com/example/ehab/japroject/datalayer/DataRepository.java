@@ -204,6 +204,11 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<User> getLoggedUser() {
+        return localRepository.getUserProfile();
+    }
+
+    @Override
     public void saveToken(String token) {
         localRepository.saveToken(token);
     }

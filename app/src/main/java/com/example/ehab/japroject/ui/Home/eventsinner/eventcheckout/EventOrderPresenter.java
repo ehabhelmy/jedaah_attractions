@@ -25,7 +25,7 @@ public class EventOrderPresenter extends BasePresenter<EventOrderContract.View> 
         @Override
         public void onSuccess(Data model) {
             if (isViewAlive.get()){
-
+                jaNavigationManager.showEventOrderSuccess();
             }
         }
 

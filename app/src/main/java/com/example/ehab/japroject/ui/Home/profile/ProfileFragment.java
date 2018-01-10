@@ -82,6 +82,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
 
     }
 
+
     @Override
     protected void initializePresenter() {
         super.presenter = presenter;

@@ -1,13 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="16dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="16dp"
     tools:context="com.example.ehab.japroject.ui.Home.profile.liked_events.LikedEventsFragment">
 
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/likedEventsList"/>
+        android:id="@+id/eventsList"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/noEvents"
+        android:visibility="gone"
+        android:textSize="@dimen/title_inner"
+        android:fontFamily="@font/gotham_bold"
+        android:text="@string/noLikedEvents"/>
+
+</RelativeLayout>

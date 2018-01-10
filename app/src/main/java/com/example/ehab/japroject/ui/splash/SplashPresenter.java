@@ -26,7 +26,7 @@ public class SplashPresenter extends BasePresenter<SplashContract.View> implemen
         super.initialize(extras);
         new Handler().postDelayed(() -> {
             if (token.getToken() == null) {
-                jaNavigationManager.goToAuthActivity();
+                jaNavigationManager.goToAuthActivity(null);
             }else {
                 jaNavigationManager.goToHomeActivity();
             }

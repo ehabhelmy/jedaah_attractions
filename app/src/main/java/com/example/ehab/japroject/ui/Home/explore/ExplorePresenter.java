@@ -50,7 +50,11 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         public void onSuccess(EventsResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                    getView().setupNearbyEvents(EventsAdapter.convertIntoEventUi(model.getData()));
+                    if (model.getData().size() > 0) {
+                        getView().setupNearbyEvents(EventsAdapter.convertIntoEventUi(model.getData()));
+                    }else {
+                        getView().hideNearByEvents();
+                    }
                 }
             }
         }
@@ -58,7 +62,8 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         @Override
         public void onError(String message) {
             if (isViewAlive.get()) {
-                getView().showError(message);
+                //getView().showError(message);
+                getView().hideNearByEvents();
             }
         }
     };
@@ -83,7 +88,8 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
         @Override
         public void onSuccess(LikeResponse model) {
-            // do nothing
+            if (isViewAlive.get()){
+            }
         }
 
         @Override

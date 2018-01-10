@@ -31,7 +31,7 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
 
         @Override
         public void onError(String message) {
-            jaNavigationManager.goToAuthActivity();
+            jaNavigationManager.goToAuthActivity(null);
             //getView().showError(message);
         }
     };
@@ -56,6 +56,6 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
     @Override
     public void logOut() {
         token.clearToken();
-        jaNavigationManager.goToAuthActivity();
+        jaNavigationManager.goToAuthActivity(null);
     }
 }

@@ -31,4 +31,10 @@ public class EventInnerActivity extends BaseActivity implements EventInnerActivi
     public int getLayoutId() {
         return R.layout.activity_inner_event;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        presenter.goToHomeActivity();
+    }
 }
