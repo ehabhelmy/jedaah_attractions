@@ -102,7 +102,7 @@ public abstract class JaNavigationManager {
         }
         fragmentTransaction.replace(frame,fragment,tag);
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     protected void addFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){

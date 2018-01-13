@@ -335,7 +335,7 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             LoginService loginService = serviceGenerator.createService(LoginService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(loginService.login(getCurrentLanguage(), new LoginRequest(email, password)), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getServiceError().getCode() == FALSE_CODE || serviceResponse.getCode() == INVALID_CODE) {
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE || serviceResponse.getCode() == INVALID_CODE) {
                                 LoginResponse loginResponse = (LoginResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(loginResponse);
                             } else {
