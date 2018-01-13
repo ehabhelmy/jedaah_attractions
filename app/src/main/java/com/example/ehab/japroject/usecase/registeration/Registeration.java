@@ -53,8 +53,12 @@ public class Registeration implements Unsubscribable {
                     if (loginResponse.getMsg().getErrors() != null) {
                         if (loginResponse.getMsg().getErrors().getEmail() != null) {
                             callback.onError(loginResponse.getMsg().getErrors().getEmail().get(0));
-                        }else {
+                        }else if (loginResponse.getMsg().getErrors().getPassword() != null){
                             callback.onError(loginResponse.getMsg().getErrors().getPassword().get(0));
+                        }else if (loginResponse.getMsg().getErrors().getMobile() !=null){
+                            callback.onError(loginResponse.getMsg().getErrors().getMobile().get(0));
+                        }else {
+                            callback.onError("Server Error");
                         }
                     }else {
                         callback.onError("Server Error");

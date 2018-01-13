@@ -50,11 +50,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         public void onSuccess(EventsResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
-                    if (model.getData().size() > 0) {
-                        getView().setupNearbyEvents(EventsAdapter.convertIntoEventUi(model.getData()));
-                    }else {
-                        getView().hideNearByEvents();
-                    }
+                    getView().setupNearbyEvents(EventsAdapter.convertIntoEventUi(model.getData()));
                 }
             }
         }

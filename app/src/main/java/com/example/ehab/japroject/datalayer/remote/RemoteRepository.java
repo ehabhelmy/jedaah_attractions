@@ -2,6 +2,7 @@ package com.example.ehab.japroject.datalayer.remote;
 
 import android.accounts.NetworkErrorException;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.pojo.request.LoginRequest;
@@ -392,7 +393,7 @@ public class RemoteRepository implements RemoteSource {
                             RequestBody requestEmail = RequestBody.create(MediaType.parse("text/plain"), email);
                             RequestBody requestPassword = RequestBody.create(MediaType.parse("text/plain"), password);
                             RequestBody requestMobile = null;
-                            if (mobile != null) {
+                            if (!TextUtils.isEmpty(mobile)) {
                                 requestMobile = RequestBody.create(MediaType.parse("text/plain"), mobile);
                             }
                             MultipartBody.Part requestImagePart = null;

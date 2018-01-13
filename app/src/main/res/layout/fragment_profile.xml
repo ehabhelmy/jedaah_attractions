@@ -54,7 +54,7 @@
                 android:layout_height="120dp"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/ic_profile_default" />
+                app:srcCompat="@drawable/profile_default" />
 
             <TextView
                 android:id="@+id/username"

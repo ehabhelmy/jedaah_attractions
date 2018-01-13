@@ -88,44 +88,56 @@ public class DateTimeUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Calendar sCalendar = Calendar.getInstance();
-        sCalendar.setTime(sDate);
-        Calendar eCalendar = Calendar.getInstance();
-        eCalendar.setTime(eDate);
-        String date = new SimpleDateFormat("EEEE, MMMM dd").format(sCalendar.getTime());
-        String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
-        String endTime = new SimpleDateFormat("hh:mm aaa").format(eCalendar.getTime());
-        return date + " at " + startTime + " - " + endTime;
+        if (sDate != null && eDate !=null) {
+            Calendar sCalendar = Calendar.getInstance();
+            sCalendar.setTime(sDate);
+            Calendar eCalendar = Calendar.getInstance();
+            eCalendar.setTime(eDate);
+            String date = new SimpleDateFormat("EEEE, MMMM dd").format(sCalendar.getTime());
+            String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+            String endTime = new SimpleDateFormat("hh:mm aaa").format(eCalendar.getTime());
+            return date + " at " + startTime + " - " + endTime;
+        }else {
+            return "";
+        }
     }
 
     public static String getEventDateOrder(TicketDate ticketDate) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
         Date sDate = null;
         try {
             sDate = format1.parse(ticketDate.getDate() + " " + ticketDate.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Calendar sCalendar = Calendar.getInstance();
-        sCalendar.setTime(sDate);
-        String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
-        String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
-        return date +" "+ startTime;
+        if (sDate != null) {
+            Calendar sCalendar = Calendar.getInstance();
+            sCalendar.setTime(sDate);
+            String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
+            String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+            return date + " " + startTime;
+        }else {
+            return "";
+        }
     }
 
     public static String getEventDateHistory(com.example.ehab.japroject.datalayer.pojo.response.history.upcoming.TicketDate ticketDate) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
         Date sDate = null;
         try {
             sDate = format1.parse(ticketDate.getDate() + " " + ticketDate.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Calendar sCalendar = Calendar.getInstance();
-        sCalendar.setTime(sDate);
-        String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
-        String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
-        return date +" "+ startTime;
+        if (sDate != null) {
+            Calendar sCalendar = Calendar.getInstance();
+            sCalendar.setTime(sDate);
+            String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
+            String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+            return date + " " + startTime;
+        }else {
+            return "";
+        }
     }
 
     /**

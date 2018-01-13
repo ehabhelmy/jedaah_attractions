@@ -17,6 +17,17 @@ public class Errors extends BaseModel {
     @SerializedName("password")
     @Expose
     private List<String> password = null;
+    @SerializedName("mobile_numer")
+    @Expose
+    private List<String> mobile = null;
+
+    public List<String> getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(List<String> mobile) {
+        this.mobile = mobile;
+    }
 
     public List<String> getPassword() {
         return password;
