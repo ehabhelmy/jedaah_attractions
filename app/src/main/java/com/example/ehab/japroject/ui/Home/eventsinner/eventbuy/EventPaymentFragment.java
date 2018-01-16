@@ -1,7 +1,9 @@
 package com.example.ehab.japroject.ui.Home.eventsinner.eventbuy;
 
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,8 +32,7 @@ import butterknife.OnClick;
  * Created by ehab on 12/25/17.
  */
 
-public class
-EventPaymentFragment extends BaseFragment implements EventPaymentContract.View {
+public class EventPaymentFragment extends BaseFragment implements EventPaymentContract.View {
 
     @Inject
     EventPaymentPresenter presenter;
@@ -115,7 +116,7 @@ EventPaymentFragment extends BaseFragment implements EventPaymentContract.View {
                 crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.creditcard_active));
                 creditToggle = true;
                 tickets = "Unlimited";
-                paymentType = "Credit Card";
+                paymentType = "credit_card";
             }
         }
     }
@@ -130,7 +131,7 @@ EventPaymentFragment extends BaseFragment implements EventPaymentContract.View {
                 cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_active));
                 cashToggle = true;
                 tickets = cashTickets+"";
-                paymentType = "Cash on delivery";
+                paymentType = "cash_on_delivery";
             }
         }
     }
@@ -145,30 +146,46 @@ EventPaymentFragment extends BaseFragment implements EventPaymentContract.View {
                 payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_active));
                 payLaterToggle = true;
                 tickets = payLaterTickets+"";
-                paymentType = "Pay Later";
+                paymentType = "pay_later";
             }
         }
     }
 
     @OnClick(R.id.next)
     void orderTicket() {
-        EventOrder eventOrder = new EventOrder();
-        eventOrder.setEmail(emailEditText.getText().toString().trim());
-        eventOrder.setName(nameEditText.getText().toString().trim());
-        eventOrder.setMobile(mobileEditText.getText().toString().trim());
-        eventOrder.setEventTitle(eventTitle);
-        eventOrder.setPaymentMethod(paymentType);
-        eventOrder.setVipPrice(vipPrice);
-        eventOrder.setRegularPrice(regularPrice);
-        eventOrder.setEventDateDays(eventDateDays);
-        eventOrder.setEventId(eventId);
-        eventOrder.setEventtickets(eventTickets);
-        eventOrder.setTicketDates(ticketDates);
-        if (nationalEnabled) {
-            eventOrder.setNational(nationalEditText.getText().toString().trim());
+        if (TextUtils.isEmpty(emailEditText.getText())
+                || TextUtils.isEmpty(nameEditText.getText())
+                || TextUtils.isEmpty(mobileEditText.getText())
+                || (TextUtils.isEmpty(nationalEditText.getText()) && nationalEditText.getVisibility() == View.VISIBLE)
+                || paymentType == null){
+
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Failure")
+                    .setMessage("you must enter all the data to proceed")
+                    .setPositiveButton("Ok", (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                    })
+                    .show();
+
+        }else {
+            EventOrder eventOrder = new EventOrder();
+            eventOrder.setEmail(emailEditText.getText().toString().trim());
+            eventOrder.setName(nameEditText.getText().toString().trim());
+            eventOrder.setMobile(mobileEditText.getText().toString().trim());
+            eventOrder.setEventTitle(eventTitle);
+            eventOrder.setPaymentMethod(paymentType);
+            eventOrder.setVipPrice(vipPrice);
+            eventOrder.setRegularPrice(regularPrice);
+            eventOrder.setEventDateDays(eventDateDays);
+            eventOrder.setEventId(eventId);
+            eventOrder.setEventtickets(eventTickets);
+            eventOrder.setTicketDates(ticketDates);
+            if (nationalEnabled) {
+                eventOrder.setNational(nationalEditText.getText().toString().trim());
+            }
+            eventOrder.setTickets(tickets);
+            presenter.showOrderView(eventOrder);
         }
-        eventOrder.setTickets(tickets);
-        presenter.showOrderView(eventOrder);
     }
 
     private void hideNationalSection() {

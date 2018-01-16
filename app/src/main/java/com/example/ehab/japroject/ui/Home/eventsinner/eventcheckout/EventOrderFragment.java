@@ -1,6 +1,8 @@
 package com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout;
 
+import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -126,10 +128,20 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
 
     @OnClick(R.id.done)
     void order(){
-        if (national) {
-            presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", nationalIdTextView.getText().toString().trim(), totalPrice.getText().toString().replace("SAR","").trim());
+        if (dateId == 0) {
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Order Failure")
+                    .setMessage("you must select a date for the event")
+                    .setPositiveButton("Ok", (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                    })
+                    .show();
         }else {
-            presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", null, totalPrice.getText().toString().replace("SAR","").trim());
+            if (national) {
+                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", nationalIdTextView.getText().toString().trim(), totalPrice.getText().toString().replace("SAR", "").trim());
+            } else {
+                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", null, totalPrice.getText().toString().replace("SAR", "").trim());
+            }
         }
     }
 

@@ -52,6 +52,7 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
     @BindView(R.id.textView31)
     TextView pastEvents;
 
+
     @Override
     protected void initializeDagger() {
         JaApplication jaApplication = (JaApplication) getActivity().getApplicationContext();
@@ -92,6 +93,7 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
             upcomingList.setVisibility(View.GONE);
             noEvents.setVisibility(View.VISIBLE);
         }else {
+            noEvents.setVisibility(View.GONE);
             setupRecyclerView(upcomingList, data, HistoryListAdapter.HistoryType.UPCOMING.name());
         }
     }
@@ -103,6 +105,7 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
             pastList.setVisibility(View.GONE);
             noEvents.setVisibility(View.VISIBLE);
         }else {
+            noEvents.setVisibility(View.GONE);
             setupRecyclerView(pastList, data, HistoryListAdapter.HistoryType.PAST.name());
         }
     }
