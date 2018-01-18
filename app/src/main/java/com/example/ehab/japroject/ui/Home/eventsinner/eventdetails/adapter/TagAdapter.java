@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventTag;
 import com.squareup.picasso.Picasso;
@@ -75,7 +77,18 @@ public class TagAdapter extends BaseAdapter {
         tagName.setText(tags.get(position).getName());
         view.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_rectangle_grey));
         view.setPadding(convertFromDpToPixel(),convertFromDpToPixel(),convertFromDpToPixel(),convertFromDpToPixel());
-        Picasso.with(context).load(tags.get(position).getImage()).placeholder(R.drawable.type_g).error(R.drawable.type_g).into(tagIcon);
+        Glide.with(context).load(tags.get(position).getImage()).apply(new RequestOptions().placeholder(R.drawable.type_g).error(R.drawable.type_g)).into(tagIcon);
         return view;
+    }
+    @Override
+    public boolean areAllItemsEnabled()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled(int position)
+    {
+        return false;
     }
 }

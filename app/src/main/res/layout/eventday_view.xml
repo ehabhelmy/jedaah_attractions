@@ -44,6 +44,7 @@
         android:layout_toEndOf="@+id/eventMonth"
         android:fontFamily="@font/gotham_medium"
         android:text="Wed 7:30 PM"
+        android:maxLines="1"
         android:textColor="@color/outerText"
         android:textSize="@dimen/cash" />
 </RelativeLayout>

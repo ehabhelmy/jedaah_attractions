@@ -24,6 +24,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.Data;
@@ -142,7 +144,8 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
         userName.setText(model.getName());
         id.setText("JA ID : "+model.getId());
         if (!TextUtils.isEmpty(model.getProfileImage())) {
-            Picasso.with(this.getContext()).load(model.getProfileImage()).placeholder(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
+            //Glide.with(this.getContext()).load(model.getProfileImage()).(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
+            Glide.with(this).load(model.getProfileImage()).apply(new RequestOptions().placeholder(R.drawable.profile_default).error(R.drawable.profile_default)).into(profileImageView);
         }
     }
 

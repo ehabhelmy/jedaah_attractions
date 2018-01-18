@@ -49,6 +49,9 @@ public abstract class JaNavigationManager {
 
     public static final int LOCATION_SETTINGS = 2;
 
+    public static final int EVENT_INNER = 3;
+
+
 
     public static JaNavigationManager getInstance(){
         if (jaNavigationManager == null){

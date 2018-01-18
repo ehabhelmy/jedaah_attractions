@@ -179,16 +179,17 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView10"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="44dp"
-            android:layout_marginStart="44dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="43dp"
-            android:weightSum="3"
+            android:weightSum="3.3"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:id="@+id/creditContainer"
+                android:background="@drawable/grey_circle"
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/creditImage"
@@ -208,7 +209,7 @@
 
                 <TextView
                     android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:fontFamily="@font/gotham_book"
@@ -225,11 +226,16 @@
                     android:text="@string/unlimited" />
 
             </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="match_parent"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/cashContainer"
+                android:background="@drawable/grey_circle"
                 android:orientation="vertical">
                 <ImageView
                     android:id="@+id/cashImage"
@@ -265,11 +271,16 @@
                     android:gravity="center"
                     android:text="@string/unlimited" />
             </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
+                android:layout_height="match_parent"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/payLaterContainer"
+                android:background="@drawable/grey_circle"
                 android:orientation="vertical">
                 <ImageView
                     android:id="@+id/paylaterImage"

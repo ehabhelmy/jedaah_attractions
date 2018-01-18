@@ -129,6 +129,7 @@
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/gotham_book"
                         android:textColor="@color/outerText"
+                        android:maxLines="1"
                         android:id="@+id/eventAddress"
                         android:text="12, Al-Aziz , Jeddah" />
                 </LinearLayout>

@@ -17,6 +17,7 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseActivity;
 import com.example.ehab.japroject.ui.navigation.JaNavigationManager;
+import com.example.ehab.japroject.util.Constants;
 
 import javax.inject.Inject;
 
@@ -100,6 +101,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             if (resultCode == 0) {
                 presenter.locationIsEnabled();
             }
+        }
+        if (requestCode == JaNavigationManager.EVENT_INNER) {
+            presenter.showEvents();
         }
     }
 

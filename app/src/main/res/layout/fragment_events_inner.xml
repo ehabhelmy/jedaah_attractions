@@ -211,7 +211,7 @@
                     android:layout_below="@+id/socialMedia"
                     android:numColumns="auto_fit"
                     android:id="@+id/tags"
-                    android:columnWidth="100dp"
+                    android:columnWidth="150dp"
                     android:verticalSpacing="10dp"
                     android:horizontalSpacing="10dp"
                     android:stretchMode="spacingWidthUniform">

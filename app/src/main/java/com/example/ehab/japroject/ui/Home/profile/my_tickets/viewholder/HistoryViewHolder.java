@@ -1,8 +1,15 @@
 package com.example.ehab.japroject.ui.Home.profile.my_tickets.viewholder;
 
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
 import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
@@ -67,7 +74,13 @@ public class HistoryViewHolder extends BaseViewHolder<HistoryEventsUi> {
         eventMonth.setText(baseModel.getEventMonth());
         eventDay.setText(baseModel.getEventDay());
         eventTime.setText(baseModel.getEventTime());
-        Picasso.with(eventImage.getContext()).load(baseModel.getEventImage()).placeholder(R.mipmap.myimage).error(R.mipmap.myimage);
+        //Picasso.with(eventImage.getContext()).load(baseModel.getEventImage()).placeholder(R.mipmap.myimage).error(R.mipmap.myimage);
+        Glide.with(eventImage.getContext()).load(baseModel.getEventImage()).apply(new RequestOptions().placeholder(R.mipmap.myimage).error(R.mipmap.myimage)).into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                eventImage.setBackground(resource);
+            }
+        });
         paymentMethod.setText(baseModel.getPaymentMethod());
         ticketType.setText(baseModel.getTicketType());
         orderNumber.setText(baseModel.getOrderNumber());
