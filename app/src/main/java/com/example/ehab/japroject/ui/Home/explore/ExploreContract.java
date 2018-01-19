@@ -1,6 +1,7 @@
 package com.example.ehab.japroject.ui.Home.explore;
 
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.Datum;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.Base.listener.ProgressView;
@@ -19,17 +20,21 @@ public interface ExploreContract {
     interface View extends BaseView,ErrorView,ProgressView {
         void setupTopEvents(List<Event> events);
         void setupNearbyEvents(List<Event> events);
+        void setupTopVenues(List<Datum> data);
+        void setupNearbyVenues(List<Datum> data);
         boolean isLocationPermissionGranted();
         boolean isLocationEnabled();
         void showErrorLocationNotEnabled();
         void getLatitudeAndLongitude();
         void setupCategories(List<Cats> categories);
         void hideNearByEvents();
+        void hideNearByVenues();
     }
 
     interface Presenter extends Unsubscribable{
         void openLocationSettings();
         void loadNearByEventsAfterLocationEnabled(LatLng latLng);
+        void loadNearByVenuesAfterLocationEnabled(LatLng latLng);
         void showEventInner(int id);
         void like(int id);
     }
