@@ -3,6 +3,7 @@ package com.example.ehab.japroject.datalayer.remote;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -33,6 +34,8 @@ public interface RemoteSource {
     Single<EventsResponse> getNearByEvents(LatLng latLng,String token);
 
     Single<VenuesResponse> getTopVenues(String token);
+
+    Single<AllVenuesResponse> getAllVenues(String token);
 
     Single<VenuesResponse> getNearByVenues(LatLng latLng,String token);
 

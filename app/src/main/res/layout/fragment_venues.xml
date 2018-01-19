@@ -59,5 +59,33 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightBlack"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_all_venues"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                style="@style/TitleTheme"
+                android:text="@string/title_all_venues" />
+
+            <GridView
+                android:id="@+id/allVenuesGridView"
+                android:numColumns="2"
+                android:gravity="center"
+                android:columnWidth="50dp"
+                android:layout_width="match_parent"
+                android:paddingStart="16dp"
+                android:clipToPadding="false"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

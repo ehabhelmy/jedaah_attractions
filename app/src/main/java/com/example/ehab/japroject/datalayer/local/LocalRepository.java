@@ -2,6 +2,7 @@ package com.example.ehab.japroject.datalayer.local;
 
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
@@ -87,8 +88,26 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
+    public Single<AllVenuesResponse> getAllVenues() {
+        AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_VENUES, EventsResponse.class);
+        Single<AllVenuesResponse> venuesResponseSingle = Single.create(e -> {
+            if (venuesResponse != null) {
+                e.onSuccess(venuesResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return venuesResponseSingle;
+    }
+
+    @Override
     public void saveTopVenues(VenuesResponse venuesResponse) {
         sharedPref.saveObject(SharedPref.TOP_VENUES, venuesResponse);
+    }
+
+    @Override
+    public void saveAllVenues(AllVenuesResponse venuesResponse) {
+        sharedPref.saveObject(SharedPref.ALL_VENUES, venuesResponse);
     }
 
     @Override

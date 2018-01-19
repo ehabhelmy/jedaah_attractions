@@ -4,6 +4,7 @@ import com.example.ehab.japroject.datalayer.local.LocalRepository;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -63,6 +64,15 @@ public class DataRepository implements DataSource {
             return remoteRepository.getTopVenues(getToken());
         } else {
             return localRepository.getTopVenues();
+        }
+    }
+
+    @Override
+    public Single<AllVenuesResponse> getAllVenues(boolean fresh) {
+        if (fresh){
+            return remoteRepository.getAllVenues(getToken());
+        } else {
+            return localRepository.getAllVenues();
         }
     }
 
@@ -203,6 +213,11 @@ public class DataRepository implements DataSource {
     @Override
     public void saveTopVenues(VenuesResponse venuesResponse) {
         localRepository.saveTopVenues(venuesResponse);
+    }
+
+    @Override
+    public void saveAllVenues(AllVenuesResponse venuesResponse) {
+        localRepository.saveAllVenues(venuesResponse);
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.example.ehab.japroject.datalayer.pojo.request.order.OrderRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -21,6 +22,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.AllVenuesService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
 import com.example.ehab.japroject.datalayer.remote.service.EventDetailsService;
@@ -184,6 +186,32 @@ public class RemoteRepository implements RemoteSource {
                             ServiceResponse serviceResponse = processCall(topVenuesService.getTopVenues(getCurrentLanguage(),token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 VenuesResponse venuesResponse = (VenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<AllVenuesResponse> getAllVenues(String token) {
+        Single<AllVenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AllVenuesService allVenuesService = serviceGenerator.createService(AllVenuesService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(allVenuesService.getAllVenues(getCurrentLanguage(),token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                AllVenuesResponse venuesResponse = (AllVenuesResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(venuesResponse);
                             } else {
                                 Throwable throwable = new NetworkErrorException();

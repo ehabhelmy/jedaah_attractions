@@ -3,6 +3,7 @@ package com.example.ehab.japroject.datalayer;
 import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
@@ -30,6 +31,8 @@ public interface DataSource {
     Single<EventsResponse> getTopEvents(boolean fresh);
 
     Single<VenuesResponse> getTopVenues(boolean fresh);
+
+    Single<AllVenuesResponse> getAllVenues(boolean fresh);
 
     Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh);
 
@@ -72,6 +75,8 @@ public interface DataSource {
     void saveNearByEvents(EventsResponse eventsResponse);
 
     void saveTopVenues(VenuesResponse venuesResponse);
+
+    void saveAllVenues(AllVenuesResponse venuesResponse);
 
     void saveNearByVenues(VenuesResponse venuesResponse);
 
