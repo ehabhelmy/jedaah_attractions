@@ -82,4 +82,6 @@
     <string name="paymentDone">Payment done successfully. Thank you for booking through Jeddah Attractions</string>
     <string name="bookMore">BOOK MORE FOR SAME EVENT</string>
     <string name="sponspored">SPONSORED</string>
+    <string name="topSpots">TOP SPOTS IN JEDDAH</string>
+    <string name="nearbyVenues">NEAR BY VENUES</string>
 </resources>

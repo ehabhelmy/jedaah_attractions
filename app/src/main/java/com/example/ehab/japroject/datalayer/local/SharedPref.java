@@ -23,6 +23,8 @@ public class SharedPref<T extends BaseModel> {
     public static final String ALL_EVENTS = "all-events";
     public static final String USER = "user";
     public static final String TOKEN = "token";
+    public static final String TOP_VENUES = "top venues";
+    public static final String NEARBY_VENUES = "nearbyVenues";
     private Context context = JaApplication.getContext();
     private SharedPreferences preferences = context.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE);
     public static final String DATA_KEY = "data-key";

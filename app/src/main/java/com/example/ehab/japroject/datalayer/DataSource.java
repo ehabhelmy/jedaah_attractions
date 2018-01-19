@@ -12,6 +12,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
@@ -28,7 +29,11 @@ public interface DataSource {
 
     Single<EventsResponse> getTopEvents(boolean fresh);
 
+    Single<VenuesResponse> getTopVenues(boolean fresh);
+
     Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh);
+
+    Single<VenuesResponse> getNearByVenues(LatLng latLng,boolean fresh);
 
     Single<Category> getCategories(boolean fresh);
 
@@ -63,6 +68,10 @@ public interface DataSource {
     void saveTopEvents(EventsResponse eventsResponse);
 
     void saveNearByEvents(EventsResponse eventsResponse);
+
+    void saveTopVenues(VenuesResponse venuesResponse);
+
+    void saveNearByVenues(VenuesResponse venuesResponse);
 
     void saveCategories(Category categoriesResponse);
 
