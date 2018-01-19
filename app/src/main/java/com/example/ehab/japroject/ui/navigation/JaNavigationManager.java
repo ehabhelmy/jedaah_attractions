@@ -45,6 +45,8 @@ public abstract class JaNavigationManager {
 
     public static final String PROFILE = "profile";
 
+    public static final String DIRECTORY = "directory";
+
     public static final String ORDER_SUCCESS = "orderSuccess";
 
     public static final int LOCATION_SETTINGS = 2;
@@ -68,6 +70,8 @@ public abstract class JaNavigationManager {
     public abstract void showEventsScreen();
 
     public abstract void showProfileScreen();
+
+    public abstract void showDirectoryScreen();
 
     public abstract void showLocationSettings();
 

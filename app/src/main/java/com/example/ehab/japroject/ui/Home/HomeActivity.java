@@ -53,6 +53,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 case R.id.profile :
                     presenter.showProfile();
                     break;
+                case R.id.directory :
+                    presenter.showDirectory();
             }
             return true;
         }

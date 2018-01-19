@@ -38,6 +38,11 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     }
 
     @Override
+    public void showDirectory() {
+        jaNavigationManager.showDirectoryScreen();
+    }
+
+    @Override
     public void locationIsEnabled() {
         jaNavigationManager.getCurrentFragmentOnHome().locationIsEnabled();
     }

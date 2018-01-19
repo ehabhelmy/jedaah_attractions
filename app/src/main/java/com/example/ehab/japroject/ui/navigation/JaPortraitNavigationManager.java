@@ -7,6 +7,7 @@ import android.provider.Settings;
 
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Home.HomeActivity;
+import com.example.ehab.japroject.ui.Home.directory.DirectoryFragment;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.eventsinner.EventInnerActivity;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventbuy.EventPaymentFragment;
@@ -55,6 +56,15 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             profileFragment = new ProfileFragment();
         }
         replaceFragment(profileFragment,false,PROFILE,R.id.frame_layout);
+    }
+
+    @Override
+    public void showDirectoryScreen() {
+        DirectoryFragment directoryFragment = (DirectoryFragment) fragmentManager.findFragmentByTag(DIRECTORY);
+        if (directoryFragment == null) {
+            directoryFragment = new DirectoryFragment();
+        }
+        replaceFragment(directoryFragment,false,DIRECTORY,R.id.frame_layout);
     }
 
     @Override

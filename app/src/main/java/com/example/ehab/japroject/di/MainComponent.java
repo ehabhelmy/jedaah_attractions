@@ -1,6 +1,9 @@
 package com.example.ehab.japroject.di;
 
 import com.example.ehab.japroject.ui.Home.HomeActivity;
+import com.example.ehab.japroject.ui.Home.directory.DirectoryFragment;
+import com.example.ehab.japroject.ui.Home.directory.attractions.AttractionFragment;
+import com.example.ehab.japroject.ui.Home.directory.venues.VenuesFragment;
 import com.example.ehab.japroject.ui.Home.events.EventsFragment;
 import com.example.ehab.japroject.ui.Home.events.all_events.AllEventsFragment;
 import com.example.ehab.japroject.ui.Home.events.nearby_events.NearByEventsFragment;
@@ -76,6 +79,12 @@ public interface MainComponent {
     void inject(SplashActivity splashActivity);
 
     void inject(EventOrderSuccessFragment orderSuccessFragment);
+
+    void inject(DirectoryFragment directoryFragment);
+
+    void inject(VenuesFragment venuesFragment);
+
+    void inject(AttractionFragment attractionFragment);
 
 }
 

@@ -7,6 +7,11 @@
         android:title="@string/explore" />
 
     <item
+        android:id="@+id/directory"
+        android:icon="@drawable/directory_ic"
+        android:title="@string/directory" />
+
+    <item
         android:id="@+id/events"
         android:icon="@drawable/events_ic"
         android:title="@string/events" />
