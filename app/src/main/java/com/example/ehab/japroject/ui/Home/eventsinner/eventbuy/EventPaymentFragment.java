@@ -112,8 +112,11 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
             if (creditToggle) {
                 crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.creditcard_deactivated));
                 creditToggle = false;
+                paymentType = null;
             }else {
                 crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.creditcard_active));
+                cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_deactivated));
+                payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_deactivated));
                 creditToggle = true;
                 tickets = "Unlimited";
                 paymentType = "credit_card";
@@ -127,8 +130,11 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
             if (cashToggle) {
                 cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_deactivated));
                 cashToggle = false;
+                paymentType = null;
             }else {
                 cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_active));
+                crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.creditcard_deactivated));
+                payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_deactivated));
                 cashToggle = true;
                 tickets = cashTickets+"";
                 paymentType = "cash_on_delivery";
@@ -142,8 +148,11 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
             if (payLaterToggle) {
                 payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_deactivated));
                 payLaterToggle = false;
+                paymentType = null;
             }else {
                 payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_active));
+                cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_deactivated));
+                cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_deactivated));
                 payLaterToggle = true;
                 tickets = payLaterTickets+"";
                 paymentType = "pay_later";
@@ -157,7 +166,7 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
                 || TextUtils.isEmpty(nameEditText.getText())
                 || TextUtils.isEmpty(mobileEditText.getText())
                 || (TextUtils.isEmpty(nationalEditText.getText()) && nationalEditText.getVisibility() == View.VISIBLE)
-                || paymentType == null){
+                || TextUtils.isEmpty(paymentType)){
 
             new AlertDialog.Builder(getActivity())
                     .setTitle("Failure")
@@ -248,7 +257,6 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
 //            credit = false;
         }else {
             credit = true;
-            paymentType = "Credit Card";
         }
         if (!paymentData.isCash()) {
             cashContainer.setVisibility(View.GONE);
@@ -258,7 +266,6 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
         }else {
             cashAmountTextView.setText(paymentData.getCashTickets()+"");
             cash = true;
-            paymentType = "Cash on delivery";
         }
         if (!paymentData.isPayLater()) {
             payLaterContainer.setVisibility(View.GONE);
@@ -268,7 +275,9 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
         }else {
             payLaterTextView.setText(paymentData.getPayLaterTickets()+"");
             paylater = true;
-            paymentType = "Pay Later";
+        }
+        if (TextUtils.isEmpty(paymentType)){
+            nextBtn.setVisibility(View.GONE);
         }
     }
 

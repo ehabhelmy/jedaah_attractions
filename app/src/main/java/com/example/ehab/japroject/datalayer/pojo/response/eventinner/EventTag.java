@@ -13,7 +13,7 @@ public class EventTag extends BaseModel{
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("image")
+    @SerializedName("icon")
     @Expose
     private String image;
 

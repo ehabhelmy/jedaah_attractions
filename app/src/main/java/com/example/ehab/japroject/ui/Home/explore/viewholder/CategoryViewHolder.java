@@ -4,6 +4,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
@@ -33,8 +35,7 @@ public class CategoryViewHolder extends BaseViewHolder<Cats> {
     @Override
     public void bind(Cats baseModel, RecyclerViewItemListener.onViewListener onViewListener, RecyclerViewItemListener.onFavouriteListener onFavouriteListener) {
         categoryName.setText(baseModel.getName());
-        Picasso.with(categoryImage.getContext()).load(baseModel.getIcon()).
-                placeholder(R.drawable.ic_ca_cafe_ic).error(R.drawable.ic_ca_cafe_ic).into(categoryImage);
+        Glide.with(categoryImage.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.ca_cafe_ic).error(R.drawable.ca_cafe_ic)).into(categoryImage);
     }
 
     @Override

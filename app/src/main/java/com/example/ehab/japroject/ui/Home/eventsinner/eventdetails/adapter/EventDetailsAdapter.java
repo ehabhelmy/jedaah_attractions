@@ -33,14 +33,14 @@ public class EventDetailsAdapter {
         EventDetails eventDetails = new EventDetails();
         eventDetails.setEventTitle(data.getTitle());
         if (Locale.getDefault().getLanguage().equals("ar")){
-            eventDetails.setInterested((data.getInterested() != 0 ? data.getInterested():"")+ " مهتم -"+(data.getGoing() !=0 ? data.getGoing():"")+" ذاهب");
+            eventDetails.setInterested((data.getInterested() != 0 ? data.getInterested()+ " مهتم -":"")+(data.getGoing() !=0 ? data.getGoing()+" ذاهب":""));
         }else {
-            eventDetails.setInterested((data.getInterested() != 0 ? data.getInterested():"")+ " Interested -"+(data.getGoing() !=0 ? data.getGoing():"")+" Going");
+            eventDetails.setInterested((data.getInterested() != 0 ? data.getInterested()+ " Interested -":"")+(data.getGoing() !=0 ? data.getGoing()+" Going":""));
         }
         eventDetails.setEventPrice(data.getStartPrice()+" - "+data.getEndPrice());
         eventDetails.setEventMonth(getMonth(convertJSONDateToDate(data.getStartDate())));
         eventDetails.setEventDay(getDay(convertJSONDateToDate(data.getStartDate())));
-        eventDetails.setEventDatRemaining(getDaysRemaining(convertJSONDateToDate(data.getStartDate())));
+        eventDetails.setEventDatRemaining(getDaysRemaining(convertJSONDateToDate(data.getEndDate() != null ? data.getEndDate() : data.getStartDate())));
         eventDetails.setEventAddress(data.getAddress());
         eventDetails.setEventDatetitle(getEventDateTitle(data.getStartDate(),data.getEndDate()));
         eventDetails.setSocialMedia(data.getSocialMedia() != null ? (ArrayList<SocialMedium>) data.getSocialMedia() : new ArrayList<>());
@@ -57,7 +57,9 @@ public class EventDetailsAdapter {
             }catch (Exception e){
                 cat.append("");
             }finally {
-                cat.append(" , ");
+                if (i != data.getCategories().size() - 1) {
+                    cat.append(" , ");
+                }
             }
         }
         eventDetails.setCategoriesText(cat.toString());

@@ -23,13 +23,13 @@ public class EventsAdapter {
             event.setEventName(datum.getTitle());
             event.setEventAddress(datum.getAddress());
             if (Locale.getDefault().getLanguage().equals("ar")){
-                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested():"")+ " مهتم -"+(datum.getGoing() !=0 ? datum.getGoing():"")+" ذاهب");
+                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested()+ " مهتم -":"")+(datum.getGoing() !=0 ? datum.getGoing()+" ذاهب":""));
             }else {
-                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested():"")+ " Interested -"+(datum.getGoing() !=0 ? datum.getGoing():"")+" Going");
+                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested()+ " Interested -":"")+(datum.getGoing() !=0 ? datum.getGoing()+" Going":""));
             }
             event.setEventMonth(getMonth(convertJSONDateToDate(datum.getStartDate())));
             event.setEventDay(getDay(convertJSONDateToDate(datum.getStartDate())));
-            event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate())));
+            event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate() != null ? datum.getEndDate():datum.getStartDate())));
             event.setId(datum.getId());
             event.setLiked(datum.isLiked());
             events.add(event);
@@ -52,7 +52,7 @@ public class EventsAdapter {
             }
             event.setEventMonth(getMonth(convertJSONDateToDate(datum.getStartDate())));
             event.setEventDay(getDay(convertJSONDateToDate(datum.getStartDate())));
-            event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate())));
+            event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate() != null ? datum.getEndDate() : datum.getStartDate())));
             event.setId(datum.getId());
             events.add(event);
         }

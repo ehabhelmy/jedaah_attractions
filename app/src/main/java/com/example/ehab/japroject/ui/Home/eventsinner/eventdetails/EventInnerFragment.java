@@ -27,6 +27,7 @@ import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.adapter.Socia
 import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.pojo.EventDetails;
 import com.example.ehab.japroject.util.Constants;
 import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import javax.inject.Inject;
 
@@ -197,6 +198,17 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
         dayRemaining.setText(data.getEventDatRemaining());
         categories.setText(data.getCategoriesText());
         likeButton.setLiked(data.isIsliked());
+        likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                presenter.like();
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                presenter.like();
+            }
+        });
         likes.setText(data.getInterested());
         eventAddress.setText(data.getEventAddress());
         eventDate.setText(data.getEventDatetitle());

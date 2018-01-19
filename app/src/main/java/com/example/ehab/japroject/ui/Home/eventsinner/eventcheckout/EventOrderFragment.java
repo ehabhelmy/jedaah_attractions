@@ -52,6 +52,7 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     private ArrayList<EventTicket> tickets;
     private EventTicketsAdapter eventTicketsAdapter;
     private ArrayList<TicketDate> days;
+    private String payment;
 
     @BindView(R.id.eventTitle)
     TextView eventTitleTextView;
@@ -138,9 +139,9 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
                     .show();
         }else {
             if (national) {
-                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", nationalIdTextView.getText().toString().trim(), totalPrice.getText().toString().replace("SAR", "").trim());
+                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), payment, eventId, ticketId + "", dateId + "", nationalIdTextView.getText().toString().trim(), totalPrice.getText().toString().replace("SAR", "").trim());
             } else {
-                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), paymentMethod.getText().toString().trim(), eventId, ticketId + "", dateId + "", null, totalPrice.getText().toString().replace("SAR", "").trim());
+                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), payment, eventId, ticketId + "", dateId + "", null, totalPrice.getText().toString().replace("SAR", "").trim());
             }
         }
     }
@@ -185,7 +186,18 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
             national = true;
             nationalIdTextView.setText(eventOrder.getNational());
         }
-        paymentMethod.setText(eventOrder.getPaymentMethod());
+        payment = eventOrder.getPaymentMethod();
+        switch (payment){
+            case "cash_on_delivery" :
+                paymentMethod.setText("Cash On Delivery");
+                break;
+            case "credit_card" :
+                paymentMethod.setText("Credit Card");
+                break;
+            case "pay_later" :
+                paymentMethod.setText("Pay Later");
+                break;
+        }
         numTickets.setText("Only "+eventOrder.getTickets()+" tickets are available");
         totalPrice.setText("");
         tickets = eventOrder.getEventtickets();
@@ -216,17 +228,23 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
         days = eventOrder.getTicketDates();
         adapter.setDays(eventOrder.getEventDateDays());
         daysGridView.setAdapter(adapter);
-        daysGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                for (int i = 0 ; i < daysGridView.getChildCount() ; i++) {
-                    if (i == position) {
-                        view.setBackground(ContextCompat.getDrawable(view.getContext(),R.drawable.rounded_rectangle_black));
+        daysGridView.setOnItemClickListener((parent, view, position, id) -> {
+            boolean isChoosed = true;
+
+            for (int i = 0 ; i < daysGridView.getChildCount() ; i++) {
+                if (i == position) {
+                    if (isChoosed) {
+                        view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.rounded_rectangle_black));
                         dateId = days.get(position).getId();
+                        isChoosed = false;
                     }else {
-                        View view1 = daysGridView.getChildAt(i);
-                        view1.setBackground(ContextCompat.getDrawable(view.getContext(),R.drawable.rounded_rectangle_grey));
+                        view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.rounded_rectangle_grey));
+                        dateId = 0;
+                        isChoosed = true;
                     }
+                }else {
+                    View view1 = daysGridView.getChildAt(i);
+                    view1.setBackground(ContextCompat.getDrawable(view.getContext(),R.drawable.rounded_rectangle_grey));
                 }
             }
         });

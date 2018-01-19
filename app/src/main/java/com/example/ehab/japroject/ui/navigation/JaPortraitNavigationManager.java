@@ -135,7 +135,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.EVENT_ID,id);
         intent.putExtras(bundle);
-        getCurrentActivity().startActivity(intent);
+        getCurrentActivity().startActivityForResult(intent,JaNavigationManager.EVENT_INNER);
     }
 
     @Override
@@ -155,7 +155,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             bundle.putParcelable(Constants.EVENT_PAYMENT,paymentData);
             eventPaymentFragment.setArguments(bundle);
         }
-        replaceFragment(eventPaymentFragment,false,PAYMENT,R.id.frame_layout_inner);
+        replaceFragment(eventPaymentFragment,true,PAYMENT,R.id.frame_layout_inner);
     }
 
     @Override

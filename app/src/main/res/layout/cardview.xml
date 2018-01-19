@@ -126,6 +126,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/address"
                         android:layout_marginStart="5dp"
+                        android:maxLines="1"
                         android:fontFamily="@font/gotham_book"
                         android:textColor="@color/outerText"
                         android:id="@+id/eventAddress"

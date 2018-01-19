@@ -16,7 +16,7 @@ public class OrderRequest extends BaseModel {
     private String event_id;
     private String event_ticket_id;
     private String ticket_date_id;
-    private String national_id;
+    private String user_national_id;
     private String total;
 
     public OrderRequest(String name, String email, String mobile_number, String number_of_tickets, String payment_method, String event_id, String event_ticket_id, String ticket_date_id, String national_id, String total) {
@@ -28,7 +28,7 @@ public class OrderRequest extends BaseModel {
         this.event_id = event_id;
         this.event_ticket_id = event_ticket_id;
         this.ticket_date_id = ticket_date_id;
-        this.national_id = national_id;
+        this.user_national_id = national_id;
         this.total = total;
     }
 
@@ -97,11 +97,11 @@ public class OrderRequest extends BaseModel {
     }
 
     public String getNational_id() {
-        return national_id;
+        return user_national_id;
     }
 
     public void setNational_id(String national_id) {
-        this.national_id = national_id;
+        this.user_national_id = national_id;
     }
 
     public String getTotal() {

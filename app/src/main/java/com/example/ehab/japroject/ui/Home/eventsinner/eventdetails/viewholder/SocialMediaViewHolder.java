@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.eventinner.SocialMedium;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
@@ -44,11 +46,11 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
             socialMediaUrl.getContext().startActivity(i);
         });
         if (baseModel.getName().equals(SocialMedia.Facebook.name())) {
-            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.facebook_g).error(R.drawable.facebook_g).into(socialMediaIcon);
+            Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.facebook_g).error(R.drawable.facebook_g)).into(socialMediaIcon);
         }else if(baseModel.getName().equals(SocialMedia.Instagram.name())){
-            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g).into(socialMediaIcon);
+            Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g)).into(socialMediaIcon);
         }else {
-            Picasso.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).placeholder(R.drawable.website_g).error(R.drawable.website_g).into(socialMediaIcon);
+            Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.website_g).error(R.drawable.website_g)).into(socialMediaIcon);
         }
     }
 
