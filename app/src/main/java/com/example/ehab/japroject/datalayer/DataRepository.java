@@ -168,6 +168,14 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<LikeResponse> likeVenues(int id) {
+        if (getToken() == null) {
+            return null;
+        }
+        return remoteRepository.likeVenues(id ,getToken());
+    }
+
+    @Override
     public Single<OrderResponse> order(String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total) {
         return remoteRepository.order(getToken(),name,email,mobileNumber,numberOfTickets,paymentMethod,eventId,ticketId,dateId,nationalId,total);
     }

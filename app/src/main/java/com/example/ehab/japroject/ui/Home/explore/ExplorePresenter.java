@@ -11,6 +11,7 @@ import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
 import com.example.ehab.japroject.usecase.categories.Categories;
 import com.example.ehab.japroject.usecase.like.Like;
+import com.example.ehab.japroject.usecase.like.LikeVenues;
 import com.example.ehab.japroject.usecase.nearbyevents.NearByEvents;
 import com.example.ehab.japroject.usecase.nearbyvenues.NearByVenues;
 import com.example.ehab.japroject.usecase.topevents.TopEvents;
@@ -31,6 +32,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     private TopVenues topVenues;
     private Categories categories;
     private Like like;
+    private LikeVenues likeVenues;
 
     private BaseCallback<EventsResponse> topEventsResponseBaseCallback = new BaseCallback<EventsResponse>() {
         @Override
@@ -119,12 +121,34 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         }
     };
 
+    private BaseCallback<VenuesResponse> nearbyVenuesResponseBaseCallback = new BaseCallback<VenuesResponse>() {
+        @Override
+        public void onSuccess(VenuesResponse model) {
+            if (isViewAlive.get()) {
+                if (model.getSuccess()) {
+                    getView().setupNearbyVenues(model.getData());
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()) {
+                //getView().showError(message);
+                getView().hideNearByVenues();
+            }
+        }
+    };
+
     @Inject
-    public ExplorePresenter(TopEvents topEvents, NearByEvents nearByEvents,Categories categories,Like like) {
+    public ExplorePresenter(TopEvents topEvents, NearByEvents nearByEvents,TopVenues topVenues,NearByVenues nearByVenues,Categories categories,Like like,LikeVenues likeVenues) {
         this.topEvents = topEvents;
         this.nearByEvents = nearByEvents;
+        this.topVenues = topVenues;
+        this.nearByVenues = nearByVenues;
         this.categories = categories;
         this.like = like;
+        this.likeVenues = likeVenues;
     }
 
     @Override
@@ -133,6 +157,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         //TODO : should call all related use cases to fetch the data
         topEvents.getTopEvents(topEventsResponseBaseCallback,true);
         categories.getCategories(categoryBaseCallback,true);
+        topVenues.getTopVenues(venuesResponseBaseCallback,true);
         if (getView().isLocationPermissionGranted()) {
             if (getView().isLocationEnabled()) {
                 getView().getLatitudeAndLongitude();
@@ -166,7 +191,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
 
     @Override
     public void loadNearByVenuesAfterLocationEnabled(LatLng latLng) {
-        nearByVenues.getNearbyVenues(latLng,venuesResponseBaseCallback,true);
+        nearByVenues.getNearbyVenues(latLng,nearbyVenuesResponseBaseCallback,true);
     }
 
     @Override
@@ -177,5 +202,10 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     @Override
     public void like(int id) {
         like.like(id,likeResponseBaseCallback);
+    }
+
+    @Override
+    public void venueLike(int id) {
+        likeVenues.like(id,likeResponseBaseCallback);
     }
 }

@@ -217,7 +217,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         venuesListAdapter.setData((ArrayList<Datum>) data);
         venuesListAdapter.setOnFavouriteListener(id -> {
             //TODO : call presenter to send id of the event to the backend
-            //presenter.like(id);
+            presenter.venueLike(id);
         });
         venuesListAdapter.setOnViewListener(id -> {
             //presenter.showEventInner(id);

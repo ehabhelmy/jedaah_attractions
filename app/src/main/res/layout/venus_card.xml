@@ -5,7 +5,7 @@
     android:id="@+id/eventCardView"
     android:layout_width="200dp"
     card_view:cardElevation="0dp"
-    card_view:cardCornerRadius="0.5dp"
+    card_view:cardCornerRadius="2dp"
     card_view:cardPreventCornerOverlap="false"
     card_view:cardUseCompatPadding="true"
     android:layout_height="200dp">
@@ -50,7 +50,11 @@
                 android:id="@+id/sponsored"
                 android:layout_width="80dp"
                 android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/rounded_sponsored"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 card_view:layout_editor_absoluteX="8dp"
                 card_view:layout_editor_absoluteY="4dp">
 

@@ -56,6 +56,8 @@ public interface RemoteSource {
 
     Single<LikeResponse> like(int id , String token);
 
+    Single<LikeResponse> likeVenues(int id , String token);
+
     Single<ProfileResponse> getProfile(String token);
 
     Single<OrderResponse> order(String token,String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total);
