@@ -1,6 +1,8 @@
 package com.example.ehab.japroject.ui.Home.directory.venues;
 
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.Datum;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 import com.example.ehab.japroject.ui.Base.listener.ErrorView;
 import com.example.ehab.japroject.ui.Base.listener.ProgressView;
@@ -16,6 +18,7 @@ public interface VenuesContract {
 
     interface View extends BaseView,ErrorView,ProgressView {
         void setupCategories(List<Cats> categoryList);
+        void setupTopVenues(List<Datum> venuesResponses);
     }
 
     interface Presenter extends Unsubscribable {

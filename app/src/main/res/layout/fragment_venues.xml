@@ -28,7 +28,7 @@
                 android:text="@string/topSpotsInJeddah" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/topSportsRecyclarView"
+                android:id="@+id/topVeuesRecyclarView"
                 android:layout_width="match_parent"
                 android:paddingStart="16dp"
                 android:clipToPadding="false"

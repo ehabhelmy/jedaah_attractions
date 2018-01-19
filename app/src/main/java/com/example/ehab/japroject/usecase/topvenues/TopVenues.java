@@ -2,7 +2,6 @@ package com.example.ehab.japroject.usecase.topvenues;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.topvenues.TopVenuesResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
@@ -36,7 +35,7 @@ public class TopVenues implements Unsubscribable {
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void getTopVenues(BaseCallback<TopVenuesResponse> callback, boolean fresh) {
+    public void getTopVenues(BaseCallback<VenuesResponse> callback, boolean fresh) {
         venuesResponseDisposableSingleObserver = new DisposableSingleObserver<VenuesResponse>() {
             @Override
             public void onSuccess(VenuesResponse venuesResponse) {

@@ -9,8 +9,10 @@ import android.view.View;
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.Datum;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
+import com.example.ehab.japroject.ui.Home.explore.adapter.VenuesListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +33,8 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
     @BindView(R.id.categories)
     RecyclerView categories;
 
-    @BindView(R.id.topSportsRecyclarView)
-    RecyclerView topSportsRecyclarView;
+    @BindView(R.id.topVeuesRecyclarView)
+    RecyclerView topVeuesRecyclarView;
 
     @Override
     public void showError(String message) {
@@ -77,8 +79,24 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
             CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
             categoryListAdapter.setData((ArrayList<Cats>) categoryList);
             categories.setAdapter(categoryListAdapter);
-        }else {
+        } else {
             categories.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setupTopVenues(List<Datum> venuesResponses) {
+        if (venuesResponses.size() > 0) {
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
+            topVeuesRecyclarView.setLayoutManager(layoutManager);
+            topVeuesRecyclarView.addItemDecoration(dividerItemDecoration);
+            VenuesListAdapter venuesListAdapter = new VenuesListAdapter();
+            venuesListAdapter.setData((ArrayList<Datum>) venuesResponses);
+            topVeuesRecyclarView.setAdapter(venuesListAdapter);
+        } else {
+            topVeuesRecyclarView.setVisibility(View.GONE);
         }
     }
 

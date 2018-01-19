@@ -67,7 +67,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @BindView(R.id.errorLocationContainerNew)
     RelativeLayout errorLocationContainer;
 
-    @BindView(R.id.topEvents)
+    @BindView(R.id.topVenues)
     RecyclerView topVenues;
 
     @BindView(R.id.nearByVenues)
