@@ -67,7 +67,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @BindView(R.id.errorLocationContainerNew)
     RelativeLayout errorLocationContainer;
 
-    @BindView(R.id.topEvents)
+    @BindView(R.id.topVenues)
     RecyclerView topVenues;
 
     @BindView(R.id.nearByVenues)
@@ -217,7 +217,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         venuesListAdapter.setData((ArrayList<Datum>) data);
         venuesListAdapter.setOnFavouriteListener(id -> {
             //TODO : call presenter to send id of the event to the backend
-            //presenter.like(id);
+            presenter.venueLike(id);
         });
         venuesListAdapter.setOnViewListener(id -> {
             //presenter.showEventInner(id);

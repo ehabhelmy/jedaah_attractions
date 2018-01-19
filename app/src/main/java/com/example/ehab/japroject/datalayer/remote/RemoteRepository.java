@@ -38,6 +38,7 @@ import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopVenuesService;
 import com.example.ehab.japroject.datalayer.remote.service.UpcomingEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.VenuesLikeService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -489,6 +490,32 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             LikeService likeService = serviceGenerator.createService(LikeService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(likeService.like(getCurrentLanguage(), id,"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                LikeResponse likeResponse = (LikeResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(likeResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return likeResponseSingle;
+    }
+
+    @Override
+    public Single<LikeResponse> likeVenues(int id, String token) {
+        Single<LikeResponse> likeResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            VenuesLikeService likeService = serviceGenerator.createService(VenuesLikeService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(likeService.like(getCurrentLanguage(), id,"bearer "+token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 LikeResponse likeResponse = (LikeResponse) serviceResponse.getData();

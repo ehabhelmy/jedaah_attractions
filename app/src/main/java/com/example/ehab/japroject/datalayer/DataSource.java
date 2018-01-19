@@ -59,6 +59,8 @@ public interface DataSource {
 
     Single<LikeResponse> like(int id);
 
+    Single<LikeResponse> likeVenues(int id);
+
     Single<OrderResponse> order(String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total);
 
     Single<HistoryEvents> getUpcomingEvents();
