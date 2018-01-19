@@ -13,6 +13,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -57,11 +58,29 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<VenuesResponse> getTopVenues(boolean fresh) {
+        if (fresh){
+            return remoteRepository.getTopVenues(getToken());
+        } else {
+            return localRepository.getTopVenues();
+        }
+    }
+
+    @Override
     public Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh) {
         if (fresh){
             return remoteRepository.getNearByEvents(latLng,getToken());
         } else {
             return localRepository.getNearByEvents();
+        }
+    }
+
+    @Override
+    public Single<VenuesResponse> getNearByVenues(LatLng latLng, boolean fresh) {
+        if (fresh){
+            return remoteRepository.getNearByVenues(latLng,getToken());
+        } else {
+            return localRepository.getNearByVenues();
         }
     }
 
@@ -171,6 +190,16 @@ public class DataRepository implements DataSource {
     @Override
     public void saveNearByEvents(EventsResponse eventsResponse) {
         localRepository.saveNearByEvents(eventsResponse);
+    }
+
+    @Override
+    public void saveTopVenues(VenuesResponse venuesResponse) {
+        localRepository.saveTopVenues(venuesResponse);
+    }
+
+    @Override
+    public void saveNearByVenues(VenuesResponse venuesResponse) {
+        localRepository.saveNearByVenues(venuesResponse);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 
 import io.reactivex.Single;
 
@@ -27,6 +28,14 @@ public interface LocalSource {
     Single<EventsResponse> getNearByEvents();
 
     void saveNearByEvents(EventsResponse eventsResponse);
+
+    Single<VenuesResponse> getTopVenues();
+
+    void saveTopVenues(VenuesResponse venuesResponse);
+
+    Single<VenuesResponse> getNearByVenues();
+
+    void saveNearByVenues(VenuesResponse venuesResponse);
 
     Single<Category> getCategories();
 

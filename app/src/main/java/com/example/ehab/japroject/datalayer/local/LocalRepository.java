@@ -6,6 +6,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.util.Constants;
 
 import javax.inject.Inject;
@@ -70,6 +71,42 @@ public class LocalRepository implements LocalSource {
     @Override
     public void saveNearByEvents(EventsResponse eventsResponse) {
         sharedPref.saveObject(SharedPref.NEARBY_EVENTS, eventsResponse);
+    }
+
+    @Override
+    public Single<VenuesResponse> getTopVenues() {
+        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.TOP_VENUES, EventsResponse.class);
+        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+            if (venuesResponse != null) {
+                e.onSuccess(venuesResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public void saveTopVenues(VenuesResponse venuesResponse) {
+        sharedPref.saveObject(SharedPref.TOP_VENUES, venuesResponse);
+    }
+
+    @Override
+    public Single<VenuesResponse> getNearByVenues() {
+        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.NEARBY_VENUES, EventsResponse.class);
+        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+            if (venuesResponse != null) {
+                e.onSuccess(venuesResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public void saveNearByVenues(VenuesResponse venuesResponse) {
+        sharedPref.saveObject(SharedPref.NEARBY_VENUES, venuesResponse);
     }
 
     @Override

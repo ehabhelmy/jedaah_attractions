@@ -19,6 +19,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
 import com.example.ehab.japroject.datalayer.remote.service.DataService;
@@ -27,6 +28,7 @@ import com.example.ehab.japroject.datalayer.remote.service.LikeService;
 import com.example.ehab.japroject.datalayer.remote.service.LikedEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.LoginService;
 import com.example.ehab.japroject.datalayer.remote.service.NearByEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.NearyByVenuesService;
 import com.example.ehab.japroject.datalayer.remote.service.OrderService;
 import com.example.ehab.japroject.datalayer.remote.service.PastEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.ProfileService;
@@ -34,6 +36,7 @@ import com.example.ehab.japroject.datalayer.remote.service.RegisterationService;
 import com.example.ehab.japroject.datalayer.remote.service.SocialLoginService;
 import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.TopVenuesService;
 import com.example.ehab.japroject.datalayer.remote.service.UpcomingEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
@@ -166,6 +169,58 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return nearByEventsSingle;
+    }
+
+    @Override
+    public Single<VenuesResponse> getTopVenues(String token) {
+        Single<VenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            TopVenuesService topVenuesService = serviceGenerator.createService(TopVenuesService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(topVenuesService.getTopVenues(getCurrentLanguage(),token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                VenuesResponse venuesResponse = (VenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<VenuesResponse> getNearByVenues(LatLng latLng, String token) {
+        Single<VenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            NearyByVenuesService nearyByVenuesService = serviceGenerator.createService(NearyByVenuesService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(nearyByVenuesService.getNearbyVenues(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""), getCurrentLanguage(),token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                VenuesResponse venuesResponse = (VenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesResponseSingle;
     }
 
     @Override
