@@ -51,5 +51,6 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     public void hideNearByEvents() {
         ExploreFragment exploreFragment = jaNavigationManager.getCurrentFragmentOnHome();
         exploreFragment.hideNearByEvents();
+        exploreFragment.hideNearByVenues();
     }
 }

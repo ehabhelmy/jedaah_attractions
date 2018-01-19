@@ -5,13 +5,16 @@ import android.os.Bundle;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsAdapter;
 import com.example.ehab.japroject.usecase.categories.Categories;
 import com.example.ehab.japroject.usecase.like.Like;
 import com.example.ehab.japroject.usecase.nearbyevents.NearByEvents;
+import com.example.ehab.japroject.usecase.nearbyvenues.NearByVenues;
 import com.example.ehab.japroject.usecase.topevents.TopEvents;
+import com.example.ehab.japroject.usecase.topvenues.TopVenues;
 import com.google.android.gms.maps.model.LatLng;
 
 import javax.inject.Inject;
@@ -24,6 +27,8 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
 
     private TopEvents topEvents;
     private NearByEvents nearByEvents;
+    private NearByVenues nearByVenues;
+    private TopVenues topVenues;
     private Categories categories;
     private Like like;
 
@@ -96,6 +101,24 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         }
     };
 
+    private BaseCallback<VenuesResponse> venuesResponseBaseCallback = new BaseCallback<VenuesResponse>() {
+        @Override
+        public void onSuccess(VenuesResponse model) {
+            if (isViewAlive.get()) {
+                if (model.getSuccess()) {
+                    getView().setupTopVenues(model.getData());
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()) {
+                getView().showError(message);
+            }
+        }
+    };
+
     @Inject
     public ExplorePresenter(TopEvents topEvents, NearByEvents nearByEvents,Categories categories,Like like) {
         this.topEvents = topEvents;
@@ -126,6 +149,8 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         topEvents.unSubscribe();
         categories.unSubscribe();
         nearByEvents.unSubscribe();
+        topVenues.unSubscribe();
+        nearByVenues.unSubscribe();
         like.unSubscribe();
     }
 
@@ -137,6 +162,11 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     @Override
     public void loadNearByEventsAfterLocationEnabled(LatLng latLng) {
         nearByEvents.getNearbyEvents(latLng, nearbyEventsResponseBaseCallback,true);
+    }
+
+    @Override
+    public void loadNearByVenuesAfterLocationEnabled(LatLng latLng) {
+        nearByVenues.getNearbyVenues(latLng,venuesResponseBaseCallback,true);
     }
 
     @Override
