@@ -97,5 +97,7 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
     @Override
     public void unSubscribe() {
         categories.unSubscribe();
+        topVenues.unSubscribe();
+        allVenues.unSubscribe();
     }
 }

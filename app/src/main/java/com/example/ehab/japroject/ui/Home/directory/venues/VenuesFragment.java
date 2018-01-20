@@ -5,6 +5,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.GridView;
 
 import com.example.ehab.japroject.JaApplication;
@@ -113,6 +114,17 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
             allVenuesGridView.setAdapter(venuesListAdapter);
         } else {
             allVenuesGridView.setVisibility(View.GONE);
+            allVenuesGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                }
+
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                }
+            });
         }
     }
 

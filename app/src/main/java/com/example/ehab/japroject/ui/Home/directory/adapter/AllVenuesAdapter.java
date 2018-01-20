@@ -43,7 +43,7 @@ public class AllVenuesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        view = LayoutInflater.from(context).inflate(R.layout.venus_card, parent, false);
+        view = LayoutInflater.from(context).inflate(R.layout.all_venues_card, parent, false);
         return view;
     }
 }
