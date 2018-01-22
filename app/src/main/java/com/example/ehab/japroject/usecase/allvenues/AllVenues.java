@@ -2,7 +2,6 @@ package com.example.ehab.japroject.usecase.allvenues;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
 import com.example.ehab.japroject.util.Constants;
@@ -39,7 +38,7 @@ public class AllVenues implements Unsubscribable {
             @Override
             public void onSuccess(AllVenuesResponse venuesResponse) {
                 //TODO : check if the data is valid
-                if (fresh){
+                if (fresh) {
                     dataRepository.saveAllVenues(venuesResponse);
                 }
                 callback.onSuccess(venuesResponse);
@@ -47,15 +46,14 @@ public class AllVenues implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if (e.getMessage() != null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)) {
                     callback.onError(e.getMessage());
-                }
-                else {
+                } else {
                     dataRepository.getAllVenues(false);
                 }
             }
         };
-        if (!compositeDisposable.isDisposed()){
+        if (!compositeDisposable.isDisposed()) {
             venuesResponseSingle = dataRepository.getAllVenues(fresh);
             disposable = venuesResponseSingle
                     .subscribeOn(Schedulers.io())
@@ -64,9 +62,10 @@ public class AllVenues implements Unsubscribable {
             compositeDisposable.add(disposable);
         }
     }
+
     @Override
     public void unSubscribe() {
-        if (!compositeDisposable.isDisposed()){
+        if (!compositeDisposable.isDisposed()) {
             compositeDisposable.remove(disposable);
         }
     }

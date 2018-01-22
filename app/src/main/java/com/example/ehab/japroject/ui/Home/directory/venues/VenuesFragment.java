@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.GridView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
@@ -14,6 +13,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
 import com.example.ehab.japroject.datalayer.pojo.response.venues.Datum;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
+import com.example.ehab.japroject.ui.Home.directory.ExpandableHeightGridView;
 import com.example.ehab.japroject.ui.Home.directory.adapter.AllVenuesAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.VenuesListAdapter;
@@ -41,7 +41,7 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
     RecyclerView topVeuesRecyclarView;
 
     @BindView(R.id.allVenuesGridView)
-    GridView allVenuesGridView;
+    ExpandableHeightGridView allVenuesGridView;
 
     @Override
     public void showError(String message) {
@@ -110,7 +110,7 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
     @Override
     public void setupAllVenues(List<Venue> venuesResponses) {
         if (venuesResponses.size() > 0) {
-            AllVenuesAdapter venuesListAdapter = new AllVenuesAdapter(this.getContext(),venuesResponses);
+            AllVenuesAdapter venuesListAdapter = new AllVenuesAdapter(this.getContext(), venuesResponses);
             allVenuesGridView.setAdapter(venuesListAdapter);
         } else {
             allVenuesGridView.setVisibility(View.GONE);
