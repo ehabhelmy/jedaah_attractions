@@ -16,16 +16,14 @@ import android.widget.RelativeLayout;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.category.Category;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.Datum;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.Venue;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.EventsListAdapter;
 import com.example.ehab.japroject.ui.Home.HomeContract;
 import com.example.ehab.japroject.ui.Home.explore.adapter.VenuesListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.pojo.Event;
-import com.example.ehab.japroject.usecase.registeration.Registeration;
 import com.example.ehab.japroject.util.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
@@ -168,7 +166,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     }
 
     @Override
-    public void setupTopVenues(List<Datum> data) {
+    public void setupTopVenues(List<Venue> data) {
         if (data.size() > 0) {
             setupVenuesRecyclerView(topVenues, data);
         }else {
@@ -178,7 +176,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     }
 
     @Override
-    public void setupNearbyVenues(List<Datum> data) {
+    public void setupNearbyVenues(List<Venue> data) {
         if (data.size() > 0) {
             setupVenuesRecyclerView(nearByVenues, data);
         }else {
@@ -206,7 +204,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         recyclerView.setAdapter(eventsListAdapter);
     }
 
-    private void setupVenuesRecyclerView(RecyclerView recyclerView, List<Datum> data) {
+    private void setupVenuesRecyclerView(RecyclerView recyclerView, List<Venue> data) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
@@ -214,7 +212,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         VenuesListAdapter venuesListAdapter = new VenuesListAdapter();
-        venuesListAdapter.setData((ArrayList<Datum>) data);
+        venuesListAdapter.setData((ArrayList<Venue>) data);
         venuesListAdapter.setOnFavouriteListener(id -> {
             //TODO : call presenter to send id of the event to the backend
             presenter.venueLike(id);

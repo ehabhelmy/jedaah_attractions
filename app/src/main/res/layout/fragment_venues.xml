@@ -76,18 +76,13 @@
                 android:layout_marginStart="16dp"
                 android:text="@string/title_all_venues" />
 
-            <com.example.ehab.japroject.ui.Home.directory.ExpandableHeightGridView
-                android:id="@+id/allVenuesGridView"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/allVenuesRecyclarView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:columnWidth="50dp"
-                android:horizontalSpacing="10dp"
-                android:numColumns="2"
-                android:paddingEnd="16dp"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
                 android:paddingStart="16dp"
-                android:paddingTop="5dp"
-                android:verticalSpacing="10dp" />
+                android:padding="@dimen/item_offset"/>
 
         </LinearLayout>
 

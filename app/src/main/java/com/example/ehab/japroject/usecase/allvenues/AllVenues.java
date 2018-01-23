@@ -26,6 +26,8 @@ public class AllVenues implements Unsubscribable {
     private Single<AllVenuesResponse> venuesResponseSingle;
     private Disposable disposable;
     private DisposableSingleObserver<AllVenuesResponse> venuesResponseDisposableSingleObserver;
+    private String venueURL = null;
+    public boolean firstLoad = true;
 
     @Inject
     public AllVenues(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
@@ -42,6 +44,8 @@ public class AllVenues implements Unsubscribable {
                     dataRepository.saveAllVenues(venuesResponse);
                 }
                 callback.onSuccess(venuesResponse);
+                venueURL = venuesResponse.getData().getNextPageUrl();
+                firstLoad = false;
             }
 
             @Override
@@ -49,17 +53,22 @@ public class AllVenues implements Unsubscribable {
                 if (e.getMessage() != null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)) {
                     callback.onError(e.getMessage());
                 } else {
-                    dataRepository.getAllVenues(false);
+                    dataRepository.getAllVenues(false, venueURL);
                 }
             }
         };
         if (!compositeDisposable.isDisposed()) {
-            venuesResponseSingle = dataRepository.getAllVenues(fresh);
-            disposable = venuesResponseSingle
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(venuesResponseDisposableSingleObserver);
-            compositeDisposable.add(disposable);
+            if(!(venueURL == null && firstLoad == false)){
+                disposable = dataRepository.getAllVenues(fresh,venueURL)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(venuesResponseDisposableSingleObserver);
+                compositeDisposable.add(disposable);
+            }
+            else {
+                callback.onSuccess(null);
+            }
+
         }
     }
 

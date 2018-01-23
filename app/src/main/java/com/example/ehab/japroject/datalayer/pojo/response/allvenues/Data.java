@@ -13,7 +13,7 @@ public class Data {
 
     @SerializedName("venues")
     @Expose
-    private List<Venue> venues = null;
+    private List<Venue> venues;
     @SerializedName("first_page_url")
     @Expose
     private String firstPageUrl;
@@ -25,13 +25,13 @@ public class Data {
     private Integer lastPage;
     @SerializedName("next_page_url")
     @Expose
-    private Object nextPageUrl;
+    private String nextPageUrl;
     @SerializedName("path")
     @Expose
     private String path;
     @SerializedName("prev_page_url")
     @Expose
-    private Object prevPageUrl;
+    private String prevPageUrl;
     @SerializedName("last_page_url")
     @Expose
     private String lastPageUrl;
@@ -74,11 +74,11 @@ public class Data {
         this.lastPage = lastPage;
     }
 
-    public Object getNextPageUrl() {
+    public String getNextPageUrl() {
         return nextPageUrl;
     }
 
-    public void setNextPageUrl(Object nextPageUrl) {
+    public void setNextPageUrl(String nextPageUrl) {
         this.nextPageUrl = nextPageUrl;
     }
 
@@ -94,7 +94,7 @@ public class Data {
         return prevPageUrl;
     }
 
-    public void setPrevPageUrl(Object prevPageUrl) {
+    public void setPrevPageUrl(String prevPageUrl) {
         this.prevPageUrl = prevPageUrl;
     }
 

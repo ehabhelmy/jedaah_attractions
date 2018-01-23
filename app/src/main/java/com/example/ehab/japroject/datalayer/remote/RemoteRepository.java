@@ -8,7 +8,6 @@ import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.datalayer.pojo.request.LoginRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.NearbyEventsRequest;
 import com.example.ehab.japroject.datalayer.pojo.request.order.OrderRequest;
-import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
@@ -44,10 +43,6 @@ import com.example.ehab.japroject.datalayer.remote.service.VenuesLikeService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -201,7 +196,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<AllVenuesResponse> getAllVenues(String token) {
+    public Single<AllVenuesResponse> getAllVenues(String venueURL, String token) {
         Single<AllVenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -209,7 +204,8 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             AllVenuesService allVenuesService = serviceGenerator.createService(AllVenuesService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(allVenuesService.getAllVenues(getCurrentLanguage(),token), false);
+                            char page = venueURL == null ? '1':venueURL.charAt(venueURL.length() - 1);
+                            ServiceResponse serviceResponse = processCall(allVenuesService.getAllVenues(getCurrentLanguage(),Character.getNumericValue(page),token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 AllVenuesResponse venuesResponse = (AllVenuesResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(venuesResponse);

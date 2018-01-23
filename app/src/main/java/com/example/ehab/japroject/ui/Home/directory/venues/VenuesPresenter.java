@@ -22,6 +22,7 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
     private Categories categories;
     private TopVenues topVenues;
     private AllVenues allVenues;
+    private boolean firstFetch = true;
 
     private BaseCallback<Category> categoryBaseCallback = new BaseCallback<Category>() {
         @Override
@@ -64,9 +65,18 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
         @Override
         public void onSuccess(AllVenuesResponse model) {
             if (isViewAlive.get()) {
-                if (model.getSuccess()) {
-                    getView().setupAllVenues(model.getData().getVenues());
+                if(model !=null){
+                    if (model.getSuccess()) {
+                        if(firstFetch){
+                            getView().setupAllVenues(model.getData().getVenues());
+                        }
+                        else {
+                            getView().addVenues(model.getData().getVenues());
+                        }
+
+                    }
                 }
+
             }
         }
 
@@ -99,5 +109,11 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
         categories.unSubscribe();
         topVenues.unSubscribe();
         allVenues.unSubscribe();
+    }
+
+    @Override
+    public void loadMoreVenues() {
+        firstFetch = false;
+        allVenues.getAllVenues(allVenuesBaseCallback, true);
     }
 }
