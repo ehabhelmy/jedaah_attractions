@@ -14,7 +14,7 @@ public class VenuesResponse extends BaseModel{
     private Boolean success;
     @SerializedName("data")
     @Expose
-    private List<Datum> data = null;
+    private List<Venue> data = null;
 
     public Boolean getSuccess() {
         return success;
@@ -24,11 +24,11 @@ public class VenuesResponse extends BaseModel{
         this.success = success;
     }
 
-    public List<Datum> getData() {
+    public List<Venue> getData() {
         return data;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(List<Venue> data) {
         this.data = data;
     }
 

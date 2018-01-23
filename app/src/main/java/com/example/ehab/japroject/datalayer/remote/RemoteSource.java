@@ -1,6 +1,5 @@
 package com.example.ehab.japroject.datalayer.remote;
 
-import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
@@ -36,7 +35,7 @@ public interface RemoteSource {
 
     Single<VenuesResponse> getTopVenues(String token);
 
-    Single<AllVenuesResponse> getAllVenues(String token);
+    Single<AllVenuesResponse> getAllVenues(String venueURL, String token);
 
     Single<VenuesResponse> getNearByVenues(LatLng latLng,String token);
 

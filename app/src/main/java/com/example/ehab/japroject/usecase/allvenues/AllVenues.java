@@ -2,7 +2,6 @@ package com.example.ehab.japroject.usecase.allvenues;
 
 import com.example.ehab.japroject.datalayer.DataRepository;
 import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
 import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
 import com.example.ehab.japroject.usecase.Unsubscribable;
 import com.example.ehab.japroject.util.Constants;
@@ -27,6 +26,8 @@ public class AllVenues implements Unsubscribable {
     private Single<AllVenuesResponse> venuesResponseSingle;
     private Disposable disposable;
     private DisposableSingleObserver<AllVenuesResponse> venuesResponseDisposableSingleObserver;
+    private String venueURL = null;
+    public boolean firstLoad = true;
 
     @Inject
     public AllVenues(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
@@ -39,34 +40,41 @@ public class AllVenues implements Unsubscribable {
             @Override
             public void onSuccess(AllVenuesResponse venuesResponse) {
                 //TODO : check if the data is valid
-                if (fresh){
+                if (fresh) {
                     dataRepository.saveAllVenues(venuesResponse);
                 }
                 callback.onSuccess(venuesResponse);
+                venueURL = venuesResponse.getData().getNextPageUrl();
+                firstLoad = false;
             }
 
             @Override
             public void onError(Throwable e) {
-                if(e.getMessage()!= null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)){
+                if (e.getMessage() != null && e.getMessage().equals(Constants.ERROR_NOT_CACHED)) {
                     callback.onError(e.getMessage());
-                }
-                else {
-                    dataRepository.getAllVenues(false);
+                } else {
+                    dataRepository.getAllVenues(false, venueURL);
                 }
             }
         };
-        if (!compositeDisposable.isDisposed()){
-            venuesResponseSingle = dataRepository.getAllVenues(fresh);
-            disposable = venuesResponseSingle
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(venuesResponseDisposableSingleObserver);
-            compositeDisposable.add(disposable);
+        if (!compositeDisposable.isDisposed()) {
+            if(!(venueURL == null && firstLoad == false)){
+                disposable = dataRepository.getAllVenues(fresh,venueURL)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(venuesResponseDisposableSingleObserver);
+                compositeDisposable.add(disposable);
+            }
+            else {
+                callback.onSuccess(null);
+            }
+
         }
     }
+
     @Override
     public void unSubscribe() {
-        if (!compositeDisposable.isDisposed()){
+        if (!compositeDisposable.isDisposed()) {
             compositeDisposable.remove(disposable);
         }
     }

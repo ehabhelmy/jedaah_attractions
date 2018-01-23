@@ -1,19 +1,21 @@
 package com.example.ehab.japroject.ui.Home.directory.venues;
 
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.GridView;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue;
 import com.example.ehab.japroject.datalayer.pojo.response.category.Cats;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.Datum;
+import com.example.ehab.japroject.datalayer.pojo.response.venues.Venue;
 import com.example.ehab.japroject.ui.Base.BaseFragment;
-import com.example.ehab.japroject.ui.Home.directory.adapter.AllVenuesAdapter;
+import com.example.ehab.japroject.ui.Home.directory.venues.adapter.AllVenuesListAdapter;
+import com.example.ehab.japroject.ui.Home.directory.venues.adapter.ItemOffsetDecoration;
+import com.example.ehab.japroject.ui.Home.events.all_events.listener.OnLoadMoreListener;
 import com.example.ehab.japroject.ui.Home.explore.adapter.CategoryListAdapter;
 import com.example.ehab.japroject.ui.Home.explore.adapter.VenuesListAdapter;
 
@@ -39,8 +41,11 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
     @BindView(R.id.topVeuesRecyclarView)
     RecyclerView topVeuesRecyclarView;
 
-    @BindView(R.id.allVenuesGridView)
-    GridView allVenuesGridView;
+    @BindView(R.id.allVenuesRecyclarView)
+    RecyclerView allVenuesRecyclarView;
+
+    private ArrayList<com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue> response;
+    private AllVenuesListAdapter allVenuesListAdapter;
 
     @Override
     public void showError(String message) {
@@ -91,7 +96,7 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
     }
 
     @Override
-    public void setupTopVenues(List<Datum> venuesResponses) {
+    public void setupTopVenues(List<Venue> venuesResponses) {
         if (venuesResponses.size() > 0) {
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
@@ -99,7 +104,7 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
             topVeuesRecyclarView.setLayoutManager(layoutManager);
             topVeuesRecyclarView.addItemDecoration(dividerItemDecoration);
             VenuesListAdapter venuesListAdapter = new VenuesListAdapter();
-            venuesListAdapter.setData((ArrayList<Datum>) venuesResponses);
+            venuesListAdapter.setData((ArrayList<Venue>) venuesResponses);
             topVeuesRecyclarView.setAdapter(venuesListAdapter);
         } else {
             topVeuesRecyclarView.setVisibility(View.GONE);
@@ -107,12 +112,34 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
     }
 
     @Override
-    public void setupAllVenues(List<Venue> venuesResponses) {
+    public void setupAllVenues(List<com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue> venuesResponses) {
         if (venuesResponses.size() > 0) {
-            AllVenuesAdapter venuesListAdapter = new AllVenuesAdapter(this.getContext(),venuesResponses);
-            allVenuesGridView.setAdapter(venuesListAdapter);
+            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getContext(), 2);
+            allVenuesRecyclarView.setLayoutManager(mLayoutManager);
+            allVenuesRecyclarView.setItemAnimator(new DefaultItemAnimator());
+            ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this.getContext(), R.dimen.item_offset);
+            allVenuesRecyclarView.addItemDecoration(itemDecoration);
+            allVenuesListAdapter = new AllVenuesListAdapter();
+            response = (ArrayList<com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue>) venuesResponses;
+            allVenuesListAdapter.setData(response);
+            allVenuesRecyclarView.setAdapter(allVenuesListAdapter);
+            allVenuesListAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore() {
+                    presenter.loadMoreVenues();
+                }
+            });
+            allVenuesListAdapter.setupLoadingRecyclerView(allVenuesRecyclarView);
+
         } else {
-            allVenuesGridView.setVisibility(View.GONE);
+            allVenuesRecyclarView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void addVenues(List<com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue> venues) {
+        if (venues != null) {
+            allVenuesListAdapter.addData((ArrayList<com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue>) venues);
         }
     }
 

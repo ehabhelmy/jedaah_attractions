@@ -1,4 +1,4 @@
-package com.example.ehab.japroject.ui.Home.explore.viewholder;
+package com.example.ehab.japroject.ui.Home.directory.venues.viewholder;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.Venue;
+import com.example.ehab.japroject.datalayer.pojo.response.allvenues.Venue;
 import com.example.ehab.japroject.ui.Base.BaseViewHolder;
 import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
 import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
@@ -24,10 +24,10 @@ import com.like.OnLikeListener;
 import butterknife.BindView;
 
 /**
- * Created by ehab on 1/19/18.
+ * Created by Roma on 1/22/2018.
  */
 
-public class VenuesViewHolder extends BaseViewHolder<Venue> {
+public class AllVenuesViewHolder extends BaseViewHolder<Venue> {
 
     @BindView(R.id.venuImage)
     ImageLayout venueImage;
@@ -47,7 +47,7 @@ public class VenuesViewHolder extends BaseViewHolder<Venue> {
     @BindView(R.id.cats)
     TextView cats;
 
-    public VenuesViewHolder(View itemView) {
+    public AllVenuesViewHolder(View itemView) {
         super(itemView);
     }
 

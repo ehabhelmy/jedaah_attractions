@@ -1,6 +1,5 @@
 package com.example.ehab.japroject.datalayer;
 
-import com.example.ehab.japroject.datalayer.pojo.request.registeration.RegisterationResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.DataResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.allvenues.AllVenuesResponse;
@@ -33,7 +32,7 @@ public interface DataSource {
 
     Single<VenuesResponse> getTopVenues(boolean fresh);
 
-    Single<AllVenuesResponse> getAllVenues(boolean fresh);
+    Single<AllVenuesResponse> getAllVenues(boolean fresh, String venueURL);
 
     Single<EventsResponse> getNearByEvents(LatLng latLng,boolean fresh);
 

@@ -1,5 +1,6 @@
 package com.example.ehab.japroject.datalayer.pojo.response.allvenues;
 
+import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Created by Roma on 1/19/2018.
  */
 
-public class Venue {
+public class Venue extends BaseModel {
 
     @SerializedName("id")
     @Expose

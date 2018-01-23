@@ -1,89 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fillViewport="true">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         android:paddingTop="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background"
-            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:paddingBottom="20dp"
-            android:orientation="vertical">
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/topSportsTextView"
+                style="@style/TitleTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                style="@style/TitleTheme"
                 android:text="@string/topSpotsInJeddah" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/topVeuesRecyclarView"
                 android:layout_width="match_parent"
-                android:paddingStart="16dp"
+                android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:layout_height="match_parent"/>
+                android:paddingStart="16dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/lightBlack"
-            android:paddingTop="10dp"
+            android:orientation="vertical"
             android:paddingBottom="20dp"
-            android:orientation="vertical">
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/title_categories"
+                style="@style/TitleTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                style="@style/TitleTheme"
                 android:text="@string/title_categories" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/categories"
                 android:layout_width="match_parent"
-                android:paddingStart="16dp"
+                android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:layout_height="match_parent"/>
+                android:paddingStart="16dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lightBlack"
-            android:paddingTop="10dp"
+            android:background="@color/cardview_light_background"
+            android:orientation="vertical"
             android:paddingBottom="20dp"
-            android:orientation="vertical">
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/title_all_venues"
+                style="@style/TitleTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                style="@style/TitleTheme"
                 android:text="@string/title_all_venues" />
 
-            <GridView
-                android:id="@+id/allVenuesGridView"
-                android:numColumns="2"
-                android:gravity="center"
-                android:columnWidth="50dp"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/allVenuesRecyclarView"
                 android:layout_width="match_parent"
-                android:paddingStart="16dp"
+                android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:layout_height="match_parent"/>
+                android:paddingStart="16dp"
+                android:padding="@dimen/item_offset"/>
 
         </LinearLayout>
 
