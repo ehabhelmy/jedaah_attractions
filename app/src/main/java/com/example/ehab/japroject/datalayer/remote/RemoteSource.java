@@ -13,6 +13,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
 import com.example.ehab.japroject.usecase.login.Login;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -50,6 +51,8 @@ public interface RemoteSource {
     Single<EventsResponse> getLikedEvents(String token);
 
     Single<EventInnerResponse> getEventDetails(int id);
+
+    Single<VenuesInnerResponse> getVenueDetails(int id);
 
     Single<LoginResponse> login(String email, String password);
 

@@ -15,4 +15,5 @@ public class Constants {
     public static final String EVENT_ORDER = "eventOrder";
     public static final String NO_TOKEN = "no token";
     public static final int EVENT_INNER = 3;
+    public static final String VENUE_ID = "venueID";
 }

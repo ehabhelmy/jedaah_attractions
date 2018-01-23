@@ -220,7 +220,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
             presenter.venueLike(id);
         });
         venuesListAdapter.setOnViewListener(id -> {
-            //presenter.showEventInner(id);
+            presenter.showVenueInner(id);
         });
         recyclerView.setAdapter(venuesListAdapter);
     }

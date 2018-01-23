@@ -34,7 +34,7 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
     }
 
     enum SocialMedia{
-        Twitter,Facebook,Instagram,WebSite;
+        Twitter,Facebook,Instagram,PHONE;
     }
 
     @Override
@@ -48,6 +48,8 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
         if (baseModel.getName().equals(SocialMedia.Facebook.name())) {
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.facebook_g).error(R.drawable.facebook_g)).into(socialMediaIcon);
         }else if(baseModel.getName().equals(SocialMedia.Instagram.name())){
+            Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g)).into(socialMediaIcon);
+        }else if (baseModel.getName().equals(SocialMedia.PHONE.name())){
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g)).into(socialMediaIcon);
         }else {
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.website_g).error(R.drawable.website_g)).into(socialMediaIcon);

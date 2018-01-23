@@ -40,7 +40,16 @@ public class Order implements Unsubscribable {
                 if (orderResponse.getSuccess()){
                     callback.onSuccess(orderResponse.getData());
                 }else {
-                    callback.onError(orderResponse.getMsg().getErrors().getUserNationalId().get(0));
+                    if (orderResponse.getMsg().getErrors() != null) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (String str : orderResponse.getMsg().getErrors()) {
+                            stringBuilder.append(str + ", ");
+                        }
+                        StringBuilder error = stringBuilder.deleteCharAt(stringBuilder.toString().length() - 1);
+                        callback.onError(error.toString());
+                    } else {
+                        callback.onError("Server Error");
+                    }
                 }
             }
 

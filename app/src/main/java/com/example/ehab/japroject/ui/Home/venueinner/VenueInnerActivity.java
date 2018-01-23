@@ -1,20 +1,34 @@
-package com.example.ehab.japroject.ui.Home.eventsinner;
+package com.example.ehab.japroject.ui.Home.venueinner;
 
 import com.example.ehab.japroject.JaApplication;
 import com.example.ehab.japroject.R;
 import com.example.ehab.japroject.ui.Base.BaseActivity;
-import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 
 import javax.inject.Inject;
 
 /**
- * Created by ehab on 12/22/17.
+ * Created by ehab on 1/20/18.
  */
 
-public class EventInnerActivity extends BaseActivity implements EventInnerActivityContract.View {
+public class VenueInnerActivity extends BaseActivity implements VenueInnerContract.View {
 
     @Inject
-    EventInnerActivityPresenter presenter;
+    VenueInnerPresenter presenter;
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
 
     @Override
     protected void initializeDagger() {
@@ -30,15 +44,12 @@ public class EventInnerActivity extends BaseActivity implements EventInnerActivi
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_inner_event;
+        return R.layout.activity_venue_inner;
     }
 
     @Override
     public void onBackPressed() {
-        if (presenter.getCurrentFragment() instanceof EventInnerFragment) {
-            presenter.goToHomeActivity();
-        }else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
+        presenter.goToHomeActivity();
     }
 }

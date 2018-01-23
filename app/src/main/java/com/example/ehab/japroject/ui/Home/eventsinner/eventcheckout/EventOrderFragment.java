@@ -53,6 +53,7 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     private EventTicketsAdapter eventTicketsAdapter;
     private ArrayList<TicketDate> days;
     private String payment;
+    boolean isChoosed = true;
 
     @BindView(R.id.eventTitle)
     TextView eventTitleTextView;
@@ -229,8 +230,6 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
         adapter.setDays(eventOrder.getEventDateDays());
         daysGridView.setAdapter(adapter);
         daysGridView.setOnItemClickListener((parent, view, position, id) -> {
-            boolean isChoosed = true;
-
             for (int i = 0 ; i < daysGridView.getChildCount() ; i++) {
                 if (i == position) {
                     if (isChoosed) {

@@ -2,6 +2,7 @@ package com.example.ehab.japroject.ui.Home.eventsinner;
 
 import android.os.Bundle;
 
+import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Base.BasePresenter;
 import com.example.ehab.japroject.util.Constants;
 
@@ -28,5 +29,10 @@ public class EventInnerActivityPresenter extends BasePresenter<EventInnerActivit
     @Override
     public void goToHomeActivity() {
         jaNavigationManager.goToHomeActivity();
+    }
+
+    @Override
+    public BaseFragment getCurrentFragment() {
+        return jaNavigationManager.getCurrentFragmentOnInner();
     }
 }

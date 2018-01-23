@@ -4,6 +4,8 @@ import com.example.ehab.japroject.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by ehab on 12/23/17.
  */
@@ -16,13 +18,13 @@ public class Msg extends BaseModel {
 
     @SerializedName("errors")
     @Expose
-    private Errors errors;
+    private List<String> errors;
 
-    public Errors getErrors() {
+    public List<String> getErrors() {
         return errors;
     }
 
-    public void setErrors(Errors errors) {
+    public void setErrors(List<String> errors) {
         this.errors = errors;
     }
 

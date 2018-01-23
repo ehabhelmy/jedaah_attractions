@@ -39,6 +39,10 @@
 
         </activity>
 
+        <activity android:name=".ui.Home.venueinner.VenueInnerActivity">
+
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="d8d813b2ac8c7c7e9b61cbb0359a8de4af26d604" />

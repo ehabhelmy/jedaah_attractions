@@ -39,6 +39,8 @@ public abstract class JaNavigationManager {
 
     public static final String EVENT_DETAILS = "eventDetails";
 
+    public static final String VENUE_DETAILS = "venueDetails";
+
     public static final String PAYMENT = "payment";
 
     public static final String ORDER = "order";
@@ -53,6 +55,7 @@ public abstract class JaNavigationManager {
 
     public static final int EVENT_INNER = 3;
 
+    public static final int VENUE_INNER = 5;
 
 
     public static JaNavigationManager getInstance(){
@@ -92,6 +95,10 @@ public abstract class JaNavigationManager {
 
     public abstract void showEventInner(int id);
 
+    public abstract void showVenueDetails(int anInt);
+
+    public abstract void showVenueInner(int id);
+
     public abstract void openNavigationView(double lat, double lng);
 
     public abstract void openPaymentView(PaymentData paymentData);
@@ -128,6 +135,9 @@ public abstract class JaNavigationManager {
 
     public  <F extends BaseFragment> F getCurrentFragmentOnAuth(){
         return (F) fragmentManager.findFragmentById(R.id.frame_layout_auth);
+    }
+    public  <F extends BaseFragment> F getCurrentFragmentOnInner(){
+        return (F) fragmentManager.findFragmentById(R.id.frame_layout_inner);
     }
 
     public BaseActivity getCurrentActivity() {

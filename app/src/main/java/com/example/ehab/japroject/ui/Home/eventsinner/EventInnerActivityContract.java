@@ -1,5 +1,6 @@
 package com.example.ehab.japroject.ui.Home.eventsinner;
 
+import com.example.ehab.japroject.ui.Base.BaseFragment;
 import com.example.ehab.japroject.ui.Base.listener.BaseView;
 
 /**
@@ -14,5 +15,6 @@ public interface EventInnerActivityContract {
 
     interface Presenter {
         void goToHomeActivity();
+        BaseFragment getCurrentFragment();
     }
 }

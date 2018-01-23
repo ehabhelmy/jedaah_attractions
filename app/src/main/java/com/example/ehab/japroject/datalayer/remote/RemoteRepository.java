@@ -18,9 +18,11 @@ import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.history.upcoming.HistoryEvents;
 import com.example.ehab.japroject.datalayer.pojo.response.like.LikeResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.login.LoginResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.order.Order;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
 import com.example.ehab.japroject.datalayer.remote.service.AllEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.AllVenuesService;
 import com.example.ehab.japroject.datalayer.remote.service.CategoriesService;
@@ -40,6 +42,7 @@ import com.example.ehab.japroject.datalayer.remote.service.TodayEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopEventsService;
 import com.example.ehab.japroject.datalayer.remote.service.TopVenuesService;
 import com.example.ehab.japroject.datalayer.remote.service.UpcomingEventsService;
+import com.example.ehab.japroject.datalayer.remote.service.VenueDetailsService;
 import com.example.ehab.japroject.datalayer.remote.service.VenuesLikeService;
 import com.example.ehab.japroject.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
@@ -51,6 +54,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -99,7 +103,12 @@ public class RemoteRepository implements RemoteSource {
                 return new ServiceResponse(responseCode, isVoid ? null : response.body());
             } else {
                 if (responseCode == 406 || responseCode == 401){
-                    return new ServiceResponse(responseCode,isVoid ? null : gson.fromJson(response.errorBody().string(),LoginResponse.class));
+                    List<String> urlPaths = response.raw().request().url().encodedPathSegments();
+                    if (!urlPaths.get(urlPaths.size() -1).equals("order")) {
+                        return new ServiceResponse(responseCode, isVoid ? null : gson.fromJson(response.errorBody().string(), LoginResponse.class));
+                    }else {
+                        return new ServiceResponse(responseCode, isVoid ? null : gson.fromJson(response.errorBody().string(), OrderResponse.class));
+                    }
                 }
                 ServiceError ServiceError;
                 ServiceError = new ServiceError(response.message(), responseCode);
@@ -410,6 +419,32 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
+    public Single<VenuesInnerResponse> getVenueDetails(int id) {
+        Single<VenuesInnerResponse> venuesInnerResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            VenueDetailsService venueDetailsService = serviceGenerator.createService(VenueDetailsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(venueDetailsService.getVenueDetails(getCurrentLanguage(), id), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                VenuesInnerResponse venuesInnerResponse = (VenuesInnerResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesInnerResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesInnerResponseSingle;
+    }
+
+    @Override
     public Single<LoginResponse> login(String email, String password) {
         Single<LoginResponse> loginResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
@@ -597,7 +632,7 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             OrderService orderService = serviceGenerator.createService(OrderService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(orderService.order(getCurrentLanguage(), "bearer " + token,new OrderRequest(name,email,mobileNumber,numberOfTickets,paymentMethod,eventId,ticketId,dateId,nationalId,total)), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == ERROR_CODE) {
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE) {
                                 OrderResponse orderResponse = (OrderResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(orderResponse);
                             } else {

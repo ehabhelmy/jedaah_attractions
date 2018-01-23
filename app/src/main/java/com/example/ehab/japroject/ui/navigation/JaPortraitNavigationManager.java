@@ -18,6 +18,8 @@ import com.example.ehab.japroject.ui.Home.eventsinner.eventdetails.EventInnerFra
 import com.example.ehab.japroject.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
 import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
+import com.example.ehab.japroject.ui.Home.venueinner.VenueInnerActivity;
+import com.example.ehab.japroject.ui.Home.venueinner.venuedetails.VenueDetailsFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
@@ -30,6 +32,7 @@ import com.example.ehab.japroject.util.Constants;
  */
 
 public class JaPortraitNavigationManager extends JaNavigationManager {
+
 
     @Override
     public void showExploreScreen() {
@@ -126,7 +129,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             bundle.putInt(Constants.EVENT_ID,id);
             eventInnerFragment.setArguments(bundle);
         }
-        replaceFragment(eventInnerFragment,false,EVENT_DETAILS,R.id.frame_layout_inner);
+        replaceFragment(eventInnerFragment,true,EVENT_DETAILS,R.id.frame_layout_inner);
     }
 
     @Override
@@ -136,6 +139,27 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         bundle.putInt(Constants.EVENT_ID,id);
         intent.putExtras(bundle);
         getCurrentActivity().startActivityForResult(intent,JaNavigationManager.EVENT_INNER);
+    }
+
+    @Override
+    public void showVenueDetails(int anInt) {
+        VenueDetailsFragment venueDetailsFragment = (VenueDetailsFragment) fragmentManager.findFragmentByTag(VENUE_DETAILS);
+        if (venueDetailsFragment == null) {
+            venueDetailsFragment = new VenueDetailsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constants.VENUE_ID,anInt);
+            venueDetailsFragment.setArguments(bundle);
+        }
+        replaceFragment(venueDetailsFragment,false,VENUE_DETAILS,R.id.frame_layout_inner_venue);
+    }
+
+    @Override
+    public void showVenueInner(int id) {
+        Intent intent = new Intent(context,VenueInnerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.VENUE_ID,id);
+        intent.putExtras(bundle);
+        getCurrentActivity().startActivityForResult(intent,JaNavigationManager.VENUE_INNER);
     }
 
     @Override

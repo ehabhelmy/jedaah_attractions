@@ -41,7 +41,20 @@ public class Login implements Unsubscribable {
                     dataRepository.saveToken(loginResponse.getData().getToken());
                     callback.onSuccess(loginResponse);
                 }else {
-                    callback.onError(loginResponse.getMsg().getMsg());
+                    if (loginResponse.getMsg().getErrors() == null) {
+                        callback.onError(loginResponse.getMsg().getMsg());
+                    }else {
+                        if (loginResponse.getMsg().getErrors() != null) {
+                            StringBuilder stringBuilder = new StringBuilder();
+                            for (String str : loginResponse.getMsg().getErrors()) {
+                                stringBuilder.append(str + ", ");
+                            }
+                            StringBuilder error = stringBuilder.deleteCharAt(stringBuilder.toString().length() - 1);
+                            callback.onError(error.toString());
+                        } else {
+                            callback.onError("Server Error");
+                        }
+                    }
                 }
             }
 

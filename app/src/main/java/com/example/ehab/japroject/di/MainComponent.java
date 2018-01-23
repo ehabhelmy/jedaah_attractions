@@ -20,6 +20,8 @@ import com.example.ehab.japroject.ui.Home.explore.ExploreFragment;
 import com.example.ehab.japroject.ui.Home.profile.ProfileFragment;
 import com.example.ehab.japroject.ui.Home.profile.liked_events.LikedEventsFragment;
 import com.example.ehab.japroject.ui.Home.profile.my_tickets.TicketsFragment;
+import com.example.ehab.japroject.ui.Home.venueinner.VenueInnerActivity;
+import com.example.ehab.japroject.ui.Home.venueinner.venuedetails.VenueDetailsFragment;
 import com.example.ehab.japroject.ui.authentication.AuthenticationActivity;
 import com.example.ehab.japroject.ui.authentication.login.SignInFragment;
 import com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment;
@@ -85,6 +87,10 @@ public interface MainComponent {
     void inject(VenuesFragment venuesFragment);
 
     void inject(AttractionFragment attractionFragment);
+
+    void inject(VenueInnerActivity venueInnerActivity);
+
+    void inject(VenueDetailsFragment venueDetailsFragment);
 
 }
 

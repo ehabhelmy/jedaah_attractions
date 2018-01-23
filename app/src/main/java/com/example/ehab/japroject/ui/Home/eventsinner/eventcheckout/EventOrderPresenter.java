@@ -32,7 +32,7 @@ public class EventOrderPresenter extends BasePresenter<EventOrderContract.View> 
         @Override
         public void onError(String message) {
             if (isViewAlive.get()){
-                getView().showError("Server Error");
+                getView().showError(message);
             }
         }
     };

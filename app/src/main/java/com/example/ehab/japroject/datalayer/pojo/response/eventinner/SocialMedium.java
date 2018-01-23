@@ -20,6 +20,15 @@ public class SocialMedium extends BaseModel{
     @Expose
     private String icon;
 
+    public SocialMedium(Integer id, String url, String name) {
+        this.id = id;
+        this.url = url;
+        this.name = name;
+    }
+
+    public SocialMedium() {
+    }
+
     public Integer getId() {
         return id;
     }

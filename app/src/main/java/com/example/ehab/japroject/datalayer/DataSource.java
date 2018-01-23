@@ -14,6 +14,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
@@ -49,6 +50,8 @@ public interface DataSource {
     Single<EventsResponse> getLikedEvents(boolean fresh);
 
     Single<EventInnerResponse> getEventDetails(int id);
+
+    Single<VenuesInnerResponse> getVenueDetails(int id);
 
     Single<LoginResponse> login(String email,String password);
 

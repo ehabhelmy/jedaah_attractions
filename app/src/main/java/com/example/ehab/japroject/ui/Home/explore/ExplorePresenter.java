@@ -200,6 +200,11 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     }
 
     @Override
+    public void showVenueInner(int id) {
+        jaNavigationManager.showVenueInner(id);
+    }
+
+    @Override
     public void like(int id) {
         like.like(id,likeResponseBaseCallback);
     }

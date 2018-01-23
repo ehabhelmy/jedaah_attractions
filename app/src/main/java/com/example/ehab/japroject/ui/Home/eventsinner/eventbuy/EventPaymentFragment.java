@@ -276,9 +276,6 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
             payLaterTextView.setText(paymentData.getPayLaterTickets()+"");
             paylater = true;
         }
-        if (TextUtils.isEmpty(paymentType)){
-            nextBtn.setVisibility(View.GONE);
-        }
     }
 
     @Override

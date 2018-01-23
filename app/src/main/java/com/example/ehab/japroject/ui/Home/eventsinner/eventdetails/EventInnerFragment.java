@@ -134,11 +134,6 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
         super.onCreate(savedInstanceState);
     }
 
-    @OnClick(R.id.favourite)
-    void like() {
-        presenter.like();
-    }
-
     @OnClick(R.id.directions)
     void openMapsInNavigationMode() {
         presenter.openNavigationView(latitude,longitude);

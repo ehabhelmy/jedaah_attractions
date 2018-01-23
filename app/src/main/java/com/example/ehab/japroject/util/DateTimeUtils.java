@@ -34,6 +34,14 @@ public class DateTimeUtils {
         }
     }
 
+    public static boolean isOpenNow(String day) {
+        if (day.equalsIgnoreCase(getWeekDay())){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public static String getMonth(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -47,6 +55,12 @@ public class DateTimeUtils {
         String day = new SimpleDateFormat("dd").format(calendar.getTime());
         return day;
     }
+
+    public static String getWeekDay(){
+        String date = new SimpleDateFormat("EEEE").format(new Date());
+        return date;
+    }
+
 
     public static String getDaysRemaining(Date date){
         Date date1 = new Date();

@@ -36,6 +36,7 @@ public interface ExploreContract {
         void loadNearByEventsAfterLocationEnabled(LatLng latLng);
         void loadNearByVenuesAfterLocationEnabled(LatLng latLng);
         void showEventInner(int id);
+        void showVenueInner(int id);
         void like(int id);
         void venueLike(int id);
     }

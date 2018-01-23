@@ -15,6 +15,7 @@ import com.example.ehab.japroject.datalayer.pojo.response.login.User;
 import com.example.ehab.japroject.datalayer.pojo.response.order.OrderResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.profile.ProfileResponse;
 import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
+import com.example.ehab.japroject.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
 import com.example.ehab.japroject.datalayer.remote.RemoteRepository;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -142,6 +143,11 @@ public class DataRepository implements DataSource {
     @Override
     public Single<EventInnerResponse> getEventDetails(int id) {
         return remoteRepository.getEventDetails(id);
+    }
+
+    @Override
+    public Single<VenuesInnerResponse> getVenueDetails(int id) {
+        return remoteRepository.getVenueDetails(id);
     }
 
     @Override
