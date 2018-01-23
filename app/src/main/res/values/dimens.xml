@@ -14,5 +14,5 @@
     <dimen name="view_min_height_large">90dp</dimen>
     <dimen name="screen_margin_normal">6dp</dimen>
     <dimen name="animation_stroke_normal">5dp</dimen>
-    <dimen name="item_offset">2dp</dimen>
+    <dimen name="item_offset">4dp</dimen>
 </resources>
