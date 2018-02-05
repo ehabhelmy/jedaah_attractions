@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/lightBlack"
     android:fillViewport="true"
-    tools:context="com.example.ehab.japroject.ui.authentication.registeration.RegisterationFragment">
+    tools:context="com.spade.ja.ui.authentication.registeration.RegisterationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.ehab.japroject.ui.widget.CircularImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.spade.ja.ui.widget.CircularImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="120dp"
             android:layout_height="120dp"

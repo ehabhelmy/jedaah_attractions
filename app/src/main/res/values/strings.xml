@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JAProject</string>
+    <string name="app_name">JEDDAH ATTRACTIONS</string>
     <string name="facebook_app_id">202726053622168</string>
     <string name="fb_login_protocol_scheme">fb202726053622168</string>
     <string name="title_activity_main">MainActivity</string>
@@ -93,4 +93,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="photos">PHOTOS</string>
+    <string name="verification">Verification</string>
+    <string name="enterVerification">ENTER VERIFICATION CODE</string>
+    <string name="textMsg">A text message with code  was sent to your phone</string>
+    <string name="resend">RESEND</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="changePassword">CHANGE PASSWORD</string>
+    <string name="dob">DATE OF BIRTH</string>
+    <string name="gender">GENDER</string>
+    <string name="newPassword">NEW PASSWORD</string>
+    <string name="retypePass">RETYPE PASSWORD</string>
+    <string name="update">UPDATE</string>
 </resources>

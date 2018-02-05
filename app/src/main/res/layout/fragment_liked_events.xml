@@ -5,7 +5,7 @@
     android:paddingStart="16dp"
     android:paddingTop="16dp"
     android:paddingEnd="16dp"
-    tools:context="com.example.ehab.japroject.ui.Home.profile.liked_events.LikedEventsFragment">
+    tools:context="com.spade.ja.ui.Home.profile.liked_events.LikedEventsFragment">
 
 
     <android.support.v7.widget.RecyclerView

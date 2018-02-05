@@ -17,7 +17,7 @@
         android:paddingBottom="20dp"
         android:background="@color/white">
 
-        <com.example.ehab.japroject.ui.widget.ImageLayout
+        <com.spade.ja.ui.widget.ImageLayout
             android:id="@+id/ticketImage"
             android:layout_width="match_parent"
             android:layout_height="130dp"
@@ -35,7 +35,7 @@
                 android:textSize="@dimen/title_inner"
                 tools:layout_editor_absoluteX="24dp"
                 tools:layout_editor_absoluteY="21dp" />
-        </com.example.ehab.japroject.ui.widget.ImageLayout>
+        </com.spade.ja.ui.widget.ImageLayout>
 
         <RelativeLayout
             android:id="@+id/eventDayContainer"

@@ -25,7 +25,7 @@
                 android:paddingBottom="10dp">
 
 
-                <com.example.ehab.japroject.ui.widget.ImageLayout
+                <com.spade.ja.ui.widget.ImageLayout
                     android:id="@+id/venueInnerImage"
                     android:layout_width="match_parent"
                     android:background="@mipmap/myimage"
@@ -173,11 +173,11 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1.5dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginTop="8dp"
                     android:id="@+id/divider"
                     android:layout_below="@+id/socialMedia"
-                    android:background="@color/outerText"/>
+                    android:background="@color/background"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -211,11 +211,11 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1.5dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginTop="8dp"
                     android:id="@+id/dividerPhotos"
                     android:layout_below="@+id/venueDescriptionContainer"
-                    android:background="@color/outerText"/>
+                    android:background="@color/background"/>
 
 
                 <LinearLayout

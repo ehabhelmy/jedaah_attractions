@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ehab.japroject.ui.Home.profile.liked_directory.LikedDirectoryFragment">
+    tools:context="com.spade.ja.ui.Home.profile.liked_directory.LikedDirectoryFragment">
 
 
     <android.support.v7.widget.RecyclerView

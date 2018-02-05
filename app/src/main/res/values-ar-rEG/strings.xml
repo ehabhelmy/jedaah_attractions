@@ -79,4 +79,15 @@
     <string name="topSpots">TOP SPOTS IN JEDDAH</string>
     <string name="nearbyVenues">NEAR BY VENUES</string>
     <string name="photos">Photos</string>
+    <string name="verification">Verification</string>
+    <string name="enterVerification">ENTER VERIFICATION CODE</string>
+    <string name="textMsg">A text message with code  was sent to your phone</string>
+    <string name="resend">RESEND</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="changePassword">CHANGE PASSWORD</string>
+    <string name="dob">DATE OF BIRTH</string>
+    <string name="gender">GENDER</string>
+    <string name="newPassword">NEW PASSWORD</string>
+    <string name="retypePass">RETYPE PASSWORD</string>
 </resources>

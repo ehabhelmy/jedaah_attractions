@@ -23,7 +23,7 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.ehab.japroject"
+        applicationId "com.spade.ja"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1

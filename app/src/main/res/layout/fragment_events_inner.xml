@@ -203,7 +203,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/eventSchedule"/>
 
-                <com.example.ehab.japroject.ui.widget.StaticGridView
+                <com.spade.ja.ui.widget.StaticGridView
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                     android:horizontalSpacing="10dp"
                     android:stretchMode="spacingWidthUniform">
 
-                </com.example.ehab.japroject.ui.widget.StaticGridView>
+                </com.spade.ja.ui.widget.StaticGridView>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

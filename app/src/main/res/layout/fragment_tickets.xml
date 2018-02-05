@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context="com.example.ehab.japroject.ui.Home.profile.my_tickets.TicketsFragment">
+    tools:context="com.spade.ja.ui.Home.profile.my_tickets.TicketsFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

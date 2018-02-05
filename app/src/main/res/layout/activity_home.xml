@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.ehab.japroject.ui.Home.HomeActivity">
+    tools:context="com.spade.ja.ui.Home.HomeActivity">
 
     <FrameLayout
         android:id="@+id/frame_layout"

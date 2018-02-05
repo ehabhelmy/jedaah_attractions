@@ -12,7 +12,7 @@
     android:visibility="gone"
     tools:visibility="visible">
 
-    <com.example.ehab.japroject.ui.widget.LoadingView
+    <com.spade.ja.ui.widget.LoadingView
         android:id="@+id/loading_view"
         android:layout_width="@dimen/view_min_height_large"
         android:layout_height="@dimen/view_min_height_large"

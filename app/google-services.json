@@ -8,7 +8,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:53888803660:android:3d1cab4a368b4e4f",
         "android_client_info": {
-          "package_name": "com.example.ehab.japroject"
+          "package_name": "com.spade.ja"
         }
       },
       "oauth_client": [
@@ -20,7 +20,7 @@
           "client_id": "53888803660-g96d3g0qura15psknsivird6o9hog1tq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.ehab.japroject",
+            "package_name": "com.spade.ja",
             "certificate_hash": "ed2969b79bc872e42c8f9bc3dffe2adbe60948df"
           }
         }

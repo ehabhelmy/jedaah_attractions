@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:weightSum="3">
 
-        <com.example.ehab.japroject.ui.widget.ImageLayout
+        <com.spade.ja.ui.widget.ImageLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/eventImage"
@@ -44,7 +44,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:like_drawable="@drawable/like_full_g"
                 app:unlike_drawable="@drawable/like_empty_g" />
-        </com.example.ehab.japroject.ui.widget.ImageLayout>
+        </com.spade.ja.ui.widget.ImageLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
