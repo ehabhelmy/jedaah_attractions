@@ -29,6 +29,8 @@ import com.spade.ja.ui.authentication.socialmedia.SocialMediaFragment;
 import com.spade.ja.ui.splash.SplashActivity;
 import com.spade.ja.util.Constants;
 
+import javax.inject.Inject;
+
 /**
  * Created by ehab on 12/1/17.
  */
@@ -216,6 +218,12 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.PROFILE_DATA,profileData);
         intent.putExtras(bundle);
+        getCurrentActivity().startActivity(intent);
+    }
+
+    @Override
+    public void showMapActivity() {
+        Intent intent = new Intent(getCurrentActivity(), MapActivity.class);
         getCurrentActivity().startActivity(intent);
     }
 }

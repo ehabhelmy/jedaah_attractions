@@ -2,9 +2,13 @@ package com.spade.ja.ui.Home.explore;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,8 +45,6 @@ import butterknife.OnClick;
  */
 
 public class ExploreFragment extends BaseFragment implements ExploreContract.View {
-
-    private HomeContract.View activity;
 
     @Inject
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -97,6 +99,11 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @BindView(R.id.noNearVenues)
     RelativeLayout noNearByVenues;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    private HomeContract.View activity;
+    private boolean locationCheck;
 
     @Override
     protected void initializeDagger() {
@@ -127,6 +134,32 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @OnClick(R.id.events)
     void openEventListing() {
         activity.openEventsList();
+    }
+
+    @OnClick(R.id.fab)
+    void openMapActivity() {
+        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) &&
+                !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            showDialog();
+        } else {
+            jaNavigationManager.showMapActivity();
+        }
+
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder
+                .setMessage(" please enable location ")
+                .setCancelable(false)
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -233,6 +266,15 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         return activity.isLocationServicesEnabled();
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (locationCheck) {
+            fab.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void showErrorLocationNotEnabled() {
         errorLocationContainer.setVisibility(View.VISIBLE);
@@ -260,18 +302,19 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     }
 
     @Override
-    public void locationIsEnabled(){
+    public void locationIsEnabled() {
         errorLocationContainer.setVisibility(View.GONE);
         venueErrorLocationContainer.setVisibility(View.GONE);
         getLatitudeAndLongitude();
     }
+
     @OnClick(R.id.enableLocationSettings)
-    void openLocationSettings(){
+    void openLocationSettings() {
         presenter.openLocationSettings();
     }
 
     @OnClick(R.id.venueenableLocationSettings)
-    void openLocationVenuesSettings(){
+    void openLocationVenuesSettings() {
         presenter.openLocationSettings();
     }
 
@@ -287,7 +330,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
             CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
             categoryListAdapter.setData((ArrayList<Cats>) categoryList);
             categories.setAdapter(categoryListAdapter);
-        }else {
+        } else {
             categories.setVisibility(View.GONE);
             noCatogories.setVisibility(View.VISIBLE);
         }
@@ -300,5 +343,10 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @Override
     public void hideNearByVenues() {
         venuesNearBy.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setLocationPermission(boolean check) {
+        locationCheck = check;
     }
 }

@@ -29,6 +29,7 @@ public interface ExploreContract {
         void setupCategories(List<Cats> categories);
         void hideNearByEvents();
         void hideNearByVenues();
+        void setLocationPermission(boolean check);
     }
 
     interface Presenter extends Unsubscribable{

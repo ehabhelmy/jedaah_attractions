@@ -34,17 +34,14 @@ import butterknife.BindView;
 public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private boolean locationPermission = false;
-    private boolean locationdEnabled =false;
     @Inject
     HomePresenter presenter;
-
     @BindView(R.id.frame_layout)
     FrameLayout container;
-
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
-
+    private boolean locationPermission = false;
+    private boolean locationdEnabled = false;
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -98,6 +95,16 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         presenter.showExplore();
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (locationPermission) {
+            ExploreContract.View exploreFragment = (ExploreContract.View) presenter.getCurrentFragmentOnHome();
+            exploreFragment.setLocationPermission(true);
+        }
+    }
+
     private void checkLocationEnabled() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
@@ -127,7 +134,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == JaNavigationManager.LOCATION_SETTINGS){
+        if (requestCode == JaNavigationManager.LOCATION_SETTINGS) {
             if (resultCode == 0) {
                 presenter.locationIsEnabled();
             }
@@ -145,7 +152,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermission = true;
                     presenter.locationIsEnabled();
-                }else{
+                } else {
                     presenter.hideNearByEvents();
                 }
         }

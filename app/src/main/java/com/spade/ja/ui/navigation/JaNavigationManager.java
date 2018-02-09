@@ -112,6 +112,7 @@ public abstract class JaNavigationManager {
 
     public abstract void openEditActivity(Data profileData);
 
+    public abstract void showMapActivity();
 
     protected void replaceFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
