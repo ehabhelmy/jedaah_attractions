@@ -1,5 +1,6 @@
 package com.spade.ja.ui.Home;
 
+import com.spade.ja.ui.Base.BaseFragment;
 import com.spade.ja.ui.Base.listener.BaseView;
 import com.spade.ja.ui.Base.listener.ErrorView;
 import com.spade.ja.ui.Base.listener.ProgressView;
@@ -21,5 +22,6 @@ public interface HomeContract {
         void showDirectory();
         void locationIsEnabled();
         void hideNearByEvents();
+        <F extends BaseFragment> F getCurrentFragmentOnHome();
     }
 }

@@ -10,6 +10,7 @@ import com.spade.ja.datalayer.pojo.request.NearbyEventsRequest;
 import com.spade.ja.datalayer.pojo.request.order.OrderRequest;
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
@@ -23,6 +24,7 @@ import com.spade.ja.datalayer.pojo.response.sms.SMSResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
 import com.spade.ja.datalayer.remote.service.AllEventsService;
+import com.spade.ja.datalayer.remote.service.AllNearyByService;
 import com.spade.ja.datalayer.remote.service.AllVenuesService;
 import com.spade.ja.datalayer.remote.service.CategoriesService;
 import com.spade.ja.datalayer.remote.service.DataService;
@@ -260,6 +262,32 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<AllNearByResponse> getNearByAll(LatLng latLng, String token) {
+        Single<AllNearByResponse> allNearByResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AllNearyByService allNearyByService = serviceGenerator.createService(AllNearyByService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(allNearyByService.getNearByAll(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""), getCurrentLanguage(),token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                AllNearByResponse allNearByResponse = (AllNearByResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(allNearByResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return allNearByResponseSingle;
     }
 
     @Override

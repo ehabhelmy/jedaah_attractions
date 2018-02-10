@@ -18,6 +18,7 @@ import com.spade.ja.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
 import com.spade.ja.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.spade.ja.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
 import com.spade.ja.ui.Home.explore.ExploreFragment;
+import com.spade.ja.ui.Home.map.MapActivity;
 import com.spade.ja.ui.Home.profile.ProfileFragment;
 import com.spade.ja.ui.Home.profile.edit.EditActivity;
 import com.spade.ja.ui.Home.venueinner.VenueInnerActivity;

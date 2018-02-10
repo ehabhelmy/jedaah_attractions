@@ -1,4 +1,4 @@
-package com.example.ehab.japroject.ui.map.holder;
+package com.spade.ja.ui.Home.map.holder;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -11,14 +11,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.Venue;
-import com.example.ehab.japroject.ui.Base.BaseViewHolder;
-import com.example.ehab.japroject.ui.Base.listener.RecyclerViewItemListener;
-import com.example.ehab.japroject.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
-import com.example.ehab.japroject.ui.map.Data;
+import com.spade.ja.R;
+import com.spade.ja.ui.Base.BaseViewHolder;
+import com.spade.ja.ui.Base.listener.RecyclerViewItemListener;
+import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
+import com.spade.ja.ui.Home.map.Data;
 import com.like.LikeButton;
-import com.like.OnLikeListener;
 
 import butterknife.BindView;
 
@@ -61,6 +59,4 @@ public class DataHolder extends BaseViewHolder<Data> {
     public void bind(Data baseModel, int position, TicketListener ticketListener) {
 
     }
-
-
 }

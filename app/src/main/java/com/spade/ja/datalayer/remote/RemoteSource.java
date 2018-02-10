@@ -2,6 +2,7 @@ package com.spade.ja.datalayer.remote;
 
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
@@ -38,6 +39,8 @@ public interface RemoteSource {
     Single<AllVenuesResponse> getAllVenues(String venueURL, String token);
 
     Single<VenuesResponse> getNearByVenues(LatLng latLng,String token);
+
+    Single<AllNearByResponse> getNearByAll(LatLng latLng, String token);
 
     Single<Category> getCategories();
 

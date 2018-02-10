@@ -1,15 +1,19 @@
-package com.example.ehab.japroject.ui.map;
+package com.spade.ja.ui.Home.map;
 
 import android.location.Location;
 import android.os.Bundle;
 
-import com.example.ehab.japroject.datalayer.pojo.response.events.EventsResponse;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.VenuesResponse;
-import com.example.ehab.japroject.ui.Base.BasePresenter;
-import com.example.ehab.japroject.ui.Base.listener.BaseCallback;
-import com.example.ehab.japroject.usecase.nearbyevents.NearByEvents;
-import com.example.ehab.japroject.usecase.nearbyvenues.NearByVenues;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
+import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
+import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
+import com.spade.ja.ui.Base.BasePresenter;
+import com.spade.ja.ui.Base.listener.BaseCallback;
+import com.spade.ja.usecase.nearbyall.NearByAll;
+import com.spade.ja.usecase.nearbyevents.NearByEvents;
+import com.spade.ja.usecase.nearbyvenues.NearByVenues;
 
 import javax.inject.Inject;
 
@@ -23,6 +27,9 @@ public class MapPresenter extends BasePresenter<MapContract.View> implements Map
 
     @Inject
     NearByVenues nearByVenues;
+
+    @Inject
+    NearByAll nearByAll;
 
     private BaseCallback<VenuesResponse> venuesResponseBaseCallback = new BaseCallback<VenuesResponse>() {
         @Override
@@ -75,11 +82,28 @@ public class MapPresenter extends BasePresenter<MapContract.View> implements Map
             }
         }
     };
+    private BaseCallback<AllNearByResponse> allNearByResponseBaseCallback = new BaseCallback<AllNearByResponse>() {
+        @Override
+        public void onSuccess(AllNearByResponse model) {
+            if (isViewAlive.get()) {
+                if (model.getSuccess()) {
+                    getView().setupData(DataConverter.convertAllNearByToView(model.getData().getResult()));
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()) {
+            }
+        }
+    };
 
     @Inject
-    public MapPresenter(NearByEvents nearByEvents, NearByVenues nearByVenues) {
+    public MapPresenter(NearByEvents nearByEvents, NearByVenues nearByVenues,NearByAll nearByAll) {
         this.nearByEvents = nearByEvents;
         this.nearByVenues = nearByVenues;
+        this.nearByAll = nearByAll;
     }
 
     @Override
@@ -89,6 +113,12 @@ public class MapPresenter extends BasePresenter<MapContract.View> implements Map
 
 
     public void getAllData() {
+        Location location = getView().getCurrentLocation();
+        if (location != null) {
+            nearByAll.getNearByAll((new LatLng(location.getLatitude(), location.getLongitude())), allNearByResponseBaseCallback, true);
+        } else {
+            nearByAll.getNearByAll(new LatLng(40, 40), allNearByResponseBaseCallback, true);
+        }
     }
 
     public void getNearByEvents() {

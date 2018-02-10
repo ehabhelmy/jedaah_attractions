@@ -1,16 +1,14 @@
-package com.example.ehab.japroject.ui.map.adapter;
+package com.spade.ja.ui.Home.map.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.Venue;
-import com.example.ehab.japroject.ui.Base.BaseRecyclerViewAdapter;
-import com.example.ehab.japroject.ui.Base.BaseViewHolder;
-import com.example.ehab.japroject.ui.map.Data;
-import com.example.ehab.japroject.ui.map.holder.DataHolder;
-
+import com.spade.ja.R;
+import com.spade.ja.ui.Base.BaseRecyclerViewAdapter;
+import com.spade.ja.ui.Base.BaseViewHolder;
+import com.spade.ja.ui.Home.map.Data;
+import com.spade.ja.ui.Home.map.holder.DataHolder;
 /**
  * Created by Roma on 2/3/2018.
  */

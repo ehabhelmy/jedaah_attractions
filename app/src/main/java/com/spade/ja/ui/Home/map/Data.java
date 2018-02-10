@@ -1,6 +1,7 @@
-package com.example.ehab.japroject.ui.map;
+package com.spade.ja.ui.Home.map;
 
-import com.example.ehab.japroject.datalayer.pojo.BaseModel;
+
+import com.spade.ja.datalayer.pojo.BaseModel;
 
 /**
  * Created by Roma on 2/7/2018.

@@ -6,24 +6,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="3"
-    tools:context="com.example.ehab.japroject.ui.map.MapActivity">
+    tools:context=".ui.Home.map.MapActivity">
 
     <RelativeLayout
+        android:id="@+id/mapViewContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2">
+
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"/>
+            android:layout_weight="2" />
 
         <RelativeLayout
             android:id="@+id/layout"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignBottom="@id/mapView"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/rounded_rectangle_green">
 
@@ -31,47 +33,47 @@
                 android:id="@+id/all"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:text="ALL"
-                android:textSize="12dp"
-                android:gravity="center"
                 android:fontFamily="@font/gotham_medium"
-                android:textColor="@color/circleWhite" />
+                android:gravity="center"
+                android:text="@string/all"
+                android:textColor="@color/circleWhite"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/events"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:text="EVENTS"
-                android:textSize="12dp"
+                android:layout_alignBottom="@id/events"
+                android:layout_toEndOf="@id/all"
                 android:fontFamily="@font/gotham_medium"
-                android:layout_toRightOf="@id/all"
                 android:gravity="center"
+                android:text="@string/eventsCap"
                 android:textColor="@color/circleWhite"
-                android:layout_alignBottom="@id/events"/>
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/venues"
                 android:layout_width="60dp"
-                android:textSize="12dp"
                 android:layout_height="match_parent"
-                android:text="VENUES"
+                android:layout_alignBottom="@id/venues"
+                android:layout_toEndOf="@id/events"
                 android:fontFamily="@font/gotham_medium"
                 android:gravity="center"
-                android:layout_alignBottom="@id/venues"
+                android:text="@string/venuesCap"
                 android:textColor="@color/circleWhite"
-                android:layout_toRightOf="@id/events"/>
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/attractions"
                 android:layout_width="100dp"
-                android:textSize="12dp"
                 android:layout_height="match_parent"
-                android:text="ATTRACTIONS"
+                android:layout_alignBottom="@id/venues"
+                android:layout_toEndOf="@id/venues"
                 android:fontFamily="@font/gotham_medium"
                 android:gravity="center"
-                android:layout_alignBottom="@id/venues"
+                android:text="@string/attractionsCap"
                 android:textColor="@color/circleWhite"
-                android:layout_toRightOf="@id/venues"/>
+                android:textSize="12dp" />
 
         </RelativeLayout>
 
@@ -80,9 +82,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/mapView"
-            android:layout_marginBottom="10dp"
-            android:layout_alignRight="@+id/mapView"
-            android:layout_marginRight="10dp"
+            android:layout_alignEnd="@+id/mapView"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="10dp"
             app:fabSize="mini"
             app:srcCompat="@drawable/location_g" />
     </RelativeLayout>

@@ -90,4 +90,8 @@
     <string name="gender">GENDER</string>
     <string name="newPassword">NEW PASSWORD</string>
     <string name="retypePass">RETYPE PASSWORD</string>
+    <string name="all">ALL</string>
+    <string name="eventsCap">EVENTS</string>
+    <string name="venuesCap">VENUES</string>
+    <string name="attractionsCap">ATTRACTIONS</string>
 </resources>

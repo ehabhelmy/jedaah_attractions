@@ -2,6 +2,7 @@ package com.spade.ja.datalayer.local;
 
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
@@ -41,6 +42,10 @@ public interface LocalSource {
     Single<VenuesResponse> getNearByVenues();
 
     void saveNearByVenues(VenuesResponse venuesResponse);
+
+    Single<AllNearByResponse> getNearByAll();
+
+    void saveAllNearBy(AllNearByResponse allNearByResponse);
 
     Single<Category> getCategories();
 

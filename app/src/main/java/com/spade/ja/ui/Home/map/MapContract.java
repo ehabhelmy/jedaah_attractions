@@ -1,10 +1,10 @@
-package com.example.ehab.japroject.ui.map;
+package com.spade.ja.ui.Home.map;
 
 import android.location.Location;
 
-import com.example.ehab.japroject.ui.Base.listener.BaseView;
-import com.example.ehab.japroject.ui.Base.listener.ErrorView;
-import com.example.ehab.japroject.ui.Base.listener.ProgressView;
+import com.spade.ja.ui.Base.listener.BaseView;
+import com.spade.ja.ui.Base.listener.ErrorView;
+import com.spade.ja.ui.Base.listener.ProgressView;
 
 import java.util.ArrayList;
 

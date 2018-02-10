@@ -16,6 +16,7 @@ import com.spade.ja.ui.Home.events.week_events.WeekEventsFragment;
 import com.spade.ja.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
 import com.spade.ja.ui.Home.eventsinner.eventphoneverification.EventPhoneVerificationFragment;
 import com.spade.ja.ui.Home.explore.ExploreFragment;
+import com.spade.ja.ui.Home.map.MapActivity;
 import com.spade.ja.ui.Home.profile.ProfileFragment;
 import com.spade.ja.ui.Home.profile.edit.EditActivity;
 import com.spade.ja.ui.Home.profile.liked_events.LikedEventsFragment;
@@ -94,6 +95,8 @@ public interface MainComponent {
     void inject(EventPhoneVerificationFragment eventPhoneVerificationFragment);
 
     void inject(EditActivity editActivity);
+
+    void inject(MapActivity mapActivity);
 
 }
 

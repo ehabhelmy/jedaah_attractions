@@ -2,6 +2,7 @@ package com.spade.ja.datalayer.local;
 
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
@@ -112,7 +113,7 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<VenuesResponse> getNearByVenues() {
-        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.NEARBY_VENUES, EventsResponse.class);
+        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.NEARBY_VENUES, VenuesResponse.class);
         Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
@@ -126,6 +127,24 @@ public class LocalRepository implements LocalSource {
     @Override
     public void saveNearByVenues(VenuesResponse venuesResponse) {
         sharedPref.saveObject(SharedPref.NEARBY_VENUES, venuesResponse);
+    }
+
+    @Override
+    public Single<AllNearByResponse> getNearByAll() {
+        AllNearByResponse allNearByResponse = (AllNearByResponse) sharedPref.getObject(sharedPref.ALL_NEARBY, AllNearByResponse.class);
+        Single<AllNearByResponse> allNearByResponseSingle = Single.create(e -> {
+            if (allNearByResponse != null) {
+                e.onSuccess(allNearByResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return allNearByResponseSingle;
+    }
+
+    @Override
+    public void saveAllNearBy(AllNearByResponse allNearByResponse) {
+        sharedPref.saveObject(SharedPref.ALL_NEARBY, allNearByResponse);
     }
 
     @Override

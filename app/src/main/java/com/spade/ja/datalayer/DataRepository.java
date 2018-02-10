@@ -3,6 +3,7 @@ package com.spade.ja.datalayer;
 import com.spade.ja.datalayer.local.LocalRepository;
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
+import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
@@ -92,6 +93,15 @@ public class DataRepository implements DataSource {
             return remoteRepository.getNearByVenues(latLng,getToken());
         } else {
             return localRepository.getNearByVenues();
+        }
+    }
+
+    @Override
+    public Single<AllNearByResponse> getNearByAll(LatLng latLng, boolean fresh) {
+        if (fresh){
+            return remoteRepository.getNearByAll(latLng,getToken());
+        } else {
+            return localRepository.getNearByAll();
         }
     }
 
@@ -234,6 +244,11 @@ public class DataRepository implements DataSource {
     @Override
     public void saveNearByVenues(VenuesResponse venuesResponse) {
         localRepository.saveNearByVenues(venuesResponse);
+    }
+
+    @Override
+    public void saveNearByAll(AllNearByResponse venuesResponse) {
+        localRepository.saveAllNearBy(venuesResponse);
     }
 
     @Override

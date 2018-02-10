@@ -72,7 +72,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.map.MapActivity"/>
+        <activity android:name=".ui.Home.map.MapActivity"/>
     </application>
 
 </manifest>

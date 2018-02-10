@@ -1,21 +1,19 @@
-package com.example.ehab.japroject.ui.map;
+package com.spade.ja.ui.Home.map;
 
 import android.Manifest;
-import android.content.Context;
+import android.animation.ValueAnimator;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.example.ehab.japroject.JaApplication;
-import com.example.ehab.japroject.R;
-import com.example.ehab.japroject.ui.Base.BaseActivity;
-import com.example.ehab.japroject.ui.map.adapter.DataAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +25,10 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
+import com.spade.ja.ui.Base.BaseActivity;
+import com.spade.ja.ui.Home.map.adapter.DataAdapter;
 
 import java.util.ArrayList;
 
@@ -45,6 +47,8 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     private RecyclerView.LayoutManager layoutManager;
     private LatLngBounds bounds;
 
+    @BindView(R.id.mapViewContainer)
+    RelativeLayout mapViewContainer;
     @BindView(R.id.mapView)
     MapView mapView;
     @BindView(R.id.recyclerView)
@@ -130,7 +134,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
         this.googleMap = googleMap;
         this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         this.googleMap.setOnMarkerClickListener(this);
-        presenter.getNearByVenues();
+        presenter.getAllData();
     }
 
     private void drawMarkers(ArrayList<Data> dataList) {
@@ -159,7 +163,21 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
                 }
             }
         }
+        dataAdapter.updateData(temp);
+        animateMap();
         return false;
+    }
+
+    private void animateMap() {
+        ValueAnimator anim = ValueAnimator.ofFloat(2, 2.5f);
+        anim.addUpdateListener(valueAnimator -> {
+            float val = (float) valueAnimator.getAnimatedValue();
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
+            layoutParams.weight = val;
+            mapViewContainer.setLayoutParams(layoutParams);
+        });
+        anim.setDuration(1000);
+        anim.start();
     }
 
     @Override

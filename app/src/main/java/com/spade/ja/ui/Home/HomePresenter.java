@@ -2,6 +2,7 @@ package com.spade.ja.ui.Home;
 
 import android.os.Bundle;
 
+import com.spade.ja.ui.Base.BaseFragment;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Home.explore.ExploreFragment;
 

@@ -1,7 +1,8 @@
-package com.example.ehab.japroject.ui.map;
+package com.spade.ja.ui.Home.map;
 
-import com.example.ehab.japroject.datalayer.pojo.response.events.Datum;
-import com.example.ehab.japroject.datalayer.pojo.response.venues.Venue;
+import com.spade.ja.datalayer.pojo.response.allnearby.Result;
+import com.spade.ja.datalayer.pojo.response.events.Datum;
+import com.spade.ja.datalayer.pojo.response.venues.Venue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,39 @@ public class DataConverter {
                 }
             }
             data.setDescription(cat.toString());
+            dataList.add(data);
+        }
+        return dataList;
+    }
+
+    public static ArrayList<Data> convertAllNearByToView(List<Result> allData) {
+        ArrayList<Data> dataList = new ArrayList<>();
+        for (Result result : allData) {
+            Data data = new Data();
+            data.setTitle(result.getTitle());
+            data.setImage(result.getImage());
+            data.setLat(result.getLat());
+            data.setLng(result.getLng());
+
+            StringBuilder cat = new StringBuilder();
+            for (int i = 0; i < result.getCategories().size(); i++) {
+                cat.append(result.getCategories().get(i) != null ? result.getCategories().get(i) : "");
+                try {
+                    cat.append(" | ");
+                    cat.append(result.getSubCategories().get(i));
+                } catch (Exception e) {
+                    cat.append("");
+                } finally {
+                    if (i != result.getCategories().size() - 1) {
+                        cat.append(" , ");
+                    }
+                }
+            }
+            if (result.getType().equals("event")){
+                data.setDescription(result.getAddress());
+            }else {
+                data.setDescription(cat.toString());
+            }
             dataList.add(data);
         }
         return dataList;

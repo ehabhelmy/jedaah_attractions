@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseActivity;
+import com.spade.ja.ui.Home.explore.ExploreContract;
 import com.spade.ja.ui.navigation.JaNavigationManager;
 
 import java.lang.reflect.Field;
