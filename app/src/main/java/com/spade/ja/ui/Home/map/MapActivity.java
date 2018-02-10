@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +47,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     private DividerItemDecoration dividerItemDecoration;
     private RecyclerView.LayoutManager layoutManager;
     private LatLngBounds bounds;
+    private boolean isMarkedClicked = false;
 
     @BindView(R.id.mapViewContainer)
     RelativeLayout mapViewContainer;
@@ -59,18 +61,34 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     FusedLocationProviderClient fusedLocationProviderClient;
     @OnClick(R.id.all)
     void allButtonClick() {
+        if (isMarkedClicked){
+            animateMapDecreasing();
+            isMarkedClicked = false;
+        }
         presenter.getAllData();
     }
     @OnClick(R.id.events)
     void eventsButtonClick() {
+        if (isMarkedClicked){
+            animateMapDecreasing();
+            isMarkedClicked = false;
+        }
         presenter.getNearByEvents();
     }
     @OnClick(R.id.venues)
     void venuesButtonClick() {
+        if (isMarkedClicked){
+            animateMapDecreasing();
+            isMarkedClicked = false;
+        }
         presenter.getNearByVenues();
     }
     @OnClick(R.id.attractions)
     void attractionsButtonClick() {
+        if (isMarkedClicked){
+            animateMapDecreasing();
+            isMarkedClicked = false;
+        }
         presenter.getNearByAttractions();
     }
     @OnClick(R.id.fab)
@@ -109,6 +127,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     private void setupRecyclarView() {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         dividerItemDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -163,6 +182,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
                 }
             }
         }
+        isMarkedClicked = true;
         dataAdapter.updateData(temp);
         animateMap();
         return false;
@@ -170,6 +190,18 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
 
     private void animateMap() {
         ValueAnimator anim = ValueAnimator.ofFloat(2, 2.5f);
+        anim.addUpdateListener(valueAnimator -> {
+            float val = (float) valueAnimator.getAnimatedValue();
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
+            layoutParams.weight = val;
+            mapViewContainer.setLayoutParams(layoutParams);
+        });
+        anim.setDuration(1000);
+        anim.start();
+    }
+
+    private void animateMapDecreasing() {
+        ValueAnimator anim = ValueAnimator.ofFloat(2.5f, 2f);
         anim.addUpdateListener(valueAnimator -> {
             float val = (float) valueAnimator.getAnimatedValue();
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
