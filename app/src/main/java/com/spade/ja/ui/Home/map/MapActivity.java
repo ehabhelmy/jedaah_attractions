@@ -1,6 +1,7 @@
 package com.spade.ja.ui.Home.map;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -151,7 +152,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-        this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        this.googleMap.setMapType(GoogleMap.MAP_TYPE_NONE);
         this.googleMap.setOnMarkerClickListener(this);
         presenter.getAllData();
     }
@@ -182,14 +183,51 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
                 }
             }
         }
+        if (isMarkedClicked){
+            animateBoth();
+        }else {
+            animateMap();
+        }
         isMarkedClicked = true;
         dataAdapter.updateData(temp);
-        animateMap();
         return false;
     }
 
+    private void animateBoth() {
+        ValueAnimator anim = ValueAnimator.ofFloat(2.4f, 2f);
+        anim.addUpdateListener(valueAnimator -> {
+            float val = (float) valueAnimator.getAnimatedValue();
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
+            layoutParams.weight = val;
+            mapViewContainer.setLayoutParams(layoutParams);
+        });
+        anim.setDuration(1000);
+        anim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                animateMap();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        anim.start();
+    }
+
     private void animateMap() {
-        ValueAnimator anim = ValueAnimator.ofFloat(2, 2.5f);
+        ValueAnimator anim = ValueAnimator.ofFloat(2, 2.4f);
         anim.addUpdateListener(valueAnimator -> {
             float val = (float) valueAnimator.getAnimatedValue();
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
@@ -201,7 +239,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     }
 
     private void animateMapDecreasing() {
-        ValueAnimator anim = ValueAnimator.ofFloat(2.5f, 2f);
+        ValueAnimator anim = ValueAnimator.ofFloat(2.4f, 2f);
         anim.addUpdateListener(valueAnimator -> {
             float val = (float) valueAnimator.getAnimatedValue();
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
@@ -221,7 +259,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     @Override
     protected void onPause() {
         super.onPause();
-        mapView.onResume();
+        mapView.onPause();
     }
 
     @Override
@@ -244,11 +282,8 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return null;
         }
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location1) {
-                if (location1 != null) MapActivity.this.location = location1;
-            }
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
+            if (location1 != null) MapActivity.this.location = location1;
         });
         return MapActivity.this.location;
     }
