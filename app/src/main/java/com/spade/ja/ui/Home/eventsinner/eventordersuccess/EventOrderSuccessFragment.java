@@ -51,8 +51,11 @@ public class EventOrderSuccessFragment extends BaseFragment implements EventOrde
         presenter.setView(this);
     }
 
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_event_order_success;
     }
+
 }

@@ -26,26 +26,45 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.spade.ja.ui.Home.HomeActivity">
+        <activity android:name="com.spade.ja.ui.Home.HomeActivity" android:windowSoftInputMode="adjustPan">
 
         </activity>
 
-        <activity android:name="com.spade.ja.ui.authentication.AuthenticationActivity">
+        <activity android:name="com.spade.ja.ui.authentication.AuthenticationActivity" android:windowSoftInputMode="adjustPan">
 
         </activity>
 
-        <activity android:name="com.spade.ja.ui.Home.profile.edit.EditActivity">
+        <activity android:name=".ui.Home.events.filterevents.FilterEventActivity" android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity android:name=".ui.Home.directory.venues.filtervenues.FilterVenueActivity" android:windowSoftInputMode="adjustPan">
 
         </activity>
 
 
-        <activity android:name="com.spade.ja.ui.Home.eventsinner.EventInnerActivity">
+        <activity android:name="com.spade.ja.ui.Home.profile.edit.EditActivity" android:windowSoftInputMode="adjustPan">
 
         </activity>
 
-        <activity android:name="com.spade.ja.ui.Home.venueinner.VenueInnerActivity">
+
+        <activity android:name="com.spade.ja.ui.Home.eventsinner.EventInnerActivity" android:windowSoftInputMode="adjustPan">
 
         </activity>
+
+        <activity android:name="com.spade.ja.ui.Home.venueinner.VenueInnerActivity" android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity android:name="com.spade.ja.ui.Home.attractioninner.AttractionInnerActivity" android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <activity android:name="com.spade.ja.ui.Home.profile.settings.SettingsActivity" android:windowSoftInputMode="adjustPan">
+
+        </activity>
+
+        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

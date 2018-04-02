@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -18,19 +17,20 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.model.LatLng;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.datalayer.pojo.response.venues.Venue;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.HomeContract;
 import com.spade.ja.ui.Home.explore.adapter.CategoryListAdapter;
 import com.spade.ja.ui.Home.explore.adapter.EventsListAdapter;
-import com.spade.ja.ui.Home.HomeContract;
 import com.spade.ja.ui.Home.explore.adapter.VenuesListAdapter;
 import com.spade.ja.ui.Home.explore.pojo.Event;
+import com.spade.ja.ui.widget.CircularImageView;
 import com.spade.ja.util.Constants;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,11 +79,26 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @BindView(R.id.venueerrorLocationContainerNew)
     RelativeLayout venueErrorLocationContainer;
 
+    @BindView(R.id.topAttractions)
+    RecyclerView topAttractions;
+
+    @BindView(R.id.nearByAttractions)
+    RecyclerView nearByAttractions;
+
+    @BindView(R.id.attractionsenableLocationSettings)
+    Button attractionsEnableLocationSettings;
+
+    @BindView(R.id.attractionserrorLocationContainerNew)
+    RelativeLayout attractionsErrorLocationContainer;
+
     @BindView(R.id.exploreNearBy)
     LinearLayout exploreNearBy;
 
     @BindView(R.id.venuesNearBy)
     LinearLayout venuesNearBy;
+
+    @BindView(R.id.attractionsNearBy)
+    LinearLayout attractionsNearBy;
 
     @BindView(R.id.noTopEvents)
     RelativeLayout noTopEvents;
@@ -97,10 +112,17 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @BindView(R.id.noTopVenues)
     RelativeLayout noTopVenues;
 
+    @BindView(R.id.noTopAttractions)
+    RelativeLayout noTopAttractions;
+
     @BindView(R.id.noNearVenues)
     RelativeLayout noNearByVenues;
+
+    @BindView(R.id.noNearAttractions)
+    RelativeLayout noNearAttractions;
+
     @BindView(R.id.fab)
-    FloatingActionButton fab;
+    CircularImageView fab;
 
     private HomeContract.View activity;
     private boolean locationCheck;
@@ -218,6 +240,26 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         }
     }
 
+    @Override
+    public void setupTopAttractions(List<Venue> data) {
+        if (data.size() > 0) {
+            setupAttractionsRecyclerView(topAttractions, data);
+        }else {
+            noTopAttractions.setVisibility(View.VISIBLE);
+            topAttractions.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setupNearbyAttractions(List<Venue> data) {
+        if (data.size() > 0) {
+            setupAttractionsRecyclerView(nearByAttractions, data);
+        }else {
+            noNearAttractions.setVisibility(View.VISIBLE);
+            nearByAttractions.setVisibility(View.GONE);
+        }
+    }
+
     private void setupRecyclerView(RecyclerView recyclerView, List<Event> events) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
@@ -244,7 +286,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        VenuesListAdapter venuesListAdapter = new VenuesListAdapter();
+        VenuesListAdapter venuesListAdapter = new VenuesListAdapter(false);
         venuesListAdapter.setData((ArrayList<Venue>) data);
         venuesListAdapter.setOnFavouriteListener(id -> {
             //TODO : call presenter to send id of the event to the backend
@@ -252,6 +294,25 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         });
         venuesListAdapter.setOnViewListener(id -> {
             presenter.showVenueInner(id);
+        });
+        recyclerView.setAdapter(venuesListAdapter);
+    }
+
+    private void setupAttractionsRecyclerView(RecyclerView recyclerView, List<Venue> data) {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        VenuesListAdapter venuesListAdapter = new VenuesListAdapter(false);
+        venuesListAdapter.setData((ArrayList<Venue>) data);
+        venuesListAdapter.setOnFavouriteListener(id -> {
+            //TODO : call presenter to send id of the event to the backend
+            presenter.attractionsLike(id);
+        });
+        venuesListAdapter.setOnViewListener(id -> {
+            presenter.showAttractionsInner(id);
         });
         recyclerView.setAdapter(venuesListAdapter);
     }
@@ -297,6 +358,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
             if (location1 != null) {
                 presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
                 presenter.loadNearByVenuesAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
+                presenter.loadNearByAttractionsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
             }
         });
     }
@@ -305,6 +367,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void locationIsEnabled() {
         errorLocationContainer.setVisibility(View.GONE);
         venueErrorLocationContainer.setVisibility(View.GONE);
+        attractionsErrorLocationContainer.setVisibility(View.GONE);
         getLatitudeAndLongitude();
     }
 
@@ -318,6 +381,10 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         presenter.openLocationSettings();
     }
 
+    @OnClick(R.id.attractionsenableLocationSettings)
+    void openLocationAttractionsSettings() {
+        presenter.openLocationSettings();
+    }
 
     @Override
     public void setupCategories(List<Cats> categoryList) {
@@ -343,6 +410,11 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @Override
     public void hideNearByVenues() {
         venuesNearBy.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideNearByAttractions() {
+        attractionsNearBy.setVisibility(View.GONE);
     }
 
     @Override

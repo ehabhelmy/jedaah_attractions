@@ -3,15 +3,18 @@ package com.spade.ja.ui.Home.map;
 import android.location.Location;
 import android.os.Bundle;
 
-
 import com.google.android.gms.maps.model.LatLng;
 import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
-import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
+import com.spade.ja.datalayer.pojo.response.like.LikeResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Base.listener.BaseCallback;
+import com.spade.ja.usecase.like.Like;
+import com.spade.ja.usecase.like.LikeAttractions;
+import com.spade.ja.usecase.like.LikeVenues;
 import com.spade.ja.usecase.nearbyall.NearByAll;
+import com.spade.ja.usecase.nearbyattractions.NearByAttractions;
 import com.spade.ja.usecase.nearbyevents.NearByEvents;
 import com.spade.ja.usecase.nearbyvenues.NearByVenues;
 
@@ -22,14 +25,13 @@ import javax.inject.Inject;
  */
 public class MapPresenter extends BasePresenter<MapContract.View> implements MapContract.Presenter {
 
-    @Inject
-    NearByEvents nearByEvents;
-
-    @Inject
-    NearByVenues nearByVenues;
-
-    @Inject
-    NearByAll nearByAll;
+    private NearByEvents nearByEvents;
+    private NearByVenues nearByVenues;
+    private NearByAttractions nearByAttractions;
+    private NearByAll nearByAll;
+    private Like eventsLike;
+    private LikeVenues venuesLike;
+    private LikeAttractions attractionsLike;
 
     private BaseCallback<VenuesResponse> venuesResponseBaseCallback = new BaseCallback<VenuesResponse>() {
         @Override
@@ -62,6 +64,20 @@ public class MapPresenter extends BasePresenter<MapContract.View> implements Map
         @Override
         public void onError(String message) {
             if (isViewAlive.get()) {
+            }
+        }
+    };
+
+    private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
+        @Override
+        public void onSuccess(LikeResponse model) {
+            // do nothing
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()){
+                getView().showError(message);
             }
         }
     };
@@ -100,10 +116,14 @@ public class MapPresenter extends BasePresenter<MapContract.View> implements Map
     };
 
     @Inject
-    public MapPresenter(NearByEvents nearByEvents, NearByVenues nearByVenues,NearByAll nearByAll) {
+    public MapPresenter(NearByEvents nearByEvents, NearByVenues nearByVenues, NearByAttractions nearByAttractions, NearByAll nearByAll, Like eventsLike, LikeVenues venuesLike, LikeAttractions attractionsLike) {
         this.nearByEvents = nearByEvents;
         this.nearByVenues = nearByVenues;
+        this.nearByAttractions = nearByAttractions;
         this.nearByAll = nearByAll;
+        this.eventsLike = eventsLike;
+        this.venuesLike = venuesLike;
+        this.attractionsLike = attractionsLike;
     }
 
     @Override
@@ -140,5 +160,52 @@ public class MapPresenter extends BasePresenter<MapContract.View> implements Map
     }
 
     public void getNearByAttractions() {
+        Location location = getView().getCurrentLocation();
+        if (location != null) {
+            nearByAttractions.getNearByAttractions((new LatLng(location.getLatitude(), location.getLongitude())), nearbyVenuesResponseBaseCallback, true);
+        } else {
+            nearByAttractions.getNearByAttractions(new LatLng(40, 40), nearbyVenuesResponseBaseCallback, true);
+        }
     }
+
+    @Override
+    public void unSubscribe() {
+        nearByAll.unSubscribe();
+        nearByEvents.unSubscribe();
+        nearByVenues.unSubscribe();
+        nearByAttractions.unSubscribe();
+        eventsLike.unSubscribe();
+        venuesLike.unSubscribe();
+        attractionsLike.unSubscribe();
+    }
+    @Override
+    public void showEventInner(int id) {
+        jaNavigationManager.showEventInner(id);
+    }
+
+    @Override
+    public void showVenuesInner(int id) {
+        jaNavigationManager.showVenueInner(id);
+    }
+
+    @Override
+    public void showAttractionInner(int id) {
+        jaNavigationManager.showAttractionInner(id);
+    }
+
+    @Override
+    public void like(int id) {
+        eventsLike.like(id,likeResponseBaseCallback);
+    }
+
+    @Override
+    public void venuesLike(int id) {
+        venuesLike.like(id,likeResponseBaseCallback);
+    }
+
+    @Override
+    public void attractionsLike(int id) {
+        attractionsLike.like(id,likeResponseBaseCallback);
+    }
+
 }

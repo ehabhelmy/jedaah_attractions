@@ -14,6 +14,9 @@ public class Data {
     @SerializedName("venues")
     @Expose
     private List<Venue> venues;
+    @SerializedName("attractions")
+    @Expose
+    private List<Venue> attractions;
     @SerializedName("first_page_url")
     @Expose
     private String firstPageUrl;
@@ -48,6 +51,14 @@ public class Data {
 
     public void setVenues(List<Venue> venues) {
         this.venues = venues;
+    }
+
+    public List<Venue> getAttractions() {
+        return attractions;
+    }
+
+    public void setAttractions(List<Venue> attractions) {
+        this.attractions = attractions;
     }
 
     public String getFirstPageUrl() {

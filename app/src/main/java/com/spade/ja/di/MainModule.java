@@ -29,7 +29,7 @@ public class MainModule {
     @Provides
     @Singleton
     public Gson provideGson() {
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().serializeNulls().create();
         return gson;
     }
 

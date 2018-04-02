@@ -1,11 +1,11 @@
 
 package com.spade.ja.datalayer.pojo.response.venues;
 
-import java.util.List;
-
-import com.spade.ja.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.spade.ja.datalayer.pojo.BaseModel;
+
+import java.util.List;
 
 public class Venue extends BaseModel {
 

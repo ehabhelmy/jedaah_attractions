@@ -3,6 +3,7 @@ package com.spade.ja.usecase.registeration;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.response.login.Data;
 import com.spade.ja.datalayer.pojo.response.login.LoginResponse;
+import com.spade.ja.datalayer.pojo.response.subscribe.SubscribeResponse;
 import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.usecase.Unsubscribable;
 
@@ -26,8 +27,10 @@ public class Registeration implements Unsubscribable {
     private DataRepository dataRepository;
     private CompositeDisposable compositeDisposable;
     private Single<LoginResponse> registerationResponseSingle;
+    private Single<SubscribeResponse> subscribeResponseSingle;
     private Disposable disposable;
     private DisposableSingleObserver<LoginResponse> registerationResponseDisposableSingleObserver;
+    private DisposableSingleObserver<SubscribeResponse> subscribeResponseDisposableSingleObserver;
 
     @Inject
     public Registeration(DataRepository dataRepository, CompositeDisposable compositeDisposable) {
@@ -40,7 +43,19 @@ public class Registeration implements Unsubscribable {
                          String password,
                          String mobile,
                          File image,
-                         BaseCallback<Data> callback) {
+                         BaseCallback<Data> callback,boolean isSubscribed) {
+
+        subscribeResponseDisposableSingleObserver = new DisposableSingleObserver<SubscribeResponse>() {
+            @Override
+            public void onSuccess(SubscribeResponse subscribeResponse) {
+                System.out.println(subscribeResponse.getSuccess());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        };
 
         registerationResponseDisposableSingleObserver = new DisposableSingleObserver<LoginResponse>() {
             @Override
@@ -48,6 +63,16 @@ public class Registeration implements Unsubscribable {
                 if (loginResponse.getSuccess()) {
                     dataRepository.saveToken(loginResponse.getData().getToken());
                     dataRepository.saveLoggedUser(loginResponse.getData().getUser());
+                    if (isSubscribed) {
+                        subscribeResponseSingle = dataRepository.subscribe();
+                        if (!compositeDisposable.isDisposed()) {
+                            disposable = subscribeResponseSingle
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribeWith(subscribeResponseDisposableSingleObserver);
+                            compositeDisposable.add(disposable);
+                        }
+                    }
                     callback.onSuccess(loginResponse.getData());
                 }else {
                     if (loginResponse.getMsg().getErrors() != null) {

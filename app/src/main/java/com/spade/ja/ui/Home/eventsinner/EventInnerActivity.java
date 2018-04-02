@@ -3,7 +3,9 @@ package com.spade.ja.ui.Home.eventsinner;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseActivity;
+import com.spade.ja.ui.Home.eventsinner.eventcheckout.EventOrderFragment;
 import com.spade.ja.ui.Home.eventsinner.eventdetails.EventInnerFragment;
+import com.spade.ja.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
 
 import javax.inject.Inject;
 
@@ -35,8 +37,8 @@ public class EventInnerActivity extends BaseActivity implements EventInnerActivi
 
     @Override
     public void onBackPressed() {
-        if (presenter.getCurrentFragment() instanceof EventInnerFragment) {
-            presenter.goToHomeActivity();
+        if (presenter.getCurrentFragment() instanceof EventOrderSuccessFragment) {
+            finish();
         }else {
             super.onBackPressed();
         }

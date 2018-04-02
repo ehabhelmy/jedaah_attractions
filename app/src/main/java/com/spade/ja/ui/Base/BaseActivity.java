@@ -1,15 +1,20 @@
 package com.spade.ja.ui.Base;
 
-import android.content.DialogInterface;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.spade.ja.ui.Base.listener.BaseView;
 import com.spade.ja.ui.navigation.JaNavigationManager;
+import com.spade.ja.util.LocaleManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static android.content.pm.PackageManager.GET_META_DATA;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
@@ -25,6 +30,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     public abstract int getLayoutId();
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +47,24 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (presenter != null) {
             presenter.initialize(getIntent().getExtras());
         }
+        resetTitles();
+    }
+
+    private void resetTitles() {
+        try {
+            ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), GET_META_DATA);
+            if (info.labelRes != 0) {
+                setTitle(info.labelRes);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        JaNavigationManager.getInstance().setFragmentManager(getSupportFragmentManager());
         if (presenter != null){
             presenter.start();
         }

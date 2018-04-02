@@ -1,8 +1,8 @@
 package com.spade.ja.datalayer.pojo.response.allvenues;
 
-import com.spade.ja.datalayer.pojo.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.spade.ja.datalayer.pojo.BaseModel;
 
 import java.util.List;
 

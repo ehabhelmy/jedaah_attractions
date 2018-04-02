@@ -1,13 +1,29 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="8dp"
+    android:background="@color/background"
     tools:context="com.spade.ja.ui.Home.profile.liked_directory.LikedDirectoryFragment">
 
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:id="@+id/likedDirectoryList"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/noAttractions"
+        android:visibility="gone"
+        android:textSize="@dimen/title_inner"
+        android:fontFamily="@font/gotham_bold"
+        android:text="@string/noLikedEvents"/>
+
+</RelativeLayout>

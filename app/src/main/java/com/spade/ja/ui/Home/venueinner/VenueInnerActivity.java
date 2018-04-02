@@ -50,6 +50,6 @@ public class VenueInnerActivity extends BaseActivity implements VenueInnerContra
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        presenter.goToHomeActivity();
+        //presenter.goToHomeActivity();
     }
 }

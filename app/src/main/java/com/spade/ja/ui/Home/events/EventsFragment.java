@@ -15,6 +15,7 @@ import com.spade.ja.ui.Base.BaseFragment;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by ehab on 12/15/17.
@@ -39,6 +40,11 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
         eventsViewPager.setAdapter(eventsViewPagerAdapter);
         tabLayout.setupWithViewPager(eventsViewPager);
         //setupCustomTabs();
+    }
+
+    @OnClick(R.id.fab)
+    void openFilterEvents() {
+        presenter.openFilterEvents();
     }
 
     private void setupCustomTabs() {

@@ -15,6 +15,6 @@ public interface EventsContract {
     }
 
     interface Presenter extends Unsubscribable {
-
+        void openFilterEvents();
     }
 }

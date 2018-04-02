@@ -55,15 +55,14 @@
         android:id="@+id/noEvents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="271dp"
+            android:layout_centerVertical="true"
             app:srcCompat="@mipmap/no_events_ic" />
 
         <TextView

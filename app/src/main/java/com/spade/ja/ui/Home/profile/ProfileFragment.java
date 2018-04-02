@@ -114,7 +114,11 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 .show();
     }
     @OnClick(R.id.settings)
-    void logout() {
+    void openSettings(){
+        presenter.openSettings();
+    }
+
+    private void logout() {
         new AlertDialog.Builder(this.getContext())
                 .setTitle("Log Out")
                 .setMessage("Are you sure you want to logout ?")

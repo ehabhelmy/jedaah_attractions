@@ -9,6 +9,9 @@ import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.profile.Data;
 import com.spade.ja.ui.Base.BaseActivity;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.attractioninner.AttractionOrder.pojo.AttractionOrder;
+import com.spade.ja.ui.Home.attractioninner.attractionpayment.pojo.AttractionPaymentModel;
+import com.spade.ja.ui.Home.attractioninner.pojo.AttractionPaymentData;
 import com.spade.ja.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
 
@@ -52,11 +55,25 @@ public abstract class JaNavigationManager {
 
     public static final String ORDER_SUCCESS = "orderSuccess";
 
+    public static final String FILTER_VENUES = "filterVenues";
+
+    public static final String ATTRACTION_DETAILS = "attractionDetails";
+
+    public static final String SETTINGS = "settings";
+
+    public static final String CONTACT_US = "contactus";
+
+    public static final String CALENDAR = "calendar";
+
     public static final int LOCATION_SETTINGS = 2;
 
     public static final int EVENT_INNER = 3;
 
     public static final int VENUE_INNER = 5;
+
+    public static final int ATTRACTION_INNER = 9;
+
+    public static final int MAP = 6;
 
 
     public static JaNavigationManager getInstance(){
@@ -74,6 +91,8 @@ public abstract class JaNavigationManager {
 
     public abstract void showExploreScreen();
 
+    public abstract void showSearch();
+
     public abstract void showEventsScreen();
 
     public abstract void showProfileScreen();
@@ -81,6 +100,8 @@ public abstract class JaNavigationManager {
     public abstract void showDirectoryScreen();
 
     public abstract void showLocationSettings();
+
+    public abstract void openEmail();
 
     public abstract void showSocialMediaScreen();
 
@@ -98,7 +119,11 @@ public abstract class JaNavigationManager {
 
     public abstract void showVenueDetails(int anInt);
 
+    public abstract void showAttractionDetails(int anInt);
+
     public abstract void showVenueInner(int id);
+
+    public abstract void showAttractionInner(int id);
 
     public abstract void openNavigationView(double lat, double lng);
 
@@ -110,9 +135,31 @@ public abstract class JaNavigationManager {
 
     public abstract void showEventOrderSuccess();
 
+    public abstract void showAttractionOrderSuccess();
+
     public abstract void openEditActivity(Data profileData);
 
+    public abstract void openSettings();
+
     public abstract void showMapActivity();
+
+    public abstract void openFilterEvents();
+
+    public abstract void openFilterVenues();
+
+    public abstract void showSettingsInner();
+
+    public abstract void openContactUs();
+
+    public abstract void openCalendarView(AttractionPaymentData attractionPaymentData);
+
+    public abstract void openAttractionPaymentView(AttractionPaymentModel attractionPaymentModel);
+
+    public abstract void showAttractionOrderView(AttractionOrder attractionOrder);
+
+    public abstract void popBackStack();
+
+    public abstract void restartApp();
 
     protected void replaceFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -120,8 +167,12 @@ public abstract class JaNavigationManager {
             fragmentTransaction.addToBackStack(tag);
         }
         fragmentTransaction.replace(frame,fragment,tag);
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
-        fragmentTransaction.commitAllowingStateLoss();
+        //fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+        if (tag.equals(EXPLORE)){
+            fragmentTransaction.commitNow();
+        }else {
+            fragmentTransaction.commitAllowingStateLoss();
+        }
     }
 
     protected void addFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
@@ -153,4 +204,9 @@ public abstract class JaNavigationManager {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
 
+    public abstract void showEventInnerAsNew(int id);
+
+    public abstract void showVenueInnerAsNew(int id);
+
+    public abstract void showAttractionInnerAsNew(int id);
 }

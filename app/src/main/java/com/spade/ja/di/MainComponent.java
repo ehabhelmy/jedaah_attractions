@@ -1,11 +1,19 @@
 package com.spade.ja.di;
 
 import com.spade.ja.ui.Home.HomeActivity;
+import com.spade.ja.ui.Home.attractioninner.AttractionInnerActivity;
+import com.spade.ja.ui.Home.attractioninner.AttractionOrder.AttractionOrderFragment;
+import com.spade.ja.ui.Home.attractioninner.attractiondetails.AttractionDetailsFragment;
+import com.spade.ja.ui.Home.attractioninner.attractionpayment.AttractionPaymentFragment;
+import com.spade.ja.ui.Home.attractioninner.calendar.CalendarFragment;
 import com.spade.ja.ui.Home.directory.DirectoryFragment;
 import com.spade.ja.ui.Home.directory.attractions.AttractionFragment;
+import com.spade.ja.ui.Home.directory.attractions.filterattractions.FilterAttractionActivity;
 import com.spade.ja.ui.Home.directory.venues.VenuesFragment;
+import com.spade.ja.ui.Home.directory.venues.filtervenues.FilterVenueActivity;
 import com.spade.ja.ui.Home.events.EventsFragment;
 import com.spade.ja.ui.Home.events.all_events.AllEventsFragment;
+import com.spade.ja.ui.Home.events.filterevents.FilterEventActivity;
 import com.spade.ja.ui.Home.events.nearby_events.NearByEventsFragment;
 import com.spade.ja.ui.Home.eventsinner.EventInnerActivity;
 import com.spade.ja.ui.Home.eventsinner.eventbuy.EventPaymentFragment;
@@ -19,8 +27,13 @@ import com.spade.ja.ui.Home.explore.ExploreFragment;
 import com.spade.ja.ui.Home.map.MapActivity;
 import com.spade.ja.ui.Home.profile.ProfileFragment;
 import com.spade.ja.ui.Home.profile.edit.EditActivity;
+import com.spade.ja.ui.Home.profile.liked_directory.LikedDirectoryFragment;
 import com.spade.ja.ui.Home.profile.liked_events.LikedEventsFragment;
 import com.spade.ja.ui.Home.profile.my_tickets.TicketsFragment;
+import com.spade.ja.ui.Home.profile.settings.SettingsActivity;
+import com.spade.ja.ui.Home.profile.settings.contactus.ContactUsFragment;
+import com.spade.ja.ui.Home.profile.settings.settingsinner.SettingsInnerFragment;
+import com.spade.ja.ui.Home.search.SearchFragment;
 import com.spade.ja.ui.Home.venueinner.VenueInnerActivity;
 import com.spade.ja.ui.Home.venueinner.venuedetails.VenueDetailsFragment;
 import com.spade.ja.ui.authentication.AuthenticationActivity;
@@ -97,6 +110,32 @@ public interface MainComponent {
     void inject(EditActivity editActivity);
 
     void inject(MapActivity mapActivity);
+
+    void inject(FilterEventActivity filterEventActivity);
+
+    void inject(FilterVenueActivity filterVenueActivity);
+
+    void inject(FilterAttractionActivity filterAttractionActivity);
+
+    void inject(LikedDirectoryFragment likedDirectoryFragment);
+
+    void inject(AttractionDetailsFragment attractionDetailsFragment);
+
+    void inject(AttractionInnerActivity attractionInnerActivity);
+
+    void inject(SettingsActivity settingsActivity);
+
+    void inject(SettingsInnerFragment settingsInnerFragment);
+
+    void inject(ContactUsFragment contactUsFragment);
+
+    void inject(CalendarFragment calendarFragment);
+
+    void inject(AttractionPaymentFragment attractionPaymentFragment);
+
+    void inject(AttractionOrderFragment attractionOrderFragment);
+
+    void inject(SearchFragment searchFragment);
 
 }
 

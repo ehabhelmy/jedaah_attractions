@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.spade.ja.ui.Home.profile.liked_directory.LikedDirectoryFragment;
 import com.spade.ja.ui.Home.profile.liked_events.LikedEventsFragment;
 import com.spade.ja.ui.Home.profile.my_tickets.TicketsFragment;
 
@@ -21,14 +22,16 @@ public class ProfileViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             return new TicketsFragment();
-        } else {
+        } else if (position == 1){
             return new LikedEventsFragment();
+        }else {
+            return new LikedDirectoryFragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -38,6 +41,8 @@ public class ProfileViewPagerAdapter extends FragmentStatePagerAdapter {
                 return "MY TICKETS";
             case 1:
                 return "LIKED EVENTS";
+            case 2:
+                return "LIKED DIRECTORY";
             default:
                 return null;
         }

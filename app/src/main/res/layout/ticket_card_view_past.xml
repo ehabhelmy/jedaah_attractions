@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/TicketCardView"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
     android:layout_width="match_parent"
     android:layout_height="360dp">
 
@@ -13,8 +17,7 @@
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="290dp"
-            android:paddingBottom="20dp"
+            android:layout_height="320dp"
             android:background="@color/white">
 
             <com.spade.ja.ui.widget.ImageLayout
@@ -27,14 +30,14 @@
                     android:id="@+id/eventTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/gotham_medium"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
                     android:text="Amr Diab Concert"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/title_inner"
-                    tools:layout_editor_absoluteX="24dp"
-                    tools:layout_editor_absoluteY="21dp" />
+                    android:textSize="@dimen/filter_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </com.spade.ja.ui.widget.ImageLayout>
 
             <RelativeLayout

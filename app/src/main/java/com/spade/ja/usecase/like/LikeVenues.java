@@ -52,7 +52,7 @@ public class LikeVenues implements Unsubscribable {
             }
         };
         if (!compositeDisposable.isDisposed()){
-            likeResponseSingle = dataRepository.like(id);
+            likeResponseSingle = dataRepository.likeVenues(id);
             if (likeResponseSingle == null) {
                 callback.onError(Constants.NO_TOKEN);
             }else {

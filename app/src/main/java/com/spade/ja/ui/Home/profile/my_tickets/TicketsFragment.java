@@ -46,6 +46,8 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
     @BindView(R.id.textView31)
     TextView pastEvents;
 
+    private boolean isUpcoming = false;
+    private boolean isPast = false;
 
     @Override
     protected void initializeDagger() {
@@ -80,14 +82,25 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
 
     }
 
+    private void hideNoDataText(){
+        noEvents.setVisibility(View.GONE);
+        upcomingEvents.setVisibility(View.GONE);
+        pastEvents.setVisibility(View.GONE);
+    }
+
     @Override
     public void setupUpcomingList(List<HistoryEventsUi> data) {
         if (data.size() == 0) {
             upcomingEvents.setVisibility(View.GONE);
             upcomingList.setVisibility(View.GONE);
-            noEvents.setVisibility(View.VISIBLE);
+            isUpcoming = true;
+            if (isPast && isUpcoming) {
+                noEvents.setVisibility(View.VISIBLE);
+            }
         }else {
-            noEvents.setVisibility(View.GONE);
+            hideNoDataText();
+            isUpcoming = false;
+            upcomingEvents.setVisibility(View.VISIBLE);
             setupRecyclerView(upcomingList, data, HistoryListAdapter.HistoryType.UPCOMING.name());
         }
     }
@@ -97,9 +110,14 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
         if (data.size() == 0) {
             pastEvents.setVisibility(View.GONE);
             pastList.setVisibility(View.GONE);
-            noEvents.setVisibility(View.VISIBLE);
+            isPast = true;
+            if (isPast && isUpcoming) {
+                noEvents.setVisibility(View.VISIBLE);
+            }
         }else {
-            noEvents.setVisibility(View.GONE);
+            hideNoDataText();
+            isPast = false;
+            pastEvents.setVisibility(View.VISIBLE);
             setupRecyclerView(pastList, data, HistoryListAdapter.HistoryType.PAST.name());
         }
     }

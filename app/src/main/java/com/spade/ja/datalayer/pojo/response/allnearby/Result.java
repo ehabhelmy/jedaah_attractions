@@ -1,10 +1,11 @@
 
 package com.spade.ja.datalayer.pojo.response.allnearby;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.spade.ja.datalayer.pojo.BaseModel;
+
+import java.util.List;
 
 public class Result extends BaseModel {
 
@@ -26,6 +27,10 @@ public class Result extends BaseModel {
     @SerializedName("address")
     @Expose
     private String address;
+    @SerializedName("start_date")
+    private String startDate;
+    @SerializedName("end_date")
+    private String endDate;
     @SerializedName("lat")
     @Expose
     private String lat;
@@ -41,6 +46,22 @@ public class Result extends BaseModel {
     @SerializedName("type")
     @Expose
     private String type;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public Integer getId() {
         return id;

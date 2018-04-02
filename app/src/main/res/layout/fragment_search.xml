@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <RelativeLayout
+        android:id="@+id/filterContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/outerText"
+            android:drawableStart="@drawable/search_green"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/rounded_rectangle_grey"
+            android:fontFamily="@font/gotham_medium "
+            android:hint="@string/searchIn"
+            android:textSize="@dimen/cash" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/searchEditText"
+            android:layout_marginTop="20dp"
+            android:fillViewport="true"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/searchResultsContainer"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/lightBlack"
+                        android:id="@+id/filterBlack"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="@string/attractions"
+                            android:id="@+id/filterByResults"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/gotham_book"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/filterBtn"
+                            android:layout_alignParentEnd="true"
+                            android:text="@string/filter"
+                            android:textColor="@color/colorTitle"
+                            android:fontFamily="@font/gotham_bold"/>
+
+
+                    </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/background"
+                    android:layout_below="@+id/filterBlack"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:id="@+id/filterResult">
+
+                </android.support.v7.widget.RecyclerView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/searchContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/filterBy"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/lightBlack"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="@string/filterBy" />
+
+                    <RelativeLayout
+                        android:id="@+id/weeklyContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/filterBy"
+                        android:padding="20dp">
+
+                        <LinearLayout
+                            android:id="@+id/weeklySugg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/attractions"
+                            android:layout_below="@+id/events"
+                            android:background="@drawable/tag_rect"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:text="@string/weeklySuggestions"
+                                android:textColor="@color/lightBlack" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/events"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/tag_rect"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat = "@mipmap/events_ic_2"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:id="@+id/eventsText"
+                                android:text="@string/events"
+                                android:textColor="@color/lightBlack" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/venues"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/events"
+                            android:background="@drawable/tag_rect"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat = "@mipmap/venues_ic"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:id="@+id/venuesText"
+                                android:text="@string/venuesSmall"
+                                android:textColor="@color/lightBlack" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/attractions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/events"
+                            android:background="@drawable/tag_rect"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginRight="5dp"
+                                app:srcCompat = "@mipmap/attractions_ic_1"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:id="@+id/attractionsText"
+                                android:text="@string/attractions"
+                                android:textColor="@color/lightBlack" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/cats"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weeklyContainer"
+                        android:background="@color/lightBlack"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="@string/categories" />
+
+                    <com.spade.ja.ui.widget.StaticGridView
+                        android:id="@+id/tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cats"
+                        android:columnWidth="150dp"
+                        android:layout_margin="20dp"
+                        android:gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:listSelector="#00000000"
+                        android:numColumns="auto_fit"
+                        android:stretchMode="spacingWidthUniform"
+                        android:verticalSpacing="10dp">
+
+                    </com.spade.ja.ui.widget.StaticGridView>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorTitle"
+            android:fontFamily="@font/gotham_bold"
+            android:padding="20dp"
+            android:text="@string/search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titleSize" />
+    </RelativeLayout>
+</RelativeLayout>

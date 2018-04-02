@@ -7,32 +7,54 @@ import android.text.TextUtils;
 import com.spade.ja.JaApplication;
 import com.spade.ja.datalayer.pojo.request.LoginRequest;
 import com.spade.ja.datalayer.pojo.request.NearbyEventsRequest;
+import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
+import com.spade.ja.datalayer.pojo.request.contactus.ContactUsRequest;
+import com.spade.ja.datalayer.pojo.request.filter.filterevents.FilterEventsRequest;
+import com.spade.ja.datalayer.pojo.request.filter.filtervenues.FilterVenuesRequest;
 import com.spade.ja.datalayer.pojo.request.order.OrderRequest;
+import com.spade.ja.datalayer.pojo.request.search.SearchRequest;
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerResponse;
+import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
+import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
+import com.spade.ja.datalayer.pojo.response.filter.events.FilterEventsResponse;
+import com.spade.ja.datalayer.pojo.response.filter.venues.FilterVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.history.upcoming.HistoryEvents;
 import com.spade.ja.datalayer.pojo.response.like.LikeResponse;
 import com.spade.ja.datalayer.pojo.response.login.LoginResponse;
 import com.spade.ja.datalayer.pojo.response.order.OrderResponse;
 import com.spade.ja.datalayer.pojo.response.profile.ProfileResponse;
 import com.spade.ja.datalayer.pojo.response.sms.SMSResponse;
+import com.spade.ja.datalayer.pojo.response.subscribe.SubscribeResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
+import com.spade.ja.datalayer.pojo.response.viewtickets.ViewTicketResponse;
+import com.spade.ja.datalayer.remote.service.AllAttractionsService;
 import com.spade.ja.datalayer.remote.service.AllEventsService;
 import com.spade.ja.datalayer.remote.service.AllNearyByService;
 import com.spade.ja.datalayer.remote.service.AllVenuesService;
+import com.spade.ja.datalayer.remote.service.AttractionInnerService;
+import com.spade.ja.datalayer.remote.service.AttractionOrderService;
+import com.spade.ja.datalayer.remote.service.AttractionsLikeService;
 import com.spade.ja.datalayer.remote.service.CategoriesService;
+import com.spade.ja.datalayer.remote.service.ContactUsService;
 import com.spade.ja.datalayer.remote.service.DataService;
 import com.spade.ja.datalayer.remote.service.EditService;
 import com.spade.ja.datalayer.remote.service.EventDetailsService;
+import com.spade.ja.datalayer.remote.service.FilterEventsService;
+import com.spade.ja.datalayer.remote.service.FilterVenuesService;
 import com.spade.ja.datalayer.remote.service.LikeService;
+import com.spade.ja.datalayer.remote.service.LikedAttractionsService;
 import com.spade.ja.datalayer.remote.service.LikedEventsService;
+import com.spade.ja.datalayer.remote.service.LikedVenuesService;
 import com.spade.ja.datalayer.remote.service.LoginService;
+import com.spade.ja.datalayer.remote.service.NearByAttractions;
 import com.spade.ja.datalayer.remote.service.NearByEventsService;
 import com.spade.ja.datalayer.remote.service.NearyByVenuesService;
 import com.spade.ja.datalayer.remote.service.OrderService;
@@ -40,13 +62,17 @@ import com.spade.ja.datalayer.remote.service.PastEventsService;
 import com.spade.ja.datalayer.remote.service.ProfileService;
 import com.spade.ja.datalayer.remote.service.RegisterationService;
 import com.spade.ja.datalayer.remote.service.SMSService;
+import com.spade.ja.datalayer.remote.service.SearchService;
 import com.spade.ja.datalayer.remote.service.SocialLoginService;
+import com.spade.ja.datalayer.remote.service.SubscribeService;
 import com.spade.ja.datalayer.remote.service.TodayEventsService;
+import com.spade.ja.datalayer.remote.service.TopAttractionsService;
 import com.spade.ja.datalayer.remote.service.TopEventsService;
 import com.spade.ja.datalayer.remote.service.TopVenuesService;
 import com.spade.ja.datalayer.remote.service.UpcomingEventsService;
 import com.spade.ja.datalayer.remote.service.VenueDetailsService;
 import com.spade.ja.datalayer.remote.service.VenuesLikeService;
+import com.spade.ja.datalayer.remote.service.ViewTicketsService;
 import com.spade.ja.datalayer.remote.service.WeekEventsService;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -212,6 +238,32 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
+    public Single<VenuesResponse> getTopAttractions(String token) {
+        Single<VenuesResponse> attractionsSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            TopAttractionsService topAttractionsService = serviceGenerator.createService(TopAttractionsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(topAttractionsService.getTopAttractions(getCurrentLanguage(),token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                VenuesResponse venuesResponse = (VenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return attractionsSingle;
+    }
+
+    @Override
     public Single<AllVenuesResponse> getAllVenues(String venueURL, String token) {
         Single<AllVenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
@@ -239,6 +291,33 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
+    public Single<AllVenuesResponse> getAllAttractions(String venueURL, String token) {
+        Single<AllVenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AllAttractionsService allVenuesService = serviceGenerator.createService(AllAttractionsService.class, BASE_URL);
+                            char page = venueURL == null ? '1':venueURL.charAt(venueURL.length() - 1);
+                            ServiceResponse serviceResponse = processCall(allVenuesService.getAllAttractions(getCurrentLanguage(),Character.getNumericValue(page),token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                AllVenuesResponse venuesResponse = (AllVenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesResponseSingle;
+    }
+
+    @Override
     public Single<VenuesResponse> getNearByVenues(LatLng latLng, String token) {
         Single<VenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
@@ -248,6 +327,32 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             NearyByVenuesService nearyByVenuesService = serviceGenerator.createService(NearyByVenuesService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(nearyByVenuesService.getNearbyVenues(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""), getCurrentLanguage(),token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                VenuesResponse venuesResponse = (VenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<VenuesResponse> getNearByAttractions(LatLng latLng, String token) {
+        Single<VenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            NearByAttractions nearByAttractions = serviceGenerator.createService(NearByAttractions.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(nearByAttractions.getNearbyAttractions(new NearbyEventsRequest(latLng.latitude + "", latLng.longitude + ""), getCurrentLanguage(),token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 VenuesResponse venuesResponse = (VenuesResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(venuesResponse);
@@ -422,7 +527,59 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<EventInnerResponse> getEventDetails(int id) {
+    public Single<VenuesResponse> getLikedVenues(String token) {
+        Single<VenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            LikedVenuesService likedEventsService = serviceGenerator.createService(LikedVenuesService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(likedEventsService.getLikedVenues(getCurrentLanguage(),"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                VenuesResponse eventsResponse = (VenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(eventsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<VenuesResponse> getLikedAttractions(String token) {
+        Single<VenuesResponse> venuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            LikedAttractionsService likedEventsService = serviceGenerator.createService(LikedAttractionsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(likedEventsService.getLikedAttractions(getCurrentLanguage(),"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                VenuesResponse eventsResponse = (VenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(eventsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<EventInnerResponse> getEventDetails(int id,String token) {
         Single<EventInnerResponse> eventInnerResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -430,7 +587,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             EventDetailsService eventDetailsService = serviceGenerator.createService(EventDetailsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(eventDetailsService.getEventDetails(getCurrentLanguage(), id), false);
+                            ServiceResponse serviceResponse = processCall(eventDetailsService.getEventDetails(getCurrentLanguage(), id,"bearer "+token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 EventInnerResponse eventInnerResponse = (EventInnerResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(eventInnerResponse);
@@ -448,7 +605,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<VenuesInnerResponse> getVenueDetails(int id) {
+    public Single<VenuesInnerResponse> getVenueDetails(int id,String token) {
         Single<VenuesInnerResponse> venuesInnerResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -456,7 +613,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             VenueDetailsService venueDetailsService = serviceGenerator.createService(VenueDetailsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(venueDetailsService.getVenueDetails(getCurrentLanguage(), id), false);
+                            ServiceResponse serviceResponse = processCall(venueDetailsService.getVenueDetails(getCurrentLanguage(), id,"bearer "+token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 VenuesInnerResponse venuesInnerResponse = (VenuesInnerResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(venuesInnerResponse);
@@ -471,6 +628,58 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return venuesInnerResponseSingle;
+    }
+
+    @Override
+    public Single<AttractionInnerResponse> getAttractionsDetails(int id,String token) {
+        Single<AttractionInnerResponse> venuesInnerResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AttractionInnerService attractionInnerService = serviceGenerator.createService(AttractionInnerService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(attractionInnerService.getAttractionsDetails(getCurrentLanguage(), id,"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                AttractionInnerResponse venuesInnerResponse = (AttractionInnerResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(venuesInnerResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return venuesInnerResponseSingle;
+    }
+
+    @Override
+    public Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date, String token) {
+        Single<ViewTicketResponse> viewTicketResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            ViewTicketsService viewTicketsService = serviceGenerator.createService(ViewTicketsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(viewTicketsService.viewTickets(getCurrentLanguage(),startTime,endTime,date,"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                ViewTicketResponse viewTicketResponse = (ViewTicketResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(viewTicketResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return viewTicketResponseSingle;
     }
 
     @Override
@@ -571,6 +780,32 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return registerationResponseSingle;
+    }
+
+    @Override
+    public Single<SubscribeResponse> subscribe(String token) {
+        Single<SubscribeResponse> subscribeResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            SubscribeService subscribeService = serviceGenerator.createService(SubscribeService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(subscribeService.subscribe(getCurrentLanguage(),"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                SubscribeResponse likeResponse = (SubscribeResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(likeResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return subscribeResponseSingle;
     }
 
     @Override
@@ -692,6 +927,32 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
+    public Single<LikeResponse> likeAttractions(int id, String token) {
+        Single<LikeResponse> likeResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AttractionsLikeService likeService = serviceGenerator.createService(AttractionsLikeService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(likeService.like(getCurrentLanguage(), id,"bearer "+token), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                LikeResponse likeResponse = (LikeResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(likeResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return likeResponseSingle;
+    }
+
+    @Override
     public Single<ProfileResponse> getProfile(String token) {
         Single<ProfileResponse> profileResponseSingle = Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
@@ -725,7 +986,7 @@ public class RemoteRepository implements RemoteSource {
                         singleOnSubscribe.onError(exception);
                     } else {
                         try {
-                            OrderService orderService = serviceGenerator.createService(OrderService.class, BASE_URL);
+                            OrderService orderService = serviceGenerator.createServiceNotNullSerialization(OrderService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(orderService.order(getCurrentLanguage(), "bearer " + token,new OrderRequest(name,email,mobileNumber,numberOfTickets,paymentMethod,eventId,ticketId,dateId,nationalId,total)), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE) {
                                 OrderResponse orderResponse = (OrderResponse) serviceResponse.getData();
@@ -820,6 +1081,135 @@ public class RemoteRepository implements RemoteSource {
                 }
         );
         return smsResponseSingle;
+    }
+
+    @Override
+    public Single<FilterEventsResponse> filterEvents(boolean weeklySuggest, List<Integer> categoryId, int date, Double lat, Double lng) {
+        Single<FilterEventsResponse> filterEventsResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            FilterEventsService filterEventsService = serviceGenerator.createService(FilterEventsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(filterEventsService.filterEvents(getCurrentLanguage(),new FilterEventsRequest(weeklySuggest,categoryId,date,lat,lng)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                FilterEventsResponse filterEventsResponse = (FilterEventsResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(filterEventsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return filterEventsResponseSingle;
+    }
+
+    @Override
+    public Single<FilterVenuesResponse> filterVenues(boolean weeklySuggest, List<Integer> categoryId, Double lat, Double lng) {
+        Single<FilterVenuesResponse> filterVenuesResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            FilterVenuesService filterVenuesService = serviceGenerator.createService(FilterVenuesService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(filterVenuesService.filterVenues(getCurrentLanguage(),new FilterVenuesRequest(weeklySuggest,categoryId,lat,lng)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                FilterVenuesResponse filterVenuesResponse = (FilterVenuesResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(filterVenuesResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return filterVenuesResponseSingle;
+    }
+
+    @Override
+    public Single<AllNearByResponse> search(String searchWord, List<String> types, List<Integer> categoryId) {
+        return Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            SearchService searchService = serviceGenerator.createService(SearchService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(searchService.search(getCurrentLanguage(),new SearchRequest(searchWord,types,categoryId)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                AllNearByResponse data = (AllNearByResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(data);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+    }
+
+    @Override
+    public Single<ContactUsResponse> contactUs(String subject, String message, String token) {
+        Single<ContactUsResponse> contactUsResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            ContactUsService contactUsService = serviceGenerator.createService(ContactUsService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(contactUsService.contactUs(getCurrentLanguage(),"bearer "+token,new ContactUsRequest(subject,message)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                ContactUsResponse contactUsResponse = (ContactUsResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(contactUsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return contactUsResponseSingle;
+    }
+
+    @Override
+    public Single<AttractionOrderResponse> orderAttraction(AttractionOrderRequest attractionOrderRequest, String token) {
+        Single<AttractionOrderResponse> attractionOrderResponseSingle = Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AttractionOrderService attractionOrderService = serviceGenerator.createService(AttractionOrderService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(attractionOrderService.attractionOrder(getCurrentLanguage(),"bearer "+token,attractionOrderRequest), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                AttractionOrderResponse attractionOrderResponse = (AttractionOrderResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(attractionOrderResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+        return attractionOrderResponseSingle;
     }
 
 

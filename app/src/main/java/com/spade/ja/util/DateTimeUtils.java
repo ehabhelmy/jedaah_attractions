@@ -45,6 +45,87 @@ public class DateTimeUtils {
         return monthName.toUpperCase();
     }
 
+    public static boolean isDateInCurrentMonth(String date) {
+        Date date1 = convertJSONDateToDate(date);
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+        calendar1.setTime(date1);
+        calendar2.setTime(new Date());
+        if (calendar1.get(Calendar.YEAR) == calendar2.get(Calendar.YEAR)){
+            if (calendar1.get(Calendar.MONTH) == calendar2.get(Calendar.MONTH)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int parseDayOfMonth(String day)  {
+        SimpleDateFormat dayFormat = new SimpleDateFormat("E");
+        Date date = null;
+        try {
+            date = dayFormat.parse(day);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        return dayOfMonth;
+    }
+
+    public static String getDateFromDay(String day)  {
+        Calendar calendar = Calendar.getInstance();
+        switch (day) {
+
+            case "Sunday":
+                calendar.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+                break;
+            case "Monday":
+                calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+                break;
+            case "Tuesday":
+                calendar.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY);
+                break;
+            case "Wednesday":
+                calendar.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY);
+                break;
+            case "Thursday":
+                calendar.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY);
+                break;
+            case "Friday":
+                calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
+                break;
+            case "Saturday":
+                calendar.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+                break;
+
+        }
+        return JaFormat.format(calendar.getTime());
+    }
+
+    public static int parseDayOfMonthExceptional(String date)  {
+        Date date1 = convertJSONDateToDate(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date1);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        return dayOfMonth;
+    }
+
+    public static int parseMonthExceptional(String date)  {
+        Date date1 = convertJSONDateToDate(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date1);
+        int month = calendar.get(Calendar.MONTH);
+        return month;
+    }
+
+    public static String getYear(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        String yearName = new SimpleDateFormat("yyyy").format(calendar.getTime());
+        return yearName.toUpperCase();
+    }
+
     public static String getDay(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -109,6 +190,19 @@ public class DateTimeUtils {
             return date + " at " + startTime + " - " + endTime;
         }else {
             return "";
+        }
+    }
+
+    public static String convertToTimeAm(String time) {
+        SimpleDateFormat format1 = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat format2 = new SimpleDateFormat("hh:mm aaa");
+        try {
+            Date date = format1.parse(time);
+            String newDate = format2.format(date);
+            return newDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

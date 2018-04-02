@@ -17,6 +17,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -68,6 +69,9 @@ public class RegisterationFragment extends BaseFragment implements Registeration
 
     @BindView(R.id.registerNow)
     Button register;
+
+    @BindView(R.id.checkbox)
+    CheckBox subscribe;
 
     @BindView(R.id.registerContainer)
     RelativeLayout registerContainer;
@@ -154,7 +158,7 @@ public class RegisterationFragment extends BaseFragment implements Registeration
             this.presenter.register(userName.getText().toString()
                     , email.getText().toString()
                     , password.getText().toString()
-                    , mobileNumber.getText().toString(), uri);
+                    , mobileNumber.getText().toString(), uri,subscribe.isChecked());
         }
     }
 

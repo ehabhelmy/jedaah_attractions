@@ -140,7 +140,7 @@
                     android:layout_alignStart="@+id/imageView7"
                     android:layout_below="@+id/directions"
                     android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/dates_g" />
+                    app:srcCompat="@drawable/op_hr" />
 
                 <TextView
                     android:id="@+id/openNow"
@@ -157,7 +157,6 @@
                     android:id="@+id/venueOpenDays"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/openNow"
                     android:layout_alignStart="@+id/openNow"
                     android:layout_below="@+id/openNow"
                     android:layout_marginTop="4dp"

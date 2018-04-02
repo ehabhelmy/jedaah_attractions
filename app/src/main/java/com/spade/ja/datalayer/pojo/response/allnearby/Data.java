@@ -1,12 +1,13 @@
 
 package com.spade.ja.datalayer.pojo.response.allnearby;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.spade.ja.datalayer.pojo.BaseModel;
 
-public class Data extends BaseModel{
+import java.util.List;
+
+public class Data extends BaseModel {
 
     @SerializedName("result")
     @Expose

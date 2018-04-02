@@ -3,7 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="130dp">
+    android:id="@+id/smallCardView"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
+    android:layout_height="100dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,9 +33,11 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignTop="@+id/cats"
                 android:layout_marginStart="18dp"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/likeButton"
+                android:layout_alignParentTop="true"
                 android:layout_marginTop="30dp"
                 style="@style/eventName"
                 android:text="TextView" />
@@ -40,7 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/title"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/gotham_book"
+                android:textSize="@dimen/daysRemaining"
+                android:textColor="@color/outerText"
                 android:layout_toStartOf="@id/likeButton"
                 android:text="TextView" />
 
@@ -49,8 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@id/title"
                 android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
                 android:background="@drawable/circle"
                 app:circle_end_color="@color/staticTitle"
                 app:circle_start_color="@color/staticTitle"

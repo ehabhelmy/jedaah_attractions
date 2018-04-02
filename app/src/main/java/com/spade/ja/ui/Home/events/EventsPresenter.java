@@ -18,4 +18,9 @@ public class EventsPresenter extends BasePresenter<EventsContract.View> implemen
     public void unSubscribe() {
 
     }
+
+    @Override
+    public void openFilterEvents() {
+        jaNavigationManager.openFilterEvents();
+    }
 }

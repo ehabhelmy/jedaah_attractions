@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="21dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/gotham_medium"
+        android:text="@string/clear"
+        android:textColor="@color/lightBlack"
+        android:textSize="@dimen/titleSize" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/clear"
+        android:layout_alignBottom="@+id/clear"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/gotham_medium "
+        android:text="@string/filter"
+        android:textColor="@color/black"
+        android:textSize="@dimen/filter_size" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/textView6"
+        android:id="@+id/filterResult">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/filterContainer"
+        android:layout_below="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/loginContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/filterBy"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="@string/filterBy" />
+
+                    <RelativeLayout
+                        android:id="@+id/weeklyContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/filterBy"
+                        android:padding="20dp">
+
+                        <LinearLayout
+                            android:id="@+id/weeklySugg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/tag_rect"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:text="@string/weeklySuggestions"
+                                android:textColor="@color/lightBlack" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/nearBy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/weeklySugg"
+                            android:background="@drawable/tag_rect"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:layout_weight="1"
+                                android:text="@string/NearBy"
+                                android:textColor="@color/lightBlack" />
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/cats"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weeklyContainer"
+                        android:background="@color/background"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:text="@string/categories" />
+
+                    <com.spade.ja.ui.widget.StaticGridView
+                        android:id="@+id/tags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cats"
+                        android:columnWidth="150dp"
+                        android:layout_margin="20dp"
+                        android:gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:listSelector="#00000000"
+                        android:numColumns="auto_fit"
+                        android:stretchMode="spacingWidthUniform"
+                        android:verticalSpacing="10dp">
+
+                    </com.spade.ja.ui.widget.StaticGridView>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorTitle"
+            android:fontFamily="@font/gotham_bold"
+            android:padding="20dp"
+            android:text="@string/filterVenues"
+            android:textColor="@color/white"
+            android:textSize="@dimen/titleSize" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#292C30</color>
-    <color name="colorAccent">#4DC181</color>
+    <color name="colorAccent">#4dc181</color>
     <color name="colorTitle">#4dc181</color>
     <color name="staticTitle">#2E9E96</color>
     <color name="circleWhite">#ffffff</color>
@@ -16,4 +16,5 @@
     <color name="black_85_percent_opacity">#D9000000</color>
     <color name="grey_scale_7">#4A4D4E</color>
     <color name="grey_scale_6">#666666</color>
+    <color name="black">#000000</color>
 </resources>

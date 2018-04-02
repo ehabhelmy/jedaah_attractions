@@ -1,6 +1,7 @@
 package com.spade.ja.ui.Home.explore.adapter;
 
 import com.spade.ja.datalayer.pojo.response.events.Datum;
+import com.spade.ja.datalayer.pojo.response.filter.events.Result;
 import com.spade.ja.ui.Home.explore.pojo.Event;
 
 import java.util.ArrayList;
@@ -32,6 +33,28 @@ public class EventsAdapter {
             event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate() != null ? datum.getEndDate():datum.getStartDate())));
             event.setId(datum.getId());
             event.setLiked(datum.isLiked());
+            events.add(event);
+        }
+        return events;
+    }
+
+    public static List<Event> convertIntoEventUiFilter(List<Result> datums){
+        ArrayList<Event> events = new ArrayList<>();
+        for (Result datum:datums) {
+            Event event = new Event();
+            event.setEventImage(datum.getImage());
+            event.setEventName(datum.getTitle());
+            event.setEventAddress(datum.getAddress());
+            if (Locale.getDefault().getLanguage().equals("ar")){
+                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested()+ " مهتم -":"")+(datum.getGoing() !=0 ? datum.getGoing()+" ذاهب":""));
+            }else {
+                event.setEventLikes((datum.getInterested() != 0 ? datum.getInterested()+ " Interested -":"")+(datum.getGoing() !=0 ? datum.getGoing()+" Going":""));
+            }
+            event.setEventMonth(getMonth(convertJSONDateToDate(datum.getStartDate())));
+            event.setEventDay(getDay(convertJSONDateToDate(datum.getStartDate())));
+            event.setEventRemaining(getDaysRemaining(convertJSONDateToDate(datum.getEndDate() != null ? datum.getEndDate():datum.getStartDate())));
+            event.setId(datum.getId());
+            event.setLiked(datum.getIsLiked());
             events.add(event);
         }
         return events;

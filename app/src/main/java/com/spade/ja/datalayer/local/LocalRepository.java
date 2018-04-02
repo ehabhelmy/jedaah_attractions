@@ -77,7 +77,20 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<VenuesResponse> getTopVenues() {
-        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.TOP_VENUES, EventsResponse.class);
+        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.TOP_VENUES, VenuesResponse.class);
+        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+            if (venuesResponse != null) {
+                e.onSuccess(venuesResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<VenuesResponse> getTopAttractions() {
+        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.TOP_ATTRACTIONS, VenuesResponse.class);
         Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
@@ -90,7 +103,20 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<AllVenuesResponse> getAllVenues() {
-        AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_VENUES, EventsResponse.class);
+        AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_VENUES, VenuesResponse.class);
+        Single<AllVenuesResponse> venuesResponseSingle = Single.create(e -> {
+            if (venuesResponse != null) {
+                e.onSuccess(venuesResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return venuesResponseSingle;
+    }
+
+    @Override
+    public Single<AllVenuesResponse> getAllAttractions() {
+        AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_ATTRACTIONS, AllVenuesResponse.class);
         Single<AllVenuesResponse> venuesResponseSingle = Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
@@ -107,8 +133,18 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
+    public void saveTopAttractions(VenuesResponse venuesResponse) {
+        sharedPref.saveObject(SharedPref.TOP_ATTRACTIONS, venuesResponse);
+    }
+
+    @Override
     public void saveAllVenues(AllVenuesResponse venuesResponse) {
         sharedPref.saveObject(SharedPref.ALL_VENUES, venuesResponse);
+    }
+
+    @Override
+    public void saveAllAttractions(AllVenuesResponse venuesResponse) {
+        sharedPref.saveObject(SharedPref.ALL_ATTRACTIONS, venuesResponse);
     }
 
     @Override
@@ -125,8 +161,26 @@ public class LocalRepository implements LocalSource {
     }
 
     @Override
+    public Single<VenuesResponse> getNearByAttractions() {
+        VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.NEARBY_ATTRACTIONS, VenuesResponse.class);
+        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+            if (venuesResponse != null) {
+                e.onSuccess(venuesResponse);
+            } else {
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return venuesResponseSingle;
+    }
+
+    @Override
     public void saveNearByVenues(VenuesResponse venuesResponse) {
         sharedPref.saveObject(SharedPref.NEARBY_VENUES, venuesResponse);
+    }
+
+    @Override
+    public void saveNearByAttractions(VenuesResponse venuesResponse) {
+        sharedPref.saveObject(SharedPref.NEARBY_ATTRACTIONS, venuesResponse);
     }
 
     @Override
@@ -235,6 +289,42 @@ public class LocalRepository implements LocalSource {
     @Override
     public void saveLikedEvents(EventsResponse eventsResponse) {
         sharedPref.saveObject(SharedPref.LIKED_EVENTS,eventsResponse);
+    }
+
+    @Override
+    public Single<VenuesResponse> getLikedVenues() {
+        VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_VENUES,EventsResponse.class);
+        Single<VenuesResponse> likedEventsResponseSingle = Single.create(e -> {
+            if (eventsResponse != null){
+                e.onSuccess(eventsResponse);
+            }else{
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return likedEventsResponseSingle;
+    }
+
+    @Override
+    public void saveLikedVenues(VenuesResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.LIKED_VENUES,eventsResponse);
+    }
+
+    @Override
+    public Single<VenuesResponse> getLikedAttractions() {
+        VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_ATTRACTIONS,EventsResponse.class);
+        Single<VenuesResponse> likedEventsResponseSingle = Single.create(e -> {
+            if (eventsResponse != null){
+                e.onSuccess(eventsResponse);
+            }else{
+                e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
+            }
+        });
+        return likedEventsResponseSingle;
+    }
+
+    @Override
+    public void saveLikedAttractions(VenuesResponse eventsResponse) {
+        sharedPref.saveObject(SharedPref.LIKED_ATTRACTIONS,eventsResponse);
     }
 
     @Override

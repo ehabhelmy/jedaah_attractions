@@ -21,4 +21,8 @@ public class Constants {
     public static final String PASSWORD = "123123";
     public static final String SENDER = "hamada";
     public static final String PROFILE_DATA = "userData";
+    public static final java.lang.String ATTRACTION_ID = "attractionId";
+    public static final String CALENDAR_PAYMENT = "calendarPayment";
+    public static final String ATTRACTION_PAYMENT = "attractionPayment";
+    public static final String ATTRACTION_ORDER = "attractionOrder";
 }

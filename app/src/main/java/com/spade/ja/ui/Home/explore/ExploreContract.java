@@ -22,6 +22,8 @@ public interface ExploreContract {
         void setupNearbyEvents(List<Event> events);
         void setupTopVenues(List<Venue> data);
         void setupNearbyVenues(List<Venue> data);
+        void setupTopAttractions(List<Venue> data);
+        void setupNearbyAttractions(List<Venue> data);
         boolean isLocationPermissionGranted();
         boolean isLocationEnabled();
         void showErrorLocationNotEnabled();
@@ -29,6 +31,7 @@ public interface ExploreContract {
         void setupCategories(List<Cats> categories);
         void hideNearByEvents();
         void hideNearByVenues();
+        void hideNearByAttractions();
         void setLocationPermission(boolean check);
     }
 
@@ -36,9 +39,12 @@ public interface ExploreContract {
         void openLocationSettings();
         void loadNearByEventsAfterLocationEnabled(LatLng latLng);
         void loadNearByVenuesAfterLocationEnabled(LatLng latLng);
+        void loadNearByAttractionsAfterLocationEnabled(LatLng latLng);
         void showEventInner(int id);
         void showVenueInner(int id);
+        void showAttractionsInner(int id);
         void like(int id);
         void venueLike(int id);
+        void attractionsLike(int id);
     }
 }

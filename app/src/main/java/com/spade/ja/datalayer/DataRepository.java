@@ -1,13 +1,19 @@
 package com.spade.ja.datalayer;
 
 import com.spade.ja.datalayer.local.LocalRepository;
+import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerResponse;
+import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
+import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
+import com.spade.ja.datalayer.pojo.response.filter.events.FilterEventsResponse;
+import com.spade.ja.datalayer.pojo.response.filter.venues.FilterVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.history.upcoming.HistoryEvents;
 import com.spade.ja.datalayer.pojo.response.like.LikeResponse;
 import com.spade.ja.datalayer.pojo.response.login.LoginResponse;
@@ -15,12 +21,15 @@ import com.spade.ja.datalayer.pojo.response.login.User;
 import com.spade.ja.datalayer.pojo.response.order.OrderResponse;
 import com.spade.ja.datalayer.pojo.response.profile.ProfileResponse;
 import com.spade.ja.datalayer.pojo.response.sms.SMSResponse;
+import com.spade.ja.datalayer.pojo.response.subscribe.SubscribeResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
+import com.spade.ja.datalayer.pojo.response.viewtickets.ViewTicketResponse;
 import com.spade.ja.datalayer.remote.RemoteRepository;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -70,11 +79,29 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<VenuesResponse> getTopAttractions(boolean fresh) {
+        if (fresh){
+            return remoteRepository.getTopAttractions(getToken());
+        } else {
+            return localRepository.getTopAttractions();
+        }
+    }
+
+    @Override
     public Single<AllVenuesResponse> getAllVenues(boolean fresh, String venueURL) {
         if (fresh){
             return remoteRepository.getAllVenues(venueURL,getToken());
         } else {
             return localRepository.getAllVenues();
+        }
+    }
+
+    @Override
+    public Single<AllVenuesResponse> getAllAttractions(boolean fresh, String venueURL) {
+        if (fresh){
+            return remoteRepository.getAllAttractions(venueURL,getToken());
+        } else {
+            return localRepository.getAllAttractions();
         }
     }
 
@@ -93,6 +120,15 @@ public class DataRepository implements DataSource {
             return remoteRepository.getNearByVenues(latLng,getToken());
         } else {
             return localRepository.getNearByVenues();
+        }
+    }
+
+    @Override
+    public Single<VenuesResponse> getNearByAttractions(LatLng latLng, boolean fresh) {
+        if (fresh){
+            return remoteRepository.getNearByAttractions(latLng,getToken());
+        } else {
+            return localRepository.getNearByAttractions();
         }
     }
 
@@ -151,13 +187,41 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<VenuesResponse> getLikedVenues(boolean fresh) {
+        if (fresh) {
+            return remoteRepository.getLikedVenues(getToken());
+        } else {
+            return localRepository.getLikedVenues();
+        }
+    }
+
+    @Override
+    public Single<VenuesResponse> getLikedAttractions(boolean fresh) {
+        if (fresh) {
+            return remoteRepository.getLikedAttractions(getToken());
+        } else {
+            return localRepository.getLikedAttractions();
+        }
+    }
+
+    @Override
     public Single<EventInnerResponse> getEventDetails(int id) {
-        return remoteRepository.getEventDetails(id);
+        return remoteRepository.getEventDetails(id,getToken());
     }
 
     @Override
     public Single<VenuesInnerResponse> getVenueDetails(int id) {
-        return remoteRepository.getVenueDetails(id);
+        return remoteRepository.getVenueDetails(id,getToken());
+    }
+
+    @Override
+    public Single<AttractionInnerResponse> getAttractionsDetails(int id) {
+        return remoteRepository.getAttractionsDetails(id,getToken());
+    }
+
+    @Override
+    public Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date) {
+        return remoteRepository.viewAttractionTickets(startTime,endTime,date,getToken());
     }
 
     @Override
@@ -207,6 +271,14 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<LikeResponse> likeAttractions(int id) {
+        if (getToken() == null) {
+            return null;
+        }
+        return remoteRepository.likeAttractions(id ,getToken());
+    }
+
+    @Override
     public Single<OrderResponse> order(String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total) {
         return remoteRepository.order(getToken(),name,email,mobileNumber,numberOfTickets,paymentMethod,eventId,ticketId,dateId,nationalId,total);
     }
@@ -219,6 +291,11 @@ public class DataRepository implements DataSource {
     @Override
     public Single<HistoryEvents> getPastEvents() {
         return remoteRepository.getPastEvents(getToken());
+    }
+
+    @Override
+    public Single<ContactUsResponse> contactUs(String subject, String message) {
+        return remoteRepository.contactUs(subject,message,getToken());
     }
 
     @Override
@@ -237,13 +314,28 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public void saveTopAttractions(VenuesResponse venuesResponse) {
+        localRepository.saveTopAttractions(venuesResponse);
+    }
+
+    @Override
     public void saveAllVenues(AllVenuesResponse venuesResponse) {
         localRepository.saveAllVenues(venuesResponse);
     }
 
     @Override
+    public void saveAllAttractions(AllVenuesResponse venuesResponse) {
+        localRepository.saveAllAttractions(venuesResponse);
+    }
+
+    @Override
     public void saveNearByVenues(VenuesResponse venuesResponse) {
         localRepository.saveNearByVenues(venuesResponse);
+    }
+
+    @Override
+    public void saveNearByAttractions(VenuesResponse venuesResponse) {
+        localRepository.saveNearByAttractions(venuesResponse);
     }
 
     @Override
@@ -277,6 +369,16 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public void saveLikedVenues(VenuesResponse eventsResponse) {
+        localRepository.saveLikedVenues(eventsResponse);
+    }
+
+    @Override
+    public void saveLikedAttractions(VenuesResponse eventsResponse) {
+        localRepository.saveLikedAttractions(eventsResponse);
+    }
+
+    @Override
     public void saveLoggedUser(User user) {
         localRepository.saveLoggedUser(user);
     }
@@ -304,6 +406,31 @@ public class DataRepository implements DataSource {
     @Override
     public Single<SMSResponse> sendSMS(String phone) {
         return remoteRepository.sendSMS(phone);
+    }
+
+    @Override
+    public Single<FilterEventsResponse> filterEvents(boolean weeklySuggest, List<Integer> categoryId, int date, Double lat, Double lng) {
+        return remoteRepository.filterEvents(weeklySuggest, categoryId, date,lat,lng);
+    }
+
+    @Override
+    public Single<FilterVenuesResponse> filterVenues(boolean weeklySuggest, List<Integer> categoryId, Double lat, Double lng) {
+        return remoteRepository.filterVenues(weeklySuggest,categoryId,lat,lng);
+    }
+
+    @Override
+    public Single<AllNearByResponse> search(String searchWord, List<String> types, List<Integer> categoryId) {
+        return remoteRepository.search(searchWord,types,categoryId);
+    }
+
+    @Override
+    public Single<AttractionOrderResponse> orderAttraction(AttractionOrderRequest attractionOrderRequest) {
+        return remoteRepository.orderAttraction(attractionOrderRequest,getToken());
+    }
+
+    @Override
+    public Single<SubscribeResponse> subscribe() {
+        return remoteRepository.subscribe(getToken());
     }
 
 }

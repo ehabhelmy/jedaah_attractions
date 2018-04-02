@@ -12,7 +12,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -22,11 +21,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseActivity;
@@ -94,10 +94,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     }
     @OnClick(R.id.fab)
     void resetMap() {
-        if (bounds != null) {
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 10);
-            this.googleMap.moveCamera(cameraUpdate);
-        }
+       animateCamera();
     }
 
     @Override
@@ -128,11 +125,42 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     private void setupRecyclarView() {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         dividerItemDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider_vertical));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         dataAdapter = new DataAdapter();
+        dataAdapter.setOnItemClick(new DataAdapter.onItemClick() {
+            @Override
+            public void onLikeClicked(int id, String type) {
+                switch (type){
+                    case "event":
+                        presenter.like(id);
+                        break;
+                    case "venue":
+                        presenter.venuesLike(id);
+                        break;
+                    case "attraction":
+                        presenter.attractionsLike(id);
+                        break;
+                }
+            }
+
+            @Override
+            public void onCardClicked(int id, String type) {
+                switch (type){
+                    case "event":
+                        presenter.showEventInner(id);
+                        break;
+                    case "venue":
+                        presenter.showVenuesInner(id);
+                        break;
+                    case "attraction":
+                        presenter.showAttractionInner(id);
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -152,8 +180,10 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-        this.googleMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+        this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         this.googleMap.setOnMarkerClickListener(this);
+        this.googleMap.getUiSettings().setMapToolbarEnabled(false);
+        this.googleMap.setMyLocationEnabled(true);
         presenter.getAllData();
     }
 
@@ -161,14 +191,27 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (Data data : dataList) {
             if (data.getLat() != null && data.getLng() != null) {
-                Marker marker = googleMap.addMarker(new MarkerOptions()
+                Marker marker = googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.mipmap.pin))
                         .position(new LatLng(Double.parseDouble(data.getLat()), Double.parseDouble(data.getLng()))));
                 builder.include(marker.getPosition());
             }
         }
         bounds = builder.build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 10);
-        googleMap.moveCamera(cameraUpdate);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 15);
+        //googleMap.animateCamera(cameraUpdate);
+        animateCamera();
+    }
+
+    private void animateCamera() {
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                .zoom(3)                   // Sets the zoom
+                .bearing(0)                // Sets the orientation of the camera to east
+                .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     @Override
@@ -184,7 +227,7 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
             }
         }
         if (isMarkedClicked){
-            animateBoth();
+            //animateBoth();
         }else {
             animateMap();
         }
@@ -194,14 +237,14 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     }
 
     private void animateBoth() {
-        ValueAnimator anim = ValueAnimator.ofFloat(2.4f, 2f);
+        ValueAnimator anim = ValueAnimator.ofFloat(2.3f, 1.9f);
         anim.addUpdateListener(valueAnimator -> {
             float val = (float) valueAnimator.getAnimatedValue();
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
             layoutParams.weight = val;
             mapViewContainer.setLayoutParams(layoutParams);
         });
-        anim.setDuration(1000);
+        anim.setDuration(500);
         anim.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -227,26 +270,26 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     }
 
     private void animateMap() {
-        ValueAnimator anim = ValueAnimator.ofFloat(2, 2.4f);
+        ValueAnimator anim = ValueAnimator.ofFloat(1.9f, 2.3f);
         anim.addUpdateListener(valueAnimator -> {
             float val = (float) valueAnimator.getAnimatedValue();
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
             layoutParams.weight = val;
             mapViewContainer.setLayoutParams(layoutParams);
         });
-        anim.setDuration(1000);
+        anim.setDuration(500);
         anim.start();
     }
 
     private void animateMapDecreasing() {
-        ValueAnimator anim = ValueAnimator.ofFloat(2.4f, 2f);
+        ValueAnimator anim = ValueAnimator.ofFloat(2.3f,1.9f);
         anim.addUpdateListener(valueAnimator -> {
             float val = (float) valueAnimator.getAnimatedValue();
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mapViewContainer.getLayoutParams();
             layoutParams.weight = val;
             mapViewContainer.setLayoutParams(layoutParams);
         });
-        anim.setDuration(1000);
+        anim.setDuration(500);
         anim.start();
     }
 

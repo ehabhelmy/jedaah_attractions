@@ -18,7 +18,7 @@ public interface RegisterationContract {
     }
 
     interface Presenter extends Unsubscribable{
-        void register(String userName, String email, String password, String mobile, Uri image);
+        void register(String userName, String email, String password, String mobile, Uri image,boolean isSubscribed);
         void showSignIn();
     }
 }

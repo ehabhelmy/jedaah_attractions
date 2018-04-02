@@ -17,6 +17,7 @@ public interface HomeContract {
     }
     interface Presenter{
         void showExplore();
+        void showSearch();
         void showEvents();
         void showProfile();
         void showDirectory();

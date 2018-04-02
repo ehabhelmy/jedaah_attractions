@@ -33,15 +33,27 @@ public interface LocalSource {
 
     Single<VenuesResponse> getTopVenues();
 
+    Single<VenuesResponse> getTopAttractions();
+
     Single<AllVenuesResponse> getAllVenues();
+
+    Single<AllVenuesResponse> getAllAttractions();
 
     void saveTopVenues(VenuesResponse venuesResponse);
 
+    void saveTopAttractions(VenuesResponse venuesResponse);
+
     void saveAllVenues(AllVenuesResponse venuesResponse);
+
+    void saveAllAttractions(AllVenuesResponse venuesResponse);
 
     Single<VenuesResponse> getNearByVenues();
 
+    Single<VenuesResponse> getNearByAttractions();
+
     void saveNearByVenues(VenuesResponse venuesResponse);
+
+    void saveNearByAttractions(VenuesResponse venuesResponse);
 
     Single<AllNearByResponse> getNearByAll();
 
@@ -66,6 +78,14 @@ public interface LocalSource {
     Single<EventsResponse> getLikedEvents();
 
     void saveLikedEvents(EventsResponse eventsResponse);
+
+    Single<VenuesResponse> getLikedVenues();
+
+    void saveLikedVenues(VenuesResponse eventsResponse);
+
+    Single<VenuesResponse> getLikedAttractions();
+
+    void saveLikedAttractions(VenuesResponse eventsResponse);
 
     void saveLoggedUser(User user);
 

@@ -2,6 +2,10 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
     android:id="@+id/TicketCardView"
     android:layout_width="match_parent"
     android:layout_height="360dp">
@@ -29,12 +33,23 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham_medium"
                 android:text="Amr Diab Concert"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/title_inner"
-                tools:layout_editor_absoluteX="24dp"
-                tools:layout_editor_absoluteY="21dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"  />
+
+            <ImageView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_more" />
         </com.spade.ja.ui.widget.ImageLayout>
 
         <RelativeLayout

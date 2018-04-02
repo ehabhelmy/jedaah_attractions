@@ -49,7 +49,7 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
         }else if(baseModel.getName().equals(SocialMedia.Instagram.name())){
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g)).into(socialMediaIcon);
         }else if (baseModel.getName().equals(SocialMedia.PHONE.name())){
-            Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g)).into(socialMediaIcon);
+            Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.tele).error(R.drawable.tele)).into(socialMediaIcon);
         }else {
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.website_g).error(R.drawable.website_g)).into(socialMediaIcon);
         }

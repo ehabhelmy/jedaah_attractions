@@ -7,6 +7,11 @@
         android:title="@string/explore" />
 
     <item
+        android:id="@+id/search"
+        android:icon="@drawable/search_ic"
+        android:title="@string/search" />
+
+    <item
         android:id="@+id/directory"
         android:icon="@drawable/directory_ic"
         android:title="@string/directory" />

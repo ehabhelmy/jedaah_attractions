@@ -12,7 +12,7 @@
         android:id="@+id/mapViewContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="1.9">
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
@@ -37,64 +37,85 @@
                 android:gravity="center"
                 android:text="@string/all"
                 android:textColor="@color/circleWhite"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:id="@+id/alldivider"
+                android:layout_toEndOf="@+id/all"/>
             <TextView
                 android:id="@+id/events"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@id/events"
-                android:layout_toEndOf="@id/all"
+                android:layout_toEndOf="@id/alldivider"
                 android:fontFamily="@font/gotham_medium"
                 android:gravity="center"
                 android:text="@string/eventsCap"
                 android:textColor="@color/circleWhite"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:id="@+id/eventsdivider"
+                android:layout_toEndOf="@+id/events"/>
 
             <TextView
                 android:id="@+id/venues"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@id/venues"
-                android:layout_toEndOf="@id/events"
+                android:layout_toEndOf="@id/eventsdivider"
                 android:fontFamily="@font/gotham_medium"
                 android:gravity="center"
                 android:text="@string/venuesCap"
                 android:textColor="@color/circleWhite"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:id="@+id/venuesdivider"
+                android:layout_toEndOf="@+id/venues"/>
 
             <TextView
                 android:id="@+id/attractions"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@id/venues"
-                android:layout_toEndOf="@id/venues"
+                android:layout_toEndOf="@id/venuesdivider"
                 android:fontFamily="@font/gotham_medium"
                 android:gravity="center"
                 android:text="@string/attractionsCap"
                 android:textColor="@color/circleWhite"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.spade.ja.ui.widget.CircularImageView
             android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignBottom="@id/mapView"
             android:layout_alignEnd="@+id/mapView"
             android:layout_marginBottom="30dp"
+            android:elevation="10dp"
             android:layout_marginEnd="10dp"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/location_g" />
+            app:srcCompat="@mipmap/recenter_bg" />
     </RelativeLayout>
 
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:background="@color/background"
+        android:padding="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1.1"/>
 
 </LinearLayout>

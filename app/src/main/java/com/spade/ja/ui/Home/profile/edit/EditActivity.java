@@ -260,10 +260,12 @@ public class EditActivity extends BaseActivity implements EditContract.View {
         email.setText(profileData.getEmail());
         mobileNumber.setText(profileData.getMobileNumber());
         dob.setText(profileData.getBirthDate());
-        if (profileData.getGender().equalsIgnoreCase("female")){
-            female.setChecked(true);
-        }else {
-            male.setChecked(true);
+        if (profileData.getGender() != null) {
+            if (profileData.getGender().equalsIgnoreCase("female")) {
+                female.setChecked(true);
+            } else {
+                male.setChecked(true);
+            }
         }
     }
 }

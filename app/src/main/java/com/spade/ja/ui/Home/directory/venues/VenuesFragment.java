@@ -24,6 +24,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Roma on 1/14/2018.
@@ -78,6 +79,11 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
         return R.layout.fragment_venues;
     }
 
+    @OnClick(R.id.fab)
+    void openFilterVenues() {
+        presenter.openFilterVenues();
+    }
+
     @Override
     public void setupCategories(List<Cats> categoryList) {
         if (categoryList.size() > 0) {
@@ -102,7 +108,7 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
             dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
             topVeuesRecyclarView.setLayoutManager(layoutManager);
             topVeuesRecyclarView.addItemDecoration(dividerItemDecoration);
-            VenuesListAdapter venuesListAdapter = new VenuesListAdapter();
+            VenuesListAdapter venuesListAdapter = new VenuesListAdapter(false);
             venuesListAdapter.setData((ArrayList<Venue>) venuesResponses);
             venuesListAdapter.setOnFavouriteListener(id -> presenter.venueLike(id));
             venuesListAdapter.setOnViewListener(id -> presenter.showVenueInner(id));

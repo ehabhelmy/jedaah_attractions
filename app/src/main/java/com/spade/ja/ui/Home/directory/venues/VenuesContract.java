@@ -27,5 +27,6 @@ public interface VenuesContract {
         void loadMoreVenues();
         void showVenueInner(int id);
         void venueLike(int id);
+        void openFilterVenues();
     }
 }

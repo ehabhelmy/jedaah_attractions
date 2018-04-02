@@ -144,4 +144,9 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
     public void venueLike(int id) {
         likeVenues.like(id,likeResponseBaseCallback);
     }
+
+    @Override
+    public void openFilterVenues() {
+        jaNavigationManager.openFilterVenues();
+    }
 }

@@ -23,6 +23,7 @@ public class EventOrderPresenter extends BasePresenter<EventOrderContract.View> 
         @Override
         public void onSuccess(Data model) {
             if (isViewAlive.get()){
+                getView().hideLoading();
                 jaNavigationManager.showEventOrderSuccess();
             }
         }
@@ -30,6 +31,7 @@ public class EventOrderPresenter extends BasePresenter<EventOrderContract.View> 
         @Override
         public void onError(String message) {
             if (isViewAlive.get()){
+                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -52,6 +54,7 @@ public class EventOrderPresenter extends BasePresenter<EventOrderContract.View> 
 
     @Override
     public void order(String name, String email, String mobileNumber, String numberOfTickets, String paymentMethod, String eventId, String ticketId, String dateId, String nationalId, String total) {
+        getView().showLoading();
         order.order(orderResponseBaseCallback,name,email,mobileNumber,numberOfTickets,paymentMethod,eventId,ticketId,dateId,nationalId,total);
     }
 

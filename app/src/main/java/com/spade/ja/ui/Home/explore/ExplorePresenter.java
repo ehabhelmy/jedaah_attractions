@@ -11,9 +11,12 @@ import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.ui.Home.explore.adapter.EventsAdapter;
 import com.spade.ja.usecase.categories.Categories;
 import com.spade.ja.usecase.like.Like;
+import com.spade.ja.usecase.like.LikeAttractions;
 import com.spade.ja.usecase.like.LikeVenues;
+import com.spade.ja.usecase.nearbyattractions.NearByAttractions;
 import com.spade.ja.usecase.nearbyevents.NearByEvents;
 import com.spade.ja.usecase.nearbyvenues.NearByVenues;
+import com.spade.ja.usecase.topattractions.TopAttractions;
 import com.spade.ja.usecase.topevents.TopEvents;
 import com.spade.ja.usecase.topvenues.TopVenues;
 import com.google.android.gms.maps.model.LatLng;
@@ -30,9 +33,12 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     private NearByEvents nearByEvents;
     private NearByVenues nearByVenues;
     private TopVenues topVenues;
+    private TopAttractions topAttractions;
+    private NearByAttractions nearByAttractions;
     private Categories categories;
     private Like like;
     private LikeVenues likeVenues;
+    private LikeAttractions likeAttractions;
 
     private BaseCallback<EventsResponse> topEventsResponseBaseCallback = new BaseCallback<EventsResponse>() {
         @Override
@@ -121,6 +127,24 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         }
     };
 
+    private BaseCallback<VenuesResponse> attractionsCallBack = new BaseCallback<VenuesResponse>() {
+        @Override
+        public void onSuccess(VenuesResponse model) {
+            if (isViewAlive.get()) {
+                if (model.getSuccess()) {
+                    getView().setupTopAttractions(model.getData());
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()) {
+                getView().showError(message);
+            }
+        }
+    };
+
     private BaseCallback<VenuesResponse> nearbyVenuesResponseBaseCallback = new BaseCallback<VenuesResponse>() {
         @Override
         public void onSuccess(VenuesResponse model) {
@@ -140,15 +164,37 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         }
     };
 
+    private BaseCallback<VenuesResponse> nearByAttractionsCallBack = new BaseCallback<VenuesResponse>() {
+        @Override
+        public void onSuccess(VenuesResponse model) {
+            if (isViewAlive.get()) {
+                if (model.getSuccess()) {
+                    getView().setupNearbyAttractions(model.getData());
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()) {
+                //getView().showError(message);
+                getView().hideNearByAttractions();
+            }
+        }
+    };
+
     @Inject
-    public ExplorePresenter(TopEvents topEvents, NearByEvents nearByEvents,TopVenues topVenues,NearByVenues nearByVenues,Categories categories,Like like,LikeVenues likeVenues) {
+    public ExplorePresenter(TopEvents topEvents, NearByEvents nearByEvents,TopVenues topVenues,NearByVenues nearByVenues,Categories categories,Like like,LikeVenues likeVenues,TopAttractions topAttractions,NearByAttractions nearByAttractions,LikeAttractions likeAttractions) {
         this.topEvents = topEvents;
         this.nearByEvents = nearByEvents;
         this.topVenues = topVenues;
         this.nearByVenues = nearByVenues;
+        this.topAttractions = topAttractions;
+        this.nearByAttractions = nearByAttractions;
         this.categories = categories;
         this.like = like;
         this.likeVenues = likeVenues;
+        this.likeAttractions = likeAttractions;
     }
 
     @Override
@@ -158,6 +204,7 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         topEvents.getTopEvents(topEventsResponseBaseCallback,true);
         categories.getCategories(categoryBaseCallback,true);
         topVenues.getTopVenues(venuesResponseBaseCallback,true);
+        topAttractions.getTopAttractions(attractionsCallBack,true);
         if (getView().isLocationPermissionGranted()) {
             if (getView().isLocationEnabled()) {
                 getView().getLatitudeAndLongitude();
@@ -176,7 +223,11 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
         nearByEvents.unSubscribe();
         topVenues.unSubscribe();
         nearByVenues.unSubscribe();
+        topAttractions.unSubscribe();
+        nearByAttractions.unSubscribe();
         like.unSubscribe();
+        likeVenues.unSubscribe();
+        likeAttractions.unSubscribe();
     }
 
     @Override
@@ -195,6 +246,11 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     }
 
     @Override
+    public void loadNearByAttractionsAfterLocationEnabled(LatLng latLng) {
+        nearByAttractions.getNearByAttractions(latLng,nearByAttractionsCallBack,true);
+    }
+
+    @Override
     public void showEventInner(int id) {
         jaNavigationManager.showEventInner(id);
     }
@@ -205,6 +261,11 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     }
 
     @Override
+    public void showAttractionsInner(int id) {
+        jaNavigationManager.showAttractionInner(id);
+    }
+
+    @Override
     public void like(int id) {
         like.like(id,likeResponseBaseCallback);
     }
@@ -212,5 +273,10 @@ public class ExplorePresenter extends BasePresenter<ExploreContract.View> implem
     @Override
     public void venueLike(int id) {
         likeVenues.like(id,likeResponseBaseCallback);
+    }
+
+    @Override
+    public void attractionsLike(int id) {
+        likeAttractions.like(id,likeResponseBaseCallback);
     }
 }

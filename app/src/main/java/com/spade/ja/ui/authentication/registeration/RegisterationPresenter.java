@@ -53,7 +53,7 @@ public class RegisterationPresenter extends BasePresenter<RegisterationContract.
     }
 
     @Override
-    public void register(String userName, String email, String password, String mobile, Uri image) {
+    public void register(String userName, String email, String password, String mobile, Uri image,boolean isSubscribed) {
         File imageFile = null;
         if (image != null) {
             imageFile = new File(getRealPathFromURI(image));
@@ -61,7 +61,7 @@ public class RegisterationPresenter extends BasePresenter<RegisterationContract.
         if (isViewAlive.get()){
             getView().showLoading();
         }
-        registeration.register(userName, email, password, mobile, imageFile, callback);
+        registeration.register(userName, email, password, mobile, imageFile, callback,isSubscribed);
     }
 
     @Override

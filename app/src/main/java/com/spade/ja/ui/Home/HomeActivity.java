@@ -20,6 +20,7 @@ import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseActivity;
 import com.spade.ja.ui.Home.explore.ExploreContract;
+import com.spade.ja.ui.Home.explore.ExploreFragment;
 import com.spade.ja.ui.navigation.JaNavigationManager;
 
 import java.lang.reflect.Field;
@@ -49,6 +50,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             switch (item.getItemId()){
                 case R.id.explore :
                     presenter.showExplore();
+                    break;
+                case R.id.search :
+                    presenter.showSearch();
                     break;
                 case R.id.events :
                     presenter.showEvents();
@@ -101,8 +105,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     public void onResume() {
         super.onResume();
         if (locationPermission) {
-            ExploreContract.View exploreFragment = (ExploreContract.View) presenter.getCurrentFragmentOnHome();
-            exploreFragment.setLocationPermission(true);
+            if (presenter.getCurrentFragmentOnHome() instanceof ExploreContract.View) {
+                ExploreContract.View exploreFragment = (ExploreContract.View) presenter.getCurrentFragmentOnHome();
+                exploreFragment.setLocationPermission(true);
+            }
         }
     }
 
@@ -135,14 +141,20 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        JaNavigationManager.getInstance().setFragmentManager(getSupportFragmentManager());
         if (requestCode == JaNavigationManager.LOCATION_SETTINGS) {
             if (resultCode == 0) {
                 presenter.locationIsEnabled();
             }
         }
-        if (requestCode == JaNavigationManager.EVENT_INNER) {
-            presenter.showEvents();
-        }
+//        if (requestCode == JaNavigationManager.EVENT_INNER) {
+//            bottomNavigationView.setSelectedItemId(R.id.events);
+//            presenter.showEvents();
+//        }
+//        if (requestCode == JaNavigationManager.MAP) {
+//            bottomNavigationView.setSelectedItemId(R.id.explore);
+//            presenter.showExplore();
+//        }
     }
 
     @Override

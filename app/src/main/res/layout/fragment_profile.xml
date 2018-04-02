@@ -36,7 +36,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:tint="@color/colorTitle"
-                app:srcCompat="@drawable/share_w" />
+                app:srcCompat="@drawable/ic_download_arrow" />
 
             <ImageView
                 android:id="@+id/settings"
@@ -45,7 +45,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                app:srcCompat="@drawable/logout_ic" />
+                app:srcCompat="@drawable/setting_ic" />
 
             <com.spade.ja.ui.widget.CircularImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -107,6 +107,7 @@
             android:layout_height="wrap_content"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
+            app:tabTextAppearance="@style/MineCustomTabText"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorTitle" />
 

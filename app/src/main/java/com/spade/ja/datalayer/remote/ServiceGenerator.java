@@ -51,6 +51,15 @@ public class ServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
+    public <S> S createServiceNotNullSerialization(Class<S> serviceClass, String baseUrl) {
+        OkHttpClient client = okHttpBuilder.build();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl).client(client)
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
+        return retrofit.create(serviceClass);
+    }
+
     Interceptor headerInterceptor = chain -> {
         Request original = chain.request();
 

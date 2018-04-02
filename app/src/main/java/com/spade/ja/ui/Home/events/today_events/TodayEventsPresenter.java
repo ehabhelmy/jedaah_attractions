@@ -67,6 +67,7 @@ public class TodayEventsPresenter extends BasePresenter<TodayEventsContract.View
     @Override
     public void unSubscribe() {
         this.todayEvents.unSubscribe();
+        like.unSubscribe();
     }
 
     @Override

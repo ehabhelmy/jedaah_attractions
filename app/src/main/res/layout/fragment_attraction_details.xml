@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/loading_overlay" android:visibility="gone"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/eventInnerContainer"
+        android:layout_above="@+id/eventPriceContainer"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:paddingBottom="10dp">
+
+
+                <com.spade.ja.ui.widget.ImageLayout
+                    android:id="@+id/venueInnerImage"
+                    android:layout_width="match_parent"
+                    android:background="@mipmap/myimage"
+                    android:layout_height="200dp" />
+
+                <com.like.LikeButton
+                    android:id="@+id/favourite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="175dp"
+                    android:background="@drawable/circle"
+                    app:anim_scale_factor="2"
+                    app:circle_end_color="@color/staticTitle"
+                    app:circle_start_color="@color/staticTitle"
+                    app:dots_primary_color="@color/staticTitle"
+                    app:dots_secondary_color="@color/staticTitle"
+                    app:icon_size="25dp"
+                    app:icon_type="heart"
+                    app:like_drawable="@drawable/like_full_g"
+                    app:unlike_drawable="@drawable/like_empty_g" />
+
+                <FrameLayout
+                    android:id="@+id/sponsored"
+                    android:layout_width="80dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/venueInnerImage"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/rounded_sponsored">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/gotham_book"
+                        android:gravity="center"
+                        android:text="@string/sponspored"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/daysRemaining" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/venueTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gotham_medium"
+                    android:gravity="center_horizontal"
+                    android:layout_below="@+id/sponsored"
+                    android:text="Attraction Name Here"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="@dimen/title_inner"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="16dp"/>
+
+                <TextView
+                    android:id="@+id/categories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/venueTitle"
+                    android:layout_alignStart="@+id/venueTitle"
+                    android:fontFamily="@font/gotham_book"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:text="ART | GALLERY"
+                    android:textSize="@dimen/cardsubtitle" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="6dp"
+                    app:srcCompat="@drawable/location_g" />
+
+                <TextView
+                    android:id="@+id/venueAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/imageView7"
+                    android:layout_marginStart="14dp"
+                    android:layout_toEndOf="@+id/imageView7"
+                    android:fontFamily="@font/gotham_book"
+                    android:text="12, Al-Aziz , Jeddah"
+                    android:textSize="@dimen/titleSize" />
+
+                <TextView
+                    android:id="@+id/directions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/venueAddress"
+                    android:layout_below="@+id/venueAddress"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/gotham_book"
+                    android:text="@string/getDirections"
+                    android:textColor="@color/staticTitle"
+                    android:textSize="@dimen/daysRemaining" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/imageView7"
+                    android:layout_below="@+id/directions"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/op_hr" />
+
+                <TextView
+                    android:id="@+id/openNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/directions"
+                    android:layout_alignTop="@+id/imageView9"
+                    android:fontFamily="@font/gotham_book"
+                    android:gravity="center"
+                    android:text="Open Now"
+                    android:textSize="@dimen/titleSize" />
+
+                <LinearLayout
+                    android:id="@+id/venueOpenDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/openNow"
+                    android:layout_below="@+id/openNow"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/socialMedia"
+                    android:layout_alignStart="@+id/imageView9"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/venueOpenDays"/>
+                <com.spade.ja.ui.widget.StaticGridView
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/socialMedia"
+                    android:numColumns="3"
+                    android:layout_alignStart="@id/socialMedia"
+                    android:id="@+id/tags"
+                    android:columnWidth="150dp"
+                    android:verticalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:horizontalSpacing="10dp"
+                    android:stretchMode="spacingWidthUniform">
+
+                </com.spade.ja.ui.widget.StaticGridView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/divider"
+                    android:layout_below="@+id/tags"
+                    android:background="@color/background"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingBottom="25dp"
+                    android:id="@+id/venueDescriptionContainer"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="32dp"
+                    android:layout_below="@+id/divider"
+                    android:layout_alignStart="@+id/socialMedia">
+
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorTitle"
+                        android:textSize="@dimen/titleSize"
+                        android:fontFamily="@font/gotham_bold"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/description" />
+
+                    <TextView
+                        android:id="@+id/venueDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gotham_book"
+                        android:text="asdhasjdhasjkdhaaasjkdhasjkdhajsdhasjkdhasjdhasjdhasjdhasjdhasjdhasjdhasjdak, asdasdgashdgahdghasgdhasgdhasdgahsdgahsdgashdgashdgashdgashdgashdgasdgahdgahsdgahsdgahsdgahsdgahdgahdsgahsdgahsdgahsdgashdgahsdgash" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/dividerPhotos"
+                    android:layout_below="@+id/venueDescriptionContainer"
+                    android:background="@color/background"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:paddingTop="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/dividerPhotos"
+                    android:paddingBottom="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView45"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        style="@style/TitleTheme"
+                        android:text="@string/photos" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/venuesPhotos"
+                        android:layout_width="match_parent"
+                        android:paddingStart="24dp"
+                        android:clipToPadding="false"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/eventPriceContainer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightBlack">
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="18dp"
+            app:srcCompat="@drawable/ticket_g" />
+
+        <TextView
+            android:id="@+id/eventPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/imageView12"
+            android:fontFamily="@font/gotham_book"
+            android:gravity="center"
+            android:text="100 - 250 SAR"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/buyNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/gotham_medium"
+            android:text="@string/buyNow"
+            android:textColor="@color/colorTitle" />
+    </RelativeLayout>
+
+</RelativeLayout>

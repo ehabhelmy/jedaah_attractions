@@ -16,9 +16,20 @@ import com.spade.ja.ui.Home.explore.viewholder.VenuesViewHolder;
 
 public class VenuesListAdapter extends BaseRecyclerViewAdapter<Venue> {
 
+    private boolean big = false;
+
+    public VenuesListAdapter(boolean big) {
+        this.big = big;
+    }
+
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.venus_card, parent, false);
+        View view = null;
+        if (big){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_venues_card, parent, false);
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.venus_card, parent, false);
+        }
         return new VenuesViewHolder(view);
     }
 }

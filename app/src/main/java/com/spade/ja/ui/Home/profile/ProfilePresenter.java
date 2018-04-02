@@ -66,4 +66,9 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
     public void editProfile() {
         jaNavigationManager.openEditActivity(profileData);
     }
+
+    @Override
+    public void openSettings() {
+        jaNavigationManager.openSettings();
+    }
 }

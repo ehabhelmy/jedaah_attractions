@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.spade.ja.JaApplication;
@@ -85,6 +87,13 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     @BindView(R.id.ticketsNumber)
     TextView ticketsNumberTextView;
 
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
+
+    @BindView(R.id.orderContainer)
+    ScrollView scrollView;
+
+
     @Override
     public void showError(String message) {
         showPopUp(message);
@@ -92,13 +101,16 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        scrollView.setVisibility(View.VISIBLE);
+        loadingView.setVisibility(View.GONE);
     }
+
 
     @Override
     protected void initializeDagger() {
