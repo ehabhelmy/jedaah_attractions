@@ -2,6 +2,8 @@ package com.spade.ja.usecase.attractioninner;
 
 import android.accounts.NetworkErrorException;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerResponse;
 import com.spade.ja.ui.Base.listener.BaseCallback;
@@ -43,7 +45,7 @@ public class AttractionInner implements Unsubscribable {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof NetworkErrorException) {
-                    callback.onError("No data Connection");
+                    callback.onError(JaApplication.context.getString(R.string.connection));
                 }else {
                     callback.onError(e.getMessage());
                 }

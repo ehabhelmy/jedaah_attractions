@@ -8,6 +8,7 @@ import com.spade.ja.datalayer.pojo.BaseModel;
 
 public class HistoryEventsUi extends BaseModel {
 
+    private int id;
     private String eventTitle;
     private String eventImage;
     private String eventMonth;
@@ -19,6 +20,41 @@ public class HistoryEventsUi extends BaseModel {
     private String orderStatus;
     private String numberTickets;
     private String ticketsPrice;
+    private String type;
+    private String addons;
+    private boolean upOrPast;
+
+    public boolean isUpOrPast() {
+        return upOrPast;
+    }
+
+    public void setUpOrPast(boolean upOrPast) {
+        this.upOrPast = upOrPast;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAddons() {
+        return addons;
+    }
+
+    public void setAddons(String addons) {
+        this.addons = addons;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getEventTitle() {
         return eventTitle;

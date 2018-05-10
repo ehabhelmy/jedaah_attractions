@@ -112,17 +112,28 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         ArrayList<Integer> openDays = new ArrayList<>();
         ArrayList<Integer> closedDays = new ArrayList<>();
         for (Day day:weekDays){
-            for (AttractionWeekDay attractionWeekDay : day.getAttractionWeekDays()) {
-                if (attractionWeekDay.getIsClosed() == 0) {
+                if (day.getAttractionWeekDays().get(0).getIsClosed() == 0) {
                     dayArrayList.add(day);
                     openDays.add(DateTimeUtils.parseDayOfMonth(day.getDay()));
                 } else {
                     closedDays.add(DateTimeUtils.parseDayOfMonth(day.getDay()));
                 }
-            }
         }
         for (AttractionExceptionalDate attractionExceptionalDate: exceptionalDates) {
             if (DateTimeUtils.isDateInCurrentMonth(attractionExceptionalDate.getDate())) {
+                Day day = new Day();
+                day.setId(attractionExceptionalDate.getId());
+                day.setType("Excep");
+                List<AttractionWeekDay>  attractionWeekDayList = new ArrayList<>();
+                AttractionWeekDay attractionWeekDay = new AttractionWeekDay();
+                attractionWeekDay.setAddons(attractionExceptionalDate.getAddons());
+                attractionWeekDay.setIsClosed(0);
+                attractionWeekDay.setTypes(attractionExceptionalDate.getTypes());
+                attractionWeekDay.setStartTime(attractionExceptionalDate.getStartTime());
+                attractionWeekDay.setEndTime(attractionExceptionalDate.getEndTime());
+                attractionWeekDayList.add(attractionWeekDay);
+                day.setAttractionWeekDays(attractionWeekDayList);
+                dayArrayList.add(day);
                 openDays.add(DateTimeUtils.parseDayOfMonthExceptional(attractionExceptionalDate.getDate()));
                 //TODO : map expectional date to week day and add to array
             }else {
@@ -163,7 +174,7 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     public void onDaySelectedListener(Day day) {
         List<TimeModel> timeModels = new ArrayList<>();
         for (AttractionWeekDay attractionWeekDay:day.getAttractionWeekDays()) {
-            timeModels.add(new TimeModel(day.getId(),DateTimeUtils.getDateFromDay(day.getDay()),attractionWeekDay.getStartTime(),attractionWeekDay.getEndTime()));
+            timeModels.add(new TimeModel(day.getId(),DateTimeUtils.getDateFromDay(day.getDay()),attractionWeekDay.getStartTime(),attractionWeekDay.getEndTime(),day.getType() != null ? "Excep":null));
         }
         setupTimes(timeModels);
         timeContainer.setVisibility(View.VISIBLE);

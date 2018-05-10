@@ -39,7 +39,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-        manifestPlaceholders = [onesignal_app_id: "148c2a49-e409-48a2-b9e2-50ae56e490cd",
+        manifestPlaceholders = [onesignal_app_id               : "148c2a49-e409-48a2-b9e2-50ae56e490cd",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
     }

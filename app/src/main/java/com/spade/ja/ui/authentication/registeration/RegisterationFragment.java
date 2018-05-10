@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
@@ -74,7 +73,7 @@ public class RegisterationFragment extends BaseFragment implements Registeration
     CheckBox subscribe;
 
     @BindView(R.id.registerContainer)
-    RelativeLayout registerContainer;
+    LinearLayout registerContainer;
 
     @BindView(R.id.loading_overlay_container)
     LinearLayout loadingView;
@@ -150,8 +149,8 @@ public class RegisterationFragment extends BaseFragment implements Registeration
         hideKeyboard();
         if (TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(email.getText()) || TextUtils.isEmpty(password.getText())) {
             new AlertDialog.Builder(this.getActivity())
-                    .setTitle("Data Required")
-                    .setMessage("You need to fill all the data")
+                    .setTitle(getString(R.string.data_required))
+                    .setMessage(getString(R.string.fill_data))
                     .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                     .show();
         }else {
@@ -216,7 +215,7 @@ public class RegisterationFragment extends BaseFragment implements Registeration
 
     private void showErrorYouCantUploadImage() {
         new AlertDialog.Builder(getContext())
-                .setMessage("You can't update your profile image")
+                .setMessage(getString(R.string.profile_image))
                 .show();
     }
 }

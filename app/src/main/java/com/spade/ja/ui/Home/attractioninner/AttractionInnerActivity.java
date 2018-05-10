@@ -3,6 +3,7 @@ package com.spade.ja.ui.Home.attractioninner;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseActivity;
+import com.spade.ja.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
 
 import javax.inject.Inject;
 
@@ -49,7 +50,10 @@ public class AttractionInnerActivity extends BaseActivity implements AttractionI
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        //presenter.goToHomeActivity();
+        if (presenter.getCurrentFragment() instanceof EventOrderSuccessFragment) {
+            finish();
+        }else {
+            super.onBackPressed();
+        }
     }
 }

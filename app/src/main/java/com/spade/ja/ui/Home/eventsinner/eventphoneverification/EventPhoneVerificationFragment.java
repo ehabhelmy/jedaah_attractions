@@ -3,6 +3,7 @@ package com.spade.ja.ui.Home.eventsinner.eventphoneverification;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -22,6 +23,7 @@ import com.spade.ja.ui.Home.eventsinner.smsreciever.SMSReciever;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by ehab on 1/25/18.
@@ -33,6 +35,7 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
     EventPhoneVerificationPresenter presenter;
 
     private SMSReciever smsReciever;
+    private String sms;
 
     @BindView(R.id.pin_box1)
     EditText mPinBox1;
@@ -61,13 +64,19 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
 
     @Override
     public void onStart() {
-        super.onStart();
         initializeSmsReciever();
+        super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     private void initializeSmsReciever() {
-        getActivity().registerReceiver(smsReciever,new IntentFilter(
-                "android.provider.Telephony.SMS_RECEIVED"));
+        IntentFilter intentFilter = new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION);
+        intentFilter.setPriority(999);
+        getActivity().registerReceiver(smsReciever,intentFilter,"android.permission.BROADCAST_SMS",null);
     }
 
     private void unRegisterSmsReciever(){
@@ -86,10 +95,10 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
         mContinueBtn.setTextColor(getResources().getColor(R.color.grey_scale_6));
         mPinDigits = new String[4];
         defineContinueBtn();
-        mPinBox1.requestFocus();
         setupFocusListeners();
         setupOnKeyListeners();
         setupTextChangeListeners();
+        mPinBox1.requestFocus();
     }
 
     private void setupFocusListeners() {
@@ -118,12 +127,14 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
             disablePinBoxes();
             setupPinDigits();
             final String pin = getPin();
-            if (pin.equals("code")){
-                //TODO : show success
+            if (pin.equals(sms)){
+                presenter.showOrderView();
             }else {
                 mResetPinBoxes = true;
                 changePinBoxesBackgroundToDefault();
                 changeContinueButtonToDisabled();
+                enablePinBoxes();
+                mPinBox1.requestFocus();
             }
         });
     }
@@ -164,7 +175,7 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
     public void onFocusChange(View view, boolean b) {
         EditText box = (EditText) view;
         if (b) {
-            changePinBoxesBackgroundToDefault();
+            changePinBoxBackgroundToDefault(box);
             box.setText("");
         }
         changeContinueBtnAppearance();
@@ -190,9 +201,23 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
         return false;
     }
 
+    @OnClick(R.id.resend)
+    void resendMessage(){
+        presenter.sendMessage();
+    }
+
     @Override
     public void onSMSRecieved(String sms) {
        //TODO : Success
+        this.sms = sms;
+        autoFillPinBoxes(sms);
+    }
+
+    private void autoFillPinBoxes(String sms) {
+        mPinBox1.setText(sms.substring(0,1));
+        mPinBox2.setText(sms.substring(1,2));
+        mPinBox3.setText(sms.substring(2,3));
+        mPinBox4.setText(sms.substring(3,4));
     }
 
     private void changeAllBoxesToBlue() {
@@ -231,7 +256,7 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
                 case R.id.pin_box4:
                     if (!text.equals("") && areAllBoxesFilled()) {
                         changePinBoxBackgroundToFull(mPinBox4);
-                        requestFocusOnNextView(mContinueBtn);
+                        changeContinueButtonToEnabled();
                         hideKeyboard();
                     }
                     break;
@@ -255,6 +280,10 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
 
     private void changePinBoxBackgroundToFull(View nextPinBox) {
         nextPinBox.setBackground(getActivity().getResources().getDrawable(R.drawable.blue_circle));
+    }
+
+    private void changePinBoxBackgroundToDefault(View nextPinBox) {
+        nextPinBox.setBackground(getActivity().getResources().getDrawable(R.drawable.circle));
     }
 
     private void requestFocusOnNextView(final View nextPinBox) {
@@ -344,4 +373,5 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
             clearInputValues();
         }
     }
+
 }

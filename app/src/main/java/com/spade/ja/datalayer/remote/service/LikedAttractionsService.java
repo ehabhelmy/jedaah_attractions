@@ -1,6 +1,5 @@
 package com.spade.ja.datalayer.remote.service;
 
-import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 
 import retrofit2.Call;
@@ -13,6 +12,6 @@ import retrofit2.http.Path;
  */
 
 public interface LikedAttractionsService {
-    @GET("{lang}/venues/liked/list")
+    @GET("{lang}/attractions/liked/list")
     Call<VenuesResponse> getLikedAttractions(@Path("lang") String lang, @Header("Authorization") String token);
 }

@@ -13,6 +13,6 @@ import retrofit2.http.Path;
 
 public interface CancelEventService {
     @GET("{lang}/events/order/cancel/{id}")
-    Call<ContactUsResponse> contactUs(@Path("lang") String lang, @Header("Authorization") String token, @Path("id") int id);
+    Call<ContactUsResponse> cancelEvent(@Path("lang") String lang, @Header("Authorization") String token, @Path("id") int id);
 
 }

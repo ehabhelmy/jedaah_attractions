@@ -1,5 +1,7 @@
 package com.spade.ja.usecase.registeration;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.response.login.Data;
 import com.spade.ja.datalayer.pojo.response.login.LoginResponse;
@@ -90,7 +92,7 @@ public class Registeration implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError("No Data Connection");
+                callback.onError(JaApplication.context.getString(R.string.connection));
             }
         };
 

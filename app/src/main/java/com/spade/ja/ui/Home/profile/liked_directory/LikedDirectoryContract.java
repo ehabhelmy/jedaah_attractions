@@ -21,6 +21,9 @@ public class LikedDirectoryContract {
     }
 
     interface Presenter extends Unsubscribable {
-        void like(int id);
+        void likeAttraction(int id);
+        void likeVenues(int id);
+        void showAttractionInner(int id);
+        void showVenuesInner(int id);
     }
 }

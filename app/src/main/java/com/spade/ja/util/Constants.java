@@ -17,9 +17,9 @@ public class Constants {
     public static final String NO_TOKEN = "no token";
     public static final int EVENT_INNER = 3;
     public static final String VENUE_ID = "venueID";
-    public static final String USER_NAME = "jeddah";
-    public static final String PASSWORD = "123123";
-    public static final String SENDER = "hamada";
+    public static final String USER_NAME = "jedattractions";
+    public static final String PASSWORD = "Sa123456";
+    public static final String SENDER = "JAApp-AD";
     public static final String PROFILE_DATA = "userData";
     public static final java.lang.String ATTRACTION_ID = "attractionId";
     public static final String CALENDAR_PAYMENT = "calendarPayment";

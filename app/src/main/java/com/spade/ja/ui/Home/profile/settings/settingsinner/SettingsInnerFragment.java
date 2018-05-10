@@ -69,10 +69,10 @@ public class SettingsInnerFragment extends BaseFragment implements SettingsInner
     @OnClick(R.id.logout)
     void logout() {
         new AlertDialog.Builder(this.getActivity())
-                .setTitle("Log Out")
-                .setMessage("Are you sure you want to logout ?")
-                .setPositiveButton("Yes", (dialog, which) -> presenter.logOut())
-                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .setTitle(getString(R.string.logout))
+                .setMessage(getString(R.string.logout_confirm))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> presenter.logOut())
+                .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss())
                 .show();
     }
 

@@ -158,8 +158,8 @@ public class AttractionPaymentFragment extends BaseFragment implements Attractio
                 || TextUtils.isEmpty(paymentType)){
 
             new AlertDialog.Builder(getActivity())
-                    .setTitle("Failure")
-                    .setMessage("you must enter all the data to proceed")
+                    .setTitle(getString(R.string.failure))
+                    .setMessage(getString(R.string.fill_data))
                     .setPositiveButton("Ok", (dialogInterface, i) -> {
                         dialogInterface.dismiss();
                     })

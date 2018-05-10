@@ -107,10 +107,10 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     @OnClick(R.id.share)
     void saveProfilePhoto(){
         new AlertDialog.Builder(this.getContext())
-                .setTitle("Take Screen shot")
-                .setMessage("Save your ID card ?")
-                .setPositiveButton("OK", (dialog, which) -> saveUserCard(getBitmapFromView(profileCard)))
-                .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
+                .setTitle(getString(R.string.take_screen_shot))
+                .setMessage(getString(R.string.id_card))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> saveUserCard(getBitmapFromView(profileCard)))
+                .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss())
                 .show();
     }
     @OnClick(R.id.settings)
@@ -120,10 +120,10 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
 
     private void logout() {
         new AlertDialog.Builder(this.getContext())
-                .setTitle("Log Out")
-                .setMessage("Are you sure you want to logout ?")
-                .setPositiveButton("Yes", (dialog, which) -> presenter.logOut())
-                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .setTitle(getString(R.string.logout))
+                .setMessage(getString(R.string.logout_confirm))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> presenter.logOut())
+                .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss())
                 .show();
     }
 

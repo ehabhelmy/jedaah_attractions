@@ -3,14 +3,9 @@ package com.spade.ja.datalayer.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
 import com.spade.ja.JaApplication;
 import com.spade.ja.datalayer.pojo.BaseModel;
-import com.spade.ja.datalayer.pojo.response.category.Category;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 /**
  * Created by ehab on 12/2/17.
@@ -65,17 +60,15 @@ public class SharedPref<T extends BaseModel> {
         editor.apply();
     }
 
-    public List<Category> getCategoryList(String key) {
-        String s = preferences.getString(key, null);
-        Type typeOfObjectsList = new TypeToken<List<Category>>() {
-        }.getType();
-        List<Category> categoriesList = new Gson().fromJson(s, typeOfObjectsList);
-        return categoriesList;
-    }
-
     public void clearToken(){
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(TOKEN);
+        editor.apply();
+    }
+
+    public void clearProfile(){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(PROFILE);
         editor.apply();
     }
 

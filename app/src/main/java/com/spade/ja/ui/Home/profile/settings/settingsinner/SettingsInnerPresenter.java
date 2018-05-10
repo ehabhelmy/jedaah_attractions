@@ -25,7 +25,7 @@ public class SettingsInnerPresenter extends BasePresenter<SettingsInnerContract.
 
     @Override
     public void openAboutScreen() {
-        //TODO
+        jaNavigationManager.openAboutScreen();
     }
 
     @Override

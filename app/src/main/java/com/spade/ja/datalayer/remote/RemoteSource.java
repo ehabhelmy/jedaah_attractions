@@ -1,13 +1,17 @@
 package com.spade.ja.datalayer.remote;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
 import com.spade.ja.datalayer.pojo.response.DataResponse;
+import com.spade.ja.datalayer.pojo.response.about.AboutUsResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.attractionhistory.AttractionOrderHistoryResponse;
 import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerResponse;
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
+import com.spade.ja.datalayer.pojo.response.code.ResetCodeResponse;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
@@ -22,7 +26,6 @@ import com.spade.ja.datalayer.pojo.response.sms.SMSResponse;
 import com.spade.ja.datalayer.pojo.response.subscribe.SubscribeResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.datalayer.pojo.response.venuesinner.VenuesInnerResponse;
-import com.google.android.gms.maps.model.LatLng;
 import com.spade.ja.datalayer.pojo.response.viewtickets.ViewTicketResponse;
 
 import java.io.File;
@@ -103,16 +106,32 @@ public interface RemoteSource {
 
     Single<HistoryEvents> getPastEvents(String token);
 
+    Single<AttractionOrderHistoryResponse> getUpcomingAttractions(String token);
+
+    Single<AttractionOrderHistoryResponse> getPastAttractions(String token);
+
     Single<SMSResponse> sendSMS(String phone);
 
     Single<FilterEventsResponse> filterEvents(boolean weeklySuggest, List<Integer> categoryId, int date, Double lat, Double lng );
 
     Single<FilterVenuesResponse> filterVenues(boolean weeklySuggest, List<Integer> categoryId, Double lat, Double lng);
 
+    Single<FilterVenuesResponse> filterAttracions(boolean weeklySuggest, List<Integer> categoryId , Double lat, Double lng);
+
     Single<AllNearByResponse> search(String searchWord,List<String> types , List<Integer> categoryId);
 
     Single<ContactUsResponse> contactUs(String subject,String message , String token);
 
     Single<AttractionOrderResponse> orderAttraction(AttractionOrderRequest attractionOrderRequest, String token);
+
+    Single<ResetCodeResponse> getCode(String email);
+
+    Single<ContactUsResponse> resetPassword(String password,String code);
+
+    Single<AboutUsResponse> about();
+
+    Single<ContactUsResponse> cancelAttraction(int id,String token);
+
+    Single<ContactUsResponse> cancelEvent(int id,String token);
 
 }

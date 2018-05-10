@@ -50,12 +50,7 @@ public class SignInPresenter extends BasePresenter<SignInContract.View> implemen
 
     @Override
     public void getResetPasswordCode() {
-
-    }
-
-    @Override
-    public void resetPassword(String newPassword) {
-
+        jaNavigationManager.goToResetCode();
     }
 
     @Override

@@ -83,6 +83,7 @@
     <string name="thankyou">THANK YOU</string>
     <string name="paymentDone">Payment done successfully. Thank you for booking through Jeddah Attractions</string>
     <string name="bookMore">BOOK MORE FOR SAME EVENT</string>
+    <string name="bookMoreAttractions">BOOK MORE FOR SAME ATTRACTION</string>
     <string name="sponspored">SPONSORED</string>
     <string name="topSpots">TOP SPOTS IN JEDDAH</string>
     <string name="nearbyVenues">NEAR BY VENUES</string>
@@ -118,6 +119,7 @@
     <string name="categories">CATEGORIES</string>
     <string name="filterEvents">FILTER EVENTS</string>
     <string name="filterVenues">FILTER VENUES</string>
+    <string name="filterAttraction">FILTER ATTRACTIONS</string>
     <string name="attractionsForu">ATTRACTIONS FOR YOU</string>
     <string name="nearByAttractions">NEAR BY ATTRACTIONS</string>
     <string name="settings">Settings</string>
@@ -147,4 +149,31 @@
     <string name="allAttractions">ATTRACTIONS FOR YOU</string>
     <string name="allAttactionsJeddah">ALL ATTRACTIONS IN JEDDAH</string>
     <string name="logout">Log out</string>
+    <string name="aboutDescription">asdasjkdhajsdhjashdjkashdjakshdjkashdjkashdjkashdjkashdjkashdjkashkdja asdhajskdhasjkdhasjkdhajksdhasjkdh asldjaskldjaskldjaskl askdjaklsdjaskl askdjalskdjalk askdjaskldja askdjaklsdjklasjdklasjdlkasjdlkajsdkljaskldjaklsdjkalsjdkasjdklasjdklajsdklajsldkjaskldajl \\n asdaklsdjkasjdklasdjkasdjaksdja \\n asdklaskdlasklda</string>
+    <string name="reset">Reset Password</string>
+    <string name="code">GET CODE</string>
+    <string name="succes">Success</string>
+    <string name="login">Login now</string>
+    <string name="data_required">Data required</string>
+    <string name="fill_data">You need to fill all data</string>
+    <string name="connection">No data connection</string>
+    <string name="profile_image">You can\'t set your profile image</string>
+    <string name="failure">Failure</string>
+    <string name="ok">Ok</string>
+    <string name="login_required">Login required</string>
+    <string name="login_feature">You need to login to use this feature</string>
+    <string name="event_date_required">you must select a date for the event</string>
+    <string name="event_ticket_required">you must select a ticket for the event</string>
+    <string name="enable_location">please enable location</string>
+    <string name="logout_confirm">Are you sure you want to log out?</string>
+    <string name="take_screen_shot">Take screen shot</string>
+    <string name="id_card">Save your id card?</string>
+    <string name="password_confirmation"></string>
+    <string name="NOADDONS">No AddOns</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>

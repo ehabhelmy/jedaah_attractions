@@ -111,8 +111,8 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
     }
 
     @OnClick(R.id.forgetPassword)
-    void forgetPassword(){
-
+    void resetPassword(){
+        presenter.getResetPasswordCode();
     }
 
     @OnClick(R.id.join)

@@ -27,6 +27,15 @@ import butterknife.ButterKnife;
 public class VenueImagesAdapter extends RecyclerView.Adapter<VenueImagesAdapter.VenueImagesViewHolder>{
 
     private ArrayList<String> imageURLS;
+    private onPhotoClick onPhotoClick;
+
+    public void setOnPhotoClick(VenueImagesAdapter.onPhotoClick onPhotoClick) {
+        this.onPhotoClick = onPhotoClick;
+    }
+
+    public interface onPhotoClick {
+        void onPhotoClicked(String imageUrl);
+    }
 
     @Override
     public VenueImagesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,6 +49,12 @@ public class VenueImagesAdapter extends RecyclerView.Adapter<VenueImagesAdapter.
             @Override
             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                 holder.getImageLayout().setBackground(resource);
+            }
+        });
+        holder.getImageLayout().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onPhotoClick.onPhotoClicked(imageURLS.get(position));
             }
         });
     }

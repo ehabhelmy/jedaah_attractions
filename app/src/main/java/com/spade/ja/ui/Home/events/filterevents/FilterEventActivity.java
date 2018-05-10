@@ -149,9 +149,9 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
     @Override
     public void showError(String message) {
         new AlertDialog.Builder(this)
-                .setTitle("Events")
+                .setTitle(getString(R.string.events))
                 .setMessage(message)
-                .setPositiveButton("Ok", (dialogInterface, i) -> {
+                .setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                 })
                 .show();

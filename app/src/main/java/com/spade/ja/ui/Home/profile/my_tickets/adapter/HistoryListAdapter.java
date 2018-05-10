@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseRecyclerViewAdapter;
 import com.spade.ja.ui.Base.BaseViewHolder;
-import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 import com.spade.ja.ui.Home.profile.my_tickets.pojo.HistoryEventsUi;
 import com.spade.ja.ui.Home.profile.my_tickets.viewholder.HistoryViewHolder;
 
@@ -17,20 +16,32 @@ import com.spade.ja.ui.Home.profile.my_tickets.viewholder.HistoryViewHolder;
 
 public class HistoryListAdapter extends BaseRecyclerViewAdapter<HistoryEventsUi>{
 
-    private TicketListener ticketListener;
-    private String type;
+    private HistoryListener ticketListener;
 
-    public enum HistoryType {
-        UPCOMING,PAST
+    public interface HistoryListener {
+        void onUpcomingCancelClick(String type,int id);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (type.equals(HistoryType.UPCOMING.name())) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_card_view, parent, false);
+        if (data.get(viewType).isUpOrPast()){
+            if (data.get(viewType).getType().equals("event")){
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_card_view, parent, false);
+            }else {
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_card_view_attraction, parent, false);
+            }
         }else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_card_view_past, parent, false);
+            if (data.get(viewType).getType().equals("event")){
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_card_view_past, parent, false);
+            }else {
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_card_view_past_attraction, parent, false);
+            }
         }
         return new HistoryViewHolder(view);
     }
@@ -38,25 +49,14 @@ public class HistoryListAdapter extends BaseRecyclerViewAdapter<HistoryEventsUi>
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         if (data != null){
-            holder.bind(data.get(position),position,ticketListener);
+            HistoryViewHolder historyViewHolder = (HistoryViewHolder) holder;
+            historyViewHolder.bind(data.get(position),position,ticketListener);
         }else{
             //TODO : throw Exception
         }
     }
 
-    public TicketListener getTicketListener() {
-        return ticketListener;
-    }
-
-    public void setTicketListener(TicketListener ticketListener) {
+    public void setTicketListener(HistoryListener ticketListener) {
         this.ticketListener = ticketListener;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

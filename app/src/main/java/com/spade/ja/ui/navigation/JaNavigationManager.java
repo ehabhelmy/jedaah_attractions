@@ -65,6 +65,26 @@ public abstract class JaNavigationManager {
 
     public static final String CALENDAR = "calendar";
 
+    public static final String RESETCODE = "resetCode";
+
+    public static final String COMEFROM = "comeFrom";
+
+    public static final String ATTRACTION_PAYMENT = "attraction_payment";
+
+    public static final String ATTRACTION_ORDER = "attractionOrder";
+
+    public static final String SEARCH = "search";
+
+    public static final String ABOUT = "asdas";
+
+    public static final String FULLPHOTO = "photo";
+
+    public static final String CODE = "code" ;
+
+    public static final String RESET = "reset" ;
+
+    public static final String VERFICATION = "verfication";
+
     public static final int LOCATION_SETTINGS = 2;
 
     public static final int EVENT_INNER = 3;
@@ -161,6 +181,24 @@ public abstract class JaNavigationManager {
 
     public abstract void restartApp();
 
+    public abstract void showEventInnerAsNew(int id);
+
+    public abstract void showVenueInnerAsNew(int id);
+
+    public abstract void showAttractionInnerAsNew(int id);
+
+    public abstract void openAboutScreen();
+
+    public abstract void showFullScreenPhoto(String imageUrl, String title);
+
+    public abstract void goToResetCode();
+
+    public abstract void goToResetPassword(String forgetCode);
+
+    public abstract void showPhoneVerfication(EventOrder eventOrder);
+
+    public abstract void showPhoneVerficationAttraction(AttractionOrder attractionOrder);
+
     protected void replaceFragment(BaseFragment fragment, boolean addToBackStack, String tag, int frame){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (addToBackStack){
@@ -195,6 +233,9 @@ public abstract class JaNavigationManager {
     public  <F extends BaseFragment> F getCurrentFragmentOnInner(){
         return (F) fragmentManager.findFragmentById(R.id.frame_layout_inner);
     }
+    public  <F extends BaseFragment> F getCurrentFragmentOnInnerAttraction(){
+        return (F) fragmentManager.findFragmentById(R.id.frame_layout_inner_attraction);
+    }
 
     public BaseActivity getCurrentActivity() {
         return currentActivity.get();
@@ -204,9 +245,4 @@ public abstract class JaNavigationManager {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
 
-    public abstract void showEventInnerAsNew(int id);
-
-    public abstract void showVenueInnerAsNew(int id);
-
-    public abstract void showAttractionInnerAsNew(int id);
 }

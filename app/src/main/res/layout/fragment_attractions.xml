@@ -73,6 +73,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/directory_ic" />
+        app:srcCompat="@drawable/filter_bg" />
 
 </android.support.design.widget.CoordinatorLayout>

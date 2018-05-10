@@ -8,10 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
@@ -20,7 +17,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,7 +31,6 @@ import com.spade.ja.ui.Base.BaseActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -160,7 +155,7 @@ public class EditActivity extends BaseActivity implements EditContract.View {
 
     private void showErrorYouCantUploadImage() {
         new AlertDialog.Builder(this)
-                .setMessage("You can't update your profile image")
+                .setMessage(getString(R.string.profile_image))
                 .show();
     }
 
@@ -212,24 +207,25 @@ public class EditActivity extends BaseActivity implements EditContract.View {
     }
 
     @OnClick(R.id.update)
-    void update() {
+    void updateProfile() {
         hideKeyboard();
         if (!newPassword.getText().toString().trim().equals(confirmPassword.getText().toString().trim())){
             new AlertDialog.Builder(this)
-                    .setTitle("Validation Error")
-                    .setMessage("the two passwords doesn't match")
-                    .setPositiveButton("Ok",(dialogInterface, i) -> {
+                    .setTitle(getString(R.string.failure))
+                    .setMessage(getString(R.string.password_confirmation))
+                    .setPositiveButton(getString(R.string.ok),(dialogInterface, i) -> {
                         newPassword.setText("");
                         confirmPassword.setText("");
                         dialogInterface.dismiss();
                     }).show();
-        }
-        if (female.isChecked()) {
-            presenter.edit(userName.getText().toString().trim(), email.getText().toString().trim(), dob.getText()
-                    .toString().trim(), "female", newPassword.getText().toString().trim(), mobileNumber.getText().toString().trim(), uri);
         }else {
-            presenter.edit(userName.getText().toString().trim(), email.getText().toString().trim(), dob.getText()
-                    .toString().trim(), "male", newPassword.getText().toString().trim(), mobileNumber.getText().toString().trim(), uri);
+            if (female.isChecked()) {
+                presenter.edit(userName.getText().toString().trim(), email.getText().toString().trim(), dob.getText()
+                        .toString().trim(), "female", newPassword.getText().toString().trim(), mobileNumber.getText().toString().trim(), uri);
+            } else {
+                presenter.edit(userName.getText().toString().trim(), email.getText().toString().trim(), dob.getText()
+                        .toString().trim(), "male", newPassword.getText().toString().trim(), mobileNumber.getText().toString().trim(), uri);
+            }
         }
     }
 

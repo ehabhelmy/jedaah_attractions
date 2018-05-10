@@ -51,6 +51,6 @@ public class AttractionPaymentPresenter extends BasePresenter<AttractionPaymentC
 
     @Override
     public void showOrderView(AttractionOrder attractionOrder) {
-        jaNavigationManager.showAttractionOrderView(attractionOrder);
+        jaNavigationManager.showPhoneVerficationAttraction(attractionOrder);
     }
 }

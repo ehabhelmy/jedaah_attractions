@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.navigation.JaPortraitNavigationManager;
 
 import javax.inject.Inject;
 
@@ -31,6 +32,9 @@ public class EventOrderSuccessFragment extends BaseFragment implements EventOrde
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (getArguments() != null && getArguments().getBoolean(JaPortraitNavigationManager.ATTRACTION_ORDER)){
+            bookMore.setText(R.string.bookMoreAttractions);
+        }
         bookMore.setPaintFlags(bookMore.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
@@ -50,6 +54,8 @@ public class EventOrderSuccessFragment extends BaseFragment implements EventOrde
         super.presenter = presenter;
         presenter.setView(this);
     }
+
+
 
 
 

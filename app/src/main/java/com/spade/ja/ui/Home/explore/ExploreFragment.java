@@ -173,13 +173,9 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     private void showDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder
-                .setMessage(" please enable location ")
+                .setMessage(getString(R.string.enable_location))
                 .setCancelable(false)
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                .setNegativeButton(getString(R.string.ok), (dialog, id) -> dialog.cancel());
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }

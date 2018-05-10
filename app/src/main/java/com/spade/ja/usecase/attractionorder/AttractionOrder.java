@@ -2,6 +2,8 @@ package com.spade.ja.usecase.attractionorder;
 
 import android.accounts.NetworkErrorException;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
@@ -45,7 +47,7 @@ public class AttractionOrder implements Unsubscribable {
             @Override
             public void onError(Throwable e) {
                 if (e instanceof NetworkErrorException) {
-                    callback.onError("No data Connection");
+                    callback.onError(JaApplication.context.getString(R.string.connection));
                 }else {
                     callback.onError(e.getMessage());
                 }

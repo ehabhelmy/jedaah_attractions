@@ -49,6 +49,6 @@ public class EventPaymentPresenter extends BasePresenter<EventPaymentContract.Vi
 
     @Override
     public void showOrderView(EventOrder eventOrder) {
-        jaNavigationManager.showOrderView(eventOrder);
+        jaNavigationManager.showPhoneVerfication(eventOrder);
     }
 }

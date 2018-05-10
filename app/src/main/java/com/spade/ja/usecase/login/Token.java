@@ -23,5 +23,6 @@ public class Token {
 
     public void clearToken() {
         dataRepository.clearToken();
+        dataRepository.clearProfile();
     }
 }

@@ -27,17 +27,22 @@ import com.spade.ja.ui.Home.eventsinner.eventcheckout.EventOrderFragment;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
 import com.spade.ja.ui.Home.eventsinner.eventdetails.EventInnerFragment;
 import com.spade.ja.ui.Home.eventsinner.eventordersuccess.EventOrderSuccessFragment;
+import com.spade.ja.ui.Home.eventsinner.eventphoneverification.EventPhoneVerificationFragment;
 import com.spade.ja.ui.Home.explore.ExploreFragment;
 import com.spade.ja.ui.Home.map.MapActivity;
 import com.spade.ja.ui.Home.profile.ProfileFragment;
 import com.spade.ja.ui.Home.profile.edit.EditActivity;
 import com.spade.ja.ui.Home.profile.settings.SettingsActivity;
+import com.spade.ja.ui.Home.profile.settings.about.AboutFragment;
 import com.spade.ja.ui.Home.profile.settings.contactus.ContactUsFragment;
 import com.spade.ja.ui.Home.profile.settings.settingsinner.SettingsInnerFragment;
 import com.spade.ja.ui.Home.search.SearchFragment;
 import com.spade.ja.ui.Home.venueinner.VenueInnerActivity;
 import com.spade.ja.ui.Home.venueinner.venuedetails.VenueDetailsFragment;
+import com.spade.ja.ui.Home.venueinner.venuedetails.fullscreenphoto.FullScreenPhotoFragment;
 import com.spade.ja.ui.authentication.AuthenticationActivity;
+import com.spade.ja.ui.authentication.foretpassword.code.GetCodeFragment;
+import com.spade.ja.ui.authentication.foretpassword.resetpassword.ResetPasswordFragment;
 import com.spade.ja.ui.authentication.login.SignInFragment;
 import com.spade.ja.ui.authentication.registeration.RegisterationFragment;
 import com.spade.ja.ui.authentication.socialmedia.SocialMediaFragment;
@@ -50,10 +55,6 @@ import com.spade.ja.util.Constants;
 
 public class JaPortraitNavigationManager extends JaNavigationManager {
 
-
-    private static final String ATTRACTION_PAYMENT = "attraction_payment";
-    private static final String ATTRACTION_ORDER = "attractionOrder";
-    private static final String SEARCH = "search";
 
     @Override
     public void showExploreScreen() {
@@ -279,6 +280,9 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         EventOrderSuccessFragment eventOrderSuccessFragment = (EventOrderSuccessFragment) fragmentManager.findFragmentByTag(ORDER_SUCCESS);
         if (eventOrderSuccessFragment == null) {
             eventOrderSuccessFragment = new EventOrderSuccessFragment();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(ATTRACTION_ORDER,true);
+            eventOrderSuccessFragment.setArguments(bundle);
         }
         replaceFragment(eventOrderSuccessFragment,true,ORDER_SUCCESS,R.id.frame_layout_inner_attraction);
     }
@@ -410,5 +414,65 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         intent.putExtras(bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void openAboutScreen() {
+        AboutFragment fragment = (AboutFragment) fragmentManager.findFragmentByTag(ABOUT);
+        if (fragment == null) {
+            fragment = new AboutFragment();
+        }
+        replaceFragment(fragment,true,ABOUT,R.id.frame_layout_settings);
+    }
+
+    @Override
+    public void showFullScreenPhoto(String imageUrl, String title) {
+        FullScreenPhotoFragment fragment = FullScreenPhotoFragment.newInstance(imageUrl, title);
+        fragment.show(getCurrentActivity().getFragmentManager(),FULLPHOTO);
+    }
+
+    @Override
+    public void goToResetCode() {
+        GetCodeFragment getCodeFragment = (GetCodeFragment) fragmentManager.findFragmentByTag(CODE);
+        if (getCodeFragment == null) {
+            getCodeFragment = new GetCodeFragment();
+        }
+        replaceFragment(getCodeFragment,true,CODE,R.id.frame_layout_auth);
+    }
+
+    @Override
+    public void goToResetPassword(String forgetCode) {
+        ResetPasswordFragment resetPasswordFragment = (ResetPasswordFragment) fragmentManager.findFragmentByTag(RESET);
+        if (resetPasswordFragment == null) {
+            Bundle bundle = new Bundle();
+            bundle.putString(RESETCODE,forgetCode);
+            resetPasswordFragment = new ResetPasswordFragment();
+            resetPasswordFragment.setArguments(bundle);
+        }
+        replaceFragment(resetPasswordFragment,true,CODE,R.id.frame_layout_auth);
+    }
+
+    @Override
+    public void showPhoneVerfication(EventOrder eventOrder) {
+        EventPhoneVerificationFragment eventPhoneVerificationFragment = (EventPhoneVerificationFragment) fragmentManager.findFragmentByTag(VERFICATION);
+        if (eventPhoneVerificationFragment == null) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.EVENT_ORDER,eventOrder);
+            eventPhoneVerificationFragment = new EventPhoneVerificationFragment();
+            eventPhoneVerificationFragment.setArguments(bundle);
+        }
+        replaceFragment(eventPhoneVerificationFragment,true,VERFICATION,R.id.frame_layout_inner);
+    }
+
+    @Override
+    public void showPhoneVerficationAttraction(AttractionOrder attractionOrder) {
+        EventPhoneVerificationFragment eventPhoneVerificationFragment = (EventPhoneVerificationFragment) fragmentManager.findFragmentByTag(VERFICATION);
+        if (eventPhoneVerificationFragment == null) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.ATTRACTION_ORDER,attractionOrder);
+            eventPhoneVerificationFragment = new EventPhoneVerificationFragment();
+            eventPhoneVerificationFragment.setArguments(bundle);
+        }
+        replaceFragment(eventPhoneVerificationFragment,true,VERFICATION,R.id.frame_layout_inner_attraction);
     }
 }

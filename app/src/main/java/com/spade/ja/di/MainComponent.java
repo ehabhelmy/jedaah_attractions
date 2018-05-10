@@ -31,12 +31,15 @@ import com.spade.ja.ui.Home.profile.liked_directory.LikedDirectoryFragment;
 import com.spade.ja.ui.Home.profile.liked_events.LikedEventsFragment;
 import com.spade.ja.ui.Home.profile.my_tickets.TicketsFragment;
 import com.spade.ja.ui.Home.profile.settings.SettingsActivity;
+import com.spade.ja.ui.Home.profile.settings.about.AboutFragment;
 import com.spade.ja.ui.Home.profile.settings.contactus.ContactUsFragment;
 import com.spade.ja.ui.Home.profile.settings.settingsinner.SettingsInnerFragment;
 import com.spade.ja.ui.Home.search.SearchFragment;
 import com.spade.ja.ui.Home.venueinner.VenueInnerActivity;
 import com.spade.ja.ui.Home.venueinner.venuedetails.VenueDetailsFragment;
 import com.spade.ja.ui.authentication.AuthenticationActivity;
+import com.spade.ja.ui.authentication.foretpassword.code.GetCodeFragment;
+import com.spade.ja.ui.authentication.foretpassword.resetpassword.ResetPasswordFragment;
 import com.spade.ja.ui.authentication.login.SignInFragment;
 import com.spade.ja.ui.authentication.registeration.RegisterationFragment;
 import com.spade.ja.ui.authentication.socialmedia.SocialMediaFragment;
@@ -137,5 +140,9 @@ public interface MainComponent {
 
     void inject(SearchFragment searchFragment);
 
-}
+    void inject(GetCodeFragment getCodeFragment);
 
+    void inject(ResetPasswordFragment resetPasswordFragment);
+
+    void inject(AboutFragment aboutFragment);
+}

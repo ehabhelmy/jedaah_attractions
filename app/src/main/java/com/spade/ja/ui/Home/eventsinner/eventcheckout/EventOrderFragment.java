@@ -38,7 +38,7 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     @Inject
     EventOrderPresenter presenter;
 
-    private int counter = 1;
+    private int counter = 0;
     private int price;
     private String numberOfTickets;
     private int ticketId;
@@ -125,26 +125,34 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     }
 
     @OnClick(R.id.cancel)
-    void cancelOrder(){
+    void cancelOrder() {
         getActivity().finish();
     }
 
     @OnClick(R.id.change)
-    void changeOrder(){
+    void changeOrder() {
         presenter.showPayment();
     }
 
     @OnClick(R.id.done)
-    void order(){
+    void order() {
         if (dateId == 0) {
             new AlertDialog.Builder(getActivity())
-                    .setTitle("Order Failure")
-                    .setMessage("you must select a date for the event")
-                    .setPositiveButton("Ok", (dialogInterface, i) -> {
+                    .setTitle(getString(R.string.failure))
+                    .setMessage(getString(R.string.event_date_required))
+                    .setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
                         dialogInterface.dismiss();
                     })
                     .show();
-        }else {
+        } else if (counter == 0) {
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(getString(R.string.failure))
+                    .setMessage(getString(R.string.event_ticket_required))
+                    .setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                    })
+                    .show();
+        } else {
             if (national) {
                 presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), quantity.getText().toString().trim(), payment, eventId, ticketId + "", dateId + "", nationalIdTextView.getText().toString().trim(), totalPrice.getText().toString().replace("SAR", "").trim());
             } else {
@@ -154,24 +162,24 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     }
 
     @OnClick(R.id.imagePlus)
-    void incrementQuantity(){
+    void incrementQuantity() {
         counter++;
-        quantity.setText(counter+"");
+        quantity.setText(counter + "");
         setPriceTotal();
     }
 
     @OnClick(R.id.imageMinus)
-    void decrementQuantity(){
-        if (!(counter == 1)) {
+    void decrementQuantity() {
+        if (counter != 0) {
             counter--;
         }
-        quantity.setText(counter+"");
+        quantity.setText(counter + "");
         setPriceTotal();
     }
 
     private void setPriceTotal() {
-        ticketsNumberTextView.setText(counter+" ticket");
-        totalPrice.setText(counter*price+" SAR");
+        ticketsNumberTextView.setText(counter + " ticket");
+        totalPrice.setText(counter * price + " SAR");
     }
 
     @Override
@@ -185,27 +193,27 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
         nameTextView.setText(eventOrder.getName());
         emailTextView.setText(eventOrder.getEmail());
         mobileTextView.setText(eventOrder.getMobile());
-        eventId = eventOrder.getEventId()+"";
+        eventId = eventOrder.getEventId() + "";
         if (eventOrder.getNational() == null) {
             national = false;
             nationalIdTextView.setVisibility(View.GONE);
-        }else {
+        } else {
             national = true;
             nationalIdTextView.setText(eventOrder.getNational());
         }
         payment = eventOrder.getPaymentMethod();
-        switch (payment){
-            case "cash_on_delivery" :
+        switch (payment) {
+            case "cash_on_delivery":
                 paymentMethod.setText("Cash On Delivery");
                 break;
-            case "credit_card" :
+            case "credit_card":
                 paymentMethod.setText("Credit Card");
                 break;
-            case "pay_later" :
+            case "pay_later":
                 paymentMethod.setText("Pay Later");
                 break;
         }
-        numTickets.setText("Only "+eventOrder.getTickets()+" tickets are available");
+        numTickets.setText("Only " + eventOrder.getTickets() + " tickets are available");
         totalPrice.setText("");
         tickets = eventOrder.getEventtickets();
         eventTicketsAdapter = new EventTicketsAdapter();
@@ -213,20 +221,20 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
         eventTicketsAdapter.setTicketListener(new TicketListener() {
             @Override
             public void onTicketChecked(int position) {
-                for (int i = 0 ; i < tickets.size() ; i++) {
+                for (int i = 0; i < tickets.size(); i++) {
                     if (i == position) {
                         price = Integer.parseInt(tickets.get(position).getPrice());
-                        numTickets.setText("Only "+tickets.get(position).getNumberOfTickets()+" tickets are available");
+                        numTickets.setText("Only " + tickets.get(position).getNumberOfTickets() + " tickets are available");
                         ticketId = tickets.get(position).getId();
                         setPriceTotal();
-                    }else {
+                    } else {
                         TicketViewHolder ticketViewHolder = (TicketViewHolder) ticketsList.findViewHolderForAdapterPosition(i);
                         ticketViewHolder.uncheck();
                     }
                 }
             }
         });
-        ticketsList.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false));
+        ticketsList.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
         ticketsList.addItemDecoration(dividerItemDecoration);
@@ -236,20 +244,20 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
         adapter.setDays(eventOrder.getEventDateDays());
         daysGridView.setAdapter(adapter);
         daysGridView.setOnItemClickListener((parent, view, position, id) -> {
-            for (int i = 0 ; i < daysGridView.getChildCount() ; i++) {
+            for (int i = 0; i < daysGridView.getChildCount(); i++) {
                 if (i == position) {
                     if (isChoosed) {
                         view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.rounded_rectangle_black));
                         dateId = days.get(position).getId();
                         isChoosed = false;
-                    }else {
+                    } else {
                         view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.rounded_rectangle_grey));
                         dateId = 0;
                         isChoosed = true;
                     }
-                }else {
+                } else {
                     View view1 = daysGridView.getChildAt(i);
-                    view1.setBackground(ContextCompat.getDrawable(view.getContext(),R.drawable.rounded_rectangle_grey));
+                    view1.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.rounded_rectangle_grey));
                 }
             }
         });

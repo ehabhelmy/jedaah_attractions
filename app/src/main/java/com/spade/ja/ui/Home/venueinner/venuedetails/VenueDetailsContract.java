@@ -18,5 +18,6 @@ public class VenueDetailsContract {
     interface Presenter extends Unsubscribable {
         void openNavigationView(double lat,double lng);
         void like();
+        void showFullScreenPhoto(String imageUrl,String title);
     }
 }

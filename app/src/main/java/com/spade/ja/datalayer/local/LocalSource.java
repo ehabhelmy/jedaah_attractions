@@ -100,4 +100,6 @@ public interface LocalSource {
     Single<ProfileResponse> getProfile();
 
     void saveProfile(ProfileResponse profileResponse);
+
+    void clearProfile();
 }

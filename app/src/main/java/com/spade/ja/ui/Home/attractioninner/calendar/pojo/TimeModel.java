@@ -15,12 +15,14 @@ public class TimeModel extends BaseModel implements Parcelable{
     private String date;
     private String startTime;
     private String endTime;
+    private String type;
 
-    public TimeModel(int id,String date, String startTime, String endTime) {
+    public TimeModel(int id,String date, String startTime, String endTime,String type) {
         this.id = id;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.type = type;
     }
 
     protected TimeModel(Parcel in) {
@@ -28,6 +30,7 @@ public class TimeModel extends BaseModel implements Parcelable{
         date = in.readString();
         startTime = in.readString();
         endTime = in.readString();
+        type = in.readString();
     }
 
     public static final Creator<TimeModel> CREATOR = new Creator<TimeModel>() {
@@ -82,6 +85,14 @@ public class TimeModel extends BaseModel implements Parcelable{
         this.endTime = endTime;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -93,5 +104,6 @@ public class TimeModel extends BaseModel implements Parcelable{
         parcel.writeString(date);
         parcel.writeString(startTime);
         parcel.writeString(endTime);
+        parcel.writeString(type);
     }
 }

@@ -134,9 +134,9 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
     @Override
     public void showError(String message) {
         new AlertDialog.Builder(this)
-                .setTitle("Venues")
+                .setTitle(getString(R.string.venues))
                 .setMessage(message)
-                .setPositiveButton("Ok", (dialogInterface, i) -> {
+                .setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                 })
                 .show();

@@ -1,7 +1,8 @@
 package com.spade.ja.usecase.edit;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
-import com.spade.ja.datalayer.pojo.response.login.Data;
 import com.spade.ja.datalayer.pojo.response.login.LoginResponse;
 import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.usecase.Unsubscribable;
@@ -67,7 +68,7 @@ public class Edit implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError("No Data Connection");
+                callback.onError(JaApplication.context.getString(R.string.connection));
             }
         };
 

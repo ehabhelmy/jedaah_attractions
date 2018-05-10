@@ -17,6 +17,7 @@ import com.spade.ja.datalayer.pojo.response.venues.Venue;
 import com.spade.ja.ui.Base.BaseViewHolder;
 import com.spade.ja.ui.Base.listener.RecyclerViewItemListener;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
+import com.spade.ja.ui.Home.profile.liked_directory.adapter.LikedDirectoryListAdapter;
 import com.spade.ja.ui.widget.ImageLayout;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
@@ -92,6 +93,49 @@ public class VenuesViewHolder extends BaseViewHolder<Venue> {
         });
         venueContainer.setOnClickListener(view -> {
             onViewListener.onViewClicked(baseModel.getId());
+        });
+    }
+
+    public void bind(Venue baseModel, LikedDirectoryListAdapter.OnDirectoryAction onDirectoryAction) {
+        if (baseModel.getIsSponsored() != 1) {
+            sponsored.setVisibility(View.GONE);
+        }
+        venuName.setText(baseModel.getTitle());
+        StringBuilder cat = new StringBuilder();
+        for (int i = 0 ; i < baseModel.getCategories().size() ; i++ ) {
+            cat.append(baseModel.getCategories().get(i) != null ? baseModel.getCategories().get(i):"");
+            try {
+                cat.append(" | ");
+                cat.append(baseModel.getSubCategories().get(i));
+            }catch (Exception e){
+                cat.append("");
+            }finally {
+                if (i != baseModel.getCategories().size() - 1) {
+                    cat.append(" , ");
+                }
+            }
+        }
+        cats.setText(cat);
+        Glide.with(venueImage.getContext()).load(baseModel.getImage()).apply(new RequestOptions().placeholder(R.mipmap.myimage).error(R.mipmap.myimage)).into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                venueImage.setBackground(resource);
+            }
+        });
+        favourite.setLiked(baseModel.getIsLiked());
+        favourite.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                onDirectoryAction.onDirectoryLike(baseModel.getId(),baseModel.getType());
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                onDirectoryAction.onDirectoryLike(baseModel.getId(),baseModel.getType());
+            }
+        });
+        venueContainer.setOnClickListener(view -> {
+            onDirectoryAction.onDirectoryClick(baseModel.getId(),baseModel.getType());
         });
     }
 

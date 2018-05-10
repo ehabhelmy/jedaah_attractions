@@ -1,6 +1,5 @@
 package com.spade.ja.ui.Base;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.spade.ja.R;
 import com.spade.ja.ui.Base.listener.BaseView;
 import com.spade.ja.ui.navigation.JaNavigationManager;
 
@@ -92,24 +92,19 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     protected void showPopUp(String message) {
         new AlertDialog.Builder(this.getContext())
                 .setMessage(message)
-                .setTitle("Failure")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+                .setTitle(getString(R.string.failure))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
     protected void showLoginRequiredError() {
         new AlertDialog.Builder(this.getActivity())
-                .setMessage("You need to login to use this feature")
-                .setTitle("Login Required")
-                .setPositiveButton("OK", (dialog, which) -> {
+                .setMessage(getString(R.string.login_feature))
+                .setTitle(getString(R.string.login_required))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
                     jaNavigationManager.goToAuthActivity(null);
                 })
-                .setNegativeButton("Cancel", (dialog, which) -> {
+                .setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
                     dialog.dismiss();
                 })
                 .show();

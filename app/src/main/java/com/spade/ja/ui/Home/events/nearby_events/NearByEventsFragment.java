@@ -108,6 +108,8 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
     @Override
     public void setupNearByEvents(List<Event> events) {
         if (events.size() > 0) {
+            eventsList.setVisibility(View.VISIBLE);
+            noEvents.setVisibility(View.GONE);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
             dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));

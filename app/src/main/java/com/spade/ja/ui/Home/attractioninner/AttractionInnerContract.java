@@ -1,5 +1,6 @@
 package com.spade.ja.ui.Home.attractioninner;
 
+import com.spade.ja.ui.Base.BaseFragment;
 import com.spade.ja.ui.Base.listener.BaseView;
 import com.spade.ja.ui.Base.listener.ErrorView;
 import com.spade.ja.ui.Base.listener.ProgressView;
@@ -16,5 +17,6 @@ public interface AttractionInnerContract {
 
     interface Presenter {
         void goToHomeActivity();
+        BaseFragment getCurrentFragment();
     }
 }

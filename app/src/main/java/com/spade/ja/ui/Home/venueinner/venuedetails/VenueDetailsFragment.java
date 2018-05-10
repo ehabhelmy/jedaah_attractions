@@ -237,6 +237,9 @@ public class VenueDetailsFragment extends BaseFragment implements VenueDetailsCo
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
         venuePhotos.setLayoutManager(layoutManager);
         venuePhotos.addItemDecoration(dividerItemDecoration);
+        venueImagesAdapter.setOnPhotoClick(imageUrl -> {
+            presenter.showFullScreenPhoto(imageUrl,data.getTitle());
+        });
         venuePhotos.setAdapter(venueImagesAdapter);
     }
 

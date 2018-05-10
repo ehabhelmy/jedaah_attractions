@@ -18,10 +18,11 @@ public interface FilterAttractionContract {
     interface View extends BaseView,ErrorView,ProgressView {
         void setupCategories(List<Cats> categories);
         void showResults(List<Data> attractions);
+        void getLatitudeAndLongitude();
     }
 
     interface Presenter extends Unsubscribable {
-        void filterAttractions(boolean weeklySuggest, Integer[] categoryId);
+        void filterAttractions(boolean weeklySuggest, List<Integer> categoryId,Double lat,Double lng);
         void showAttractionInner(int id);
         void like(int id);
     }

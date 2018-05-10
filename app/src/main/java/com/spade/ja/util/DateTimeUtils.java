@@ -138,6 +138,12 @@ public class DateTimeUtils {
         return date;
     }
 
+    public static String getWeekDay(Date date1){
+        String date = new SimpleDateFormat("EEEE").format(date1);
+        return date;
+    }
+
+
 
     public static String getDaysRemaining(Date date){
         Date date1 = new Date();

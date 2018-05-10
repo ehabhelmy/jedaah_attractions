@@ -9,10 +9,9 @@ import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.ui.Home.map.DataConverter;
 import com.spade.ja.usecase.categories.Categories;
-import com.spade.ja.usecase.filter.filtervenues.FilterVenues;
+import com.spade.ja.usecase.filter.filterattractions.FilterAttraction;
 import com.spade.ja.usecase.like.LikeAttractions;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -24,13 +23,14 @@ import javax.inject.Inject;
 public class FilterAttractionPresenter extends BasePresenter<FilterAttractionContract.View> implements FilterAttractionContract.Presenter{
 
     private Categories categories;
-    private FilterVenues filterVenues;
+    private FilterAttraction filterVenues;
     private LikeAttractions like;
 
     @Inject
-    public FilterAttractionPresenter(Categories categories, FilterVenues filterVenues) {
+    public FilterAttractionPresenter(Categories categories, FilterAttraction filterVenues,LikeAttractions like) {
         this.categories = categories;
         this.filterVenues = filterVenues;
+        this.like = like;
     }
 
     private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
@@ -97,9 +97,8 @@ public class FilterAttractionPresenter extends BasePresenter<FilterAttractionCon
     }
 
     @Override
-    public void filterAttractions(boolean weeklySuggest,Integer[] categoryId) {
-        List<Integer> cats = Arrays.asList(categoryId);
-        //filterVenues.filterVenues(weeklySuggest,cats,filterEventsResponseBaseCallback);
+    public void filterAttractions(boolean weeklySuggest,List<Integer> categoryId,Double lat,Double lng) {
+        filterVenues.filterAttractions(weeklySuggest,categoryId,filterEventsResponseBaseCallback,lat,lng);
     }
 
     @Override

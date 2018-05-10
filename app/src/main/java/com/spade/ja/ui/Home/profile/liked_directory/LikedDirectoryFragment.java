@@ -15,7 +15,7 @@ import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.venues.Venue;
 import com.spade.ja.ui.Base.BaseFragment;
 import com.spade.ja.ui.Home.directory.venues.adapter.ItemOffsetDecoration;
-import com.spade.ja.ui.Home.explore.adapter.VenuesListAdapter;
+import com.spade.ja.ui.Home.profile.liked_directory.adapter.LikedDirectoryListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class LikedDirectoryFragment extends BaseFragment implements LikedDirecto
     TextView noData;
 
     private ArrayList<Venue> response;
-    private VenuesListAdapter allVenuesListAdapter;
+    private LikedDirectoryListAdapter allVenuesListAdapter;
     private boolean firstDataFetch = true;
 
     @Override
@@ -96,10 +96,28 @@ public class LikedDirectoryFragment extends BaseFragment implements LikedDirecto
         noData.setVisibility(View.GONE);
         allVenuesRecyclarView.setVisibility(View.VISIBLE);
         if (firstDataFetch) {
-            allVenuesListAdapter = new VenuesListAdapter(true);
+            allVenuesListAdapter = new LikedDirectoryListAdapter(true);
             response = (ArrayList<Venue>) venuesResponses;
             allVenuesListAdapter.setData((ArrayList<Venue>) venuesResponses);
-            //allVenuesListAdapter.setOnViewListener(id -> presenter.showAttractionsInner(id));
+            allVenuesListAdapter.setOnDirectoryAction(new LikedDirectoryListAdapter.OnDirectoryAction() {
+                @Override
+                public void onDirectoryLike(int id, String type) {
+                    if (type.equals("attraction")){
+
+                    }else {
+
+                    }
+                }
+
+                @Override
+                public void onDirectoryClick(int id, String type) {
+                    if (type.equals("attraction")){
+
+                    }else {
+
+                    }
+                }
+            });
             allVenuesRecyclarView.setAdapter(allVenuesListAdapter);
             firstDataFetch = false;
         }else {
@@ -115,10 +133,28 @@ public class LikedDirectoryFragment extends BaseFragment implements LikedDirecto
         noData.setVisibility(View.GONE);
         allVenuesRecyclarView.setVisibility(View.VISIBLE);
         if (firstDataFetch) {
-            allVenuesListAdapter = new VenuesListAdapter(true);
+            allVenuesListAdapter = new LikedDirectoryListAdapter(true);
             response = (ArrayList<Venue>) venuesResponses;
             allVenuesListAdapter.setData((ArrayList<Venue>) venuesResponses);
-            //allVenuesListAdapter.setOnViewListener(id -> presenter.showAttractionsInner(id));
+            allVenuesListAdapter.setOnDirectoryAction(new LikedDirectoryListAdapter.OnDirectoryAction() {
+                @Override
+                public void onDirectoryLike(int id, String type) {
+                    if (type.equals("attraction")){
+
+                    }else {
+
+                    }
+                }
+
+                @Override
+                public void onDirectoryClick(int id, String type) {
+                    if (type.equals("attraction")){
+
+                    }else {
+
+                    }
+                }
+            });
             allVenuesRecyclarView.setAdapter(allVenuesListAdapter);
             firstDataFetch = false;
         }else {

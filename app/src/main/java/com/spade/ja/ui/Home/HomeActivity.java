@@ -1,5 +1,6 @@
 package com.spade.ja.ui.Home;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,7 @@ import butterknife.BindView;
 public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private static final int MY_PERMISSIONS_REQUEST_SMS_RECEIVE = 10;
     @Inject
     HomePresenter presenter;
     @BindView(R.id.frame_layout)
@@ -124,7 +126,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
      * Request location permission, so that we can get the location of the
      * device. The result of the permission request is handled by a callback,
      * onRequestPermissionsResult.
+     *
      */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED){
+
+        }else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECEIVE_SMS},
+                    MY_PERMISSIONS_REQUEST_SMS_RECEIVE);
+        }
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -136,6 +146,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
+
+
     }
 
     @Override
@@ -168,6 +180,11 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 } else {
                     presenter.hideNearByEvents();
                 }
+                break;
+
+            case MY_PERMISSIONS_REQUEST_SMS_RECEIVE:
+                System.out.println("Asdasdasda");
+                break;
         }
     }
 

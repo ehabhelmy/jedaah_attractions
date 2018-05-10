@@ -2,6 +2,8 @@ package com.spade.ja.ui.Home.profile;
 
 import android.os.Bundle;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.profile.Data;
 import com.spade.ja.datalayer.pojo.response.profile.ProfileResponse;
 import com.spade.ja.ui.Base.BasePresenter;
@@ -34,7 +36,11 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
 
         @Override
         public void onError(String message) {
-            jaNavigationManager.goToAuthActivity(null);
+            if(message.equals(JaApplication.getContext().getString(R.string.connection))){
+
+            }else {
+                jaNavigationManager.goToAuthActivity(null);
+            }
             //getView().showError(message);
         }
     };

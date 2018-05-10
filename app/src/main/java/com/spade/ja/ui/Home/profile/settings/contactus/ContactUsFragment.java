@@ -1,6 +1,8 @@
 package com.spade.ja.ui.Home.profile.settings.contactus;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
@@ -28,7 +30,11 @@ public class ContactUsFragment extends BaseFragment implements ContactUsContract
 
     @OnClick(R.id.send)
     void sendMessage() {
-        presenter.contactUs(subject.getText().toString().trim(),message.getText().toString().trim());
+        if (TextUtils.isEmpty(subject.getText().toString().trim()) || TextUtils.isEmpty(message.getText().toString().trim())) {
+            showPopUp("You have to enter both subject and message");
+        }else{
+            presenter.contactUs(subject.getText().toString().trim(), message.getText().toString().trim());
+        }
     }
 
     @Override
@@ -65,6 +71,12 @@ public class ContactUsFragment extends BaseFragment implements ContactUsContract
 
     @Override
     public void showSuccess(String msg) {
-        showPopUp(msg);
+        new AlertDialog.Builder(getActivity())
+                .setMessage(msg)
+                .setTitle(getString(R.string.contactUs))
+                .setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                })
+                .show();
     }
 }

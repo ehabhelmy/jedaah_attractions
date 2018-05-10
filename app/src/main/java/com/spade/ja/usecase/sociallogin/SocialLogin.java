@@ -1,5 +1,7 @@
 package com.spade.ja.usecase.sociallogin;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.response.login.LoginResponse;
 import com.spade.ja.ui.Base.listener.BaseCallback;
@@ -47,7 +49,7 @@ public class SocialLogin implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError("No Data Connection");
+                callback.onError(JaApplication.context.getString(R.string.connection));
             }
         };
         if (!compositeDisposable.isDisposed()){

@@ -20,6 +20,6 @@ public class TicketsContract {
     }
 
     interface Presenter extends Unsubscribable {
-
+        void cancelOrder(String type,int id);
     }
 }

@@ -1,12 +1,11 @@
 package com.spade.ja.usecase.contactus;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
-import com.spade.ja.datalayer.pojo.response.login.LoginResponse;
 import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.usecase.Unsubscribable;
-
-import java.io.File;
 
 import javax.inject.Inject;
 
@@ -49,7 +48,7 @@ public class ContactUs implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError("No Data Connection");
+                callback.onError(JaApplication.context.getString(R.string.connection));
             }
         };
 

@@ -1,6 +1,9 @@
 package com.spade.ja.ui.Home.directory.attractions.filterattractions;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -8,17 +11,17 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.ui.Base.BaseActivity;
-import com.spade.ja.ui.Home.directory.venues.filtervenues.FilterVenueActivity;
-import com.spade.ja.ui.Home.directory.venues.filtervenues.FilterVenuePresenter;
 import com.spade.ja.ui.Home.events.filterevents.adapter.FilterCategoriesAdapter;
 import com.spade.ja.ui.Home.map.Data;
 import com.spade.ja.ui.Home.map.adapter.DataAdapter;
@@ -43,6 +46,9 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
     @Inject
     FilterAttractionPresenter presenter;
 
+    @Inject
+    FusedLocationProviderClient fusedLocationProviderClient;
+
     @BindView(R.id.clear)
     TextView clearAll;
 
@@ -61,7 +67,11 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
     @BindView(R.id.filterContainer)
     RelativeLayout filterContainer;
 
+    @BindView(R.id.filter)
+    Button filter;
+
     private boolean isWeeklySelected = false;
+    private boolean isNearBy = false;
     private Set<Integer> categoriesChosen = new HashSet<>();
     private FilterCategoriesAdapter filterCategoriesAdapter;
 
@@ -69,6 +79,7 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        filter.setText(R.string.filterAttraction);
     }
 
     @OnClick(R.id.weeklySugg)
@@ -82,9 +93,26 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
         }
     }
 
+    @OnClick(R.id.nearBy)
+    void selectNearBy() {
+        if (isNearBy) {
+            nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
+            isNearBy = false;
+        } else {
+            nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
+            isNearBy = true;
+        }
+    }
+
+
     @OnClick(R.id.filter)
     void filterAttractions() {
-        presenter.filterAttractions(isWeeklySelected, categoriesChosen.toArray(new Integer[categoriesChosen.size()]));
+        if (isNearBy){
+            getLatitudeAndLongitude();
+        }else {
+            List<Integer> cats = new ArrayList<>(categoriesChosen);
+            presenter.filterAttractions(isWeeklySelected, cats,null,null);
+        }
     }
 
     @OnClick(R.id.clear)
@@ -101,7 +129,9 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
     private void reset() {
         categoriesChosen.clear();
         isWeeklySelected = false;
+        isNearBy = false;
         weeklySugg.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
+        nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
         cats.setAdapter(null);
         cats.setAdapter(filterCategoriesAdapter);
         filterCategoriesAdapter.notifyDataSetChanged();
@@ -110,9 +140,9 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
     @Override
     public void showError(String message) {
         new AlertDialog.Builder(this)
-                .setTitle("Venues")
+                .setTitle(getString(R.string.venues))
                 .setMessage(message)
-                .setPositiveButton("Ok", (dialogInterface, i) -> {
+                .setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                 })
                 .show();
@@ -138,6 +168,7 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
         super.presenter = presenter;
         presenter.setView(this);
     }
+
 
     @Override
     public int getLayoutId() {
@@ -187,5 +218,25 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
             //presenter.showVenueInner(id);
         });
         filterResults.setAdapter(dataAdapter);
+    }
+
+    @Override
+    public void getLatitudeAndLongitude() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
+            if (location1 != null) {
+                List<Integer> cats = new ArrayList<>(categoriesChosen);
+                presenter.filterAttractions(isWeeklySelected,cats ,location1.getLatitude(),location1.getLongitude());
+            }
+        });
     }
 }

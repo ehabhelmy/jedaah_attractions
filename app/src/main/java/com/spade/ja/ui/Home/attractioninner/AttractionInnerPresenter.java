@@ -2,6 +2,7 @@ package com.spade.ja.ui.Home.attractioninner;
 
 import android.os.Bundle;
 
+import com.spade.ja.ui.Base.BaseFragment;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.util.Constants;
 
@@ -28,5 +29,10 @@ public class AttractionInnerPresenter extends BasePresenter<AttractionInnerContr
     @Override
     public void goToHomeActivity() {
         jaNavigationManager.goToHomeActivity();
+    }
+
+    @Override
+    public BaseFragment getCurrentFragment() {
+        return jaNavigationManager.getCurrentFragmentOnInnerAttraction();
     }
 }

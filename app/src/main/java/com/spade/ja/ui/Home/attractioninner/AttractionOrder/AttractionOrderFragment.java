@@ -94,7 +94,7 @@ public class AttractionOrderFragment extends BaseFragment implements AttractionO
     @BindView(R.id.ticketsNumber)
     TextView ticketsNumberTextView;
 
-    @BindView(R.id.loading_overlay_container)
+    @BindView(R.id.load)
     LinearLayout loadingView;
 
     @BindView(R.id.nestedScroll)
@@ -170,7 +170,11 @@ public class AttractionOrderFragment extends BaseFragment implements AttractionO
 
         } else {
             List<Ticket> tickets = getAllTickets();
-            presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), payment, attractionId, totPrice, null,timeModel.getId() ,tickets);
+            if (timeModel.getType() == null) {
+                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), payment, attractionId, totPrice, null, timeModel.getId(), tickets);
+            }else {
+                presenter.order(nameTextView.getText().toString().trim(), emailTextView.getText().toString().trim(), mobileTextView.getText().toString().trim(), payment, attractionId, totPrice, timeModel.getId(), null, tickets);
+            }
         }
     }
 

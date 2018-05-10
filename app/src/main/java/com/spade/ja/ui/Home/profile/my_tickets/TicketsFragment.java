@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 import com.spade.ja.ui.Home.profile.my_tickets.adapter.HistoryListAdapter;
 import com.spade.ja.ui.Home.profile.my_tickets.pojo.HistoryEventsUi;
 
@@ -101,7 +102,7 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
             hideNoDataText();
             isUpcoming = false;
             upcomingEvents.setVisibility(View.VISIBLE);
-            setupRecyclerView(upcomingList, data, HistoryListAdapter.HistoryType.UPCOMING.name());
+            setupRecyclerView(upcomingList, data);
         }
     }
 
@@ -118,10 +119,10 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
             hideNoDataText();
             isPast = false;
             pastEvents.setVisibility(View.VISIBLE);
-            setupRecyclerView(pastList, data, HistoryListAdapter.HistoryType.PAST.name());
+            setupRecyclerView(pastList, data);
         }
     }
-    private void setupRecyclerView(RecyclerView recyclerView,List<HistoryEventsUi> data,String type) {
+    private void setupRecyclerView(RecyclerView recyclerView,List<HistoryEventsUi> data) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));
@@ -130,7 +131,9 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
         recyclerView.addItemDecoration(dividerItemDecoration);
         HistoryListAdapter historyListAdapter = new HistoryListAdapter();
         historyListAdapter.setData((ArrayList<HistoryEventsUi>) data);
-        historyListAdapter.setType(type);
+        historyListAdapter.setTicketListener((type, id) -> {
+            presenter.cancelOrder(type,id);
+        });
         recyclerView.setAdapter(historyListAdapter);
     }
 }

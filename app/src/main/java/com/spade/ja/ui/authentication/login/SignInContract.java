@@ -18,7 +18,6 @@ public interface SignInContract  {
     interface Presenter extends Unsubscribable {
         void login(String email,String password);
         void getResetPasswordCode();
-        void resetPassword(String newPassword);
         void showRegisterScreen();
     }
 }

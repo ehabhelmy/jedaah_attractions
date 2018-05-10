@@ -3,18 +3,13 @@ package com.spade.ja.ui.Home.directory.attractions;
 import android.os.Bundle;
 
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
-import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.like.LikeResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.usecase.allattractions.AllAttractions;
-import com.spade.ja.usecase.allvenues.AllVenues;
-import com.spade.ja.usecase.categories.Categories;
 import com.spade.ja.usecase.like.LikeAttractions;
-import com.spade.ja.usecase.like.LikeVenues;
 import com.spade.ja.usecase.topattractions.TopAttractions;
-import com.spade.ja.usecase.topvenues.TopVenues;
 
 import javax.inject.Inject;
 
@@ -110,6 +105,7 @@ public class AttractionsPresenter extends BasePresenter<AttractionsContract.View
     public void unSubscribe() {
         topAttractions.unSubscribe();
         allAttractions.unSubscribe();
+        likeAttractions.unSubscribe();
     }
 
     @Override

@@ -103,7 +103,7 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<AllVenuesResponse> getAllVenues() {
-        AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_VENUES, VenuesResponse.class);
+        AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_VENUES, AllVenuesResponse.class);
         Single<AllVenuesResponse> venuesResponseSingle = Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
@@ -376,5 +376,10 @@ public class LocalRepository implements LocalSource {
     @Override
     public void saveProfile(ProfileResponse profileResponse) {
         sharedPref.saveObject(SharedPref.PROFILE,profileResponse);
+    }
+
+    @Override
+    public void clearProfile() {
+        sharedPref.clearProfile();
     }
 }

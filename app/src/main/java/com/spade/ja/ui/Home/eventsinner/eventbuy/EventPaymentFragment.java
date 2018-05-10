@@ -168,9 +168,9 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
                 || TextUtils.isEmpty(paymentType)){
 
             new AlertDialog.Builder(getActivity())
-                    .setTitle("Failure")
-                    .setMessage("you must enter all the data to proceed")
-                    .setPositiveButton("Ok", (dialogInterface, i) -> {
+                    .setTitle(getString(R.string.failure))
+                    .setMessage(getString(R.string.fill_data))
+                    .setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
                         dialogInterface.dismiss();
                     })
                     .show();

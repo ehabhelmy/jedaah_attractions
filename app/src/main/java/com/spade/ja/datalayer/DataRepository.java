@@ -3,12 +3,15 @@ package com.spade.ja.datalayer;
 import com.spade.ja.datalayer.local.LocalRepository;
 import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
 import com.spade.ja.datalayer.pojo.response.DataResponse;
+import com.spade.ja.datalayer.pojo.response.about.AboutUsResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.attractionhistory.AttractionOrderHistoryResponse;
 import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerResponse;
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
+import com.spade.ja.datalayer.pojo.response.code.ResetCodeResponse;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
@@ -294,8 +297,28 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<AttractionOrderHistoryResponse> getUpcomingAttractions() {
+        return remoteRepository.getUpcomingAttractions(getToken());
+    }
+
+    @Override
+    public Single<AttractionOrderHistoryResponse> getPastAttractions() {
+        return remoteRepository.getPastAttractions(getToken());
+    }
+
+    @Override
     public Single<ContactUsResponse> contactUs(String subject, String message) {
         return remoteRepository.contactUs(subject,message,getToken());
+    }
+
+    @Override
+    public Single<ContactUsResponse> cancelAttraction(int id) {
+        return remoteRepository.cancelAttraction(id,getToken());
+    }
+
+    @Override
+    public Single<ContactUsResponse> cancelEvent(int id) {
+        return remoteRepository.cancelEvent(id,getToken());
     }
 
     @Override
@@ -395,7 +418,16 @@ public class DataRepository implements DataSource {
 
     @Override
     public Single<ProfileResponse> getProfile(boolean fresh) {
-        return remoteRepository.getProfile(localRepository.getToken());
+        if (fresh) {
+            return remoteRepository.getProfile(getToken());
+        }else {
+            return localRepository.getProfile();
+        }
+    }
+
+    @Override
+    public void clearProfile() {
+        localRepository.clearProfile();
     }
 
     @Override
@@ -419,6 +451,11 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<FilterVenuesResponse> filterAttracions(boolean weeklySuggest, List<Integer> categoryId, Double lat, Double lng) {
+        return remoteRepository.filterAttracions(weeklySuggest,categoryId,lat,lng);
+    }
+
+    @Override
     public Single<AllNearByResponse> search(String searchWord, List<String> types, List<Integer> categoryId) {
         return remoteRepository.search(searchWord,types,categoryId);
     }
@@ -431,6 +468,21 @@ public class DataRepository implements DataSource {
     @Override
     public Single<SubscribeResponse> subscribe() {
         return remoteRepository.subscribe(getToken());
+    }
+
+    @Override
+    public Single<ResetCodeResponse> getCode(String email) {
+        return remoteRepository.getCode(email);
+    }
+
+    @Override
+    public Single<ContactUsResponse> resetPassword(String password, String code) {
+        return remoteRepository.resetPassword(password,code);
+    }
+
+    @Override
+    public Single<AboutUsResponse> about() {
+        return remoteRepository.about();
     }
 
 }

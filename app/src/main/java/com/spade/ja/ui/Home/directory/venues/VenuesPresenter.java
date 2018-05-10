@@ -107,12 +107,12 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
     };
 
     @Inject
-    public VenuesPresenter(Categories categories, TopVenues topVenues, AllVenues allVenues) {
+    public VenuesPresenter(Categories categories, TopVenues topVenues, AllVenues allVenues, LikeVenues likeVenues) {
         this.categories = categories;
         this.topVenues = topVenues;
         this.allVenues = allVenues;
+        this.likeVenues = likeVenues;
     }
-
 
     @Override
     public void initialize(Bundle extras) {
@@ -127,6 +127,7 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
         categories.unSubscribe();
         topVenues.unSubscribe();
         allVenues.unSubscribe();
+        likeVenues.unSubscribe();
     }
 
     @Override

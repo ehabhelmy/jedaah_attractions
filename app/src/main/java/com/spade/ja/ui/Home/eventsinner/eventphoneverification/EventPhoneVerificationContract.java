@@ -17,6 +17,7 @@ public interface EventPhoneVerificationContract {
     }
 
     interface Presenter extends Unsubscribable {
-
+        void showOrderView();
+        void sendMessage();
     }
 }

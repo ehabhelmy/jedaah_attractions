@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -14,6 +15,7 @@ import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseViewHolder;
 import com.spade.ja.ui.Base.listener.RecyclerViewItemListener;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
+import com.spade.ja.ui.Home.profile.my_tickets.adapter.HistoryListAdapter;
 import com.spade.ja.ui.Home.profile.my_tickets.pojo.HistoryEventsUi;
 import com.spade.ja.ui.widget.ImageLayout;
 
@@ -58,6 +60,14 @@ public class HistoryViewHolder extends BaseViewHolder<HistoryEventsUi> {
     @BindView(R.id.ticketsPrice)
     TextView ticketsPrice;
 
+    @Nullable
+    @BindView(R.id.cancel)
+    ImageView cancel;
+
+    @Nullable
+    @BindView(R.id.type_addon)
+    TextView typeAddon;
+
     public HistoryViewHolder(View itemView) {
         super(itemView);
     }
@@ -69,11 +79,14 @@ public class HistoryViewHolder extends BaseViewHolder<HistoryEventsUi> {
 
     @Override
     public void bind(HistoryEventsUi baseModel, int position, TicketListener ticketListener) {
+
+    }
+
+    public void bind(HistoryEventsUi baseModel, int position, HistoryListAdapter.HistoryListener ticketListener) {
         eventTitle.setText(baseModel.getEventTitle());
         eventMonth.setText(baseModel.getEventMonth());
         eventDay.setText(baseModel.getEventDay());
         eventTime.setText(baseModel.getEventTime());
-        //Picasso.with(eventImage.getContext()).load(baseModel.getEventImage()).placeholder(R.mipmap.myimage).error(R.mipmap.myimage);
         Glide.with(eventImage.getContext()).load(baseModel.getEventImage()).apply(new RequestOptions().placeholder(R.mipmap.myimage).error(R.mipmap.myimage)).into(new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
@@ -86,5 +99,13 @@ public class HistoryViewHolder extends BaseViewHolder<HistoryEventsUi> {
         orderStatus.setText(baseModel.getOrderStatus());
         numberTickets.setText(baseModel.getNumberTickets());
         ticketsPrice.setText(baseModel.getTicketsPrice());
+        if (baseModel.getAddons() != null){
+            typeAddon.setText(baseModel.getAddons());
+        }
+        if (baseModel.isUpOrPast()){
+            cancel.setOnClickListener(view -> {
+                ticketListener.onUpcomingCancelClick(baseModel.getType(),baseModel.getId());
+            });
+        }
     }
 }

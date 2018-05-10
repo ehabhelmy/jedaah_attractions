@@ -76,6 +76,8 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
     @Override
     public void setupWeekEvents(List<Event> events) {
         if (events.size() > 0) {
+            recyclerView.setVisibility(View.VISIBLE);
+            noEvents.setVisibility(View.GONE);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.VERTICAL);
             dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider_vertical));

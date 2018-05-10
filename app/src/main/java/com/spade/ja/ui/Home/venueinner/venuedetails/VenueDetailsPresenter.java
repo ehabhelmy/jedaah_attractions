@@ -80,6 +80,11 @@ public class VenueDetailsPresenter extends BasePresenter<VenueDetailsContract.Vi
     }
 
     @Override
+    public void showFullScreenPhoto(String imageUrl, String title) {
+        jaNavigationManager.showFullScreenPhoto(imageUrl,title);
+    }
+
+    @Override
     public void unSubscribe() {
         venueInner.unSubscribe();
         like.unSubscribe();
