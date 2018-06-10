@@ -1,621 +1,666 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-<ScrollView
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-    <LinearLayout
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:paddingTop="10dp">
-        <LinearLayout
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/searchEditText"
             android:layout_width="match_parent"
+            android:focusable="false"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingBottom="10dp"
-            android:orientation="vertical">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/rounded_rectangle_grey"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:drawableStart="@drawable/search_green"
+            android:fontFamily="@font/gotham_medium "
+            android:hint="@string/searchIn"
+            android:padding="10dp"
+            android:textColor="@color/outerText"
+            android:textSize="@dimen/cash" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/TitleTheme"
-                android:text="@string/exploreJeddah" />
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="5">
-
+            android:layout_height="match_parent"
+            android:layout_below="@id/searchEditText">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.6"
+                android:background="@color/white"
                 android:orientation="vertical"
-                android:padding="10dp"
-                android:id="@id/events"
-                android:background="@drawable/rounded_rect_light_grey">
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                app:srcCompat="@mipmap/events_ic_2" />
+                android:paddingTop="10dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/daysRemaining"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/colorTitle"
-                    android:text="@string/Events"/>
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/exploreJeddah" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="5">
+
+
+                        <LinearLayout
+                            android:id="@id/events"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.6"
+                            android:background="@drawable/rounded_rect_light_grey"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@mipmap/events_ic_2" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/gotham_bold"
+                                android:gravity="center"
+                                android:text="@string/Events"
+                                android:textColor="@color/colorTitle"
+                                android:textSize="@dimen/daysRemaining" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/venues"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.6"
+                            android:background="@drawable/rounded_rect_light_grey"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@mipmap/venues" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/gotham_bold"
+                                android:gravity="center"
+                                android:text="@string/venues"
+                                android:textColor="@color/colorTitle"
+                                android:textSize="@dimen/daysRemaining" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/attractions"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1.6"
+                            android:background="@drawable/rounded_rect_light_grey"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@mipmap/attractions" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/gotham_bold"
+                                android:gravity="center"
+                                android:text="@string/attractions"
+                                android:textColor="@color/colorTitle"
+                                android:textSize="@dimen/daysRemaining" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/topEvents" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/topEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/noTopEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@mipmap/no_events_ic" />
+
+                        <TextView
+                            android:id="@+id/textView262"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView22"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="27dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/nothingScheduled"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textView45"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/topSpots" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/topVenues"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/noTopVenues"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView223"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@mipmap/no_events_ic" />
+
+                        <TextView
+                            android:id="@+id/textView2622"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView223"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="27dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/nothingScheduled"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textView435"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/attractionsForu" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/topAttractions"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/noTopAttractions"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView2232"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@mipmap/no_events_ic" />
+
+                        <TextView
+                            android:id="@+id/textView122"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView2232"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="27dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/nothingScheduled"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/lightBlack"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/title_categories"
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/title_categories" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/categories"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp" />
+
+                    <RelativeLayout
+                        android:id="@+id/noCatogories"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@mipmap/no_events_ic" />
+
+                        <TextView
+                            android:id="@+id/textView26"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView11"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="27dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/nothingScheduled"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/exploreNearBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/nearbyEvents" />
+
+                    <RelativeLayout
+                        android:id="@+id/errorLocationContainerNew"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/gotham_book"
+                            android:gravity="center"
+                            android:text="@string/want_to_know"
+                            android:textSize="@dimen/static_title_size" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/textView14"
+                            android:layout_below="@+id/textView14"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/your_nearby"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+
+                        <Button
+                            android:id="@+id/enableLocationSettings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textView23"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="22dp"
+                            android:background="@drawable/rounded_rectangle_green"
+                            android:text="@string/allowLocation"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/noNearEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView212"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@mipmap/no_events_ic" />
+
+                        <TextView
+                            android:id="@+id/textView267"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView212"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="27dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/nothingScheduled"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/nearByEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/venuesNearBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/nearbyVenues" />
+
+                    <RelativeLayout
+                        android:id="@+id/venueerrorLocationContainerNew"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+
+                        <TextView
+                            android:id="@+id/textView141"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/gotham_book"
+                            android:gravity="center"
+                            android:text="@string/want_to_know"
+                            android:textSize="@dimen/static_title_size" />
+
+                        <TextView
+                            android:id="@+id/textView231"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/textView141"
+                            android:layout_below="@+id/textView141"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/your_nearby"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+
+                        <Button
+                            android:id="@+id/venueenableLocationSettings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textView231"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="22dp"
+                            android:background="@drawable/rounded_rectangle_green"
+                            android:text="@string/allowLocation"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/noNearVenues"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView2122"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@mipmap/no_events_ic" />
+
+                        <TextView
+                            android:id="@+id/textView2672"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView2122"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="27dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/nothingScheduled"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/nearByVenues"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/attractionsNearBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        style="@style/TitleTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/nearByAttractions" />
+
+                    <RelativeLayout
+                        android:id="@+id/attractionserrorLocationContainerNew"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+
+                        <TextView
+                            android:id="@+id/textView1412"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/gotham_book"
+                            android:gravity="center"
+                            android:text="@string/want_to_know"
+                            android:textSize="@dimen/static_title_size" />
+
+                        <TextView
+                            android:id="@+id/textView2321"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/textView1412"
+                            android:layout_below="@+id/textView1412"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/your_nearby"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+
+                        <Button
+                            android:id="@+id/attractionsenableLocationSettings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textView2321"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="22dp"
+                            android:background="@drawable/rounded_rectangle_green"
+                            android:text="@string/allowLocation"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/noNearAttractions"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView2152"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@mipmap/no_events_ic" />
+
+                        <TextView
+                            android:id="@+id/textView2372"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imageView2152"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="27dp"
+                            android:fontFamily="@font/gotham_bold"
+                            android:gravity="center"
+                            android:text="@string/nothingScheduled"
+                            android:textColor="@color/staticTitle"
+                            android:textSize="@dimen/static_title_size" />
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/nearByAttractions"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp" />
+
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.6"
-                android:layout_marginStart="10dp"
-                android:padding="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_rect_light_grey">
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/venues" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/daysRemaining"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/colorTitle"
-                    android:text="@string/venues"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.6"
-                android:orientation="vertical"
-                android:layout_marginStart="10dp"
-                android:padding="10dp"
-                android:background="@drawable/rounded_rect_light_grey">
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/attractions" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:textColor="@color/colorTitle"
-                    android:textSize="@dimen/daysRemaining"
-                    android:fontFamily="@font/gotham_bold"
-                    android:text="@string/attractions"/>
-            </LinearLayout>
-        </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                style="@style/TitleTheme"
-                android:text="@string/topEvents" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/topEvents"
-                android:layout_width="match_parent"
-                android:paddingStart="16dp"
-                android:clipToPadding="false"
-                android:layout_height="match_parent"/>
-            <RelativeLayout
-                android:id="@+id/noTopEvents"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@mipmap/no_events_ic" />
-
-                <TextView
-                    android:id="@+id/textView262"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/imageView22"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="27dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/nothingScheduled" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView45"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                style="@style/TitleTheme"
-                android:text="@string/topSpots" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/topVenues"
-                android:layout_width="match_parent"
-                android:paddingStart="16dp"
-                android:clipToPadding="false"
-                android:layout_height="match_parent"/>
-            <RelativeLayout
-                android:id="@+id/noTopVenues"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView223"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@mipmap/no_events_ic" />
-
-                <TextView
-                    android:id="@+id/textView2622"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/imageView223"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="27dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/nothingScheduled" />
-            </RelativeLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView435"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                style="@style/TitleTheme"
-                android:text="@string/attractionsForu" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/topAttractions"
-                android:layout_width="match_parent"
-                android:paddingStart="16dp"
-                android:clipToPadding="false"
-                android:layout_height="match_parent"/>
-            <RelativeLayout
-                android:id="@+id/noTopAttractions"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView2232"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@mipmap/no_events_ic" />
-
-                <TextView
-                    android:id="@+id/textView122"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/imageView2232"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="27dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/nothingScheduled" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/lightBlack"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/title_categories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                style="@style/TitleTheme"
-                android:text="@string/title_categories" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/categories"
-                android:layout_width="match_parent"
-                android:paddingStart="16dp"
-                android:clipToPadding="false"
-                android:layout_height="match_parent"/>
-            <RelativeLayout
-                android:id="@+id/noCatogories"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@mipmap/no_events_ic" />
-
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/imageView11"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="27dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/nothingScheduled" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/exploreNearBy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingTop="10dp">
-
-            <TextView
-                style="@style/TitleTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/nearbyEvents" />
-
-            <RelativeLayout
-                android:id="@+id/errorLocationContainerNew"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="match_parent">
-
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_book"
-                    android:text="@string/want_to_know" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_alignStart="@+id/textView14"
-                    android:layout_below="@+id/textView14"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/your_nearby" />
-
-                <Button
-                    android:id="@+id/enableLocationSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_green"
-                    android:text="@string/allowLocation"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/textView23"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="22dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/noNearEvents"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView212"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@mipmap/no_events_ic" />
-
-                <TextView
-                    android:id="@+id/textView267"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/imageView212"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="27dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/nothingScheduled" />
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/nearByEvents"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="16dp" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/venuesNearBy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingTop="10dp">
-
-            <TextView
-                style="@style/TitleTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/nearbyVenues" />
-
-            <RelativeLayout
-                android:id="@+id/venueerrorLocationContainerNew"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="match_parent">
-
-
-                <TextView
-                    android:id="@+id/textView141"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_book"
-                    android:text="@string/want_to_know" />
-
-                <TextView
-                    android:id="@+id/textView231"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_alignStart="@+id/textView141"
-                    android:layout_below="@+id/textView141"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/your_nearby" />
-
-                <Button
-                    android:id="@+id/venueenableLocationSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_green"
-                    android:text="@string/allowLocation"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/textView231"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="22dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/noNearVenues"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView2122"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@mipmap/no_events_ic" />
-
-                <TextView
-                    android:id="@+id/textView2672"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/imageView2122"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="27dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/nothingScheduled" />
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/nearByVenues"
-                android:layout_width="match_parent"
-                android:paddingStart="16dp"
-                android:clipToPadding="false"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/attractionsNearBy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingTop="10dp">
-
-            <TextView
-                style="@style/TitleTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/nearByAttractions" />
-
-            <RelativeLayout
-                android:id="@+id/attractionserrorLocationContainerNew"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="match_parent">
-
-
-                <TextView
-                    android:id="@+id/textView1412"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_book"
-                    android:text="@string/want_to_know" />
-
-                <TextView
-                    android:id="@+id/textView2321"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_alignStart="@+id/textView1412"
-                    android:layout_below="@+id/textView1412"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/your_nearby" />
-
-                <Button
-                    android:id="@+id/attractionsenableLocationSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_green"
-                    android:text="@string/allowLocation"
-                    android:textColor="@color/white"
-                    android:layout_below="@+id/textView2321"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="22dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/noNearAttractions"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imageView2152"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    app:srcCompat="@mipmap/no_events_ic" />
-
-                <TextView
-                    android:id="@+id/textView2372"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_below="@+id/imageView2152"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="27dp"
-                    android:textSize="@dimen/static_title_size"
-                    android:fontFamily="@font/gotham_bold"
-                    android:textColor="@color/staticTitle"
-                    android:text="@string/nothingScheduled" />
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/nearByAttractions"
-                android:layout_width="match_parent"
-                android:paddingStart="16dp"
-                android:clipToPadding="false"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+        </ScrollView>
+    </RelativeLayout>
 
     <com.spade.ja.ui.widget.CircularImageView
         android:id="@+id/fab"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:elevation="10dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
+        android:elevation="10dp"
+        android:scaleType="fitXY"
         app:srcCompat="@mipmap/map"
-        app:useCompatPadding="false"
-        android:scaleType="fitXY" />
+        app:useCompatPadding="false" />
 </android.support.design.widget.CoordinatorLayout>

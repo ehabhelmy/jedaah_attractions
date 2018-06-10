@@ -42,12 +42,7 @@ public class ViewTickets implements Unsubscribable {
             @Override
             public void onSuccess(ViewTicketResponse venuesInnerResponse) {
                 if (venuesInnerResponse.getSuccess()) {
-                    for (Datum datum : venuesInnerResponse.getData()) {
-                        if (datum.getAttractionId() == id) {
-                            callback.onSuccess(datum);
-                            break;
-                        }
-                    }
+                    callback.onSuccess(venuesInnerResponse.getData().get(0));
                 }
             }
 
@@ -61,7 +56,7 @@ public class ViewTickets implements Unsubscribable {
             }
         };
         if (!compositeDisposable.isDisposed()){
-            viewTicketResponseSingle = dataRepository.viewAttractionTickets(startTime, endTime, date);
+            viewTicketResponseSingle = dataRepository.viewAttractionTickets(startTime, endTime, date,id);
             disposable = viewTicketResponseSingle
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

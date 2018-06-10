@@ -150,7 +150,7 @@
                     android:layout_alignTop="@+id/imageView9"
                     android:fontFamily="@font/gotham_book"
                     android:gravity="center"
-                    android:text="Open Now"
+                    android:text="@string/open_now"
                     android:textSize="@dimen/titleSize" />
 
                 <LinearLayout

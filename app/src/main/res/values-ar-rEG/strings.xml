@@ -161,7 +161,7 @@
     <string name="failure">فشل</string>
     <string name="ok">نعم</string>
     <string name="login_required">الانضمام ضرورى</string>
-    <string name="login_feature">يجب عليك الانضمام لاستخدام هذه الخاصيه</string>
+    <string name="login_feature">برجاء تسجيل الدخول</string>
     <string name="event_date_required">يجب اختيار موعد للفعاليه</string>
     <string name="event_ticket_required">يجب عليك اختيار تذكره للفعاليه</string>
     <string name="enable_location">من فضلك مكن خاصيه تحديد المكان</string>
@@ -170,4 +170,13 @@
     <string name="id_card">احتفظ بالكارد</string>
     <string name="password_confirmation">كلمه السر غير منطبقه</string>
     <string name="NOADDONS">لا اضافات</string>
+    <string name="tickets">تذاكرى</string>
+    <string name="liked_events">الفعاليلت المفضله</string>
+    <string name="liked_directory">الاماكن المفضله</string>
+    <string name="error_like">يجب تسجيل الدخول</string>
+    <string name="open_now">مفتوح الان</string>
+    <string name="closed_now">مغلق الان</string>
+    <string name="hours">ساعه </string>
+    <string name="web_site">Web Site</string>
+    <string name="phone">Phone</string>
 </resources>

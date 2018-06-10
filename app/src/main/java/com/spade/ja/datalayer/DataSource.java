@@ -80,7 +80,7 @@ public interface DataSource {
 
     Single<AttractionInnerResponse> getAttractionsDetails(int id);
 
-    Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date);
+    Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date,int id);
 
     Single<LoginResponse> login(String email,String password);
 

@@ -204,28 +204,28 @@ public class VenueDetailsFragment extends BaseFragment implements VenueDetailsCo
         description.setText(data.getDescription());
         StringBuilder venuDays = new StringBuilder();
         StringBuilder hours = new StringBuilder();
-        hours.append("Hours ");
+        hours.append(getString(R.string.hours));
         for (VenueOpeningHour venueOpeningHour:data.getVenueOpeningHours()) {
             if (venueOpeningHour.getIsClosed() == 1) {
                 venuDays.append(venueOpeningHour.getVenueDay()+", ");
             }
             if (DateTimeUtils.isOpenNow(venueOpeningHour.getVenueDay())){
                 if (venueOpeningHour.getIsClosed() == 1) {
-                    openNow.setText("Closed Now");
+                    openNow.setText(getString(R.string.closed_now));
                 }
                 hours.append(venueOpeningHour.getStartTime() +" - "+venueOpeningHour.getEndTime());
             }
         }
-        venuDays.append("Closed");
+        venuDays.append(getString(R.string.closed_now));
         venueOpenDays.addView(createTextView(hours.toString()));
         venueOpenDays.addView(createTextView(venuDays.toString()));
         SocialMediaAdapter adapter = new SocialMediaAdapter();
         ArrayList<SocialMedium> socialMediumArrayList = (ArrayList<SocialMedium>) data.getSocialMedia();
         if (data.getWebsite() != null){
-            socialMediumArrayList.add(new SocialMedium(0,data.getWebsite(),"WEBSITE"));
+            socialMediumArrayList.add(new SocialMedium(0,data.getWebsite(),getString(R.string.web_site)));
         }
         if (data.getTelephoneNumbers() !=null){
-            socialMediumArrayList.add(new SocialMedium(0,data.getTelephoneNumbers(),"PHONE"));
+            socialMediumArrayList.add(new SocialMedium(0,data.getTelephoneNumbers(),getString(R.string.phone)));
         }
         adapter.setData(socialMediumArrayList);
         socialMedia.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false));
@@ -237,9 +237,7 @@ public class VenueDetailsFragment extends BaseFragment implements VenueDetailsCo
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));
         venuePhotos.setLayoutManager(layoutManager);
         venuePhotos.addItemDecoration(dividerItemDecoration);
-        venueImagesAdapter.setOnPhotoClick(imageUrl -> {
-            presenter.showFullScreenPhoto(imageUrl,data.getTitle());
-        });
+        venueImagesAdapter.setOnPhotoClick(imageUrl -> presenter.showFullScreenPhoto(imageUrl,data.getTitle()));
         venuePhotos.setAdapter(venueImagesAdapter);
     }
 

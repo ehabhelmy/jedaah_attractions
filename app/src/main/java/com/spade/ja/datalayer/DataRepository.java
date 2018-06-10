@@ -223,8 +223,8 @@ public class DataRepository implements DataSource {
     }
 
     @Override
-    public Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date) {
-        return remoteRepository.viewAttractionTickets(startTime,endTime,date,getToken());
+    public Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date,int id) {
+        return remoteRepository.viewAttractionTickets(startTime,endTime,date,getToken(),id);
     }
 
     @Override

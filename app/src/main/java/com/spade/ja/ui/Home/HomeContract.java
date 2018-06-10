@@ -14,6 +14,9 @@ public interface HomeContract {
         boolean isLocationPermissionGranted();
         boolean isLocationServicesEnabled();
         void openEventsList();
+        void showEventsListing();
+        void showDirectoryListing();
+        void showSearch();
     }
     interface Presenter{
         void showExplore();

@@ -15,6 +15,6 @@ import retrofit2.http.Query;
 public interface ViewTicketsService {
 
     @GET("{lang}/attractions/ticket/view")
-    Call<ViewTicketResponse> viewTickets(@Path("lang") String lang, @Query("start_time") String startTime,@Query("end_time")String endTime,@Query("date") String date, @Header("Authorization") String token);
+    Call<ViewTicketResponse> viewTickets(@Path("lang") String lang, @Query("start_time") String startTime,@Query("end_time")String endTime,@Query("date") String date,@Query("attraction_id") int id, @Header("Authorization") String token);
 
 }

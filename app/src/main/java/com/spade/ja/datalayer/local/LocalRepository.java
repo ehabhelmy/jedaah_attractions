@@ -42,14 +42,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<EventsResponse> getTopEvents() {
         EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.TOP_EVENTS, EventsResponse.class);
-        Single<EventsResponse> topEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null) {
                 e.onSuccess(eventsResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return topEventsResponseSingle;
     }
 
     @Override
@@ -60,14 +59,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<EventsResponse> getNearByEvents() {
         EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.NEARBY_EVENTS, EventsResponse.class);
-        Single<EventsResponse> NearByEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null) {
                 e.onSuccess(eventsResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return NearByEventsResponseSingle;
     }
 
     @Override
@@ -78,53 +76,49 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<VenuesResponse> getTopVenues() {
         VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.TOP_VENUES, VenuesResponse.class);
-        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return venuesResponseSingle;
     }
 
     @Override
     public Single<VenuesResponse> getTopAttractions() {
         VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.TOP_ATTRACTIONS, VenuesResponse.class);
-        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return venuesResponseSingle;
     }
 
     @Override
     public Single<AllVenuesResponse> getAllVenues() {
         AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_VENUES, AllVenuesResponse.class);
-        Single<AllVenuesResponse> venuesResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return venuesResponseSingle;
     }
 
     @Override
     public Single<AllVenuesResponse> getAllAttractions() {
         AllVenuesResponse venuesResponse = (AllVenuesResponse) sharedPref.getObject(sharedPref.ALL_ATTRACTIONS, AllVenuesResponse.class);
-        Single<AllVenuesResponse> venuesResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return venuesResponseSingle;
     }
 
     @Override
@@ -150,27 +144,25 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<VenuesResponse> getNearByVenues() {
         VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.NEARBY_VENUES, VenuesResponse.class);
-        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return venuesResponseSingle;
     }
 
     @Override
     public Single<VenuesResponse> getNearByAttractions() {
         VenuesResponse venuesResponse = (VenuesResponse) sharedPref.getObject(sharedPref.NEARBY_ATTRACTIONS, VenuesResponse.class);
-        Single<VenuesResponse> venuesResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (venuesResponse != null) {
                 e.onSuccess(venuesResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return venuesResponseSingle;
     }
 
     @Override
@@ -186,14 +178,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<AllNearByResponse> getNearByAll() {
         AllNearByResponse allNearByResponse = (AllNearByResponse) sharedPref.getObject(sharedPref.ALL_NEARBY, AllNearByResponse.class);
-        Single<AllNearByResponse> allNearByResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (allNearByResponse != null) {
                 e.onSuccess(allNearByResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return allNearByResponseSingle;
     }
 
     @Override
@@ -204,14 +195,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<Category> getCategories() {
         Category categoriesResponse = (Category) sharedPref.getObject(SharedPref.CATEGORIES,Category.class);
-        Single<Category> categoriesResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (categoriesResponse != null) {
                 e.onSuccess(categoriesResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return categoriesResponseSingle;
     }
 
     @Override
@@ -227,14 +217,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<EventsResponse> getTodayEvents() {
         EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(SharedPref.TADAY_EVENTS, EventsResponse.class);
-        Single<EventsResponse> todayEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null) {
                 e.onSuccess(eventsResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return todayEventsResponseSingle;
     }
 
     @Override
@@ -245,27 +234,25 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<EventsResponse> getWeekEvents() {
         EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(SharedPref.WEEK_EVENTS, EventsResponse.class);
-        Single<EventsResponse> weekEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null) {
                 e.onSuccess(eventsResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return weekEventsResponseSingle;
     }
 
     @Override
     public Single<AllEventsResponse> getAllEvents() {
         AllEventsResponse eventsResponse = (AllEventsResponse) sharedPref.getObject(sharedPref.ALL_EVENTS,AllEventsResponse.class);
-        Single<AllEventsResponse> allEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null){
                 e.onSuccess(eventsResponse);
             }else{
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return allEventsResponseSingle;
     }
 
     @Override
@@ -276,14 +263,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<EventsResponse> getLikedEvents() {
         EventsResponse eventsResponse = (EventsResponse) sharedPref.getObject(sharedPref.LIKED_EVENTS,EventsResponse.class);
-        Single<EventsResponse> likedEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null){
                 e.onSuccess(eventsResponse);
             }else{
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return likedEventsResponseSingle;
     }
 
     @Override
@@ -294,14 +280,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<VenuesResponse> getLikedVenues() {
         VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_VENUES,EventsResponse.class);
-        Single<VenuesResponse> likedEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null){
                 e.onSuccess(eventsResponse);
             }else{
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return likedEventsResponseSingle;
     }
 
     @Override
@@ -312,14 +297,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<VenuesResponse> getLikedAttractions() {
         VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_ATTRACTIONS,EventsResponse.class);
-        Single<VenuesResponse> likedEventsResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (eventsResponse != null){
                 e.onSuccess(eventsResponse);
             }else{
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return likedEventsResponseSingle;
     }
 
     @Override
@@ -335,14 +319,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<User> getUserProfile() {
         User user = (User) sharedPref.getObject(SharedPref.USER,User.class);
-        Single<User> userSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (user != null) {
                 e.onSuccess(user);
             }else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return userSingle;
     }
 
     @Override
@@ -363,14 +346,13 @@ public class LocalRepository implements LocalSource {
     @Override
     public Single<ProfileResponse> getProfile() {
         ProfileResponse profileResponse = (ProfileResponse) sharedPref.getObject(SharedPref.PROFILE, ProfileResponse.class);
-        Single<ProfileResponse> profileResponseSingle = Single.create(e -> {
+        return Single.create(e -> {
             if (profileResponse != null) {
                 e.onSuccess(profileResponse);
             } else {
                 e.onError(new Throwable(Constants.ERROR_NOT_CACHED));
             }
         });
-        return profileResponseSingle;
     }
 
     @Override

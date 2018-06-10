@@ -37,7 +37,7 @@ public class ProfilePresenter extends BasePresenter<ProfileContract.View> implem
         @Override
         public void onError(String message) {
             if(message.equals(JaApplication.getContext().getString(R.string.connection))){
-
+                getView().showError(message);
             }else {
                 jaNavigationManager.goToAuthActivity(null);
             }

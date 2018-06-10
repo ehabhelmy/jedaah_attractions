@@ -80,7 +80,7 @@ public interface RemoteSource {
 
     Single<AttractionInnerResponse> getAttractionsDetails(int id,String token);
 
-    Single<ViewTicketResponse> viewAttractionTickets(String startTime,String endTime,String date, String token);
+    Single<ViewTicketResponse> viewAttractionTickets(String startTime,String endTime,String date, String token,int id);
 
     Single<LoginResponse> login(String email, String password);
 

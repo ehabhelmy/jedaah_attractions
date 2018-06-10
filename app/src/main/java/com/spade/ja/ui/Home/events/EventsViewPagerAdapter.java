@@ -13,6 +13,8 @@ import com.spade.ja.ui.Home.events.nearby_events.NearByEventsFragment;
 import com.spade.ja.ui.Home.events.today_events.TodayEventsFragment;
 import com.spade.ja.ui.Home.events.week_events.WeekEventsFragment;
 
+import java.util.Locale;
+
 /**
  * Created by ehab on 12/15/17.
  */
@@ -31,17 +33,41 @@ public class EventsViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) {
-            return new AllEventsFragment();
-        }else if (position == 1){
-            return new TodayEventsFragment();
-        }else if (position == 2){
-            return new WeekEventsFragment();
-        }else if (position == 3){
-            return new NearByEventsFragment();
+        if (isRTL()){
+            if (position == 0) {
+                return new NearByEventsFragment();
+            } else if (position == 1) {
+                return new WeekEventsFragment();
+            } else if (position == 2) {
+                return new TodayEventsFragment();
+            } else if (position == 3) {
+                return new AllEventsFragment();
+            } else {
+                return null;
+            }
         }else {
-            return null;
+            if (position == 0) {
+                return new AllEventsFragment();
+            } else if (position == 1) {
+                return new TodayEventsFragment();
+            } else if (position == 2) {
+                return new WeekEventsFragment();
+            } else if (position == 3) {
+                return new NearByEventsFragment();
+            } else {
+                return null;
+            }
         }
+    }
+
+    private static boolean isRTL() {
+        return isRTL(Locale.getDefault());
+    }
+
+    private static boolean isRTL(Locale locale) {
+        final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
+        return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT ||
+                directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
     }
 
     @Override
@@ -59,17 +85,32 @@ public class EventsViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0 :
-                return JaApplication.getContext().getString(R.string.allevents);
-            case 1 :
-                return JaApplication.getContext().getString(R.string.todayEvents);
-            case 2 :
-                return JaApplication.getContext().getString(R.string.ThisWeekEvents);
-            case 3 :
-                return JaApplication.getContext().getString(R.string.NearByEvents);
-            default:
-                return null;
+        if (isRTL()){
+            switch (position) {
+                case 0:
+                    return JaApplication.getContext().getString(R.string.NearByEvents);
+                case 1:
+                    return JaApplication.getContext().getString(R.string.ThisWeekEvents);
+                case 2:
+                    return JaApplication.getContext().getString(R.string.todayEvents);
+                case 3:
+                    return JaApplication.getContext().getString(R.string.allevents);
+                default:
+                    return null;
+            }
+        }else {
+            switch (position) {
+                case 0:
+                    return JaApplication.getContext().getString(R.string.allevents);
+                case 1:
+                    return JaApplication.getContext().getString(R.string.todayEvents);
+                case 2:
+                    return JaApplication.getContext().getString(R.string.ThisWeekEvents);
+                case 3:
+                    return JaApplication.getContext().getString(R.string.NearByEvents);
+                default:
+                    return null;
+            }
         }
     }
 }

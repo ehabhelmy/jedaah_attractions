@@ -94,7 +94,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         editTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-        profileViewPagerAdapter = new ProfileViewPagerAdapter(getActivity().getSupportFragmentManager());
+        profileViewPagerAdapter = new ProfileViewPagerAdapter(getActivity(),getActivity().getSupportFragmentManager());
         profileViewPager.setAdapter(profileViewPagerAdapter);
         tabLayout.setupWithViewPager(profileViewPager);
     }
@@ -140,6 +140,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     @Override
     public void showError(String message) {
         showPopUp(message);
+        editTextView.setVisibility(View.GONE);
     }
 
     @Override

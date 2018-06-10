@@ -248,19 +248,21 @@ public class EditActivity extends BaseActivity implements EditContract.View {
 
     @Override
     public void showProfileData(Data profileData) {
-        if (!TextUtils.isEmpty(profileData.getProfileImage())) {
-            //Glide.with(this.getContext()).load(model.getProfileImage()).(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
-            Glide.with(this).load(profileData.getProfileImage()).apply(new RequestOptions().placeholder(R.drawable.profile_default).error(R.drawable.profile_default)).into(profileImage);
-        }
-        userName.setText(profileData.getName());
-        email.setText(profileData.getEmail());
-        mobileNumber.setText(profileData.getMobileNumber());
-        dob.setText(profileData.getBirthDate());
-        if (profileData.getGender() != null) {
-            if (profileData.getGender().equalsIgnoreCase("female")) {
-                female.setChecked(true);
-            } else {
-                male.setChecked(true);
+        if (profileData != null) {
+            if (!TextUtils.isEmpty(profileData.getProfileImage())) {
+                //Glide.with(this.getContext()).load(model.getProfileImage()).(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
+                Glide.with(this).load(profileData.getProfileImage()).apply(new RequestOptions().placeholder(R.drawable.profile_default).error(R.drawable.profile_default)).into(profileImage);
+            }
+            userName.setText(profileData.getName());
+            email.setText(profileData.getEmail());
+            mobileNumber.setText(profileData.getMobileNumber());
+            dob.setText(profileData.getBirthDate());
+            if (profileData.getGender() != null) {
+                if (profileData.getGender().equalsIgnoreCase("female")) {
+                    female.setChecked(true);
+                } else {
+                    male.setChecked(true);
+                }
             }
         }
     }

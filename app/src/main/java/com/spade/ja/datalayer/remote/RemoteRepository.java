@@ -653,7 +653,7 @@ public class RemoteRepository implements RemoteSource {
     }
 
     @Override
-    public Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date, String token) {
+    public Single<ViewTicketResponse> viewAttractionTickets(String startTime, String endTime, String date, String token,int id) {
         return Single.create(singleOnSubscribe -> {
                     if (!isConnected(JaApplication.getContext())) {
                         Exception exception = new NetworkErrorException();
@@ -661,7 +661,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             ViewTicketsService viewTicketsService = serviceGenerator.createService(ViewTicketsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(viewTicketsService.viewTickets(getCurrentLanguage(),startTime,endTime,date,BEARER+token), false);
+                            ServiceResponse serviceResponse = processCall(viewTicketsService.viewTickets(getCurrentLanguage(),startTime,endTime,date,id,BEARER+token), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 ViewTicketResponse viewTicketResponse = (ViewTicketResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(viewTicketResponse);
@@ -1123,7 +1123,7 @@ public class RemoteRepository implements RemoteSource {
                         singleOnSubscribe.onError(exception);
                     } else {
                         try {
-                            FilterEventsService filterEventsService = serviceGenerator.createService(FilterEventsService.class, BASE_URL);
+                            FilterEventsService filterEventsService = serviceGenerator.createServiceNotNullSerialization(FilterEventsService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(filterEventsService.filterEvents(getCurrentLanguage(),new FilterEventsRequest(weeklySuggest,categoryId,date,lat,lng)), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 FilterEventsResponse filterEventsResponse = (FilterEventsResponse) serviceResponse.getData();
@@ -1148,7 +1148,7 @@ public class RemoteRepository implements RemoteSource {
                         singleOnSubscribe.onError(exception);
                     } else {
                         try {
-                            FilterVenuesService filterVenuesService = serviceGenerator.createService(FilterVenuesService.class, BASE_URL);
+                            FilterVenuesService filterVenuesService = serviceGenerator.createServiceNotNullSerialization(FilterVenuesService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(filterVenuesService.filterVenues(getCurrentLanguage(),new FilterVenuesRequest(weeklySuggest,categoryId,lat,lng)), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 FilterVenuesResponse filterVenuesResponse = (FilterVenuesResponse) serviceResponse.getData();
@@ -1173,7 +1173,7 @@ public class RemoteRepository implements RemoteSource {
                         singleOnSubscribe.onError(exception);
                     } else {
                         try {
-                            FilterAttractionService filterVenuesService = serviceGenerator.createService(FilterAttractionService.class, BASE_URL);
+                            FilterAttractionService filterVenuesService = serviceGenerator.createServiceNotNullSerialization(FilterAttractionService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(filterVenuesService.filterAttractions(getCurrentLanguage(),new FilterVenuesRequest(weeklySuggest,categoryId,lat,lng)), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 FilterVenuesResponse filterVenuesResponse = (FilterVenuesResponse) serviceResponse.getData();

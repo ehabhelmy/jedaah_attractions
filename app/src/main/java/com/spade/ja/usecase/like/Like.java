@@ -1,5 +1,7 @@
 package com.spade.ja.usecase.like;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.response.like.LikeResponse;
 import com.spade.ja.ui.Base.listener.BaseCallback;
@@ -37,7 +39,6 @@ public class Like implements Unsubscribable {
         likeResponseDisposableSingleObserver = new DisposableSingleObserver<LikeResponse>() {
             @Override
             public void onSuccess(LikeResponse likeResponse) {
-                //TODO : handle succes of like
                 if (likeResponse.getSuccess()){
                     callback.onSuccess(likeResponse);
                 }else {
@@ -47,8 +48,7 @@ public class Like implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                //TODO : show Error important
-                callback.onError("Server Error");
+                callback.onError(JaApplication.getContext().getString(R.string.error_like));
             }
         };
         if (!compositeDisposable.isDisposed()){

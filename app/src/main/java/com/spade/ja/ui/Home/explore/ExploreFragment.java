@@ -2,9 +2,9 @@ package com.spade.ja.ui.Home.explore;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -12,7 +12,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -38,7 +40,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by ehab on 12/11/17.
@@ -123,6 +127,12 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
 
     @BindView(R.id.fab)
     CircularImageView fab;
+    Unbinder unbinder;
+
+    @OnClick(R.id.searchEditText)
+    void openSearchView(){
+        activity.showSearch();
+    }
 
     private HomeContract.View activity;
     private boolean locationCheck;
@@ -200,7 +210,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void setupTopEvents(List<Event> events) {
         if (events.size() > 0) {
             setupRecyclerView(topEvents, events);
-        }else {
+        } else {
             noTopEvents.setVisibility(View.VISIBLE);
             topEvents.setVisibility(View.GONE);
         }
@@ -210,7 +220,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void setupNearbyEvents(List<Event> events) {
         if (events.size() > 0) {
             setupRecyclerView(nearByEvents, events);
-        }else {
+        } else {
             noNearEvents.setVisibility(View.VISIBLE);
             nearByEvents.setVisibility(View.GONE);
         }
@@ -220,7 +230,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void setupTopVenues(List<Venue> data) {
         if (data.size() > 0) {
             setupVenuesRecyclerView(topVenues, data);
-        }else {
+        } else {
             noTopVenues.setVisibility(View.VISIBLE);
             topVenues.setVisibility(View.GONE);
         }
@@ -230,7 +240,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void setupNearbyVenues(List<Venue> data) {
         if (data.size() > 0) {
             setupVenuesRecyclerView(nearByVenues, data);
-        }else {
+        } else {
             noNearByVenues.setVisibility(View.VISIBLE);
             nearByVenues.setVisibility(View.GONE);
         }
@@ -240,7 +250,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void setupTopAttractions(List<Venue> data) {
         if (data.size() > 0) {
             setupAttractionsRecyclerView(topAttractions, data);
-        }else {
+        } else {
             noTopAttractions.setVisibility(View.VISIBLE);
             topAttractions.setVisibility(View.GONE);
         }
@@ -250,7 +260,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void setupNearbyAttractions(List<Venue> data) {
         if (data.size() > 0) {
             setupAttractionsRecyclerView(nearByAttractions, data);
-        }else {
+        } else {
             noNearAttractions.setVisibility(View.VISIBLE);
             nearByAttractions.setVisibility(View.GONE);
         }
@@ -416,5 +426,34 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     @Override
     public void setLocationPermission(boolean check) {
         locationCheck = check;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick({R.id.events, R.id.venues, R.id.attractions})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.events:
+                activity.showEventsListing();
+                break;
+            case R.id.venues:
+                activity.showDirectoryListing();
+                break;
+            case R.id.attractions:
+                activity.showDirectoryListing();
+                break;
+        }
     }
 }

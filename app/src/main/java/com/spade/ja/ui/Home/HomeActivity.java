@@ -235,4 +235,21 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         bottomNavigationView.setSelectedItemId(R.id.events);
         presenter.showEvents();
     }
+
+    @Override
+    public void showEventsListing() {
+        openEventsList();
+    }
+
+    @Override
+    public void showDirectoryListing() {
+        bottomNavigationView.setSelectedItemId(R.id.directory);
+        presenter.showDirectory();
+    }
+
+    @Override
+    public void showSearch() {
+        bottomNavigationView.setSelectedItemId(R.id.search);
+        presenter.showSearch();
+    }
 }

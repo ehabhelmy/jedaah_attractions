@@ -213,7 +213,7 @@ public class AttractionDetailsFragment extends BaseFragment implements Attractio
         description.setText(data.getDescription());
         StringBuilder venuDays = new StringBuilder();
         StringBuilder hours = new StringBuilder();
-        hours.append("Hours ");
+        hours.append(getString(R.string.hours));
         for (Day day:data.getDays()) {
             for (AttractionWeekDay attractionWeekDay:day.getAttractionWeekDays()){
                 if (attractionWeekDay.getIsClosed()== 1) {
@@ -221,22 +221,22 @@ public class AttractionDetailsFragment extends BaseFragment implements Attractio
                 }
                 if (DateTimeUtils.isOpenNow(day.getDay())) {
                     if (attractionWeekDay.getIsClosed() == 1) {
-                        openNow.setText("Closed Now");
+                        openNow.setText(getString(R.string.closed_now));
                     }
                     hours.append(attractionWeekDay.getStartTime() + " - " + attractionWeekDay.getEndTime());
                 }
             }
         }
-        venuDays.append("Closed");
+        venuDays.append(getString(R.string.closed_now));
         venueOpenDays.addView(createTextView(hours.toString()));
         venueOpenDays.addView(createTextView(venuDays.toString()));
         SocialMediaAdapter adapter = new SocialMediaAdapter();
         ArrayList<SocialMedium> socialMediumArrayList = (ArrayList<SocialMedium>) data.getSocialMedia();
         if (data.getAddressUrl() != null){
-            socialMediumArrayList.add(new SocialMedium(0,data.getAddressUrl(),"WEBSITE"));
+            socialMediumArrayList.add(new SocialMedium(0,data.getAddressUrl(),getString(R.string.web_site)));
         }
         if (data.getContactNumbers() !=null){
-            socialMediumArrayList.add(new SocialMedium(0,data.getContactNumbers(),"PHONE"));
+            socialMediumArrayList.add(new SocialMedium(0,data.getContactNumbers(),getString(R.string.phone)));
         }
         adapter.setData(socialMediumArrayList);
         socialMedia.setLayoutManager(new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false));
