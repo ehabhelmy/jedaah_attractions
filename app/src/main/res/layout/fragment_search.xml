@@ -174,7 +174,7 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat = "@mipmap/venues_ic"/>
+                                app:srcCompat = "@mipmap/venues"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -203,7 +203,7 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat = "@mipmap/attractions_ic_1"/>
+                                app:srcCompat = "@mipmap/attractions"/>
 
                             <TextView
                                 android:layout_width="wrap_content"

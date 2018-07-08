@@ -11,6 +11,6 @@ public class AttractionPaymentAdapter {
 
     public static AttractionPaymentData convertToPaymentData (Data data) {
 
-        return new AttractionPaymentData(data.getDays(),data.getAttractionExceptionalDates(),data.getCreditCard() ==1 ? true:false,data.getCashOnDelivery() == 1 ? true:false,data.getPayLater() == 1 ? true:false,data.getMaxOfPayLaterTickets(),data.getMaxOfCashTickets(),data.getId(),data.getTitle());
+        return new AttractionPaymentData(data.getDays(),data.getAttractionExceptionalDates(), data.getCreditCard() == 1, data.getCashOnDelivery() == 1, data.getPayLater() == 1,data.getMaxOfPayLaterTickets() != null ? data.getMaxOfPayLaterTickets():0,data.getMaxOfCashTickets() != null ? data.getMaxOfCashTickets() : 0,data.getId(),data.getTitle());
     }
 }

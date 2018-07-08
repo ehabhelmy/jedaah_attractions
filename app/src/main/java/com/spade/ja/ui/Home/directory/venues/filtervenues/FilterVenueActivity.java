@@ -203,12 +203,16 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
         filterResults.addItemDecoration(dividerItemDecoration);
         DataAdapter dataAdapter = new DataAdapter();
         dataAdapter.setData((ArrayList<Data>) venues);
-        dataAdapter.setOnFavouriteListener(id -> {
-            //TODO : call presenter to send id of the event to the backend
-            presenter.like(id);
-        });
-        dataAdapter.setOnViewListener(id -> {
-            presenter.showVenueInner(id);
+        dataAdapter.setOnItemClick(new DataAdapter.onItemClick() {
+            @Override
+            public void onLikeClicked(int id, String type) {
+                presenter.like(id);
+            }
+
+            @Override
+            public void onCardClicked(int id, String type) {
+                presenter.showVenueInner(id);
+            }
         });
         filterResults.setAdapter(dataAdapter);
     }

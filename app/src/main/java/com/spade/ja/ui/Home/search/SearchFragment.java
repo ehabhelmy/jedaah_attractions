@@ -86,6 +86,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     private boolean isEventSelected = false;
     private boolean isVenueSelected = false;
     private boolean isAttractionSelected = false;
+    private int type;
 
     @OnClick(R.id.events)
     void eventsSelected(){
@@ -134,12 +135,15 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
         List<Integer> categories = new ArrayList<>();
         categories.addAll(categoriesChosen);
         if (isEventSelected){
+            type = R.string.events;
             types.add("events");
         }
         if (isVenueSelected){
+            type = R.string.venues;
             types.add("venues");
         }
         if (isAttractionSelected){
+            type = R.string.attractions;
             types.add("attractions");
         }
         presenter.search(searchInput.getText().toString().trim(),types,categories);
@@ -201,6 +205,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
     @Override
     public void showResults(List<Result> results) {
+        filterByText.setText(getString(type));
         searchContainer.setVisibility(View.GONE);
         resultsContainer.setVisibility(View.VISIBLE);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

@@ -108,8 +108,12 @@ public class EventDetailsAdapter {
         }else {
             paymentData.setPayLater(false);
         }
-        paymentData.setCashTickets(data.getMaxOfCashTickets());
-        paymentData.setPayLaterTickets(data.getMaxOfPayLaterTickets());
+        if (data.getMaxOfCashTickets() != null) {
+            paymentData.setCashTickets(data.getMaxOfCashTickets());
+        }
+        if (data.getMaxOfPayLaterTickets() != null) {
+            paymentData.setPayLaterTickets(data.getMaxOfPayLaterTickets());
+        }
         if (data.getNationalId() == 1) {
             paymentData.setNationalRequired(true);
         }else {

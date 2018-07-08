@@ -218,12 +218,16 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
         filterResults.addItemDecoration(dividerItemDecoration);
         DataAdapter dataAdapter = new DataAdapter();
         dataAdapter.setData((ArrayList<Data>) events);
-        dataAdapter.setOnFavouriteListener(id -> {
-            //TODO : call presenter to send id of the event to the backend
-            presenter.like(id);
-        });
-        dataAdapter.setOnViewListener(id -> {
-            presenter.showEventInner(id);
+        dataAdapter.setOnItemClick(new DataAdapter.onItemClick() {
+            @Override
+            public void onLikeClicked(int id, String type) {
+                presenter.like(id);
+            }
+
+            @Override
+            public void onCardClicked(int id, String type) {
+                presenter.showEventInner(id);
+            }
         });
         filterResults.setAdapter(dataAdapter);
     }

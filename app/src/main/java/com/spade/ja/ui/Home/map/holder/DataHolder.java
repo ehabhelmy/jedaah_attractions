@@ -62,7 +62,7 @@ public class DataHolder extends BaseViewHolder<Data> {
         Glide.with(image.getContext()).load(baseModel.getImage()).apply(new RequestOptions().placeholder(R.mipmap.myimage).error(R.mipmap.myimage)).into(new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                image.setBackground(resource);
+                image.setImageDrawable(resource);
             }
         });
         cats.setText(baseModel.getDescription());
