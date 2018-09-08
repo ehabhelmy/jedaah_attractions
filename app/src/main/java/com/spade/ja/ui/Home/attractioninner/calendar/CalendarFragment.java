@@ -38,7 +38,7 @@ import butterknife.OnClick;
  * Created by ehab on 3/14/18.
  */
 
-public class CalendarFragment extends BaseFragment implements CalendarContract.View,JACalendarView.DaySelectListener {
+public class CalendarFragment extends BaseFragment implements CalendarContract.View, JACalendarView.DaySelectListener {
 
     @Inject
     CalendarPresenter presenter;
@@ -58,13 +58,13 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     JACalendarView calendarView;
 
     private TimeModel timeModel;
-    private Map<Integer,AttractionWeekDay> weekDayMap;
+    private Map<Integer, AttractionWeekDay> weekDayMap;
 
     @OnClick(R.id.next)
     void gotToPaymentView() {
-        if (timeModel==null) {
+        if (timeModel == null) {
             showPopUp("You must select a date.");
-        }else {
+        } else {
             presenter.openPaymentView(new AttractionPaymentModel(attractionPaymentData.isCredit(), attractionPaymentData.isCash(), attractionPaymentData.isPayLater(), attractionPaymentData.getMaxPayLaterTickets(), attractionPaymentData.getMaxCashTickets(), false, timeModel, attractionPaymentData.getAttractionTitle(), attractionPaymentData.getAttractionId()));
         }
     }
@@ -111,43 +111,46 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         calendar.setTime(new Date());
         ArrayList<Integer> openDays = new ArrayList<>();
         ArrayList<Integer> closedDays = new ArrayList<>();
-        for (Day day:weekDays){
-                if (day.getAttractionWeekDays().get(0).getIsClosed() == 0) {
-                    dayArrayList.add(day);
-                    openDays.add(DateTimeUtils.parseDayOfMonth(day.getDay()));
-                } else {
-                    closedDays.add(DateTimeUtils.parseDayOfMonth(day.getDay()));
-                }
-        }
-        for (AttractionExceptionalDate attractionExceptionalDate: exceptionalDates) {
-            if (DateTimeUtils.isDateInCurrentMonth(attractionExceptionalDate.getDate())) {
-                Day day = new Day();
-                day.setId(attractionExceptionalDate.getId());
-                day.setType("Excep");
-                List<AttractionWeekDay>  attractionWeekDayList = new ArrayList<>();
-                AttractionWeekDay attractionWeekDay = new AttractionWeekDay();
-                attractionWeekDay.setAddons(attractionExceptionalDate.getAddons());
-                attractionWeekDay.setIsClosed(0);
-                attractionWeekDay.setTypes(attractionExceptionalDate.getTypes());
-                attractionWeekDay.setStartTime(attractionExceptionalDate.getStartTime());
-                attractionWeekDay.setEndTime(attractionExceptionalDate.getEndTime());
-                attractionWeekDayList.add(attractionWeekDay);
-                day.setAttractionWeekDays(attractionWeekDayList);
+        for (Day day : weekDays) {
+            if (day.getAttractionWeekDays().get(0).getIsClosed() == 0) {
                 dayArrayList.add(day);
-                openDays.add(DateTimeUtils.parseDayOfMonthExceptional(attractionExceptionalDate.getDate()));
-                //TODO : map expectional date to week day and add to array
-            }else {
-                JACalendarView jaCalendarView = new JACalendarView(getActivity());
-                jaCalendarView.setMonth(DateTimeUtils.parseMonthExceptional(attractionExceptionalDate.getDate()));
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.setMargins(0,convertFromDpToPixel(),0,0);
-                jaCalendarView.setLayoutParams(params);
-                jaCalendarView.setListener(this);
-                ArrayList<Integer> expDay = new ArrayList<>();
-                expDay.add(DateTimeUtils.parseDayOfMonthExceptional(attractionExceptionalDate.getDate()));
-                jaCalendarView.setupCalendar(DateTimeUtils.getMonth(DateTimeUtils.convertJSONDateToDate(attractionExceptionalDate.getDate())).toUpperCase()+" "+DateTimeUtils.getYear(DateTimeUtils.convertJSONDateToDate(attractionExceptionalDate.getDate())).toUpperCase()
-                ,expDay.toArray(new Integer[]{}),null,dayArrayList);
-                calendarContainer.addView(jaCalendarView);
+                openDays.add(DateTimeUtils.parseDayOfMonth(day.getDay()));
+            } else {
+                closedDays.add(DateTimeUtils.parseDayOfMonth(day.getDay()));
+            }
+        }
+        for (AttractionExceptionalDate attractionExceptionalDate : exceptionalDates) {
+            if (attractionExceptionalDate.getDate() != null) {
+                if (DateTimeUtils.isDateInCurrentMonth(attractionExceptionalDate.getDate())) {
+                    Day day = new Day();
+                    day.setId(attractionExceptionalDate.getId());
+                    day.setType("Excep");
+                    day.setDate(attractionExceptionalDate.getDate());
+                    List<AttractionWeekDay> attractionWeekDayList = new ArrayList<>();
+                    AttractionWeekDay attractionWeekDay = new AttractionWeekDay();
+                    attractionWeekDay.setAddons(attractionExceptionalDate.getAddons());
+                    attractionWeekDay.setIsClosed(0);
+                    attractionWeekDay.setTypes(attractionExceptionalDate.getTypes());
+                    attractionWeekDay.setStartTime(attractionExceptionalDate.getStartTime());
+                    attractionWeekDay.setEndTime(attractionExceptionalDate.getEndTime());
+                    attractionWeekDayList.add(attractionWeekDay);
+                    day.setAttractionWeekDays(attractionWeekDayList);
+                    dayArrayList.add(day);
+                    openDays.add(DateTimeUtils.parseDayOfMonthExceptional(attractionExceptionalDate.getDate()));
+                    //TODO : map expectional date to week day and add to array
+                } else {
+                    JACalendarView jaCalendarView = new JACalendarView(getActivity());
+                    jaCalendarView.setMonth(DateTimeUtils.parseMonthExceptional(attractionExceptionalDate.getDate()));
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(0, convertFromDpToPixel(), 0, 0);
+                    jaCalendarView.setLayoutParams(params);
+                    jaCalendarView.setListener(this);
+                    ArrayList<Integer> expDay = new ArrayList<>();
+                    expDay.add(DateTimeUtils.parseDayOfMonthExceptional(attractionExceptionalDate.getDate()));
+                    jaCalendarView.setupCalendar(DateTimeUtils.getMonth(DateTimeUtils.convertJSONDateToDate(attractionExceptionalDate.getDate())).toUpperCase() + " " + DateTimeUtils.getYear(DateTimeUtils.convertJSONDateToDate(attractionExceptionalDate.getDate())).toUpperCase()
+                            , expDay.toArray(new Integer[]{}), null, dayArrayList);
+                    calendarContainer.addView(jaCalendarView);
+                }
             }
         }
         calendarView.setListener(this);
@@ -156,11 +159,11 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
         openDaysArray = openDays.toArray(new Integer[]{});
         closedDaysArray = closedDays.toArray(new Integer[]{});
         calendarView.setupCalendar(
-                DateTimeUtils.getMonth(new Date()).toUpperCase()+" "+DateTimeUtils.getYear(new Date()).toUpperCase()
-                , openDaysArray,closedDaysArray,dayArrayList);
+                DateTimeUtils.getMonth(new Date()).toUpperCase() + " " + DateTimeUtils.getYear(new Date()).toUpperCase()
+                , openDaysArray, closedDaysArray, dayArrayList);
     }
 
-    private int convertFromDpToPixel(){
+    private int convertFromDpToPixel() {
         Resources r = getActivity().getResources();
         int px = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
@@ -173,8 +176,12 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     @Override
     public void onDaySelectedListener(Day day) {
         List<TimeModel> timeModels = new ArrayList<>();
-        for (AttractionWeekDay attractionWeekDay:day.getAttractionWeekDays()) {
-            timeModels.add(new TimeModel(day.getId(),DateTimeUtils.getDateFromDay(day.getDay()),attractionWeekDay.getStartTime(),attractionWeekDay.getEndTime(),day.getType() != null ? "Excep":null));
+        for (AttractionWeekDay attractionWeekDay : day.getAttractionWeekDays()) {
+            if (day.getType() != null) {
+                timeModels.add(new TimeModel(day.getId(),day.getDate(), attractionWeekDay.getStartTime(), attractionWeekDay.getEndTime(), day.getType() != null ? "Excep" : null));
+            } else {
+                timeModels.add(new TimeModel(day.getId(), DateTimeUtils.getDateFromDay(day.getDay()), attractionWeekDay.getStartTime(), attractionWeekDay.getEndTime(), day.getType() != null ? "Excep" : null));
+            }
         }
         setupTimes(timeModels);
         timeContainer.setVisibility(View.VISIBLE);
@@ -195,12 +202,12 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
             if (timeModel == null) {
                 timeModel = timeModel1;
                 TextView textView = view.findViewById(R.id.tagType);
-                textView.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
                 view.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.tag_rect_black));
-            } else if (timeModel == timeModel1){
+            } else if (timeModel == timeModel1) {
                 timeModel = null;
                 TextView textView = view.findViewById(R.id.tagType);
-                textView.setTextColor(ContextCompat.getColor(getActivity(),R.color.lightBlack));
+                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.lightBlack));
                 view.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.tag_rect_white));
             }
         });

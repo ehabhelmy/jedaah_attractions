@@ -4,6 +4,7 @@ import com.spade.ja.ui.Base.BaseFragment;
 import com.spade.ja.ui.Base.listener.BaseView;
 import com.spade.ja.ui.Base.listener.ErrorView;
 import com.spade.ja.ui.Base.listener.ProgressView;
+import com.spade.ja.usecase.Unsubscribable;
 
 /**
  * Created by ehab on 12/2/17.
@@ -18,7 +19,7 @@ public interface HomeContract {
         void showDirectoryListing();
         void showSearch();
     }
-    interface Presenter{
+    interface Presenter {
         void showExplore();
         void showSearch();
         void showEvents();

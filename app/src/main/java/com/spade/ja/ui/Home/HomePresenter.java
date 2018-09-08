@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.spade.ja.ui.Base.BaseFragment;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Home.explore.ExploreFragment;
+import com.spade.ja.usecase.login.Token;
 
 import javax.inject.Inject;
 
@@ -14,8 +15,10 @@ import javax.inject.Inject;
 
 public class HomePresenter extends BasePresenter<HomeContract.View> implements HomeContract.Presenter {
 
+    private Token token;
     @Inject
-    public HomePresenter() {
+    public HomePresenter(Token token) {
+        this.token = token;
     }
 
     @Override
@@ -40,7 +43,11 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void showProfile() {
-        jaNavigationManager.showProfileScreen();
+        if (token.getToken() != null) {
+            jaNavigationManager.showProfileScreen();
+        }else {
+            jaNavigationManager.goToAuthActivity(null);
+        }
     }
 
     @Override

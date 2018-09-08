@@ -18,6 +18,15 @@ public class Day extends BaseModel{
     @SerializedName("attraction_week_days")
     @Expose
     private List<AttractionWeekDay> attractionWeekDays = null;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     private String type;
 

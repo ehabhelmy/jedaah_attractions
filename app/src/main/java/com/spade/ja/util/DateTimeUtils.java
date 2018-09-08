@@ -61,6 +61,7 @@ public class DateTimeUtils {
 
     public static int parseDayOfMonth(String day)  {
         SimpleDateFormat dayFormat = new SimpleDateFormat("E");
+        Calendar calendar2 = Calendar.getInstance();
         Date date = null;
         try {
             date = dayFormat.parse(day);
@@ -69,7 +70,8 @@ public class DateTimeUtils {
         }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        calendar2.set(Calendar.DAY_OF_WEEK,calendar.get(Calendar.DAY_OF_WEEK));
+        int dayOfMonth = calendar2.get(Calendar.DAY_OF_MONTH);
         return dayOfMonth;
     }
 

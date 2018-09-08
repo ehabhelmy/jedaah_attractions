@@ -7,9 +7,11 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import okhttp3.Credentials;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,6 +23,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Singleton
 public class ServiceGenerator {
 
+    private static final String AUTHORIZATION = "Authorization";
+    String authToken;
+    private String username = "spadeuser";
+    private String serverPassword  = "9fhQj$mX)p4uM.v2";
     //Network constants
     private final int TIMEOUT_CONNECT = 30;   //In seconds
     private final int TIMEOUT_READ = 30;   //In seconds
@@ -36,6 +42,7 @@ public class ServiceGenerator {
     @Inject
     public ServiceGenerator(Gson gson) {
         this.okHttpBuilder = new OkHttpClient.Builder();
+        authToken = Credentials.basic(username, serverPassword);
         okHttpBuilder.addInterceptor(headerInterceptor)
                      .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
                      .connectTimeout(TIMEOUT_CONNECT,TimeUnit.SECONDS);
@@ -66,6 +73,7 @@ public class ServiceGenerator {
         Request request = original.newBuilder()
                 .header(CONTENT_TYPE, CONTENT_TYPE_VALUE)
                 .header(API_KEY, API_KEY_VALUE)
+                .header(AUTHORIZATION,authToken)
                 .method(original.method(), original.body())
                 .build();
 
