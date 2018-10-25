@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:background="@color/lightBlack"
     android:layout_height="match_parent">
-        <RelativeLayout
+
+    <include layout="@layout/loading_overlay" android:visibility="gone"/>
+
+    <RelativeLayout
             android:layout_width="match_parent"
             android:id="@+id/loginContainer"
             android:background="@drawable/payment_bg"

@@ -5,10 +5,12 @@ import android.os.Bundle;
 import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
 import com.spade.ja.datalayer.pojo.request.attractionorder.Ticket;
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
+import com.spade.ja.datalayer.pojo.response.login.User;
 import com.spade.ja.datalayer.pojo.response.viewtickets.Datum;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.ui.Home.attractioninner.AttractionOrder.pojo.AttractionOrder;
+import com.spade.ja.usecase.LoggedUser.LoggedUser;
 import com.spade.ja.usecase.viewtickets.ViewTickets;
 import com.spade.ja.util.Constants;
 
@@ -25,6 +27,9 @@ public class AttractionOrderPresenter extends BasePresenter<AttractionOrderContr
     private ViewTickets viewTickets;
     private com.spade.ja.usecase.attractionorder.AttractionOrder attractionOrder;
     private AttractionOrder order;
+    private LoggedUser loggedUser;
+    private String paymentMethod;
+    private String amount;
     private BaseCallback<Datum> datumBaseCallback = new BaseCallback<Datum>() {
         @Override
         public void onSuccess(Datum model) {
@@ -43,10 +48,28 @@ public class AttractionOrderPresenter extends BasePresenter<AttractionOrderContr
     };
     private BaseCallback<AttractionOrderResponse> attractionOrderResponseBaseCallback = new BaseCallback<AttractionOrderResponse>() {
         @Override
-        public void onSuccess(AttractionOrderResponse model) {
+        public void onSuccess(AttractionOrderResponse attractionOrderResponse) {
             if (isViewAlive.get()){
                 getView().hideLoading();
-                jaNavigationManager.showAttractionOrderSuccess();
+                if (paymentMethod.equals("credit_card")){
+                    loggedUser.getLoggedUser(new BaseCallback<User>() {
+                        @Override
+                        public void onSuccess(User model) {
+                            if (isViewAlive.get()){
+                                getView().setupCreditCardPayment(model,amount,attractionOrderResponse.getData().getOrder().getId());
+                            }
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            if (isViewAlive.get()){
+                                getView().showError(message);
+                            }
+                        }
+                    });
+                }else {
+                    jaNavigationManager.showAttractionOrderSuccess();
+                }
             }
         }
 
@@ -60,15 +83,17 @@ public class AttractionOrderPresenter extends BasePresenter<AttractionOrderContr
     };
 
     @Inject
-    public AttractionOrderPresenter(ViewTickets viewTickets, com.spade.ja.usecase.attractionorder.AttractionOrder attractionOrder) {
+    public AttractionOrderPresenter(ViewTickets viewTickets, com.spade.ja.usecase.attractionorder.AttractionOrder attractionOrder,LoggedUser loggedUser) {
         this.viewTickets = viewTickets;
         this.attractionOrder = attractionOrder;
+        this.loggedUser = loggedUser;
     }
 
     @Override
     public void unSubscribe() {
         viewTickets.unSubscribe();
         attractionOrder.unSubscribe();
+        loggedUser.unSubscribe();
     }
 
     @Override
@@ -96,6 +121,8 @@ public class AttractionOrderPresenter extends BasePresenter<AttractionOrderContr
     @Override
     public void order(String name, String email, String mobile, String paymentMethod, int attractionId, int totalPrice, Integer exceptionalId, Integer attractionWeekId, List<Ticket> tickets) {
         getView().showLoading();
+        this.paymentMethod = paymentMethod;
+        this.amount = totalPrice+"";
         attractionOrder.attractionOrder(attractionOrderResponseBaseCallback,new AttractionOrderRequest(name,email,mobile,paymentMethod,attractionId,totalPrice,exceptionalId,attractionWeekId,tickets));
     }
 }

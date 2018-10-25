@@ -17,12 +17,13 @@
 
     <TextView
         android:id="@+id/venueName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gotham_bold"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/filter_size"
-        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@id/close"
         android:layout_alignTop="@id/close"
         android:text="Amr Diab" />
 

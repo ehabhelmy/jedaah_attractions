@@ -1,18 +1,21 @@
 package com.spade.ja.datalayer.remote;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.spade.ja.datalayer.pojo.BaseModel;
 import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
 import com.spade.ja.datalayer.pojo.response.DataResponse;
 import com.spade.ja.datalayer.pojo.response.about.AboutUsResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.attractionconfirm.AttractionConfirmOrderResponse;
 import com.spade.ja.datalayer.pojo.response.attractionhistory.AttractionOrderHistoryResponse;
 import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerResponse;
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.code.ResetCodeResponse;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
+import com.spade.ja.datalayer.pojo.response.eventcreditconfirm.EventChangeStatusResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
 import com.spade.ja.datalayer.pojo.response.filter.events.FilterEventsResponse;
@@ -134,4 +137,7 @@ public interface RemoteSource {
 
     Single<ContactUsResponse> cancelEvent(int id,String token);
 
+    Single<EventChangeStatusResponse> changeOrderCreditEvent(String orderId, String status, String token);
+
+    Single<AttractionConfirmOrderResponse> changeOrderCreditAttraction(String orderId, String status, String token);
 }

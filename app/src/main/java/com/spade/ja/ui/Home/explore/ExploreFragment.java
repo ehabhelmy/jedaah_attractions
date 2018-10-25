@@ -346,6 +346,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     public void showErrorLocationNotEnabled() {
         errorLocationContainer.setVisibility(View.VISIBLE);
         venueErrorLocationContainer.setVisibility(View.VISIBLE);
+        attractionsErrorLocationContainer.setVisibility(View.VISIBLE);
     }
 
     @Override

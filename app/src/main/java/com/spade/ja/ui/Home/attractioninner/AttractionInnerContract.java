@@ -18,5 +18,6 @@ public interface AttractionInnerContract {
     interface Presenter {
         void goToHomeActivity();
         BaseFragment getCurrentFragment();
+        void changeCreditCardStatus(String orderid,String status);
     }
 }

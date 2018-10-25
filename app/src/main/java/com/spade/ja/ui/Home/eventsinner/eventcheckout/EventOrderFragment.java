@@ -15,12 +15,15 @@ import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventTicket;
 import com.spade.ja.datalayer.pojo.response.eventinner.TicketDate;
+import com.spade.ja.datalayer.pojo.response.login.User;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.eventsinner.EventInnerActivity;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.EventDaysAdapter;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.EventTicketsAdapter;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.viewholder.TicketViewHolder;
+import com.spade.ja.util.PaymentGateWay;
 
 import java.util.ArrayList;
 
@@ -261,5 +264,11 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
                 }
             }
         });
+    }
+
+    @Override
+    public void setupCreditCardPayment(User user,String amount,int orderId) {
+        ((EventInnerActivity)getActivity()).setOrderId(orderId+"");
+        PaymentGateWay.pay(getActivity(),user,amount,getActivity().getComponentName().getClassName());
     }
 }

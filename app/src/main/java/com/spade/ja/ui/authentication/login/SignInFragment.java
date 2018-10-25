@@ -123,12 +123,11 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
 
     @OnClick(R.id.signin)
     void login(){
-        //TODO : call presenter and send the email and password
         hideKeyboard();
         if (!Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()){
-            showPopUp("Not a valid email");
+            showPopUp(getString(R.string.enter_mail));
         }else if (TextUtils.isEmpty(password.getText())){
-            showPopUp("Not a valid password");
+            showPopUp(getString(R.string.enter_pass));
         }else {
             presenter.login(email.getText().toString().trim(), password.getText().toString().trim());
         }

@@ -24,6 +24,6 @@
         android:visibility="gone"
         android:textSize="@dimen/title_inner"
         android:fontFamily="@font/gotham_bold"
-        android:text="@string/noLikedEvents"/>
+        android:text="@string/noLikedDirectories"/>
 
 </RelativeLayout>

@@ -19,5 +19,6 @@ public interface AttractionDetailsContract {
         void openNavigationView(double lat,double lng);
         void like();
         void openPaymentView();
+        void showFullScreenPhoto(String imageUrl,String title);
     }
 }

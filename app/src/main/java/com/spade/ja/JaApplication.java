@@ -2,15 +2,18 @@ package com.spade.ja;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.onesignal.OneSignal;
 import com.spade.ja.di.DaggerMainComponent;
 import com.spade.ja.di.MainComponent;
 import com.spade.ja.ui.notification.NotificationHandler;
 import com.spade.ja.util.LocaleManager;
+import com.telr.mobile.sdk.TelrApplication;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -18,7 +21,7 @@ import io.fabric.sdk.android.Fabric;
  * Created by ehab on 12/1/17.
  */
 
-public class JaApplication extends MultiDexApplication {
+public class JaApplication extends TelrApplication {
 
     public static Context context;
     private MainComponent mainComponent;
@@ -31,17 +34,13 @@ public class JaApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-//        // TODO : initialize leak canary and crashlytics and FireBase Analytics and facebook sdk
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            return;
-//        }
-//        LeakCanary.install(this);
         // OneSignal Initialization
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new NotificationHandler())
                 .init();
+        FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         mainComponent = DaggerMainComponent.create();
         context = getApplicationContext();
@@ -50,6 +49,7 @@ public class JaApplication extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleManager.setLocale(base));
+        MultiDex.install(this);
     }
 
     @Override

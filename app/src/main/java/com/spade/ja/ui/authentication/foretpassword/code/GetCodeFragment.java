@@ -3,6 +3,8 @@ package com.spade.ja.ui.authentication.foretpassword.code;
 import android.content.Context;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
@@ -18,6 +20,12 @@ public class GetCodeFragment extends BaseFragment implements GetCodeContract.Vie
 
     @Inject
     GetCodePresenter getCodePresenter;
+
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
+
+    @BindView(R.id.container)
+    LinearLayout container;
 
     @BindView(R.id.email)
     AppCompatEditText email;
@@ -67,11 +75,13 @@ public class GetCodeFragment extends BaseFragment implements GetCodeContract.Vie
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
+        container.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
+        container.setVisibility(View.VISIBLE);
     }
 }

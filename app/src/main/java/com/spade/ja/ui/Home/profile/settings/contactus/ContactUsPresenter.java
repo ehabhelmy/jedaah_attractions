@@ -25,6 +25,7 @@ public class ContactUsPresenter extends BasePresenter<ContactUsContract.View> im
         public void onSuccess(ContactUsResponse model) {
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
+                    getView().hideLoading();
                     getView().showSuccess(model.getData().getMsg());
                 }
             }
@@ -33,6 +34,7 @@ public class ContactUsPresenter extends BasePresenter<ContactUsContract.View> im
         @Override
         public void onError(String message) {
             if (isViewAlive.get()) {
+                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -45,6 +47,7 @@ public class ContactUsPresenter extends BasePresenter<ContactUsContract.View> im
 
     @Override
     public void contactUs(String subject, String message) {
+        getView().showLoading();
         contactUs.contactUs(subject,message,contactUsResponseBaseCallback);
     }
 }

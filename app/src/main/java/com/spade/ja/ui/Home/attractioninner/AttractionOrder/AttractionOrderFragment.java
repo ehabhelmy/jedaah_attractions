@@ -15,16 +15,20 @@ import android.widget.TextView;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.request.attractionorder.Ticket;
+import com.spade.ja.datalayer.pojo.response.login.User;
 import com.spade.ja.datalayer.pojo.response.viewtickets.Addon;
 import com.spade.ja.datalayer.pojo.response.viewtickets.Type;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.attractioninner.AttractionInnerActivity;
 import com.spade.ja.ui.Home.attractioninner.AttractionOrder.adapter.AddOnsAdapter;
 import com.spade.ja.ui.Home.attractioninner.AttractionOrder.adapter.TicketAdapter;
 import com.spade.ja.ui.Home.attractioninner.AttractionOrder.pojo.AttractionOrder;
 import com.spade.ja.ui.Home.attractioninner.AttractionOrder.viewholder.AddOnViewHolder;
 import com.spade.ja.ui.Home.attractioninner.AttractionOrder.viewholder.TicketViewHolder;
 import com.spade.ja.ui.Home.attractioninner.calendar.pojo.TimeModel;
+import com.spade.ja.ui.Home.eventsinner.EventInnerActivity;
 import com.spade.ja.util.DateTimeUtils;
+import com.spade.ja.util.PaymentGateWay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -257,5 +261,12 @@ public class AttractionOrderFragment extends BaseFragment implements AttractionO
             ticketsNumberTextView.setText(numTickets + " ticket");
         });
         addOnsList.setAdapter(addOnsAdapter);
+    }
+
+
+    @Override
+    public void setupCreditCardPayment(User user, String amount, int orderId) {
+        ((AttractionInnerActivity)getActivity()).setOrderId(orderId+"");
+        PaymentGateWay.pay(getActivity(),user,amount,getActivity().getComponentName().getClassName());
     }
 }

@@ -22,8 +22,8 @@
     <string name="getDirections">Get Directions</string>
     <string name="buyNow">BUY NOW</string>
     <string name="skip">SKIP</string>
-    <string name="welcome">WELCOME TO</string>
-    <string name="paragraph">askjdhasjkdhasjdhasjdhasjdah , asjdkashjdahsjdhaj ,asdasdasda ,asdasdasd</string>
+    <string name="welcome">Hala Fikom!</string>
+    <string name="paragraph">Jeddah attractions app welcome youYour City Guide in Jeddah &amp; soon cross the Kingdom!</string>
     <string name="register">REGISTER</string>
     <string name="signin">SIGN IN</string>
     <string name="googleplus">GOOGLE +</string>
@@ -32,7 +32,7 @@
     <string name="password">Password</string>
     <string name="forgetPassword">Forget Password ?</string>
     <string name="username">Username</string>
-    <string name="emailAdress">Email Adress</string>
+    <string name="emailAdress">Email Address</string>
     <string name="mobileNumber">Mobile Number (Optional)</string>
     <string name="join">JOIN NOW</string>
     <string name="buynow">Buy Now</string>
@@ -70,7 +70,7 @@
     <string name="upcomingEvents">UPCOMING EVENTS</string>
     <string name="pastEvents">PAST EVENTS</string>
     <string name="description">DESCRIPTION</string>
-    <string name="noevents">NO EVENTS IN YOUR HISTORY</string>
+    <string name="noevents">NO ITEMS IN YOUR HISTORY</string>
     <string name="noLikedEvents">NO LIKED EVENTS FOUND</string>
     <string name="comingSoon">COMING SOON</string>
     <string name="Events">EVENTS</string>
@@ -179,4 +179,14 @@
     <string name="hours">Hours </string>
     <string name="web_site">Web Site</string>
     <string name="phone">Phone</string>
+    <string name="reset_error">Can\'t Reset Password</string>
+    <string name="code_enter">Code</string>
+    <string name="change_lang">Change Language</string>
+    <string name="change_lang_msg">This change will restart your app</string>
+    <string name="noLikedDirectories">No Liked Directories Found</string>
+    <string name="your_nearby_attractions" >YOUR NEAR BY ATTRACTIONS</string>
+    <string name="your_nearby_venues" >YOUR NEAR BY VENUES</string>
+    <string name="enter_mail">please enter your email</string>
+    <string name="enter_pass">please enter your password</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>

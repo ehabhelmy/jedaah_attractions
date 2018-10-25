@@ -58,9 +58,6 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     @BindView(R.id.searchContainer)
     RelativeLayout searchContainer;
 
-    @BindView(R.id.weeklySugg)
-    LinearLayout weeklySugg;
-
     @BindView(R.id.events)
     LinearLayout events;
 
@@ -86,7 +83,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     private boolean isEventSelected = false;
     private boolean isVenueSelected = false;
     private boolean isAttractionSelected = false;
-    private int type;
+    private int type = R.string.all;
 
     @OnClick(R.id.events)
     void eventsSelected(){

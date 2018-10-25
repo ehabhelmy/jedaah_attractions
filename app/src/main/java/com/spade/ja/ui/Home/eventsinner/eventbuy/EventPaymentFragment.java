@@ -151,7 +151,7 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
             }else {
                 payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_active));
                 cashImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.cod_deactivated));
-                payLaterImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.paylater_deactivated));
+                crediteImageView.setImageDrawable(ContextCompat.getDrawable(this.getContext(),R.drawable.creditcard_deactivated));
                 payLaterToggle = true;
                 tickets = payLaterTickets+"";
                 paymentType = "pay_later";

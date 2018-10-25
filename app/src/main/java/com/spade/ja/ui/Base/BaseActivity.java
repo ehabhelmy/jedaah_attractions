@@ -35,13 +35,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.attachBaseContext(LocaleManager.setLocale(base));
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        unbinder = ButterKnife.bind(this);
         JaNavigationManager.getInstance().setCurrentActivity(this);
         JaNavigationManager.getInstance().setFragmentManager(getSupportFragmentManager());
+        unbinder = ButterKnife.bind(this);
         initializeDagger();
         initializePresenter();
         if (presenter != null) {
@@ -64,6 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onStart() {
         super.onStart();
+        JaNavigationManager.getInstance().setCurrentActivity(this);
         JaNavigationManager.getInstance().setFragmentManager(getSupportFragmentManager());
         if (presenter != null){
             presenter.start();

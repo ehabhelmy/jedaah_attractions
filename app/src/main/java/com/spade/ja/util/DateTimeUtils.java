@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class DateTimeUtils {
 
     public static final long MILLISECS_PER_DAY = TimeUnit.DAYS.toMillis(1);
-    private static final SimpleDateFormat JaFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat JaFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
     public static Date convertJSONDateToDate(String jsonDate) {
         try {
@@ -41,7 +41,7 @@ public class DateTimeUtils {
     public static String getMonth(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        String monthName = new SimpleDateFormat("MMM").format(calendar.getTime());
+        String monthName = new SimpleDateFormat("MMM", Locale.ENGLISH).format(calendar.getTime());
         return monthName.toUpperCase();
     }
 
@@ -60,7 +60,7 @@ public class DateTimeUtils {
     }
 
     public static int parseDayOfMonth(String day)  {
-        SimpleDateFormat dayFormat = new SimpleDateFormat("E");
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEE", Locale.ENGLISH);
         Calendar calendar2 = Calendar.getInstance();
         Date date = null;
         try {
@@ -124,24 +124,24 @@ public class DateTimeUtils {
     public static String getYear(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        String yearName = new SimpleDateFormat("yyyy").format(calendar.getTime());
+        String yearName = new SimpleDateFormat("yyyy", Locale.ENGLISH).format(calendar.getTime());
         return yearName.toUpperCase();
     }
 
     public static String getDay(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        String day = new SimpleDateFormat("dd").format(calendar.getTime());
+        String day = new SimpleDateFormat("dd", Locale.ENGLISH).format(calendar.getTime());
         return day;
     }
 
     public static String getWeekDay(){
-        String date = new SimpleDateFormat("EEEE").format(new Date());
+        String date = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(new Date());
         return date;
     }
 
     public static String getWeekDay(Date date1){
-        String date = new SimpleDateFormat("EEEE").format(date1);
+        String date = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date1);
         return date;
     }
 
@@ -170,15 +170,15 @@ public class DateTimeUtils {
         sCalendar.setTime(sDate);
         Calendar eCalendar = Calendar.getInstance();
         eCalendar.setTime(eDate);
-        String sDay = new SimpleDateFormat("dd").format(sCalendar.getTime());
-        String sMonth = new SimpleDateFormat("MMMM").format(sCalendar.getTime());
-        String eMonth = new SimpleDateFormat("MMMM").format(eCalendar.getTime());
-        String eDay = new SimpleDateFormat("dd").format(eCalendar.getTime());
+        String sDay = new SimpleDateFormat("dd", Locale.ENGLISH).format(sCalendar.getTime());
+        String sMonth = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(sCalendar.getTime());
+        String eMonth = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(eCalendar.getTime());
+        String eDay = new SimpleDateFormat("dd", Locale.ENGLISH).format(eCalendar.getTime());
         return sMonth + " " + sDay + " - " + eMonth + " " + eDay;
     }
 
     public static String getEventDays(EventDay eventDay) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.ENGLISH);
         Date sDate = null;
         Date eDate = null;
         try {
@@ -192,9 +192,9 @@ public class DateTimeUtils {
             sCalendar.setTime(sDate);
             Calendar eCalendar = Calendar.getInstance();
             eCalendar.setTime(eDate);
-            String date = new SimpleDateFormat("EEEE, MMMM dd").format(sCalendar.getTime());
-            String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
-            String endTime = new SimpleDateFormat("hh:mm aaa").format(eCalendar.getTime());
+            String date = new SimpleDateFormat("EEEE, MMMM dd", Locale.ENGLISH).format(sCalendar.getTime());
+            String startTime = new SimpleDateFormat("hh:mm aaa", Locale.ENGLISH).format(sCalendar.getTime());
+            String endTime = new SimpleDateFormat("hh:mm aaa", Locale.ENGLISH).format(eCalendar.getTime());
             return date + " at " + startTime + " - " + endTime;
         }else {
             return "";
@@ -202,8 +202,8 @@ public class DateTimeUtils {
     }
 
     public static String convertToTimeAm(String time) {
-        SimpleDateFormat format1 = new SimpleDateFormat("hh:mm:ss");
-        SimpleDateFormat format2 = new SimpleDateFormat("hh:mm aaa");
+        SimpleDateFormat format1 = new SimpleDateFormat("hh:mm:ss", Locale.ENGLISH);
+        SimpleDateFormat format2 = new SimpleDateFormat("hh:mm aaa", Locale.ENGLISH);
         try {
             Date date = format1.parse(time);
             String newDate = format2.format(date);
@@ -215,7 +215,7 @@ public class DateTimeUtils {
     }
 
     public static String getEventDateOrder(TicketDate ticketDate) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.ENGLISH);
         Date sDate = null;
         try {
             sDate = format1.parse(ticketDate.getDate() + " " + ticketDate.getTime());
@@ -225,8 +225,8 @@ public class DateTimeUtils {
         if (sDate != null) {
             Calendar sCalendar = Calendar.getInstance();
             sCalendar.setTime(sDate);
-            String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
-            String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+            String date = new SimpleDateFormat("EEE", Locale.ENGLISH).format(sCalendar.getTime());
+            String startTime = new SimpleDateFormat("hh:mm aaa", Locale.ENGLISH).format(sCalendar.getTime());
             return date + " " + startTime;
         }else {
             return "";
@@ -234,7 +234,7 @@ public class DateTimeUtils {
     }
 
     public static String getEventDateHistory(com.spade.ja.datalayer.pojo.response.history.upcoming.TicketDate ticketDate) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.ENGLISH);
         Date sDate = null;
         try {
             sDate = format1.parse(ticketDate.getDate() + " " + ticketDate.getTime());
@@ -244,8 +244,8 @@ public class DateTimeUtils {
         if (sDate != null) {
             Calendar sCalendar = Calendar.getInstance();
             sCalendar.setTime(sDate);
-            String date = new SimpleDateFormat("EEE").format(sCalendar.getTime());
-            String startTime = new SimpleDateFormat("hh:mm aaa").format(sCalendar.getTime());
+            String date = new SimpleDateFormat("EEE", Locale.ENGLISH).format(sCalendar.getTime());
+            String startTime = new SimpleDateFormat("hh:mm aaa", Locale.ENGLISH).format(sCalendar.getTime());
             return date + " " + startTime;
         }else {
             return "";
@@ -309,7 +309,7 @@ public class DateTimeUtils {
     public static long getDateInMilliSeconds(String dateString) {
         long timeInMilliseconds = 0;
         if (dateString != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             try {
                 Date mDate = sdf.parse(dateString);
                 timeInMilliseconds = mDate.getTime();
@@ -323,8 +323,8 @@ public class DateTimeUtils {
     public static String getFormattedDate(String dateString) {
         String formattedDate;
         try {
-            Date parsedDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
-            formattedDate = new SimpleDateFormat("d MMM yyyy").format(parsedDate);
+            Date parsedDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(dateString);
+            formattedDate = new SimpleDateFormat("d MMM yyyy", Locale.ENGLISH).format(parsedDate);
 
         } catch (Exception e) {
             e.printStackTrace();

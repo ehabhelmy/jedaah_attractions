@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
@@ -20,6 +22,15 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
     @Inject
     ResetPasswordPresenter resetPasswordPresenter;
 
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
+
+    @BindView(R.id.container)
+    LinearLayout container;
+
+    @BindView(R.id.code)
+    AppCompatEditText code;
+
     @BindView(R.id.password)
     AppCompatEditText password;
 
@@ -34,7 +45,7 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
         if (TextUtils.isEmpty(password.getText().toString().trim()) || TextUtils.isEmpty(confirmPassword.getText().toString().trim())){
             showPopUp("You must enter both password and confirmation password");
         }else if (password.getText().toString().trim().equals(confirmPassword.getText().toString().trim())){
-            resetPasswordPresenter.resetPassword(password.getText().toString().trim());
+            resetPasswordPresenter.resetPassword(password.getText().toString().trim(),code.getText().toString().trim());
         }else {
             showPopUp("Password and confirmation password doesn't match");
         }
@@ -86,11 +97,13 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
+        container.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
+        container.setVisibility(View.VISIBLE);
     }
 }

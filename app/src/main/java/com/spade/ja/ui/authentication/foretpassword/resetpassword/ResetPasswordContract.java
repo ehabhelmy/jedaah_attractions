@@ -12,7 +12,7 @@ public interface ResetPasswordContract {
     }
 
     interface Presenter extends Unsubscribable {
-        void resetPassword(String password);
+        void resetPassword(String password,String code);
         void goToLogin();
     }
 }

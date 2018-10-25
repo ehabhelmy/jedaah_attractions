@@ -93,4 +93,9 @@ public class AttractionDetailsPresenter extends BasePresenter<AttractionDetailsC
         attractionInner.unSubscribe();
         like.unSubscribe();
     }
+
+    @Override
+    public void showFullScreenPhoto(String imageUrl, String title) {
+        jaNavigationManager.showFullScreenPhoto(imageUrl,title);
+    }
 }

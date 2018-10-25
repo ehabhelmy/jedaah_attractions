@@ -1,8 +1,12 @@
 package com.spade.ja.ui.Home.profile.settings.contactus;
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
@@ -21,6 +25,12 @@ public class ContactUsFragment extends BaseFragment implements ContactUsContract
 
     @Inject
     ContactUsPresenter presenter;
+
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
+
+    @BindView(R.id.loginContainer)
+    RelativeLayout contactUsContainer;
 
     @BindView(R.id.subject)
     AppCompatEditText subject;
@@ -44,12 +54,14 @@ public class ContactUsFragment extends BaseFragment implements ContactUsContract
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
+        contactUsContainer.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
+        contactUsContainer.setVisibility(View.VISIBLE);
     }
 
     @Override

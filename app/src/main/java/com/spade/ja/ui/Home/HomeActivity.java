@@ -69,6 +69,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        if (bottomNavigationView.getSelectedItemId() != R.id.explore) {
+            bottomNavigationView.setSelectedItemId(R.id.explore);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
     @SuppressLint("RestrictedApi")
     public void removeShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
@@ -156,7 +165,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         JaNavigationManager.getInstance().setFragmentManager(getSupportFragmentManager());
         if (requestCode == JaNavigationManager.LOCATION_SETTINGS) {
             if (resultCode == 0) {
+                locationdEnabled = true;
                 presenter.locationIsEnabled();
+            }else {
+                locationdEnabled = false;
             }
         }
 //        if (requestCode == JaNavigationManager.EVENT_INNER) {

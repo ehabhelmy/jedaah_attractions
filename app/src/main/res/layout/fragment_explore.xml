@@ -497,7 +497,7 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/gotham_bold"
                             android:gravity="center"
-                            android:text="@string/your_nearby"
+                            android:text="@string/your_nearby_venues"
                             android:textColor="@color/staticTitle"
                             android:textSize="@dimen/static_title_size" />
 
@@ -595,7 +595,7 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/gotham_bold"
                             android:gravity="center"
-                            android:text="@string/your_nearby"
+                            android:text="@string/your_nearby_attractions"
                             android:textColor="@color/staticTitle"
                             android:textSize="@dimen/static_title_size" />
 

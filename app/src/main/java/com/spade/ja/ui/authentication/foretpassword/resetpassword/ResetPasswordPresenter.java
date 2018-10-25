@@ -14,12 +14,11 @@ public class ResetPasswordPresenter extends BasePresenter<ResetPasswordContract.
 
     private ResetPassword resetPassword;
 
-    private String code;
-
     private BaseCallback<ContactUsResponse> contactUsResponseBaseCallback = new BaseCallback<ContactUsResponse>() {
         @Override
         public void onSuccess(ContactUsResponse model) {
             if (isViewAlive.get()){
+                getView().hideLoading();
                 getView().showSuccess(model.getData().getMsg());
             }
         }
@@ -27,6 +26,7 @@ public class ResetPasswordPresenter extends BasePresenter<ResetPasswordContract.
         @Override
         public void onError(String message) {
             if (isViewAlive.get()){
+                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -40,13 +40,11 @@ public class ResetPasswordPresenter extends BasePresenter<ResetPasswordContract.
     @Override
     public void initialize(Bundle extras) {
         super.initialize(extras);
-        if (extras != null){
-            code = extras.getString(JaNavigationManager.RESETCODE);
-        }
     }
 
     @Override
-    public void resetPassword(String password) {
+    public void resetPassword(String password,String code) {
+        getView().showLoading();
         resetPassword.resetPassword(code,password,contactUsResponseBaseCallback);
     }
 

@@ -15,6 +15,7 @@ public class GetCodePresenter extends BasePresenter<GetCodeContract.View> implem
         @Override
         public void onSuccess(ResetCodeResponse model) {
             if (isViewAlive.get()){
+                getView().hideLoading();
                 jaNavigationManager.goToResetPassword(model.getData().getForgetCode());
             }
         }
@@ -22,6 +23,7 @@ public class GetCodePresenter extends BasePresenter<GetCodeContract.View> implem
         @Override
         public void onError(String message) {
             if (isViewAlive.get()){
+                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -34,6 +36,7 @@ public class GetCodePresenter extends BasePresenter<GetCodeContract.View> implem
 
     @Override
     public void getCode(String email) {
+        getView().showLoading();
         code.getCode(email,resetCodeResponseBaseCallback);
     }
 

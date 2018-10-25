@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.spade.ja.JaApplication;
+import com.spade.ja.datalayer.pojo.BaseModel;
 import com.spade.ja.datalayer.pojo.request.LoginRequest;
 import com.spade.ja.datalayer.pojo.request.NearbyEventsRequest;
 import com.spade.ja.datalayer.pojo.request.attractionorder.AttractionOrderRequest;
+import com.spade.ja.datalayer.pojo.request.changeorder.ChangeOrderRequest;
 import com.spade.ja.datalayer.pojo.request.contactus.ContactUsRequest;
 import com.spade.ja.datalayer.pojo.request.filter.filterevents.FilterEventsRequest;
 import com.spade.ja.datalayer.pojo.request.filter.filtervenues.FilterVenuesRequest;
@@ -20,12 +22,14 @@ import com.spade.ja.datalayer.pojo.response.about.AboutUsResponse;
 import com.spade.ja.datalayer.pojo.response.allevents.AllEventsResponse;
 import com.spade.ja.datalayer.pojo.response.allnearby.AllNearByResponse;
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.attractionconfirm.AttractionConfirmOrderResponse;
 import com.spade.ja.datalayer.pojo.response.attractionhistory.AttractionOrderHistoryResponse;
 import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerResponse;
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.code.ResetCodeResponse;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
+import com.spade.ja.datalayer.pojo.response.eventcreditconfirm.EventChangeStatusResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
 import com.spade.ja.datalayer.pojo.response.events.EventsResponse;
 import com.spade.ja.datalayer.pojo.response.filter.events.FilterEventsResponse;
@@ -45,6 +49,7 @@ import com.spade.ja.datalayer.remote.service.AllAttractionsService;
 import com.spade.ja.datalayer.remote.service.AllEventsService;
 import com.spade.ja.datalayer.remote.service.AllNearyByService;
 import com.spade.ja.datalayer.remote.service.AllVenuesService;
+import com.spade.ja.datalayer.remote.service.AttractionCreditOrderChange;
 import com.spade.ja.datalayer.remote.service.AttractionInnerService;
 import com.spade.ja.datalayer.remote.service.AttractionOrderPastService;
 import com.spade.ja.datalayer.remote.service.AttractionOrderService;
@@ -56,6 +61,7 @@ import com.spade.ja.datalayer.remote.service.CategoriesService;
 import com.spade.ja.datalayer.remote.service.ContactUsService;
 import com.spade.ja.datalayer.remote.service.DataService;
 import com.spade.ja.datalayer.remote.service.EditService;
+import com.spade.ja.datalayer.remote.service.EventCreditOrderChange;
 import com.spade.ja.datalayer.remote.service.EventDetailsService;
 import com.spade.ja.datalayer.remote.service.FilterAttractionService;
 import com.spade.ja.datalayer.remote.service.FilterEventsService;
@@ -1377,6 +1383,56 @@ public class RemoteRepository implements RemoteSource {
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 ContactUsResponse contactUsResponse = (ContactUsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(contactUsResponse);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+    }
+
+    @Override
+    public Single<EventChangeStatusResponse> changeOrderCreditEvent(String orderId, String status, String token) {
+        return Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            EventCreditOrderChange service = serviceGenerator.createService(EventCreditOrderChange.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(service.changeOrder(getCurrentLanguage(),BEARER+token,new ChangeOrderRequest(orderId,status)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                EventChangeStatusResponse model = (EventChangeStatusResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(model);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+    }
+
+    @Override
+    public Single<AttractionConfirmOrderResponse> changeOrderCreditAttraction(String orderId, String status, String token) {
+        return Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            AttractionCreditOrderChange service = serviceGenerator.createService(AttractionCreditOrderChange.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(service.changeOrder(getCurrentLanguage(),BEARER+token,new ChangeOrderRequest(orderId,status)), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                AttractionConfirmOrderResponse model = (AttractionConfirmOrderResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(model);
                             } else {
                                 Throwable throwable = new NetworkErrorException();
                                 singleOnSubscribe.onError(throwable);

@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -54,6 +55,9 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
 
     @BindView(R.id.clear)
     TextView clearAll;
+
+    @BindView(R.id.scroll_view)
+    ScrollView scrollView;
 
     @BindView(R.id.monthSpinner)
     AppCompatSpinner monthSpinner;
@@ -257,11 +261,11 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
         categoriesChosen.clear();
         isWeeklySelected = false;
         isNearBy = false;
-        monthNumber = 1;
         weeklySugg.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
         nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
         cats.setAdapter(null);
         cats.setAdapter(filterCategoriesAdapter);
         filterCategoriesAdapter.notifyDataSetChanged();
+        scrollView.post(() -> scrollView.fullScroll(scrollView.FOCUS_UP));
     }
 }

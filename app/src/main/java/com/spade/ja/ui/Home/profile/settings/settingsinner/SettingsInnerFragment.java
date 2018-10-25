@@ -78,11 +78,18 @@ public class SettingsInnerFragment extends BaseFragment implements SettingsInner
 
     @OnClick(R.id.languageChoice)
     void changeLanguage(){
-        if (getCurrentLanguage().equals(LocaleManager.LANGUAGE_ENGLISH)) {
-            setNewLocale(LocaleManager.LANGUAGE_ARABIC);
-        }else {
-            setNewLocale(LocaleManager.LANGUAGE_ENGLISH);
-        }
+        new AlertDialog.Builder(this.getActivity())
+                .setTitle(getString(R.string.change_lang))
+                .setMessage(getString(R.string.change_lang_msg))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+                    if (getCurrentLanguage().equals(LocaleManager.LANGUAGE_ENGLISH)) {
+                        setNewLocale(LocaleManager.LANGUAGE_ARABIC);
+                    }else {
+                        setNewLocale(LocaleManager.LANGUAGE_ENGLISH);
+                    }
+                })
+                .setNegativeButton(getString(R.string.cancel), (dialog, which) -> dialog.dismiss())
+                .show();
     }
 
     private void setNewLocale(String language) {

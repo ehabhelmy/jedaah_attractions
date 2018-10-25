@@ -243,6 +243,7 @@ public class AttractionDetailsFragment extends BaseFragment implements Attractio
         socialMedia.setAdapter(adapter);
         VenueImagesAdapter venueImagesAdapter = new VenueImagesAdapter();
         venueImagesAdapter.setImageURLS((ArrayList<String>) data.getGallery());
+        venueImagesAdapter.setOnPhotoClick(imageUrl -> presenter.showFullScreenPhoto(imageUrl,data.getTitle()));
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this.getContext(), LinearLayoutManager.HORIZONTAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.divider));

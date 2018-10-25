@@ -69,11 +69,12 @@ public class ServiceGenerator {
 
     Interceptor headerInterceptor = chain -> {
         Request original = chain.request();
-
+        String tokenAuth = original.header(AUTHORIZATION);
+        String tokenAfterAuth = authToken + "," + tokenAuth;
         Request request = original.newBuilder()
                 .header(CONTENT_TYPE, CONTENT_TYPE_VALUE)
                 .header(API_KEY, API_KEY_VALUE)
-                .header(AUTHORIZATION,authToken)
+                .header(AUTHORIZATION,tokenAfterAuth)
                 .method(original.method(), original.body())
                 .build();
 

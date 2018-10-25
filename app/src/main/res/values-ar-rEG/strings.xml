@@ -23,8 +23,9 @@
     <string name="getDirections">وصف الموقع</string>
     <string name="buyNow">اشتري الآن</string>
     <string name="skip">تخطي</string>
-    <string name="welcome">مرحبا بكم</string>
-    <string name="paragraph"></string>
+    <string name="welcome">هلا فيكم</string>
+    <string name="paragraph">نحييكم في تطبيق جدة اتراكشنز
+دليلكم في مدينة جدة وقريباً حول المملكة!</string>
     <string name="register">سجّل</string>
     <string name="signin">تسجيل الدخول</string>
     <string name="googleplus">+ قوقل</string>
@@ -125,13 +126,13 @@
     <string name="settings">اعدادات</string>
     <string name="notification">اعدادات الاشعارات</string>
     <string name="language">اللغة </string>
-    <string name="english">English</string>
+    <string name="english">عربى</string>
     <string name="contactUs">تواصل معنا </string>
     <string name="subject">الموضوع</string>
     <string name="message">الرسالة</string>
     <string name="send">أرسل</string>
     <string name="about">عن التطبيق </string>
-    <string name="feedback">Feedback</string>
+    <string name="feedback">الانطباع</string>
     <string name="sunday">الأحد</string>
     <string name="monday">الاثنين</string>
     <string name="tuesday">الثلاثاء</string>
@@ -179,4 +180,14 @@
     <string name="hours">ساعه </string>
     <string name="web_site">Web Site</string>
     <string name="phone">Phone</string>
+    <string name="reset_error">لم نتمكن من تغيير كلمه السر</string>
+    <string name="code_enter">رمز التاكيد</string>
+    <string name="change_lang">تغيير اللغه</string>
+    <string name="change_lang_msg">هذا التغيير سوف يعيد تشغيل التطبيق</string>
+    <string name="noLikedDirectories">ا يوجد أي دلائل أعجبتم بها</string>
+    <string name="your_nearby_attractions" >مواقع ترفيهيه قريبة منك</string>
+    <string name="your_nearby_venues" >أماكن قريبة منك</string>
+    <string name="enter_mail">رجاء ادخال البريد الالكترونى</string>
+    <string name="enter_pass">رجاء ادخال كلمه السر</string>
+    <string name="edit_profile">تغيير البيانات</string>
 </resources>

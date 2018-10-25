@@ -1,5 +1,7 @@
 package com.spade.ja.usecase.resetpassword;
 
+import com.spade.ja.JaApplication;
+import com.spade.ja.R;
 import com.spade.ja.datalayer.DataRepository;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.ui.Base.listener.BaseCallback;
@@ -42,7 +44,7 @@ public class ResetPassword implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError("User is not valid");
+                callback.onError(JaApplication.getContext().getString(R.string.reset_error));
             }
         };
 
