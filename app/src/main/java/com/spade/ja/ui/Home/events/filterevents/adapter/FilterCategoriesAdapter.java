@@ -1,6 +1,8 @@
 package com.spade.ja.ui.Home.events.filterevents.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +17,24 @@ import com.spade.ja.datalayer.pojo.response.category.Cats;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by ehab on 2/18/18.
  */
 
-public class FilterCategoriesAdapter extends BaseAdapter {
+public class FilterCategoriesAdapter extends RecyclerView.Adapter<FilterCategoriesAdapter.ViewHolder> {
+
+    public interface OnCatSelected {
+        void onCategorySelected(Cats cats,View layout,ImageView icon,TextView type);
+    }
+
+    private OnCatSelected onCatSelected;
+
+    public void setOnCatSelected(OnCatSelected onCatSelected) {
+        this.onCatSelected = onCatSelected;
+    }
 
     private ArrayList<Cats> cats;
 
@@ -33,35 +48,42 @@ public class FilterCategoriesAdapter extends BaseAdapter {
         this.cats = cats;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ViewHolder viewHolder = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.tag_view,parent,false));
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Cats category = cats.get(position);
+        Glide.with(context).load(category.getIcon()).apply(new RequestOptions().placeholder(R.drawable.ca_food_ic).error(R.drawable.ca_food_ic)).into(holder.tagIcon);
+        holder.tagType.setText(category.getName());
+        holder.view.setOnClickListener(v -> {
+           onCatSelected.onCategorySelected(category,holder.view,holder.tagIcon,holder.tagType);
+        });
+    }
+
+    @Override
+    public int getItemCount() {
         return cats.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return cats.get(position);
-    }
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+        @BindView(R.id.tagIcon)
+        ImageView tagIcon;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+        @BindView(R.id.tagType)
+        TextView tagType;
+
         View view;
-        if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            view = LayoutInflater.from(context).inflate(R.layout.tag_view,parent,false);
 
-        } else {
-            view = convertView;
+        public ViewHolder(View itemView) {
+            super(itemView);
+            this.view = itemView;
+            ButterKnife.bind(this,itemView);
         }
-        ImageView catIcon = view.findViewById(R.id.tagIcon);
-        TextView catName = view.findViewById(R.id.tagType);
-        Glide.with(context).load(cats.get(position).getIcon()).apply(new RequestOptions().placeholder(R.drawable.ca_food_ic).error(R.drawable.ca_food_ic)).into(catIcon);
-        catName.setText(cats.get(position).getName());
-        return view;
     }
 }

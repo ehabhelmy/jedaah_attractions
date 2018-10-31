@@ -77,8 +77,15 @@ public class PaymentGateWay {
     @NonNull
     private static Billing createBillingInfo(User user) {
         Billing billing = new Billing();
-        Name name = createName(user);
-        billing.setName(name);
+        if (user.getName() != null){
+            Name name = createName(user);
+            billing.setName(name);
+        }else {
+            Name name = new Name();
+            name.setFirst("anonymus");
+            name.setTitle("Mr");
+            billing.setName(name);
+        }
         billing.setEmail(user.getEmail());
         billing.setPhone(user.getMobileNumber());                // Phone number, required if enabled in your merchant dashboard.
         return billing;

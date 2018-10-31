@@ -41,7 +41,20 @@ public class AttractionOrder implements Unsubscribable {
         attractionOrderResponseDisposableSingleObserver = new DisposableSingleObserver<AttractionOrderResponse>() {
             @Override
             public void onSuccess(AttractionOrderResponse venuesInnerResponse) {
-                callback.onSuccess(venuesInnerResponse);
+                if (venuesInnerResponse.getSuccess()){
+                    callback.onSuccess(venuesInnerResponse);
+                }else {
+                    if (venuesInnerResponse.getMsg().getErrors() != null) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (String str : venuesInnerResponse.getMsg().getErrors()) {
+                            stringBuilder.append(str + ", ");
+                        }
+                        StringBuilder error = stringBuilder.deleteCharAt(stringBuilder.toString().length() - 1);
+                        callback.onError(error.toString());
+                    } else {
+                        callback.onError("Server Error");
+                    }
+                }
             }
 
             @Override

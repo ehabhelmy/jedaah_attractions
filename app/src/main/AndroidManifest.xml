@@ -45,6 +45,10 @@
         <activity
             android:name=".ui.Home.directory.venues.filtervenues.FilterVenueActivity"
             android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name=".ui.Home.directory.attractions.filterattractions.FilterAttractionActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".ui.Home.profile.edit.EditActivity"
             android:windowSoftInputMode="adjustPan"></activity>
@@ -54,14 +58,18 @@
             android:launchMode="singleInstance"></activity>
         <activity
             android:name=".ui.Home.venueinner.VenueInnerActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:launchMode="singleTop"></activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".ui.Home.attractioninner.AttractionInnerActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleInstance"></activity>
         <activity
             android:name=".ui.Home.profile.settings.SettingsActivity"
             android:windowSoftInputMode="adjustPan"></activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <meta-data
             android:name="com.onesignal.NotificationOpened.DEFAULT"
@@ -71,7 +79,7 @@
             android:value="d8d813b2ac8c7c7e9b61cbb0359a8de4af26d604" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCbhmCfvgQNdwwojqB9u_14semkBmTokaU" />
+            android:value="AIzaSyBkBIyl2ktrLFnL9bY_Mht5oj7s8z4wmE8" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

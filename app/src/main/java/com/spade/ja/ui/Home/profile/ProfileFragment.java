@@ -146,7 +146,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     @Override
     public void updateProfileFragment(Data model) {
         userName.setText(model.getName());
-        id.setText("JA ID : "+model.getId());
+        id.setText("JA ID : "+model.getUserId());
         if (!TextUtils.isEmpty(model.getProfileImage())) {
             //Glide.with(this.getContext()).load(model.getProfileImage()).(R.drawable.ic_profile_default).error(R.drawable.ic_profile_default).into(profileImageView);
             Glide.with(this).load(model.getProfileImage()).apply(new RequestOptions().placeholder(R.drawable.profile_default).error(R.drawable.profile_default)).into(profileImageView);

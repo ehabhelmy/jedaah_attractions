@@ -44,7 +44,7 @@ public class Code implements Unsubscribable {
 
             @Override
             public void onError(Throwable e) {
-                callback.onError(JaApplication.context.getString(R.string.connection));
+                callback.onError(JaApplication.context.getString(R.string.email));
             }
         };
 

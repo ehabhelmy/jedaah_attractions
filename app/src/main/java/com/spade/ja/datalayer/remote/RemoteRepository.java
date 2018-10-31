@@ -150,18 +150,22 @@ public class RemoteRepository implements RemoteSource {
             }
             int responseCode = response.code();
             if (response.isSuccessful()) {
-                return new ServiceResponse(responseCode, isVoid ? null : response.body());
+                return new ServiceResponse(responseCode, isVoid ? false : response.body());
             } else {
                 if (responseCode == 406 || responseCode == 401){
                     List<String> urlPaths = response.raw().request().url().encodedPathSegments();
                     if (!urlPaths.get(urlPaths.size() -1).equals("order")) {
                         return new ServiceResponse(responseCode, isVoid ? null : gson.fromJson(response.errorBody().string(), LoginResponse.class));
                     }else {
-                        return new ServiceResponse(responseCode, isVoid ? null : gson.fromJson(response.errorBody().string(), OrderResponse.class));
+                        if (urlPaths.get(urlPaths.size() - 3).contains("attraction")) {
+                            return new ServiceResponse(responseCode, isVoid ? null : gson.fromJson(response.errorBody().string(), AttractionOrderResponse.class));
+                        } else {
+                            return new ServiceResponse(responseCode, isVoid ? null : gson.fromJson(response.errorBody().string(), OrderResponse.class));
+                        }
                     }
                 }
                 ServiceError ServiceError;
-                ServiceError = new ServiceError(response.message(), responseCode);
+                ServiceError = new ServiceError(response.errorBody().string(), responseCode);
                 return new ServiceResponse(ServiceError);
             }
         } catch (IOException e) {
@@ -1255,7 +1259,7 @@ public class RemoteRepository implements RemoteSource {
                         try {
                             AttractionOrderService attractionOrderService = serviceGenerator.createService(AttractionOrderService.class, BASE_URL);
                             ServiceResponse serviceResponse = processCall(attractionOrderService.attractionOrder(getCurrentLanguage(),BEARER+token,attractionOrderRequest), false);
-                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                            if (serviceResponse.getCode() == SUCCESS_CODE || serviceResponse.getCode() == FALSE_CODE) {
                                 AttractionOrderResponse attractionOrderResponse = (AttractionOrderResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(attractionOrderResponse);
                             } else {

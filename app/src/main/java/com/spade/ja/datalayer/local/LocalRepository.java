@@ -279,7 +279,7 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<VenuesResponse> getLikedVenues() {
-        VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_VENUES,EventsResponse.class);
+        VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_VENUES,VenuesResponse.class);
         return Single.create(e -> {
             if (eventsResponse != null){
                 e.onSuccess(eventsResponse);
@@ -296,7 +296,7 @@ public class LocalRepository implements LocalSource {
 
     @Override
     public Single<VenuesResponse> getLikedAttractions() {
-        VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_ATTRACTIONS,EventsResponse.class);
+        VenuesResponse eventsResponse = (VenuesResponse) sharedPref.getObject(sharedPref.LIKED_ATTRACTIONS,VenuesResponse.class);
         return Single.create(e -> {
             if (eventsResponse != null){
                 e.onSuccess(eventsResponse);

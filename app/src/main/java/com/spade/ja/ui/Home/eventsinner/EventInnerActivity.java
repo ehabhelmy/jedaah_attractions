@@ -3,6 +3,7 @@ package com.spade.ja.ui.Home.eventsinner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -57,7 +58,6 @@ public class EventInnerActivity extends BaseActivity implements EventInnerActivi
         if (object instanceof StatusResponse) {
             StatusResponse status = (StatusResponse) object;
             if (status.getAuth() != null) {
-                status.getAuth().getStatus();   // Authorisation status. A indicates an authorised transaction. H also indicates an authorised transaction, but where the transaction has been placed on hold. Any other value indicates that the request could not be processed.
                 status.getAuth().getAvs();      /* Result of the AVS check:
                                             Y = AVS matched OK
                                             P = Partial match (for example, post-code only)
@@ -77,13 +77,20 @@ public class EventInnerActivity extends BaseActivity implements EventInnerActivi
                 status.getAuth().getTranref(); //The payment gateway transaction reference allocated to this request.
                 Log.d("hany", status.getAuth().getTranref());
                 status.getAuth().getCardfirst6(); // The first 6 digits of the card number used in the transaction, only for version 2 is submitted in Tran -> Version
-
+                status.getAuth().getStatus();   // Authorisation status. A indicates an authorised transaction. H also indicates an authorised transaction, but where the transaction has been placed on hold. Any other value indicates that the request could not be processed.
                 setTransactionDetails(status.getAuth().getTranref(), status.getAuth().getCardlast4());
             }
         }else {
             String errorMessage = (String) object;
             presenter.changeCreditCardStatus(orderId, ChangeOrderRequest.REJECTED);
-            showPopUp(errorMessage);
+            new AlertDialog.Builder(this)
+                    .setMessage(errorMessage)
+                    .setTitle("Failure")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        dialog.dismiss();
+                        finish();
+                    })
+                    .show();
         }
     }
 

@@ -39,7 +39,7 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
 
     @Override
     public void bind(SocialMedium baseModel, RecyclerViewItemListener.onViewListener onViewListener, RecyclerViewItemListener.onFavouriteListener onFavouriteListener) {
-        socialMediaUrl.setText(baseModel.getUrl());
+        socialMediaUrl.setText(baseModel.getUrlName() != null ? baseModel.getUrlName() : baseModel.getUrl());
         socialMediaUrl.setOnClickListener(view -> {
             if (baseModel.getName().equals(JaApplication.getContext().getString(R.string.phone))){
 //                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));

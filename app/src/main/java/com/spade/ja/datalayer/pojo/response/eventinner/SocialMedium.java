@@ -16,6 +16,9 @@ public class SocialMedium extends BaseModel{
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("url_name")
+    @Expose
+    private String urlName;
     @SerializedName("icon")
     @Expose
     private String icon;
@@ -61,4 +64,11 @@ public class SocialMedium extends BaseModel{
         this.icon = icon;
     }
 
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
+    }
 }

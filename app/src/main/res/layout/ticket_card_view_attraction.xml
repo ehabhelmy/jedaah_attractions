@@ -118,7 +118,7 @@
                 android:text="@string/ticketsType" />
 
                 <TextView
-                    android:id="@+id/type"
+                    android:id="@+id/ticketType"
                     android:layout_alignStart="@+id/eventDayContainer"
                     android:layout_below="@+id/textView99"
                     android:layout_marginTop="11dp"
@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/eventDayContainer"
-                android:layout_below="@+id/type"
+                android:layout_below="@+id/ticketType"
                 android:layout_marginTop="28dp"
                 android:fontFamily="@font/gotham_bold"
                 android:textSize="@dimen/cash"

@@ -17,6 +17,7 @@ import com.spade.ja.ui.Home.attractioninner.attractionpayment.pojo.AttractionPay
 import com.spade.ja.ui.Home.attractioninner.calendar.CalendarFragment;
 import com.spade.ja.ui.Home.attractioninner.pojo.AttractionPaymentData;
 import com.spade.ja.ui.Home.directory.DirectoryFragment;
+import com.spade.ja.ui.Home.directory.attractions.filterattractions.FilterAttractionActivity;
 import com.spade.ja.ui.Home.directory.venues.filtervenues.FilterVenueActivity;
 import com.spade.ja.ui.Home.events.EventsFragment;
 import com.spade.ja.ui.Home.events.filterevents.FilterEventActivity;
@@ -317,6 +318,12 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     @Override
     public void openFilterVenues() {
         Intent intent = new Intent(context,FilterVenueActivity.class);
+        getCurrentActivity().startActivityForResult(intent,JaNavigationManager.MAP);
+    }
+
+    @Override
+    public void openFilterAttraction() {
+        Intent intent = new Intent(context,FilterAttractionActivity.class);
         getCurrentActivity().startActivityForResult(intent,JaNavigationManager.MAP);
     }
 

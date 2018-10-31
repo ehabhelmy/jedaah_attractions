@@ -3,6 +3,7 @@ package com.spade.ja.ui.Home.events.nearby_events;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,6 +23,7 @@ import com.spade.ja.ui.Home.explore.pojo.Event;
 import com.spade.ja.util.Constants;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
+import com.spade.ja.util.MyLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,10 +164,21 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
             if (location1 != null) {
                 presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
+            }else {
+                MyLocation myLocation = new MyLocation();
+                myLocation.getLocation(getActivity(), locationResult);
             }
         });
     }
 
+    private MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+        @Override
+        public void gotLocation(Location location) {
+            if (isAdded() && isResumed() && location != null) {
+                presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location.getLatitude(), location.getLongitude()));
+            }
+        }
+    };
     @Override
     public void locationIsEnabled() {
         errorLocationContainer.setVisibility(View.GONE);

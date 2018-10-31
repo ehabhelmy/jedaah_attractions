@@ -4,6 +4,7 @@ package com.spade.ja.datalayer.pojo.response.attractionorder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.spade.ja.datalayer.pojo.BaseModel;
+import com.spade.ja.datalayer.pojo.response.order.Msg;
 
 public class AttractionOrderResponse extends BaseModel {
 
@@ -13,6 +14,17 @@ public class AttractionOrderResponse extends BaseModel {
     @SerializedName("data")
     @Expose
     private Data data;
+    @SerializedName("msg")
+    @Expose
+    private Msg msg;
+
+    public Msg getMsg() {
+        return msg;
+    }
+
+    public void setMsg(Msg msg) {
+        this.msg = msg;
+    }
 
     public Boolean getSuccess() {
         return success;

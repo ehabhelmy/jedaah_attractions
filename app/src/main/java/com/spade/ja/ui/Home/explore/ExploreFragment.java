@@ -3,6 +3,7 @@ package com.spade.ja.ui.Home.explore;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -33,6 +34,7 @@ import com.spade.ja.ui.Home.explore.adapter.VenuesListAdapter;
 import com.spade.ja.ui.Home.explore.pojo.Event;
 import com.spade.ja.ui.widget.CircularImageView;
 import com.spade.ja.util.Constants;
+import com.spade.ja.util.MyLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +132,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
     Unbinder unbinder;
 
     @OnClick(R.id.searchEditText)
-    void openSearchView(){
+    void openSearchView() {
         activity.showSearch();
     }
 
@@ -349,6 +351,17 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         attractionsErrorLocationContainer.setVisibility(View.VISIBLE);
     }
 
+    private MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
+        @Override
+        public void gotLocation(Location location) {
+            if (isAdded() && isResumed() && location != null) {
+                presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location.getLatitude(), location.getLongitude()));
+                presenter.loadNearByVenuesAfterLocationEnabled(new LatLng(location.getLatitude(), location.getLongitude()));
+                presenter.loadNearByAttractionsAfterLocationEnabled(new LatLng(location.getLatitude(), location.getLongitude()));
+            }
+        }
+    };
+
     @Override
     public void getLatitudeAndLongitude() {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -366,6 +379,9 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
                 presenter.loadNearByEventsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
                 presenter.loadNearByVenuesAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
                 presenter.loadNearByAttractionsAfterLocationEnabled(new LatLng(location1.getLatitude(), location1.getLongitude()));
+            } else {
+                MyLocation myLocation = new MyLocation();
+                myLocation.getLocation(getActivity(), locationResult);
             }
         });
     }

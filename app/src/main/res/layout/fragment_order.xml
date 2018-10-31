@@ -395,7 +395,7 @@
                     android:layout_alignTop="@+id/imageMinus"
                     android:fontFamily="@font/gotham_book"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="0"
                     android:textSize="@dimen/title_inner" />
 
                 <TextView

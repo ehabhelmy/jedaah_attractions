@@ -31,7 +31,6 @@ public class EventInnerActivityPresenter extends BasePresenter<EventInnerActivit
         @Override
         public void onSuccess(EventChangeStatusResponse model) {
             if (isViewAlive.get()){
-                getView().hideLoading();
                 jaNavigationManager.showEventOrderSuccess();
             }
         }
@@ -39,7 +38,6 @@ public class EventInnerActivityPresenter extends BasePresenter<EventInnerActivit
         @Override
         public void onError(String message) {
             if (isViewAlive.get()){
-                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -66,7 +64,6 @@ public class EventInnerActivityPresenter extends BasePresenter<EventInnerActivit
 
     @Override
     public void changeCreditCardStatus(String orderid, String status) {
-        getView().showLoading();
         paymentCreditUseCase.changeCreditCardOrder(orderid, status,baseModelBaseCallback);
     }
 

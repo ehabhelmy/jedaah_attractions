@@ -126,6 +126,6 @@ public class AttractionsPresenter extends BasePresenter<AttractionsContract.View
 
     @Override
     public void openFilterAttraction() {
-        jaNavigationManager.openFilterVenues();
+        jaNavigationManager.openFilterAttraction();
     }
 }

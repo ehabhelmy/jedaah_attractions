@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/scroll_view"
@@ -63,6 +63,7 @@
                     android:id="@+id/loginContainer"
                     android:layout_width="match_parent"
                     android:layout_marginTop="40dp"
+                    android:paddingBottom="70dp"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -165,24 +166,30 @@
                         android:padding="@dimen/activity_horizontal_margin"
                         android:text="@string/categories" />
 
-                    <com.spade.ja.ui.widget.StaticGridView
-                        android:id="@+id/tags"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/gridview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_below="@+id/cats"
-                        android:columnWidth="150dp"
-                        android:layout_margin="20dp"
-                        android:gravity="center"
-                        android:horizontalSpacing="10dp"
-                        android:listSelector="#00000000"
-                        android:numColumns="auto_fit"
-                        android:stretchMode="spacingWidthUniform"
-                        android:verticalSpacing="10dp">
+                        android:layout_margin="10dp"
+                        android:layout_height="match_parent" />
 
-                    </com.spade.ja.ui.widget.StaticGridView>
+                    <!--<com.spade.ja.ui.widget.StaticGridView-->
+                        <!--android:id="@+id/tags"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_below="@+id/cats"-->
+                        <!--android:columnWidth="160dp"-->
+                        <!--android:layout_margin="10dp"-->
+                        <!--android:gravity="start"-->
+                        <!--android:horizontalSpacing="10dp"-->
+                        <!--android:listSelector="#00000000"-->
+                        <!--android:numColumns="2"-->
+                        <!--android:verticalSpacing="15dp">-->
+
+                    <!--</com.spade.ja.ui.widget.StaticGridView>-->
                 </RelativeLayout>
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
 
         <Button
             android:id="@+id/filter"

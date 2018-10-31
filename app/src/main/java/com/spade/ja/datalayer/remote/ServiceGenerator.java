@@ -43,9 +43,12 @@ public class ServiceGenerator {
     public ServiceGenerator(Gson gson) {
         this.okHttpBuilder = new OkHttpClient.Builder();
         authToken = Credentials.basic(username, serverPassword);
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
         okHttpBuilder.addInterceptor(headerInterceptor)
-                     .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
-                     .connectTimeout(TIMEOUT_CONNECT,TimeUnit.SECONDS);
+                .addInterceptor(httpLoggingInterceptor)
+                .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT_CONNECT,TimeUnit.SECONDS);
         this.gson = gson;
     }
 

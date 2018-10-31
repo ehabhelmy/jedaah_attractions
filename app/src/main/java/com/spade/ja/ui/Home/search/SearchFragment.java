@@ -4,19 +4,24 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ViewUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.like.Utils;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.allnearby.Result;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.directory.venues.adapter.ItemOffsetDecoration;
 import com.spade.ja.ui.Home.events.filterevents.adapter.FilterCategoriesAdapter;
 import com.spade.ja.ui.Home.search.adapter.SearchListAdapter;
 import com.spade.ja.ui.widget.StaticGridView;
@@ -76,8 +81,8 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     @BindView(R.id.attractionsText)
     TextView attractionsText;
 
-    @BindView(R.id.tags)
-    StaticGridView cats;
+    @BindView(R.id.gridview)
+    RecyclerView cats;
 
     private Set<Integer> categoriesChosen = new HashSet<>();
     private boolean isEventSelected = false;
@@ -179,22 +184,24 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
     @Override
     public void setupCategories(List<Cats> categories) {
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getContext(), 2);
+        cats.setLayoutManager(mLayoutManager);
+        cats.setItemAnimator(new DefaultItemAnimator());
+        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this.getContext(), R.dimen.item_offset);
+        cats.addItemDecoration(itemDecoration);
         FilterCategoriesAdapter filterCategoriesAdapter = new FilterCategoriesAdapter(getActivity());
         filterCategoriesAdapter.setCats((ArrayList<Cats>) categories);
         cats.setAdapter(filterCategoriesAdapter);
-        cats.setOnItemClickListener((adapterView, view, i, l) -> {
-            Cats cats = (Cats) adapterView.getItemAtPosition(i);
-            ImageView icon = view.findViewById(R.id.tagIcon);
-            TextView text = view.findViewById(R.id.tagType);
+        filterCategoriesAdapter.setOnCatSelected((cats,layout,icon,type) -> {
             if (!categoriesChosen.contains(cats.getId())) {
                 categoriesChosen.add(cats.getId());
-                view.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.tag_rect_green));
+                layout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.tag_rect_green));
                 icon.setColorFilter(ContextCompat.getColor(getActivity(),R.color.white));
-                text.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                type.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
             } else {
-                view.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.tag_rect));
+                layout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.tag_rect));
                 icon.setColorFilter(ContextCompat.getColor(getActivity(),R.color.colorTitle));
-                text.setTextColor(ContextCompat.getColor(getActivity(),R.color.lightBlack));
+                type.setTextColor(ContextCompat.getColor(getActivity(),R.color.lightBlack));
                 categoriesChosen.remove(cats.getId());
             }
         });

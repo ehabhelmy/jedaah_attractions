@@ -29,7 +29,6 @@ public class AttractionInnerPresenter extends BasePresenter<AttractionInnerContr
         @Override
         public void onSuccess(AttractionConfirmOrderResponse model) {
             if (isViewAlive.get()){
-                getView().hideLoading();
                 jaNavigationManager.showAttractionOrderSuccess();
             }
         }
@@ -37,7 +36,6 @@ public class AttractionInnerPresenter extends BasePresenter<AttractionInnerContr
         @Override
         public void onError(String message) {
             if (isViewAlive.get()){
-                getView().hideLoading();
                 getView().showError(message);
             }
         }
@@ -64,7 +62,6 @@ public class AttractionInnerPresenter extends BasePresenter<AttractionInnerContr
 
     @Override
     public void changeCreditCardStatus(String orderid, String status) {
-        getView().showLoading();
         paymentCreditAttractionUseCase.changeCreditCardOrder(orderid, status,baseModelBaseCallback);
     }
 }

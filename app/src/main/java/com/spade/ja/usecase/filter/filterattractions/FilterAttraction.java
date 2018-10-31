@@ -30,7 +30,7 @@ public class FilterAttraction implements Unsubscribable{
         this.compositeDisposable = compositeDisposable;
     }
 
-    public void filterAttractions(boolean weeklysuggest, List<Integer> categoryId, BaseCallback<FilterVenuesResponse> filterEventsResponseBaseCallback, double lat, double lng) {
+    public void filterAttractions(boolean weeklysuggest, List<Integer> categoryId, BaseCallback<FilterVenuesResponse> filterEventsResponseBaseCallback, Double lat, Double lng) {
         filterVenuesResponseDisposableSingleObserver = new DisposableSingleObserver<FilterVenuesResponse>() {
             @Override
             public void onSuccess(FilterVenuesResponse filterEventsResponse) {

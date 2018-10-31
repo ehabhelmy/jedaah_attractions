@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">JEDDAH ATTRACTIONS</string>
     <string name="facebook_app_id">202726053622168</string>
-    <string name="fb_login_protocol_scheme">fb202726053622168</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -190,4 +189,5 @@
     <string name="enter_mail">رجاء ادخال البريد الالكترونى</string>
     <string name="enter_pass">رجاء ادخال كلمه السر</string>
     <string name="edit_profile">تغيير البيانات</string>
+    <string name="not_valid_email">لا وجود لهذا البريد الالكترونى</string>
 </resources>

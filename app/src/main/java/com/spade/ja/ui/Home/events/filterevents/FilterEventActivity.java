@@ -5,10 +5,12 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.ui.Base.BaseActivity;
+import com.spade.ja.ui.Home.directory.venues.adapter.ItemOffsetDecoration;
 import com.spade.ja.ui.Home.events.filterevents.adapter.FilterCategoriesAdapter;
 import com.spade.ja.ui.Home.map.Data;
 import com.spade.ja.ui.Home.map.adapter.DataAdapter;
@@ -57,7 +60,7 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
     TextView clearAll;
 
     @BindView(R.id.scroll_view)
-    ScrollView scrollView;
+    NestedScrollView scrollView;
 
     @BindView(R.id.monthSpinner)
     AppCompatSpinner monthSpinner;
@@ -68,8 +71,8 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
     @BindView(R.id.nearBy)
     LinearLayout nearBy;
 
-    @BindView(R.id.tags)
-    StaticGridView cats;
+    @BindView(R.id.gridview)
+    RecyclerView cats;
 
     @BindView(R.id.filterResult)
     RecyclerView filterResults;
@@ -189,22 +192,24 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
 
     @Override
     public void setupCategories(List<Cats> categories) {
-        filterCategoriesAdapter = new FilterCategoriesAdapter(this);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        cats.setLayoutManager(mLayoutManager);
+        cats.setItemAnimator(new DefaultItemAnimator());
+        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
+        cats.addItemDecoration(itemDecoration);
+        FilterCategoriesAdapter filterCategoriesAdapter = new FilterCategoriesAdapter(this);
         filterCategoriesAdapter.setCats((ArrayList<Cats>) categories);
         cats.setAdapter(filterCategoriesAdapter);
-        cats.setOnItemClickListener((adapterView, view, i, l) -> {
-            Cats cats = (Cats) adapterView.getItemAtPosition(i);
-            ImageView icon = view.findViewById(R.id.tagIcon);
-            TextView name = view.findViewById(R.id.tagType);
+        filterCategoriesAdapter.setOnCatSelected((cats,layout,icon,type) -> {
             if (!categoriesChosen.contains(cats.getId())) {
                 categoriesChosen.add(cats.getId());
-                name.setTextColor(ContextCompat.getColor(FilterEventActivity.this,R.color.white));
-                icon.setColorFilter(ContextCompat.getColor(FilterEventActivity.this,R.color.white));
-                view.setBackground(ContextCompat.getDrawable(FilterEventActivity.this, R.drawable.tag_rect_green));
+                layout.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
+                icon.setColorFilter(ContextCompat.getColor(this,R.color.white));
+                type.setTextColor(ContextCompat.getColor(this,R.color.white));
             } else {
-                view.setBackground(ContextCompat.getDrawable(FilterEventActivity.this, R.drawable.tag_rect));
-                name.setTextColor(ContextCompat.getColor(FilterEventActivity.this,R.color.lightBlack));
-                icon.setColorFilter(ContextCompat.getColor(FilterEventActivity.this,R.color.colorTitle));
+                layout.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
+                icon.setColorFilter(ContextCompat.getColor(this,R.color.colorTitle));
+                type.setTextColor(ContextCompat.getColor(this,R.color.lightBlack));
                 categoriesChosen.remove(cats.getId());
             }
         });

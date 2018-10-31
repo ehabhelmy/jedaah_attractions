@@ -150,7 +150,7 @@
     <string name="allAttactionsJeddah">ALL ATTRACTIONS IN JEDDAH</string>
     <string name="logout">Log out</string>
     <string name="aboutDescription">asdasjkdhajsdhjashdjkashdjakshdjkashdjkashdjkashdjkashdjkashdjkashkdja asdhajskdhasjkdhasjkdhajksdhasjkdh asldjaskldjaskldjaskl askdjaklsdjaskl askdjalskdjalk askdjaskldja askdjaklsdjklasjdklasjdlkasjdlkajsdkljaskldjaklsdjkalsjdkasjdklasjdklajsdklajsldkjaskldajl \\n asdaklsdjkasjdklasdjkasdjaksdja \\n asdklaskdlasklda</string>
-    <string name="reset">Reset Password</string>
+    <string name="reset">Forget Password</string>
     <string name="code">GET CODE</string>
     <string name="succes">Success</string>
     <string name="login">Login now</string>
@@ -189,4 +189,5 @@
     <string name="enter_mail">please enter your email</string>
     <string name="enter_pass">please enter your password</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="not_valid_email">Email doesn\'t exist</string>
 </resources>

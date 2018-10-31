@@ -167,6 +167,8 @@ public abstract class JaNavigationManager {
 
     public abstract void openFilterVenues();
 
+    public abstract void openFilterAttraction();
+
     public abstract void showSettingsInner();
 
     public abstract void openContactUs();
