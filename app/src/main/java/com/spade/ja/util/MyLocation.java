@@ -11,6 +11,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import com.google.android.gms.location.LocationResult;
+
 public class MyLocation {
     Timer timer1;
     LocationManager lm;
@@ -24,8 +26,11 @@ public class MyLocation {
         //I use LocationResult callback class to pass location value from MyLocation to user code.
         locationResult=result;
         if(lm==null)
-            lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
+            if (context != null) {
+                lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            }else {
+                return false;
+            }
         //exceptions will be thrown if provider is not permitted.
         try{gps_enabled=lm.isProviderEnabled(LocationManager.GPS_PROVIDER);}catch(Exception ex){}
         try{network_enabled=lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);}catch(Exception ex){}

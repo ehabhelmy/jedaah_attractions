@@ -31,7 +31,7 @@ public class Data extends BaseModel implements Parcelable {
     @SerializedName("gender")
     @Expose
     private String gender;
-    @SerializedName("user_id")
+    @SerializedName("ja_id")
     @Expose
     private String userId;
     @SerializedName("profile_image")

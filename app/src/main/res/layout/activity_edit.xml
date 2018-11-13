@@ -5,20 +5,13 @@
     android:layout_height="match_parent"
     android:background="@color/lightBlack"
     android:fillViewport="true"
-    android:orientation="vertical"
     tools:context="com.spade.ja.ui.authentication.registeration.RegisterationFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/register_bg"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_register_bg"
         android:orientation="vertical">
-
-        <include
-            layout="@layout/loading_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/registerContainer"
@@ -289,5 +282,10 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+        <include
+            layout="@layout/loading_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </RelativeLayout>
 </ScrollView>

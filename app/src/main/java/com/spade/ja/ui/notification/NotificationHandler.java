@@ -29,13 +29,14 @@ public class NotificationHandler implements OneSignal.NotificationOpenedHandler 
         if (actionType == OSNotificationAction.ActionType.Opened) {
             if (action != null && id != null) {
                 switch (action) {
-                    case "event":
+                    case "events":
                         JaNavigationManager.getInstance().showEventInnerAsNew(Integer.parseInt(id));
                         break;
-                    case "venue":
+                    case "venues":
                         JaNavigationManager.getInstance().showVenueInnerAsNew(Integer.parseInt(id));
                         break;
-                    case "attraction":
+                    case "attractions" +
+                            "":
                         JaNavigationManager.getInstance().showAttractionInnerAsNew(Integer.parseInt(id));
                         break;
                     default:

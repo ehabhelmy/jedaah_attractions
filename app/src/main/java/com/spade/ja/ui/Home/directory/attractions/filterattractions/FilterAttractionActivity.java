@@ -184,7 +184,7 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
         cats.setItemAnimator(new DefaultItemAnimator());
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
         cats.addItemDecoration(itemDecoration);
-        FilterCategoriesAdapter filterCategoriesAdapter = new FilterCategoriesAdapter(this);
+        filterCategoriesAdapter = new FilterCategoriesAdapter(this);
         filterCategoriesAdapter.setCats((ArrayList<Cats>) categories);
         cats.setAdapter(filterCategoriesAdapter);
         filterCategoriesAdapter.setOnCatSelected((cats,layout,icon,type) -> {

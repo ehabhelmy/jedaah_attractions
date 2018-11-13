@@ -64,7 +64,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:layout_toEndOf="@+id/profile_image"
-                android:text="MOHAMED OMAR"
                 android:textColor="@color/staticTitle"
                 android:textSize="@dimen/static_title_size" />
 
@@ -75,7 +74,6 @@
                 android:layout_alignStart="@+id/username"
                 android:layout_below="@+id/username"
                 android:layout_marginTop="1dp"
-                android:text="JA ID : 43287"
                 android:textColor="@color/white"
                 android:textSize="@dimen/static_title_size" />
 
