@@ -1,6 +1,7 @@
 package com.spade.ja.ui.Home.events.filterevents;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -26,6 +27,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
+import com.spade.ja.datalayer.pojo.SearchCriteria;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.ui.Base.BaseActivity;
 import com.spade.ja.ui.Home.directory.venues.adapter.ItemOffsetDecoration;
@@ -50,6 +52,8 @@ import butterknife.OnClick;
 
 public class FilterEventActivity extends BaseActivity implements FilterEventContract.View, AdapterView.OnItemSelectedListener {
 
+    public static final int FILTER_EVENT = 1234;
+    public static final String SEARCH_CRITERIA = "SearchCriteria";
     @Inject
     FilterEventPresenter presenter;
 
@@ -58,6 +62,9 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
 
     @BindView(R.id.clear)
     TextView clearAll;
+
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
 
     @BindView(R.id.scroll_view)
     NestedScrollView scrollView;
@@ -68,14 +75,17 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
     @BindView(R.id.weeklySugg)
     LinearLayout weeklySugg;
 
+    @BindView(R.id.weekly_sugg_txt)
+    TextView suggTxt;
+
+    @BindView(R.id.nearby_text)
+    TextView nearByTxt;
+
     @BindView(R.id.nearBy)
     LinearLayout nearBy;
 
     @BindView(R.id.gridview)
     RecyclerView cats;
-
-    @BindView(R.id.filterResult)
-    RecyclerView filterResults;
 
     @BindView(R.id.filterContainer)
     RelativeLayout filterContainer;
@@ -83,7 +93,7 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
     private boolean isWeeklySelected = false;
     private boolean isNearBy = false;
     private int monthNumber = 1;
-    private Set<Integer> categoriesChosen = new HashSet<>();
+    private Set<Cats> categoriesChosen = new HashSet<>();
     private FilterCategoriesAdapter filterCategoriesAdapter;
 
     @Override
@@ -103,9 +113,11 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
     void selectWeeklySugg() {
         if (isWeeklySelected) {
             weeklySugg.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
+            suggTxt.setTextColor(ContextCompat.getColor(this,R.color.lightBlack));
             isWeeklySelected = false;
         } else {
             weeklySugg.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
+            suggTxt.setTextColor(ContextCompat.getColor(this,R.color.white));
             isWeeklySelected = true;
         }
     }
@@ -114,9 +126,11 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
     void selectNearBy() {
         if (isNearBy) {
             nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
+            nearByTxt.setTextColor(ContextCompat.getColor(this,R.color.lightBlack));
             isNearBy = false;
         } else {
             nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
+            nearByTxt.setTextColor(ContextCompat.getColor(this,R.color.white));
             isNearBy = true;
         }
     }
@@ -124,12 +138,15 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
 
     @OnClick(R.id.filter)
     void filterEvents() {
+        showLoading();
         if (isNearBy) {
             getLatitudeAndLongitude();
-        }else {
-            List<Integer> cats = new ArrayList<>(categoriesChosen);
-            presenter.filterEvents(isWeeklySelected,cats , monthNumber,null,null);
-
+        } else {
+            Intent intent = new Intent();
+            intent.putExtra(SEARCH_CRITERIA, new SearchCriteria(monthNumber, null, null, isWeeklySelected, new ArrayList<>(categoriesChosen)));
+            setResult(FILTER_EVENT, intent);
+            hideLoading();
+            finish();
         }
     }
 
@@ -147,8 +164,11 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
         }
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
             if (location1 != null) {
-                List<Integer> cats = new ArrayList<>(categoriesChosen);
-                presenter.filterEvents(isWeeklySelected,cats , monthNumber,location1.getLatitude(),location1.getLongitude());
+                Intent intent = new Intent();
+                intent.putExtra(SEARCH_CRITERIA, new SearchCriteria(monthNumber, location1.getLatitude(), location1.getLongitude(), isWeeklySelected, new ArrayList<>(categoriesChosen)));
+                setResult(FILTER_EVENT, intent);
+                hideLoading();
+                finish();
             }
         });
     }
@@ -166,11 +186,12 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
+
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
@@ -197,53 +218,31 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
         cats.setItemAnimator(new DefaultItemAnimator());
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this, R.dimen.item_offset);
         cats.addItemDecoration(itemDecoration);
-        FilterCategoriesAdapter filterCategoriesAdapter = new FilterCategoriesAdapter(this);
+        filterCategoriesAdapter = new FilterCategoriesAdapter(this);
         filterCategoriesAdapter.setCats((ArrayList<Cats>) categories);
         cats.setAdapter(filterCategoriesAdapter);
-        filterCategoriesAdapter.setOnCatSelected((cats,layout,icon,type) -> {
-            if (!categoriesChosen.contains(cats.getId())) {
-                categoriesChosen.add(cats.getId());
+        filterCategoriesAdapter.setOnCatSelected((cats, layout, icon, type) -> {
+            if (!categoriesChosen.contains(cats)) {
+                categoriesChosen.add(cats);
                 layout.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
-                icon.setColorFilter(ContextCompat.getColor(this,R.color.white));
-                type.setTextColor(ContextCompat.getColor(this,R.color.white));
+                icon.setColorFilter(ContextCompat.getColor(this, R.color.white));
+                type.setTextColor(ContextCompat.getColor(this, R.color.white));
             } else {
                 layout.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
-                icon.setColorFilter(ContextCompat.getColor(this,R.color.colorTitle));
-                type.setTextColor(ContextCompat.getColor(this,R.color.lightBlack));
-                categoriesChosen.remove(cats.getId());
+                icon.setColorFilter(ContextCompat.getColor(this, R.color.colorTitle));
+                type.setTextColor(ContextCompat.getColor(this, R.color.lightBlack));
+                categoriesChosen.remove(cats);
             }
         });
-    }
-
-    @Override
-    public void showResults(List<Data> events) {
-        filterContainer.setVisibility(View.GONE);
-        filterResults.setVisibility(View.VISIBLE);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider_vertical));
-        filterResults.setLayoutManager(layoutManager);
-        filterResults.setItemAnimator(new DefaultItemAnimator());
-        filterResults.addItemDecoration(dividerItemDecoration);
-        DataAdapter dataAdapter = new DataAdapter();
-        dataAdapter.setData((ArrayList<Data>) events);
-        dataAdapter.setOnItemClick(new DataAdapter.onItemClick() {
-            @Override
-            public void onLikeClicked(int id, String type) {
-                presenter.like(id);
-            }
-
-            @Override
-            public void onCardClicked(int id, String type) {
-                presenter.showEventInner(id);
-            }
-        });
-        filterResults.setAdapter(dataAdapter);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        monthNumber = i + 1;
+        if (i == 0){
+            monthNumber = 0;
+        }else {
+            monthNumber = i + 1;
+        }
     }
 
     @Override
@@ -253,13 +252,7 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
 
     @OnClick(R.id.clear)
     void clear() {
-        if (filterContainer.getVisibility() == View.VISIBLE){
-            reset();
-        }else {
-            reset();
-            filterContainer.setVisibility(View.VISIBLE);
-            filterResults.setVisibility(View.GONE);
-        }
+        reset();
     }
 
     private void reset() {

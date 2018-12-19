@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.usecase.login.Token;
+import com.spade.ja.usecase.walkthrough.WalkThroughUseCase;
 
 import javax.inject.Inject;
 
@@ -15,10 +16,12 @@ import javax.inject.Inject;
 public class SplashPresenter extends BasePresenter<SplashContract.View> implements SplashContract.Presenter{
 
     private Token token;
+    private WalkThroughUseCase walkThroughUseCase;
 
     @Inject
-    public SplashPresenter(Token token) {
+    public SplashPresenter(Token token,WalkThroughUseCase walkThroughUseCase) {
         this.token = token;
+        this.walkThroughUseCase = walkThroughUseCase;
     }
 
     @Override
@@ -26,7 +29,11 @@ public class SplashPresenter extends BasePresenter<SplashContract.View> implemen
         super.initialize(extras);
         new Handler().postDelayed(() -> {
             if (token.getToken() == null) {
-                jaNavigationManager.goToAuthActivity(null);
+                if (walkThroughUseCase.isFirstInstall()){
+                    jaNavigationManager.goToWalkthrough();
+                }else {
+                    jaNavigationManager.goToAuthActivity(null);
+                }
             }else {
                 jaNavigationManager.goToHomeActivity();
             }

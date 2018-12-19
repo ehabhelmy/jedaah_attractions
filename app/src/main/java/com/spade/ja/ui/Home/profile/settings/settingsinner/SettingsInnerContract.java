@@ -15,7 +15,7 @@ public interface SettingsInnerContract {
     }
 
     interface Presenter {
-        void openEmail();
+        void openFeedback();
         void openAboutScreen();
         void openContactUs();
         void logOut();

@@ -1,6 +1,7 @@
 package com.spade.ja.ui.Home.directory.venues.filtervenues;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
+import com.spade.ja.datalayer.pojo.SearchCriteria;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.ui.Base.BaseActivity;
 import com.spade.ja.ui.Home.directory.venues.adapter.ItemOffsetDecoration;
@@ -38,12 +40,15 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.spade.ja.ui.Home.events.filterevents.FilterEventActivity.SEARCH_CRITERIA;
+
 /**
  * Created by ehab on 2/27/18.
  */
 
 public class FilterVenueActivity extends BaseActivity implements FilterVenueContract.View {
 
+    public static final int FILTER_VENUE = 2345;
     @Inject
     FilterVenuePresenter presenter;
 
@@ -52,6 +57,9 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
 
     @BindView(R.id.clear)
     TextView clearAll;
+
+    @BindView(R.id.loading_overlay_container)
+    LinearLayout loadingView;
 
     @BindView(R.id.weeklySugg)
     LinearLayout weeklySugg;
@@ -62,15 +70,15 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
     @BindView(R.id.gridview)
     RecyclerView cats;
 
-    @BindView(R.id.filterResult)
-    RecyclerView filterResults;
+    @BindView(R.id.weekly_sugg_txt)
+    TextView suggTxt;
 
-    @BindView(R.id.filterContainer)
-    RelativeLayout filterContainer;
+    @BindView(R.id.nearby_text)
+    TextView nearByTxt;
 
     private boolean isWeeklySelected = false;
     private boolean isNearBy = false;
-    private Set<Integer> categoriesChosen = new HashSet<>();
+    private Set<Cats> categoriesChosen = new HashSet<>();
     private FilterCategoriesAdapter filterCategoriesAdapter;
 
 
@@ -83,9 +91,11 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
     void selectWeeklySugg() {
         if (isWeeklySelected) {
             weeklySugg.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
+            suggTxt.setTextColor(ContextCompat.getColor(this,R.color.lightBlack));
             isWeeklySelected = false;
         } else {
             weeklySugg.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
+            suggTxt.setTextColor(ContextCompat.getColor(this,R.color.white));
             isWeeklySelected = true;
         }
     }
@@ -94,32 +104,33 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
     void selectNearBy() {
         if (isNearBy) {
             nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
+            nearByTxt.setTextColor(ContextCompat.getColor(this,R.color.lightBlack));
             isNearBy = false;
         } else {
             nearBy.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
+            nearByTxt.setTextColor(ContextCompat.getColor(this,R.color.white));
             isNearBy = true;
         }
     }
 
+
     @OnClick(R.id.filter)
     void filterVenues() {
+        showLoading();
         if (isNearBy){
             getLatitudeAndLongitude();
         }else {
-            List<Integer> cats = new ArrayList<>(categoriesChosen);
-            presenter.filterVenues(isWeeklySelected,cats,null,null);
+            Intent intent = new Intent();
+            intent.putExtra(SEARCH_CRITERIA, new SearchCriteria(null, null, isWeeklySelected, new ArrayList<>(categoriesChosen)));
+            setResult(FILTER_VENUE, intent);
+            hideLoading();
+            finish();
         }
     }
 
     @OnClick(R.id.clear)
     void clear() {
-        if (filterContainer.getVisibility() == View.VISIBLE){
-            reset();
-        }else {
-            reset();
-            filterContainer.setVisibility(View.VISIBLE);
-            filterResults.setVisibility(View.GONE);
-        }
+        reset();
     }
 
     private void reset() {
@@ -146,11 +157,11 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
     }
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
@@ -181,8 +192,8 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
         filterCategoriesAdapter.setCats((ArrayList<Cats>) categories);
         cats.setAdapter(filterCategoriesAdapter);
         filterCategoriesAdapter.setOnCatSelected((cats,layout,icon,type) -> {
-            if (!categoriesChosen.contains(cats.getId())) {
-                categoriesChosen.add(cats.getId());
+            if (!categoriesChosen.contains(cats)) {
+                categoriesChosen.add(cats);
                 layout.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect_green));
                 icon.setColorFilter(ContextCompat.getColor(this,R.color.white));
                 type.setTextColor(ContextCompat.getColor(this,R.color.white));
@@ -190,34 +201,9 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
                 layout.setBackground(ContextCompat.getDrawable(this, R.drawable.tag_rect));
                 icon.setColorFilter(ContextCompat.getColor(this,R.color.colorTitle));
                 type.setTextColor(ContextCompat.getColor(this,R.color.lightBlack));
-                categoriesChosen.remove(cats.getId());
+                categoriesChosen.remove(cats);
             }
         });
-    }
-    @Override
-    public void showResults(List<Data> venues) {
-        filterContainer.setVisibility(View.GONE);
-        filterResults.setVisibility(View.VISIBLE);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider_vertical));
-        filterResults.setLayoutManager(layoutManager);
-        filterResults.setItemAnimator(new DefaultItemAnimator());
-        filterResults.addItemDecoration(dividerItemDecoration);
-        DataAdapter dataAdapter = new DataAdapter();
-        dataAdapter.setData((ArrayList<Data>) venues);
-        dataAdapter.setOnItemClick(new DataAdapter.onItemClick() {
-            @Override
-            public void onLikeClicked(int id, String type) {
-                presenter.like(id);
-            }
-
-            @Override
-            public void onCardClicked(int id, String type) {
-                presenter.showVenueInner(id);
-            }
-        });
-        filterResults.setAdapter(dataAdapter);
     }
 
     @Override
@@ -234,8 +220,11 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
         }
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location1 -> {
             if (location1 != null) {
-                List<Integer> cats = new ArrayList<>(categoriesChosen);
-                presenter.filterVenues(isWeeklySelected,cats ,location1.getLatitude(),location1.getLongitude());
+                Intent intent = new Intent();
+                intent.putExtra(SEARCH_CRITERIA, new SearchCriteria(location1.getLatitude(), location1.getLongitude(), isWeeklySelected, new ArrayList<>(categoriesChosen)));
+                setResult(FILTER_VENUE, intent);
+                hideLoading();
+                finish();
             }
         });
     }

@@ -27,7 +27,7 @@ public class NotificationHandler implements OneSignal.NotificationOpenedHandler 
         }
 
         if (actionType == OSNotificationAction.ActionType.Opened) {
-            if (action != null && id != null) {
+            if (action != null) {
                 switch (action) {
                     case "events":
                         JaNavigationManager.getInstance().showEventInnerAsNew(Integer.parseInt(id));
@@ -35,11 +35,20 @@ public class NotificationHandler implements OneSignal.NotificationOpenedHandler 
                     case "venues":
                         JaNavigationManager.getInstance().showVenueInnerAsNew(Integer.parseInt(id));
                         break;
-                    case "attractions" +
-                            "":
+                    case "attractions":
                         JaNavigationManager.getInstance().showAttractionInnerAsNew(Integer.parseInt(id));
                         break;
+                    case "2":
+                        JaNavigationManager.getInstance().showEventsScreenAsNew();
+                        break;
+                    case "3":
+                        JaNavigationManager.getInstance().showVenuesScreenAsNew();
+                        break;
+                    case "4":
+                        JaNavigationManager.getInstance().showAttractionScreenAsNew();
+                        break;
                     default:
+                        JaNavigationManager.getInstance().goToHomeActivity();
                         break;
                 }
             }

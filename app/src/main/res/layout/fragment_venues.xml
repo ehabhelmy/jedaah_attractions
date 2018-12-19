@@ -3,102 +3,135 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/filter_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingTop="10dp">
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gotham_bold"
+            android:text="@string/filterBy"
+            android:textColor="@color/staticTitle"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/topSportsTextView"
-                style="@style/TitleTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/topSpotsInJeddah" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/topVeuesRecyclarView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="16dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/filter_list"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/lightBlack"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingTop="10dp">
+            android:layout_marginTop="10dp" />
 
-            <TextView
-                android:id="@+id/title_categories"
-                style="@style/TitleTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/title_categories" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/categories"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="16dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/title_all_venues"
-                style="@style/TitleTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/title_all_venues" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/allVenuesRecyclarView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="16dp"
-                android:padding="@dimen/item_offset"/>
-
-        </LinearLayout>
-
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
-</ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/events_list_container"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/topSportsTextView"
+                    style="@style/TitleTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/topSpotsInJeddah" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/topVeuesRecyclarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingStart="16dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightBlack"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/title_categories"
+                    style="@style/TitleTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/title_categories" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingStart="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/title_all_venues"
+                    style="@style/TitleTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/title_all_venues" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/allVenuesRecyclarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:padding="@dimen/item_offset"
+                    android:paddingStart="16dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:scaleType="center"
         android:layout_margin="20dp"
+        android:scaleType="center"
         app:srcCompat="@drawable/filter_bg" />
 
 </android.support.design.widget.CoordinatorLayout>

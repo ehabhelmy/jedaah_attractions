@@ -12,6 +12,7 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,6 +21,12 @@ import android.widget.FrameLayout;
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.BaseActivity;
+import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.directory.DirectoryFragment;
+import com.spade.ja.ui.Home.directory.attractions.filterattractions.FilterAttractionActivity;
+import com.spade.ja.ui.Home.directory.venues.filtervenues.FilterVenueActivity;
+import com.spade.ja.ui.Home.events.EventsFragment;
+import com.spade.ja.ui.Home.events.filterevents.FilterEventActivity;
 import com.spade.ja.ui.Home.explore.ExploreContract;
 import com.spade.ja.ui.Home.explore.ExploreFragment;
 import com.spade.ja.ui.navigation.JaNavigationManager;
@@ -36,8 +43,10 @@ import butterknife.BindView;
 
 public class HomeActivity extends BaseActivity implements HomeContract.View {
 
+    public static final String TYPE = "tabType";
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final int MY_PERMISSIONS_REQUEST_SMS_RECEIVE = 10;
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 101;
     @Inject
     HomePresenter presenter;
     @BindView(R.id.frame_layout)
@@ -49,20 +58,20 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()){
-                case R.id.explore :
+            switch (item.getItemId()) {
+                case R.id.explore:
                     presenter.showExplore();
                     break;
-                case R.id.search :
+                case R.id.search:
                     presenter.showSearch();
                     break;
-                case R.id.events :
+                case R.id.events:
                     presenter.showEvents();
                     break;
-                case R.id.profile :
+                case R.id.profile:
                     presenter.showProfile();
                     break;
-                case R.id.directory :
+                case R.id.directory:
                     presenter.showDirectory();
             }
             return true;
@@ -73,7 +82,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     public void onBackPressed() {
         if (bottomNavigationView.getSelectedItemId() != R.id.explore) {
             bottomNavigationView.setSelectedItemId(R.id.explore);
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -108,7 +117,26 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         removeShiftMode(bottomNavigationView);
         getLocationPermission();
         checkLocationEnabled();
-        presenter.showExplore();
+        switch (getIntent().getIntExtra(TYPE, 0)) {
+            case 0:
+                presenter.showExplore();
+                break;
+            case 1:
+                bottomNavigationView.setSelectedItemId(R.id.events);
+                presenter.showEvents();
+                break;
+            case 2:
+                bottomNavigationView.setSelectedItemId(R.id.directory);
+                presenter.showDirectory(2);
+                break;
+            case 3:
+                bottomNavigationView.setSelectedItemId(R.id.directory);
+                presenter.showDirectory(3);
+                break;
+            default:
+                presenter.showExplore();
+                break;
+        }
     }
 
 
@@ -131,18 +159,25 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     }
 
     private void getLocationPermission() {
-    /*
-     * Request location permission, so that we can get the location of the
-     * device. The result of the permission request is handled by a callback,
-     * onRequestPermissionsResult.
-     *
-     */
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED){
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         *
+         */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED) {
 
-        }else {
+        } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.RECEIVE_SMS},
                     MY_PERMISSIONS_REQUEST_SMS_RECEIVE);
+        }
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
         }
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -167,18 +202,28 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             if (resultCode == 0) {
                 locationdEnabled = true;
                 presenter.locationIsEnabled();
-            }else {
+            } else {
                 locationdEnabled = false;
             }
         }
-//        if (requestCode == JaNavigationManager.EVENT_INNER) {
-//            bottomNavigationView.setSelectedItemId(R.id.events);
-//            presenter.showEvents();
-//        }
-//        if (requestCode == JaNavigationManager.MAP) {
-//            bottomNavigationView.setSelectedItemId(R.id.explore);
-//            presenter.showExplore();
-//        }
+        if (resultCode == FilterEventActivity.FILTER_EVENT) {
+            BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout);
+            if (fragment instanceof EventsFragment) {
+                ((EventsFragment) fragment).showFilterResults(data.getParcelableExtra(FilterEventActivity.SEARCH_CRITERIA));
+            }
+        }
+        if (resultCode == FilterVenueActivity.FILTER_VENUE) {
+            BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout);
+            if (fragment instanceof DirectoryFragment) {
+                ((DirectoryFragment) fragment).showFilterResultsVenue(data.getParcelableExtra(FilterEventActivity.SEARCH_CRITERIA));
+            }
+        }
+        if (resultCode == FilterAttractionActivity.FILTER_ATTRACTION) {
+            BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout);
+            if (fragment instanceof DirectoryFragment) {
+                ((DirectoryFragment) fragment).showFilterResultsAttraction(data.getParcelableExtra(FilterEventActivity.SEARCH_CRITERIA));
+            }
+        }
     }
 
     @Override

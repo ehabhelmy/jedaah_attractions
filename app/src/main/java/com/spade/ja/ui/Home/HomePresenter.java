@@ -76,4 +76,7 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     }
 
 
+    public void showDirectory(int type) {
+        jaNavigationManager.showDirectoryScreen(type);
+    }
 }

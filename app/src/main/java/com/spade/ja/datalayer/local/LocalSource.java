@@ -102,4 +102,8 @@ public interface LocalSource {
     void saveProfile(ProfileResponse profileResponse);
 
     void clearProfile();
+
+    boolean isFirstInstall();
+
+    void walkThroughAppeared();
 }

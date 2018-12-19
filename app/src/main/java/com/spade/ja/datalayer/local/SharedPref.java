@@ -14,6 +14,7 @@ import com.spade.ja.datalayer.pojo.BaseModel;
 public class SharedPref<T extends BaseModel> {
 
     public static final String CATEGORIES = "categories";
+    public static final String IS_FIRST_INSTALL = "isFirstInstall";
     private static final String SHARED_PREF = "ja shared pref";
     public static final String ALL_EVENTS = "all-events";
     public static final String USER = "user";
@@ -70,6 +71,16 @@ public class SharedPref<T extends BaseModel> {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(PROFILE);
         editor.apply();
+    }
+
+    public void saveBoolean(String key,boolean value){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(key,value);
+        editor.apply();
+    }
+
+    public boolean getBoolean(String key){
+        return preferences.getBoolean(key,true);
     }
 
 

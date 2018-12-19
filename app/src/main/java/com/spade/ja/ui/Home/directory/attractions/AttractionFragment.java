@@ -1,5 +1,6 @@
 package com.spade.ja.ui.Home.directory.attractions;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -7,17 +8,25 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
+import com.spade.ja.datalayer.pojo.SearchCriteria;
 import com.spade.ja.datalayer.pojo.response.allvenues.Venue;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
+import com.spade.ja.datalayer.pojo.response.filter.venues.Result;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Base.listener.RecyclerViewItemListener;
 import com.spade.ja.ui.Home.directory.venues.VenuesPresenter;
 import com.spade.ja.ui.Home.directory.venues.adapter.AllVenuesListAdapter;
 import com.spade.ja.ui.Home.directory.venues.adapter.ItemOffsetDecoration;
+import com.spade.ja.ui.Home.events.FilterCategoriesChoosenAdapter;
 import com.spade.ja.ui.Home.explore.adapter.CategoryListAdapter;
 import com.spade.ja.ui.Home.explore.adapter.VenuesListAdapter;
+import com.spade.ja.ui.Home.map.Data;
+import com.spade.ja.ui.Home.map.adapter.DataAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +51,24 @@ public class AttractionFragment extends BaseFragment implements AttractionsContr
     @BindView(R.id.allVenuesRecyclarView)
     RecyclerView allVenuesRecyclarView;
 
+    @BindView(R.id.filter_list)
+    RecyclerView filterList;
+
+    @BindView(R.id.list)
+    RecyclerView list;
+
+    @BindView(R.id.filter_container)
+    LinearLayout filterContainer;
+
+    @BindView(R.id.events_list_container)
+    ScrollView eventsListContainer;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
     private ArrayList<Venue> response;
     private AllVenuesListAdapter allVenuesListAdapter;
+    private FilterCategoriesChoosenAdapter adapter;
 
     @Override
     protected void initializeDagger() {
@@ -56,6 +81,41 @@ public class AttractionFragment extends BaseFragment implements AttractionsContr
         super.presenter = presenter;
         presenter.setView(this);
     }
+
+    public void showFilterResults(SearchCriteria searchCriteria) {
+        filterContainer.setVisibility(View.VISIBLE);
+        eventsListContainer.setVisibility(View.GONE);
+        fab.setVisibility(View.GONE);
+        List<Integer> ids = new ArrayList<>();
+        for (Cats cats : searchCriteria.getCategoriesNames()) {
+            ids.add(cats.getId());
+        }
+        setupCategoriesChoosen(searchCriteria);
+        presenter.filterAttractions(searchCriteria.isWeeklySuggested(), ids, searchCriteria.getLatitiude(), searchCriteria.getLongitude());
+    }
+
+    private void setupCategoriesChoosen(SearchCriteria searchCriteria) {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        filterList.setLayoutManager(layoutManager);
+        filterList.setItemAnimator(new DefaultItemAnimator());
+        adapter = new FilterCategoriesChoosenAdapter(getActivity());
+        adapter.setCats((ArrayList<Cats>) searchCriteria.getCategoriesNames());
+        adapter.setOnCatUnSelected(cats -> {
+            List<Integer> ids = new ArrayList<>();
+            for (Cats cats1 : adapter.getCats()) {
+                ids.add(cats1.getId());
+            }
+            if (adapter.getCats().isEmpty()) {
+                filterContainer.setVisibility(View.GONE);
+                eventsListContainer.setVisibility(View.VISIBLE);
+                fab.setVisibility(View.VISIBLE);
+            } else {
+                presenter.filterAttractions(searchCriteria.isWeeklySuggested(), ids, searchCriteria.getLatitiude(), searchCriteria.getLongitude());
+            }
+        });
+        filterList.setAdapter(adapter);
+    }
+
 
     @Override
     protected int getLayoutId() {
@@ -112,6 +172,20 @@ public class AttractionFragment extends BaseFragment implements AttractionsContr
         if (venues != null) {
             allVenuesListAdapter.addData((ArrayList<com.spade.ja.datalayer.pojo.response.allvenues.Venue>) venues);
         }
+    }
+
+    @Override
+    public void showResults(List<Result> venues) {
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getActivity(), 2);
+        list.setLayoutManager(mLayoutManager);
+        list.setItemAnimator(new DefaultItemAnimator());
+        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(this.getActivity(), R.dimen.item_offset);
+        list.addItemDecoration(itemDecoration);
+        FilterVenueResultsAdapter dataAdapter = new FilterVenueResultsAdapter();
+        dataAdapter.setDataList(venues);
+        dataAdapter.setItemListener(id -> presenter.showAttractionsInner(id));
+        dataAdapter.setFavouriteListener(id -> presenter.attractionLike(id));
+        list.setAdapter(dataAdapter);
     }
 
     @Override

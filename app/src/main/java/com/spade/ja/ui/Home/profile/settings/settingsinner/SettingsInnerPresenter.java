@@ -19,8 +19,8 @@ public class SettingsInnerPresenter extends BasePresenter<SettingsInnerContract.
 
 
     @Override
-    public void openEmail() {
-        jaNavigationManager.openEmail();
+    public void openFeedback() {
+        jaNavigationManager.openFeedback();
     }
 
     @Override

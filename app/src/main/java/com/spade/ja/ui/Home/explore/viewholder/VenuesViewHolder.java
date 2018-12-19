@@ -65,6 +65,7 @@ public class VenuesViewHolder extends BaseViewHolder<Venue> {
                 cat.append(" | ");
                 cat.append(baseModel.getSubCategories().get(i));
             }catch (Exception e){
+                cat.delete(cat.length()-3,cat.length() -1);
                 cat.append("");
             }finally {
                 if (i != baseModel.getCategories().size() - 1) {

@@ -364,4 +364,14 @@ public class LocalRepository implements LocalSource {
     public void clearProfile() {
         sharedPref.clearProfile();
     }
+
+    @Override
+    public boolean isFirstInstall() {
+        return sharedPref.getBoolean(SharedPref.IS_FIRST_INSTALL);
+    }
+
+    @Override
+    public void walkThroughAppeared() {
+        sharedPref.saveBoolean(SharedPref.IS_FIRST_INSTALL,false);
+    }
 }

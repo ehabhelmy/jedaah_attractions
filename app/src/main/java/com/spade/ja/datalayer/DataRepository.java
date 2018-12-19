@@ -14,6 +14,7 @@ import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerRespo
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.code.ResetCodeResponse;
+import com.spade.ja.datalayer.pojo.response.contact.ContactUsDataResponse;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.datalayer.pojo.response.eventcreditconfirm.EventChangeStatusResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
@@ -496,6 +497,21 @@ public class DataRepository implements DataSource {
     @Override
     public Single<AttractionConfirmOrderResponse> changeOrderCreditAttraction(String orderId, String status) {
         return remoteRepository.changeOrderCreditAttraction(orderId,status,getToken());
+    }
+
+    @Override
+    public Single<ContactUsDataResponse> getContactUsData() {
+        return remoteRepository.getContactUsData();
+    }
+
+    @Override
+    public boolean isFirstInstall() {
+        return localRepository.isFirstInstall();
+    }
+
+    @Override
+    public void walkThroughAppeared() {
+        localRepository.walkThroughAppeared();
     }
 
 }

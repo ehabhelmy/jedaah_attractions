@@ -48,7 +48,7 @@ public class SettingsInnerFragment extends BaseFragment implements SettingsInner
 
     @OnClick(R.id.feedback)
     void openEmail() {
-        presenter.openEmail();
+        presenter.openFeedback();
     }
 
     @OnClick(R.id.about)

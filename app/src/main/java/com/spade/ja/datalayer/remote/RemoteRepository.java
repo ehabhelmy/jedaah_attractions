@@ -28,6 +28,7 @@ import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerRespo
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.code.ResetCodeResponse;
+import com.spade.ja.datalayer.pojo.response.contact.ContactUsDataResponse;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.datalayer.pojo.response.eventcreditconfirm.EventChangeStatusResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
@@ -58,6 +59,7 @@ import com.spade.ja.datalayer.remote.service.AttractionsLikeService;
 import com.spade.ja.datalayer.remote.service.CancelAttractionService;
 import com.spade.ja.datalayer.remote.service.CancelEventService;
 import com.spade.ja.datalayer.remote.service.CategoriesService;
+import com.spade.ja.datalayer.remote.service.ContactUsDataService;
 import com.spade.ja.datalayer.remote.service.ContactUsService;
 import com.spade.ja.datalayer.remote.service.DataService;
 import com.spade.ja.datalayer.remote.service.EditService;
@@ -1134,7 +1136,7 @@ public class RemoteRepository implements RemoteSource {
                     } else {
                         try {
                             FilterEventsService filterEventsService = serviceGenerator.createServiceNotNullSerialization(FilterEventsService.class, BASE_URL);
-                            ServiceResponse serviceResponse = processCall(filterEventsService.filterEvents(getCurrentLanguage(),new FilterEventsRequest(weeklySuggest,categoryId,date,lat,lng)), false);
+                            ServiceResponse serviceResponse = processCall(filterEventsService.filterEvents(getCurrentLanguage(),date != 0 ? new FilterEventsRequest(weeklySuggest,categoryId,date,lat,lng) : new FilterEventsRequest(weeklySuggest,categoryId,null,lat,lng)), false);
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 FilterEventsResponse filterEventsResponse = (FilterEventsResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(filterEventsResponse);
@@ -1437,6 +1439,31 @@ public class RemoteRepository implements RemoteSource {
                             if (serviceResponse.getCode() == SUCCESS_CODE) {
                                 AttractionConfirmOrderResponse model = (AttractionConfirmOrderResponse) serviceResponse.getData();
                                 singleOnSubscribe.onSuccess(model);
+                            } else {
+                                Throwable throwable = new NetworkErrorException();
+                                singleOnSubscribe.onError(throwable);
+                            }
+                        } catch (Exception e) {
+                            singleOnSubscribe.onError(e);
+                        }
+                    }
+                }
+        );
+    }
+
+    @Override
+    public Single<ContactUsDataResponse> getContactUsData() {
+        return Single.create(singleOnSubscribe -> {
+                    if (!isConnected(JaApplication.getContext())) {
+                        Exception exception = new NetworkErrorException();
+                        singleOnSubscribe.onError(exception);
+                    } else {
+                        try {
+                            ContactUsDataService contactUsDataService = serviceGenerator.createService(ContactUsDataService.class, BASE_URL);
+                            ServiceResponse serviceResponse = processCall(contactUsDataService.contactUs(getCurrentLanguage()), false);
+                            if (serviceResponse.getCode() == SUCCESS_CODE) {
+                                ContactUsDataResponse contactUsResponse = (ContactUsDataResponse) serviceResponse.getData();
+                                singleOnSubscribe.onSuccess(contactUsResponse);
                             } else {
                                 Throwable throwable = new NetworkErrorException();
                                 singleOnSubscribe.onError(throwable);

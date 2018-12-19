@@ -131,7 +131,7 @@
     <string name="message">الرسالة</string>
     <string name="send">أرسل</string>
     <string name="about">عن التطبيق </string>
-    <string name="feedback">الانطباع</string>
+    <string name="feedback">رأيكم يهمنا</string>
     <string name="sunday">الأحد</string>
     <string name="monday">الاثنين</string>
     <string name="tuesday">الثلاثاء</string>
@@ -141,7 +141,6 @@
     <string name="saturday">السبت</string>
     <string name="pickAdate">اختر الوقت</string>
     <string name="attraction">موقع ترفيهي</string>
-    <string name="dateTime"><![CDATA[DATE & TIME]]></string>
     <string name="ticketAddOns">اضافات</string>
     <string name="search">بحث</string>
     <string name="venuesSmall">اماكن</string>
@@ -177,8 +176,6 @@
     <string name="open_now">مفتوح الان</string>
     <string name="closed_now">مغلق الان</string>
     <string name="hours">ساعه </string>
-    <string name="web_site">Web Site</string>
-    <string name="phone">Phone</string>
     <string name="reset_error">لم نتمكن من تغيير كلمه السر</string>
     <string name="code_enter">رمز التاكيد</string>
     <string name="change_lang">تغيير اللغه</string>
@@ -190,4 +187,25 @@
     <string name="enter_pass">رجاء ادخال كلمه السر</string>
     <string name="edit_profile">تغيير البيانات</string>
     <string name="not_valid_email">لا وجود لهذا البريد الالكترونى</string>
+    <string name="postal_address">العنوان البريدي</string>
+    <string name="telephone">التليفون</string>
+    <string name="call">الاتصال</string>
+    <string name="email_contact">البريد الالكتروني</string>
+    <string name="send_message">ارسل</string>
+    <string name="web_site_contact">الموقع الالكتروني</string>
+    <string name="socail">مواقع التواصل الاجتماعي</string>
+    <string name="location_intro">تقدر تشوف وتعرف اقرب الأماكن والفعاليات اللي حولينك</string>
+    <string name="location_intro_subtitle">مع خاصية معرفة كل الأماكن والفعاليات القريبة منك وكمان مع خاصية الوصول لها</string>
+    <string name="calendar_intro">أحجز تذاكر الفعاليات</string>
+    <string name="calendar_intro_subtitle">حفلات وفعاليات جدة طول السنة ما توقف ولا تنتهي ، أحجز مكانك اليوم وعيش الأجواء من خلال تطبيق جدة اتراكشنز</string>
+    <string name="attraction_intro">استكشف فعاليات جدة، احجز واشتري تذاكرها من مكان واحد</string>
+    <string name="attraction_intro_subtitle">عيشوا اجواء الترفيه ، الحماس والمتعة من خلال استكشاف ومعرفة أهم معالم وفعاليات مدينة جدة . مو بس كدا وكمان تقدروا تحجزوا وتشتروا التذاكر كله من مكان واحد</string>
+    <string name="back_home">الرجوع للرئيسية</string>
+    <string name="filterAttraction">تصفية المواقع الترفيهية</string>
+    <string name="dateTime">التاريخ و الوقت</string>
+    <string name="web_site">الموقع الالكتروني</string>
+    <string name="phone">التليفون</string>
+    <string name="font_book"></string>
+    <string name="font_medium"></string>
+    <string name="font_bold"></string>
 </resources>

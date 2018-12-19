@@ -115,9 +115,17 @@ public abstract class JaNavigationManager {
 
     public abstract void showEventsScreen();
 
+    public abstract void showEventsScreenAsNew();
+
     public abstract void showProfileScreen();
 
     public abstract void showDirectoryScreen();
+
+    public abstract void showDirectoryScreen(int type);
+
+    public abstract void showVenuesScreenAsNew();
+
+    public abstract void showAttractionScreenAsNew();
 
     public abstract void showLocationSettings();
 
@@ -130,6 +138,8 @@ public abstract class JaNavigationManager {
     public abstract void goToHomeActivity();
 
     public abstract void goToAuthActivity(String token);
+
+    public abstract void goToWalkthrough();
 
     public abstract void showRegisterationScreen();
 
@@ -171,7 +181,7 @@ public abstract class JaNavigationManager {
 
     public abstract void showSettingsInner();
 
-    public abstract void openContactUs();
+    public abstract void openFeedback();
 
     public abstract void openCalendarView(AttractionPaymentData attractionPaymentData);
 
@@ -246,5 +256,7 @@ public abstract class JaNavigationManager {
     public void setCurrentActivity(BaseActivity currentActivity) {
         this.currentActivity = new WeakReference<BaseActivity>(currentActivity);
     }
+
+    public abstract void openContactUs();
 
 }

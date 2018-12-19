@@ -17,13 +17,10 @@ public class FilterVenueContract {
 
     interface View extends BaseView,ErrorView,ProgressView {
         void setupCategories(List<Cats> categories);
-        void showResults(List<Data> venues);
         void getLatitudeAndLongitude();
     }
 
     interface Presenter extends Unsubscribable {
-        void filterVenues(boolean weeklySuggest,List<Integer> categoryId,Double lat , Double lng);
-        void showVenueInner(int id);
-        void like(int id);
+
     }
 }

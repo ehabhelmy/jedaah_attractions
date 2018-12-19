@@ -4,14 +4,19 @@ import android.os.Bundle;
 
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
+import com.spade.ja.datalayer.pojo.response.filter.venues.FilterVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.like.LikeResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Base.listener.BaseCallback;
+import com.spade.ja.ui.Home.map.DataConverter;
 import com.spade.ja.usecase.allvenues.AllVenues;
 import com.spade.ja.usecase.categories.Categories;
+import com.spade.ja.usecase.filter.filtervenues.FilterVenues;
 import com.spade.ja.usecase.like.LikeVenues;
 import com.spade.ja.usecase.topvenues.TopVenues;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,6 +30,7 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
     private TopVenues topVenues;
     private AllVenues allVenues;
     private LikeVenues likeVenues;
+    private FilterVenues filterVenues;
     private boolean firstFetch = true;
 
     private BaseCallback<Category> categoryBaseCallback = new BaseCallback<Category>() {
@@ -33,6 +39,24 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
             if (isViewAlive.get()) {
                 if (model.getSuccess()) {
                     getView().setupCategories(model.getData());
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()) {
+                getView().showError(message);
+            }
+        }
+    };
+
+    private BaseCallback<FilterVenuesResponse> filterEventsResponseBaseCallback  = new BaseCallback<FilterVenuesResponse>() {
+        @Override
+        public void onSuccess(FilterVenuesResponse model) {
+            if (isViewAlive.get()){
+                if (model.getSuccess()){
+                    getView().showResults(model.getData().getResult());
                 }
             }
         }
@@ -107,11 +131,12 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
     };
 
     @Inject
-    public VenuesPresenter(Categories categories, TopVenues topVenues, AllVenues allVenues, LikeVenues likeVenues) {
+    public VenuesPresenter(Categories categories, TopVenues topVenues, AllVenues allVenues, LikeVenues likeVenues,FilterVenues filterVenues) {
         this.categories = categories;
         this.topVenues = topVenues;
         this.allVenues = allVenues;
         this.likeVenues = likeVenues;
+        this.filterVenues = filterVenues;
     }
 
     @Override
@@ -128,6 +153,7 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
         topVenues.unSubscribe();
         allVenues.unSubscribe();
         likeVenues.unSubscribe();
+        filterVenues.unSubscribe();
     }
 
     @Override
@@ -149,5 +175,10 @@ public class VenuesPresenter extends BasePresenter<VenuesContract.View> implemen
     @Override
     public void openFilterVenues() {
         jaNavigationManager.openFilterVenues();
+    }
+
+    @Override
+    public void filterVenues(boolean weeklySuggest, List<Integer> categoryId, Double lat, Double lng) {
+        filterVenues.filterVenues(weeklySuggest,categoryId,filterEventsResponseBaseCallback,lat,lng);
     }
 }

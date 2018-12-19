@@ -10,6 +10,7 @@ import com.spade.ja.ui.Base.listener.BaseCallback;
 import com.spade.ja.ui.Home.attractioninner.adapter.AttractionPaymentAdapter;
 import com.spade.ja.usecase.attractioninner.AttractionInner;
 import com.spade.ja.usecase.like.LikeAttractions;
+import com.spade.ja.usecase.login.Token;
 import com.spade.ja.util.Constants;
 
 import javax.inject.Inject;
@@ -24,11 +25,13 @@ public class AttractionDetailsPresenter extends BasePresenter<AttractionDetailsC
     private int id;
     private LikeAttractions like;
     private Data data;
+    private Token token;
 
     @Inject
-    public AttractionDetailsPresenter(AttractionInner attractionInner, LikeAttractions like) {
+    public AttractionDetailsPresenter(AttractionInner attractionInner, LikeAttractions like,Token token) {
         this.attractionInner = attractionInner;
         this.like = like;
+        this.token = token;
     }
 
     private BaseCallback<AttractionInnerResponse> attractionInnerResponseBaseCallback = new BaseCallback<AttractionInnerResponse>() {
@@ -85,7 +88,11 @@ public class AttractionDetailsPresenter extends BasePresenter<AttractionDetailsC
 
     @Override
     public void openPaymentView() {
-        jaNavigationManager.openCalendarView(AttractionPaymentAdapter.convertToPaymentData(data));
+        if (token.getToken() == null) {
+            jaNavigationManager.goToAuthActivity(token.getToken());
+        }else {
+            jaNavigationManager.openCalendarView(AttractionPaymentAdapter.convertToPaymentData(data));
+        }
     }
 
     @Override

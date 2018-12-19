@@ -33,6 +33,7 @@ import com.spade.ja.ui.Home.profile.my_tickets.TicketsFragment;
 import com.spade.ja.ui.Home.profile.settings.SettingsActivity;
 import com.spade.ja.ui.Home.profile.settings.about.AboutFragment;
 import com.spade.ja.ui.Home.profile.settings.contactus.ContactUsFragment;
+import com.spade.ja.ui.Home.profile.settings.contactusnew.ContactUsNewFragment;
 import com.spade.ja.ui.Home.profile.settings.settingsinner.SettingsInnerFragment;
 import com.spade.ja.ui.Home.search.SearchFragment;
 import com.spade.ja.ui.Home.venueinner.VenueInnerActivity;
@@ -44,6 +45,7 @@ import com.spade.ja.ui.authentication.login.SignInFragment;
 import com.spade.ja.ui.authentication.registeration.RegisterationFragment;
 import com.spade.ja.ui.authentication.socialmedia.SocialMediaFragment;
 import com.spade.ja.ui.splash.SplashActivity;
+import com.spade.ja.ui.walkthrough.WalkThroughActivity;
 
 import javax.inject.Singleton;
 
@@ -145,4 +147,8 @@ public interface MainComponent {
     void inject(ResetPasswordFragment resetPasswordFragment);
 
     void inject(AboutFragment aboutFragment);
+
+    void inject(ContactUsNewFragment contactUsNewFragment);
+
+    void inject(WalkThroughActivity walkThroughActivity);
 }

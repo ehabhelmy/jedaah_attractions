@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.profile.Data;
 import com.spade.ja.ui.Home.HomeActivity;
@@ -36,6 +37,7 @@ import com.spade.ja.ui.Home.profile.edit.EditActivity;
 import com.spade.ja.ui.Home.profile.settings.SettingsActivity;
 import com.spade.ja.ui.Home.profile.settings.about.AboutFragment;
 import com.spade.ja.ui.Home.profile.settings.contactus.ContactUsFragment;
+import com.spade.ja.ui.Home.profile.settings.contactusnew.ContactUsNewFragment;
 import com.spade.ja.ui.Home.profile.settings.settingsinner.SettingsInnerFragment;
 import com.spade.ja.ui.Home.search.SearchFragment;
 import com.spade.ja.ui.Home.venueinner.VenueInnerActivity;
@@ -48,7 +50,11 @@ import com.spade.ja.ui.authentication.login.SignInFragment;
 import com.spade.ja.ui.authentication.registeration.RegisterationFragment;
 import com.spade.ja.ui.authentication.socialmedia.SocialMediaFragment;
 import com.spade.ja.ui.splash.SplashActivity;
+import com.spade.ja.ui.walkthrough.WalkThroughActivity;
 import com.spade.ja.util.Constants;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * Created by ehab on 12/1/17.
@@ -56,6 +62,8 @@ import com.spade.ja.util.Constants;
 
 public class JaPortraitNavigationManager extends JaNavigationManager {
 
+
+    private static final String CONTACT_US_NEW = "newContactUs";
 
     @Override
     public void showExploreScreen() {
@@ -85,6 +93,22 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     }
 
     @Override
+    public void showEventsScreenAsNew() {
+        showHomeAsRoot(1);
+    }
+
+    private void showHomeAsRoot(int type) {
+        Intent intent = new Intent(context,HomeActivity.class);
+        intent.setFlags(FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(HomeActivity.TYPE,type);
+        if (getCurrentActivity() == null){
+            JaApplication.getContext().startActivity(intent);
+        }else {
+            getCurrentActivity().startActivity(intent);
+        }
+    }
+
+    @Override
     public void showProfileScreen() {
         ProfileFragment profileFragment = (ProfileFragment) fragmentManager.findFragmentByTag(PROFILE);
         if (profileFragment == null) {
@@ -103,18 +127,34 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     }
 
     @Override
+    public void showDirectoryScreen(int type) {
+        DirectoryFragment directoryFragment = (DirectoryFragment) fragmentManager.findFragmentByTag(DIRECTORY);
+        if (directoryFragment == null) {
+            directoryFragment = new DirectoryFragment();
+        }
+        Bundle bundle = new Bundle();
+        bundle.putInt(HomeActivity.TYPE,type);
+        directoryFragment.setArguments(bundle);
+        replaceFragment(directoryFragment,false,DIRECTORY,R.id.frame_layout);
+    }
+
+    @Override
+    public void showVenuesScreenAsNew() {
+        showHomeAsRoot(2);
+    }
+
+    @Override
+    public void showAttractionScreenAsNew() {
+        showHomeAsRoot(3);
+    }
+
+    @Override
     public void showLocationSettings() {
         getCurrentActivity().startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),LOCATION_SETTINGS);
     }
 
     @Override
     public void openEmail() {
-//        Intent intent = new Intent(Intent.ACTION_SENDTO);
-//        intent.setType("text/plain");
-//        intent.putExtra(Intent.EXTRA_EMAIL, "spade@jeddahAttractions.com");
-//        intent.putExtra(Intent.EXTRA_SUBJECT, "FeedBack");
-//        intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-//        startActivity(intent);
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto","spade@jeddahAttractions.com", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FeedBack");
@@ -155,6 +195,12 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
                 getCurrentActivity().finish();
             }
         }
+        getCurrentActivity().startActivity(intent);
+    }
+
+    @Override
+    public void goToWalkthrough() {
+        Intent intent = new Intent(context,WalkThroughActivity.class);
         getCurrentActivity().startActivity(intent);
     }
 
@@ -337,7 +383,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     }
 
     @Override
-    public void openContactUs() {
+    public void openFeedback() {
         ContactUsFragment fragment = (ContactUsFragment) fragmentManager.findFragmentByTag(CONTACT_US);
         if (fragment == null) {
             fragment = new ContactUsFragment();
@@ -389,7 +435,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
     @Override
     public void restartApp() {
         Intent i = new Intent(context, SplashActivity.class);
-        getCurrentActivity().startActivity(i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+        getCurrentActivity().startActivity(i.addFlags(FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK));
         System.exit(0);
     }
 
@@ -399,7 +445,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.EVENT_ID,id);
         intent.putExtras(bundle);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
@@ -409,7 +455,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.VENUE_ID,id);
         intent.putExtras(bundle);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
@@ -419,7 +465,7 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.ATTRACTION_ID,id);
         intent.putExtras(bundle);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
@@ -481,5 +527,15 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
             eventPhoneVerificationFragment.setArguments(bundle);
         }
         replaceFragment(eventPhoneVerificationFragment,true,VERFICATION,R.id.frame_layout_inner_attraction);
+    }
+
+    @Override
+    public void openContactUs() {
+        ContactUsNewFragment fragment = (ContactUsNewFragment) fragmentManager.findFragmentByTag(CONTACT_US_NEW);
+        if (fragment == null) {
+            fragment = new ContactUsNewFragment();
+        }
+        replaceFragment(fragment,true,CONTACT_US_NEW,R.id.frame_layout_settings);
+
     }
 }

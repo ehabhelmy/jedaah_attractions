@@ -59,15 +59,12 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // TODO : call api and send user id to it
-                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        try {
-                            String email = object.getString("email");
-                            presenter.socialLogin(loginResult.getAccessToken().getUserId(),null,email);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), (object, response) -> {
+                    try {
+                        String email = object.getString("email");
+                        presenter.socialLogin(loginResult.getAccessToken().getUserId(),null,email);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 });
                 Bundle parameters = new Bundle();

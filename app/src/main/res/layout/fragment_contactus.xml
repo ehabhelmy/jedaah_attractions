@@ -24,7 +24,7 @@
                 android:layout_alignParentTop="true"
                 android:textSize="@dimen/static_title_size"
                 android:layout_centerHorizontal="true"
-                android:text="@string/contactUs" />
+                android:text="@string/feedback" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/subject"

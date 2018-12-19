@@ -54,6 +54,7 @@ public class EventDetailsAdapter {
                 cat.append(" | ");
                 cat.append(data.getSubCategories().get(i));
             }catch (Exception e){
+                cat.delete(cat.length()-3,cat.length() -1);
                 cat.append("");
             }finally {
                 if (i != data.getCategories().size() - 1) {

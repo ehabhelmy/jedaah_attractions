@@ -8,7 +8,7 @@
     app:cardCornerRadius="10dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true"
-    android:layout_height="250dp">
+    android:layout_height="260dp">
 
 
     <LinearLayout

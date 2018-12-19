@@ -18,7 +18,7 @@ public class FilterEventsRequest extends BaseModel {
     private List<Integer> categoryId;
 
     @SerializedName("date")
-    private int monthNumber;
+    private Integer monthNumber;
 
     @SerializedName("lat")
     private Double lat;
@@ -26,7 +26,7 @@ public class FilterEventsRequest extends BaseModel {
     @SerializedName("lng")
     private Double lng;
 
-    public FilterEventsRequest(boolean weeklySuggest, List<Integer> categoryId, int monthNumber, Double lat, Double lng) {
+    public FilterEventsRequest(boolean weeklySuggest, List<Integer> categoryId, Integer monthNumber, Double lat, Double lng) {
         this.weeklySuggest = weeklySuggest;
         this.categoryId = categoryId;
         this.monthNumber = monthNumber;
@@ -66,11 +66,11 @@ public class FilterEventsRequest extends BaseModel {
         this.categoryId = categoryId;
     }
 
-    public int getMonthNumber() {
+    public Integer getMonthNumber() {
         return monthNumber;
     }
 
-    public void setMonthNumber(int monthNumber) {
+    public void setMonthNumber(Integer monthNumber) {
         this.monthNumber = monthNumber;
     }
 }

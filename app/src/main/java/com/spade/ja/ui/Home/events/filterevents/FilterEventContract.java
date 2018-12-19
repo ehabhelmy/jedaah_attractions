@@ -17,13 +17,10 @@ public interface FilterEventContract {
 
     interface View extends BaseView,ErrorView,ProgressView {
         void setupCategories(List<Cats> categories);
-        void showResults(List<Data> events);
         void getLatitudeAndLongitude();
     }
 
     interface Presenter extends Unsubscribable {
-        void filterEvents(boolean weeklySuggest, List<Integer> categoryId, int monthNumber,Double lat, Double lng);
-        void showEventInner(int id);
-        void like(int id);
+
     }
 }

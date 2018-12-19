@@ -14,6 +14,7 @@ import com.spade.ja.datalayer.pojo.response.attractioninner.AttractionInnerRespo
 import com.spade.ja.datalayer.pojo.response.attractionorder.AttractionOrderResponse;
 import com.spade.ja.datalayer.pojo.response.category.Category;
 import com.spade.ja.datalayer.pojo.response.code.ResetCodeResponse;
+import com.spade.ja.datalayer.pojo.response.contact.ContactUsDataResponse;
 import com.spade.ja.datalayer.pojo.response.contactus.ContactUsResponse;
 import com.spade.ja.datalayer.pojo.response.eventcreditconfirm.EventChangeStatusResponse;
 import com.spade.ja.datalayer.pojo.response.eventinner.EventInnerResponse;
@@ -187,4 +188,9 @@ public interface DataSource {
 
     Single<AttractionConfirmOrderResponse> changeOrderCreditAttraction(String orderId, String status);
 
+    Single<ContactUsDataResponse> getContactUsData();
+
+    boolean isFirstInstall();
+
+    void walkThroughAppeared();
 }

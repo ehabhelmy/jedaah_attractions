@@ -3,13 +3,18 @@ package com.spade.ja.ui.Home.directory.attractions;
 import android.os.Bundle;
 
 import com.spade.ja.datalayer.pojo.response.allvenues.AllVenuesResponse;
+import com.spade.ja.datalayer.pojo.response.filter.venues.FilterVenuesResponse;
 import com.spade.ja.datalayer.pojo.response.like.LikeResponse;
 import com.spade.ja.datalayer.pojo.response.venues.VenuesResponse;
 import com.spade.ja.ui.Base.BasePresenter;
 import com.spade.ja.ui.Base.listener.BaseCallback;
+import com.spade.ja.ui.Home.map.DataConverter;
 import com.spade.ja.usecase.allattractions.AllAttractions;
+import com.spade.ja.usecase.filter.filterattractions.FilterAttraction;
 import com.spade.ja.usecase.like.LikeAttractions;
 import com.spade.ja.usecase.topattractions.TopAttractions;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,8 +27,27 @@ public class AttractionsPresenter extends BasePresenter<AttractionsContract.View
     private TopAttractions topAttractions;
     private AllAttractions allAttractions;
     private LikeAttractions likeAttractions;
+    private FilterAttraction filterAttraction;
     private boolean firstFetch = true;
 
+
+    private BaseCallback<FilterVenuesResponse> filterEventsResponseBaseCallback  = new BaseCallback<FilterVenuesResponse>() {
+        @Override
+        public void onSuccess(FilterVenuesResponse model) {
+            if (isViewAlive.get()){
+                if (model.getSuccess()){
+                    getView().showResults(model.getData().getResult());
+                }
+            }
+        }
+
+        @Override
+        public void onError(String message) {
+            if (isViewAlive.get()) {
+                getView().showError(message);
+            }
+        }
+    };
 
     private BaseCallback<VenuesResponse> topVenuesBaseCallback = new BaseCallback<VenuesResponse>() {
         @Override
@@ -87,10 +111,11 @@ public class AttractionsPresenter extends BasePresenter<AttractionsContract.View
     };
 
     @Inject
-    public AttractionsPresenter(TopAttractions topAttractions, AllAttractions allAttractions,LikeAttractions likeAttractions) {
+    public AttractionsPresenter(TopAttractions topAttractions, AllAttractions allAttractions,LikeAttractions likeAttractions,FilterAttraction filterAttraction) {
         this.topAttractions= topAttractions;
         this.allAttractions = allAttractions;
         this.likeAttractions = likeAttractions;
+        this.filterAttraction = filterAttraction;
     }
 
 
@@ -106,6 +131,7 @@ public class AttractionsPresenter extends BasePresenter<AttractionsContract.View
         topAttractions.unSubscribe();
         allAttractions.unSubscribe();
         likeAttractions.unSubscribe();
+        filterAttraction.unSubscribe();
     }
 
     @Override
@@ -127,5 +153,10 @@ public class AttractionsPresenter extends BasePresenter<AttractionsContract.View
     @Override
     public void openFilterAttraction() {
         jaNavigationManager.openFilterAttraction();
+    }
+
+    @Override
+    public void filterAttractions(boolean weeklySuggest, List<Integer> categoryId, Double lat, Double lng) {
+        filterAttraction.filterAttractions(weeklySuggest,categoryId,filterEventsResponseBaseCallback,lat,lng);
     }
 }

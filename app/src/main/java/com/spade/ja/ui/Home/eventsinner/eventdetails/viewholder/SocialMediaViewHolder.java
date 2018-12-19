@@ -41,20 +41,20 @@ public class SocialMediaViewHolder extends BaseViewHolder<SocialMedium> {
     public void bind(SocialMedium baseModel, RecyclerViewItemListener.onViewListener onViewListener, RecyclerViewItemListener.onFavouriteListener onFavouriteListener) {
         socialMediaUrl.setText(baseModel.getUrlName() != null ? baseModel.getUrlName() : baseModel.getUrl());
         socialMediaUrl.setOnClickListener(view -> {
-            if (baseModel.getName().equals(JaApplication.getContext().getString(R.string.phone))){
-//                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
-//                socialMediaUrl.getContext().startActivity(intent);
+            if (baseModel.getName().equalsIgnoreCase(JaApplication.getContext().getString(R.string.phone))){
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + baseModel.getUrl()));
+                socialMediaUrl.getContext().startActivity(intent);
             }else {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(baseModel.getUrl()));
                 socialMediaUrl.getContext().startActivity(i);
             }
         });
-        if (baseModel.getName().equals(SocialMedia.Facebook.name())) {
+        if (baseModel.getName().equalsIgnoreCase(SocialMedia.Facebook.name())) {
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.facebook_g).error(R.drawable.facebook_g)).into(socialMediaIcon);
-        }else if(baseModel.getName().equals(SocialMedia.INSTAGRAM.name())){
+        }else if(baseModel.getName().equalsIgnoreCase(SocialMedia.INSTAGRAM.name())){
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.instagram_g).error(R.drawable.instagram_g)).into(socialMediaIcon);
-        }else if (baseModel.getName().equals(SocialMedia.PHONE.name())){
+        }else if (baseModel.getName().equalsIgnoreCase(SocialMedia.PHONE.name())){
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.tele).error(R.drawable.tele)).into(socialMediaIcon);
         }else {
             Glide.with(socialMediaIcon.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.website_g).error(R.drawable.website_g)).into(socialMediaIcon);

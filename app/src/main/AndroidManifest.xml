@@ -25,6 +25,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
@@ -33,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.walkthrough.WalkThroughActivity"/>
         <activity
             android:name=".ui.Home.HomeActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -101,6 +103,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.Home.map.MapActivity" />
+        <service
+            android:name=".ui.notification.NotificationsService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

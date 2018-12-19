@@ -23,47 +23,11 @@ import javax.inject.Inject;
 public class FilterEventPresenter extends BasePresenter<FilterEventContract.View> implements FilterEventContract.Presenter {
 
     private Categories categories;
-    private FilterEvents filterEvents;
-    private Like like;
-
     @Inject
-    public FilterEventPresenter(Categories categories, FilterEvents filterEvents) {
+    public FilterEventPresenter(Categories categories) {
         this.categories = categories;
-        this.filterEvents = filterEvents;
     }
 
-    private BaseCallback<LikeResponse> likeResponseBaseCallback = new BaseCallback<LikeResponse>() {
-        @Override
-        public void onSuccess(LikeResponse model) {
-            // do nothing
-        }
-
-        @Override
-        public void onError(String message) {
-            if (isViewAlive.get()){
-                getView().showError(message);
-            }
-        }
-    };
-
-
-    private BaseCallback<FilterEventsResponse> filterEventsResponseBaseCallback  = new BaseCallback<FilterEventsResponse>() {
-        @Override
-        public void onSuccess(FilterEventsResponse model) {
-            if (isViewAlive.get()){
-                if (model.getSuccess()){
-                    getView().showResults(DataConverter.convertIntoEventUiFilter(model.getData().getResult()));
-                }
-            }
-        }
-
-        @Override
-        public void onError(String message) {
-            if (isViewAlive.get()) {
-                getView().showError(message);
-            }
-        }
-    };
     private BaseCallback<Category> categoryBaseCallback = new BaseCallback<Category>() {
         @Override
         public void onSuccess(Category model) {
@@ -91,21 +55,6 @@ public class FilterEventPresenter extends BasePresenter<FilterEventContract.View
     @Override
     public void unSubscribe() {
         categories.unSubscribe();
-        filterEvents.unSubscribe();
     }
 
-    @Override
-    public void filterEvents(boolean weeklySuggest,List<Integer> categoryId, int monthNumber,Double lat,Double lng) {
-        filterEvents.filterEvents(weeklySuggest,categoryId,lat,lng,monthNumber,filterEventsResponseBaseCallback);
-    }
-
-    @Override
-    public void showEventInner(int id) {
-        jaNavigationManager.showEventInner(id);
-    }
-
-    @Override
-    public void like(int id) {
-        like.like(id,likeResponseBaseCallback);
-    }
 }

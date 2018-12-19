@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <include layout="@layout/loading_overlay" android:visibility="gone"/>
+
     <TextView
         android:id="@+id/clear"
         android:layout_width="wrap_content"
@@ -30,15 +32,6 @@
         android:text="@string/filter"
         android:textColor="@color/black"
         android:textSize="@dimen/filter_size" />
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_below="@+id/textView6"
-        android:id="@+id/filterResult">
-
-    </android.support.v7.widget.RecyclerView>
 
     <RelativeLayout
         android:id="@+id/filterContainer"
@@ -95,6 +88,7 @@
                                 android:layout_marginStart="2dp"
                                 android:layout_weight="1"
                                 android:text="@string/weeklySuggestions"
+                                android:id="@+id/weekly_sugg_txt"
                                 android:textColor="@color/lightBlack" />
 
                         </LinearLayout>
@@ -115,6 +109,7 @@
                                 android:layout_marginStart="2dp"
                                 android:layout_weight="1"
                                 android:text="@string/NearBy"
+                                android:id="@+id/nearby_text"
                                 android:textColor="@color/lightBlack" />
 
                         </LinearLayout>

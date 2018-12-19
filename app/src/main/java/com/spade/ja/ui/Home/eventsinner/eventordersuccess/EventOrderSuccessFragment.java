@@ -29,6 +29,9 @@ public class EventOrderSuccessFragment extends BaseFragment implements EventOrde
     @BindView(R.id.bookMore)
     TextView bookMore;
 
+    @BindView(R.id.go_home)
+    TextView goHome;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -36,11 +39,17 @@ public class EventOrderSuccessFragment extends BaseFragment implements EventOrde
             bookMore.setText(R.string.bookMoreAttractions);
         }
         bookMore.setPaintFlags(bookMore.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        goHome.setPaintFlags(bookMore.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
     @OnClick(R.id.bookMore)
     void bookMoreTickets() {
         presenter.bookMore();
+    }
+
+    @OnClick(R.id.go_home)
+    void backHome() {
+        getActivity().finish();
     }
 
     @Override
@@ -54,9 +63,6 @@ public class EventOrderSuccessFragment extends BaseFragment implements EventOrde
         super.presenter = presenter;
         presenter.setView(this);
     }
-
-
-
 
 
     @Override

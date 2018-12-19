@@ -1,14 +1,29 @@
 package com.spade.ja.ui.Home.directory;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
+import com.spade.ja.datalayer.pojo.SearchCriteria;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Home.HomeActivity;
+import com.spade.ja.ui.Home.directory.attractions.AttractionFragment;
+import com.spade.ja.ui.Home.directory.venues.VenuesFragment;
+import com.spade.ja.ui.Home.map.Data;
+import com.spade.ja.ui.Home.map.adapter.DataAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,6 +50,11 @@ public class DirectoryFragment extends BaseFragment implements DirectoryContract
         directoryViewPagerAdapter = new DirectoryViewPagerAdapter(getActivity().getSupportFragmentManager());
         directoryViewPager.setAdapter(directoryViewPagerAdapter);
         tabLayout.setupWithViewPager(directoryViewPager);
+        if (getArguments() != null){
+            if (getArguments().getInt(HomeActivity.TYPE) == 3) {
+                directoryViewPager.setCurrentItem(1);
+            }
+        }
     }
 
     @Override
@@ -51,7 +71,7 @@ public class DirectoryFragment extends BaseFragment implements DirectoryContract
 
     @Override
     protected int getLayoutId() {
-       return R.layout.fragment_directory;
+        return R.layout.fragment_directory;
     }
 
     @Override
@@ -67,5 +87,21 @@ public class DirectoryFragment extends BaseFragment implements DirectoryContract
     @Override
     public void hideLoading() {
 
+    }
+
+    public void showFilterResultsVenue(SearchCriteria searchCriteria) {
+        BaseFragment fragment = (BaseFragment) directoryViewPagerAdapter.getItem(directoryViewPager.getCurrentItem());
+        if (fragment instanceof VenuesFragment) {
+            VenuesFragment venuesFragment = (VenuesFragment) directoryViewPager.getAdapter().instantiateItem(directoryViewPager, directoryViewPager.getCurrentItem());
+            venuesFragment.showFilterResults(searchCriteria);
+        }
+    }
+
+    public void showFilterResultsAttraction(SearchCriteria searchCriteria) {
+        BaseFragment fragment = (BaseFragment) directoryViewPagerAdapter.getItem(directoryViewPager.getCurrentItem());
+        if (fragment instanceof AttractionFragment) {
+            AttractionFragment attractionFragment = (AttractionFragment) directoryViewPager.getAdapter().instantiateItem(directoryViewPager, directoryViewPager.getCurrentItem());
+            attractionFragment.showFilterResults(searchCriteria);
+        }
     }
 }

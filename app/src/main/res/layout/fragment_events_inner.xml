@@ -98,7 +98,8 @@
                     android:layout_marginStart="13dp"
                     android:layout_toEndOf="@+id/eventMonth"
                     android:fontFamily="@font/gotham_medium"
-                    android:gravity="center_horizontal"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="Amr Diab Concert"
                     android:textColor="@color/colorTitle"
                     android:textSize="@dimen/title_inner" />
