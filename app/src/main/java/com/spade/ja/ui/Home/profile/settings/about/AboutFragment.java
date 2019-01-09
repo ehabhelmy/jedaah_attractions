@@ -38,6 +38,11 @@ public class AboutFragment extends BaseFragment implements AboutUsContract.View 
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "about screen";
+    }
+
+    @Override
     public void setupAboutText(String about) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N ) {
             this.about.setText(Html.fromHtml(about));

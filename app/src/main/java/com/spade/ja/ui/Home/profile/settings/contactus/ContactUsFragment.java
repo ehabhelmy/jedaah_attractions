@@ -82,6 +82,11 @@ public class ContactUsFragment extends BaseFragment implements ContactUsContract
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "feedback";
+    }
+
+    @Override
     public void showSuccess(String msg) {
         new AlertDialog.Builder(getActivity())
                 .setMessage(msg)

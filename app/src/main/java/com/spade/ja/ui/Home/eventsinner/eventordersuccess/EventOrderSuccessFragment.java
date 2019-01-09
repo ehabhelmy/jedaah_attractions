@@ -70,4 +70,9 @@ public class EventOrderSuccessFragment extends BaseFragment implements EventOrde
         return R.layout.fragment_event_order_success;
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "order success";
+    }
+
 }

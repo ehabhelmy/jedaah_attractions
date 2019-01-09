@@ -26,7 +26,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="22dp"
-                android:fontFamily="@font/gotham_bold"
+                fontPath="@string/font_bold"
+                tools:ignore="MissingPrefix"
                 android:text="@string/settings"
                 android:textColor="@color/white"
                 android:textSize="@dimen/static_title_size" />
@@ -46,7 +47,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/notification"
                     android:textColor="@color/white"
                     android:textSize="@dimen/static_title_size" />
@@ -85,7 +87,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/language"
                     android:textColor="@color/white"
                     android:textSize="@dimen/static_title_size" />
@@ -97,7 +100,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="20dp"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/english"
                     android:textColor="@color/staticTitle"
                     android:textSize="@dimen/static_title_size" />
@@ -127,7 +131,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/feedback"
                     android:textColor="@color/white"
                     android:textSize="@dimen/static_title_size" />
@@ -167,7 +172,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/about"
                     android:textColor="@color/white"
                     android:textSize="@dimen/static_title_size" />
@@ -206,7 +212,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/contactUs"
                     android:textColor="@color/white"
                     android:textSize="@dimen/static_title_size" />
@@ -245,7 +252,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/logout"
                     android:textColor="@color/white"
                     android:textSize="@dimen/static_title_size" />

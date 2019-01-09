@@ -59,6 +59,8 @@
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
+                fontPath="@string/font_medium"
+                tools:ignore="MissingPrefix"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/profile_image"
                 android:layout_marginStart="16dp"
@@ -70,6 +72,8 @@
             <TextView
                 android:id="@+id/id"
                 android:layout_width="wrap_content"
+                fontPath="@string/font_medium"
+                tools:ignore="MissingPrefix"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/username"
                 android:layout_below="@+id/username"
@@ -80,6 +84,8 @@
             <TextView
                 android:id="@+id/edit"
                 android:layout_width="wrap_content"
+                fontPath="@string/font_medium"
+                tools:ignore="MissingPrefix"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/id"
                 android:layout_below="@+id/id"

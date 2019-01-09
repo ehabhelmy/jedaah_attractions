@@ -66,6 +66,11 @@ public class ContactUsNewFragment extends BaseFragment implements ContactUsNewCo
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "contact us";
+    }
+
+    @Override
     public void showError(String message) {
         showPopUp(message);
     }

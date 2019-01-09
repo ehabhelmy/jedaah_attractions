@@ -105,6 +105,11 @@ public class SignInFragment extends BaseFragment implements SignInContract.View 
         return R.layout.fragment_login;
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "login";
+    }
+
     @OnClick(R.id.skip)
     void skipLogin(){
         activity.skipAuth();

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="6dp">
 
     <ImageView
@@ -21,7 +23,8 @@
         android:layout_alignTop="@+id/socialMediaIcon"
         android:layout_marginStart="14dp"
         android:layout_toEndOf="@+id/socialMediaIcon"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:textColor="@color/white"
         android:text="12, Al-Aziz , Jeddah"
         android:textSize="@dimen/titleSize" />

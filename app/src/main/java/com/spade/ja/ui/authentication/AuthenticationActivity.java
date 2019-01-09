@@ -91,6 +91,11 @@ public class AuthenticationActivity extends BaseActivity implements Authenticati
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "Social media login";
+    }
+
+    @Override
     protected void initializePresenter() {
         super.presenter = presenter;
         presenter.setView(this);

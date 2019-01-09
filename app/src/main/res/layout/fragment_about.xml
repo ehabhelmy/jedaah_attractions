@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/lightBlack">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,7 +28,8 @@
             android:layout_marginEnd="42dp"
             android:layout_below="@+id/imageView5"
             android:textSize="@dimen/static_title_size"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_medium"
+            tools:ignore="MissingPrefix"
             android:textColor="@color/white" />
 
     </RelativeLayout>

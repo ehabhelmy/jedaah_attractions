@@ -27,6 +27,7 @@ import com.spade.ja.ui.Home.explore.adapter.CategoryListAdapter;
 import com.spade.ja.ui.Home.explore.adapter.VenuesListAdapter;
 import com.spade.ja.ui.Home.map.Data;
 import com.spade.ja.ui.Home.map.adapter.DataAdapter;
+import com.spade.ja.ui.categories.FilterCategoriesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +142,11 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
         return R.layout.fragment_venues;
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "venues tab";
+    }
+
     @OnClick(R.id.fab)
     void openFilterVenues() {
         presenter.openFilterVenues();
@@ -157,6 +163,8 @@ public class VenuesFragment extends BaseFragment implements VenuesContract.View 
             CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
             categoryListAdapter.setData((ArrayList<Cats>) categoryList);
             categoriesRecyclarView.setAdapter(categoryListAdapter);
+            categoryListAdapter.setOnItemClick(cats -> jaNavigationManager.showFilterCategories(cats,FilterCategoriesActivity.FilterCatType.DIRECTORY));
+
         } else {
             categoriesRecyclarView.setVisibility(View.GONE);
         }

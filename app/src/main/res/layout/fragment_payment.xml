@@ -1,345 +1,373 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:background="@drawable/payment_bg"
-    android:layout_height="match_parent">
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/payment_bg">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/lightBlack">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:background="@drawable/ic_payment_bg">
-
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="28dp"
-            android:textSize="@dimen/title_inner"
-            android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/white"
-            android:text="@string/buynow" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/gotham_medium"
-            android:gravity="center"
-            android:text="@string/personalInfo"
-            android:textColor="@color/staticTitle"
-            android:textSize="@dimen/static_title_size" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView2"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:textSize="@dimen/daysRemaining"
-            android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/outerText"
-            android:text="@string/name" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView3"
-            android:layout_below="@+id/textView3"
-            android:layout_marginEnd="32dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:backgroundTint="@color/white"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/name"
-            android:layout_below="@+id/name"
-            android:layout_marginTop="11dp"
-            android:textSize="@dimen/daysRemaining"
-            android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/outerText"
-            android:text="@string/emailaddress" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView5"
-            android:layout_below="@+id/textView5"
-            android:layout_marginEnd="32dp"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            app:backgroundTint="@color/white"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/email"
-            android:layout_below="@+id/email"
-            android:layout_marginTop="11dp"
-            android:textSize="@dimen/daysRemaining"
-            android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/outerText"
-            android:text="@string/mobilenumber" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/mobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView7"
-            android:layout_below="@+id/textView7"
-            android:ems="10"
-            android:layout_marginEnd="32dp"
-            android:inputType="phone"
-            app:backgroundTint="@color/white"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/nationalIDLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/mobile"
-            android:layout_below="@+id/mobile"
-            android:layout_marginTop="11dp"
-            android:textSize="@dimen/daysRemaining"
-            android:fontFamily="@font/gotham_medium"
-            android:textColor="@color/outerText"
-            android:text="@string/nationalId" />
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/nationalID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/nationalIDLabel"
-            android:layout_below="@+id/nationalIDLabel"
-            android:layout_marginEnd="32dp"
-            android:ems="10"
-            android:inputType="number"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/white" />
-    </RelativeLayout>
-    </LinearLayout>
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:layout_marginTop="14dp"
-            android:textColor="@color/staticTitle"
-            android:textSize="@dimen/static_title_size"
-            android:fontFamily="@font/gotham_medium"
-            android:text="@string/paymentMethod" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView24"
-            android:gravity="center"
-            android:text="@string/suitsYou" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/paymentContainer"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView10"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="43dp"
-            android:weightSum="3.3"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/creditContainer"
-                android:background="@drawable/grey_circle"
-                android:layout_weight="1">
-                <ImageView
-                    android:id="@+id/creditImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/creditcard_deactivated" />
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/gotham_medium"
-                    android:text="@string/creditCard"
-                    android:gravity="center"
-                    android:textColor="@color/staticTitle"
-                    android:textSize="@dimen/cash" />
+            android:background="@color/lightBlack">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_payment_bg"
+                android:paddingBottom="20dp">
+
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="28dp"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
+                    android:text="@string/buynow"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_inner" />
+
+                <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="16dp"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center"
-                    android:fontFamily="@font/gotham_book"
-                    android:text="@string/maxTickets"
+                    android:text="@string/personalInfo"
+                    android:textColor="@color/staticTitle"
+                    android:textSize="@dimen/static_title_size" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView2"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
+                    android:text="@string/name"
+                    android:textColor="@color/outerText"
                     android:textSize="@dimen/daysRemaining" />
 
-                <TextView
-                    android:id="@+id/creditAmount"
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView3"
+                    android:layout_alignStart="@+id/textView3"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_alignStart="@+id/name"
+                    android:layout_marginTop="11dp"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
+                    android:text="@string/emailaddress"
                     android:textColor="@color/outerText"
-                    android:textSize="@dimen/cardsubtitle"
-                    android:gravity="center"
-                    android:text="@string/unlimited" />
-
-            </LinearLayout>
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:layout_height="match_parent"/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/cashContainer"
-                android:background="@drawable/grey_circle"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/cashImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/cod_deactivated" />
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:fontFamily="@font/gotham_medium"
-                    android:text="@string/cash"
-                    android:textColor="@color/staticTitle"
-                    android:textSize="@dimen/cash" />
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:fontFamily="@font/gotham_book"
-                    android:text="@string/maxTickets"
                     android:textSize="@dimen/daysRemaining" />
 
-                <TextView
-                    android:id="@+id/cashAmount"
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/outerText"
-                    android:textSize="@dimen/cardsubtitle"
-                    android:gravity="center"
-                    android:text="@string/unlimited" />
-            </LinearLayout>
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="0.1"
-                android:layout_height="match_parent"/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/payLaterContainer"
-                android:background="@drawable/grey_circle"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/paylaterImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/paylater_deactivated" />
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:fontFamily="@font/gotham_medium"
-                    android:textColor="@color/staticTitle"
-                    android:textSize="@dimen/cash"
-                    android:text="@string/payLater" />
+                    android:layout_below="@+id/textView5"
+                    android:layout_alignStart="@+id/textView5"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/email"
+                    android:layout_alignStart="@+id/email"
+                    android:layout_marginTop="11dp"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
+                    android:text="@string/mobilenumber"
+                    android:textColor="@color/outerText"
+                    android:textSize="@dimen/daysRemaining" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:fontFamily="@font/gotham_book"
-                    android:textSize="@dimen/daysRemaining"
-                    android:text="@string/maxTickets" />
+                    android:layout_below="@+id/textView7"
+                    android:layout_alignStart="@+id/textView7"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
+                    android:inputType="phone"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white" />
 
                 <TextView
-                    android:id="@+id/paylaterAmount"
+                    android:id="@+id/nationalIDLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mobile"
+                    android:layout_alignStart="@+id/mobile"
+                    android:layout_marginTop="11dp"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
+                    android:text="@string/nationalId"
+                    android:textColor="@color/outerText"
+                    android:textSize="@dimen/daysRemaining" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/nationalID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/unlimited"
-                    android:textColor="@color/outerText"
-                    android:textSize="@dimen/cardsubtitle" />
-            </LinearLayout>
+                    android:layout_below="@+id/nationalIDLabel"
+                    android:layout_alignStart="@+id/nationalIDLabel"
+                    android:layout_marginEnd="32dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/white" />
+            </RelativeLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/next"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/paymentContainer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/static_title_size"
-            android:background="@drawable/rounded_rectangle_green"
-            android:text="@string/next" />
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView9"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:text="@string/choosePayment" />
-    </RelativeLayout>
-</LinearLayout>
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="14dp"
+                fontPath="@string/font_medium"
+                tools:ignore="MissingPrefix"
+                android:gravity="center"
+                android:text="@string/paymentMethod"
+                android:textColor="@color/staticTitle"
+                android:textSize="@dimen/static_title_size" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView24"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="@string/suitsYou" />
+
+            <LinearLayout
+                android:id="@+id/paymentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="43dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="horizontal"
+                android:weightSum="3.3">
+
+                <LinearLayout
+                    android:id="@+id/creditContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circle"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/creditImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/creditcard_deactivated" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        fontPath="@string/font_medium"
+                        tools:ignore="MissingPrefix"
+                        android:gravity="center"
+                        android:text="@string/creditCard"
+                        android:textColor="@color/staticTitle"
+                        android:textSize="@dimen/cash" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        fontPath="@string/font_book"
+                        tools:ignore="MissingPrefix"
+                        android:gravity="center"
+                        android:text="@string/maxTickets"
+                        android:textSize="@dimen/daysRemaining" />
+
+                    <TextView
+                        android:id="@+id/creditAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/unlimited"
+                        android:textColor="@color/outerText"
+                        android:textSize="@dimen/cardsubtitle" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1" />
+
+                <LinearLayout
+                    android:id="@+id/cashContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circle"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/cashImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/cod_deactivated" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        fontPath="@string/font_medium"
+                        tools:ignore="MissingPrefix"
+                        android:gravity="center"
+                        android:text="@string/cash"
+                        android:textColor="@color/staticTitle"
+                        android:textSize="@dimen/cash" />
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        fontPath="@string/font_book"
+                        tools:ignore="MissingPrefix"
+                        android:gravity="center"
+                        android:text="@string/maxTickets"
+                        android:textSize="@dimen/daysRemaining" />
+
+                    <TextView
+                        android:id="@+id/cashAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/unlimited"
+                        android:textColor="@color/outerText"
+                        android:textSize="@dimen/cardsubtitle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1" />
+
+                <LinearLayout
+                    android:id="@+id/payLaterContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_circle"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/paylaterImage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/paylater_deactivated" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        fontPath="@string/font_medium"
+                        tools:ignore="MissingPrefix"
+                        android:gravity="center"
+                        android:text="@string/payLater"
+                        android:textColor="@color/staticTitle"
+                        android:textSize="@dimen/cash" />
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        fontPath="@string/font_book"
+                        tools:ignore="MissingPrefix"
+                        android:gravity="center"
+                        android:text="@string/maxTickets"
+                        android:textSize="@dimen/daysRemaining" />
+
+                    <TextView
+                        android:id="@+id/paylaterAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/unlimited"
+                        android:textColor="@color/outerText"
+                        android:textSize="@dimen/cardsubtitle" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/paymentContainer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/rounded_rectangle_green"
+                android:text="@string/next"
+                android:textColor="@color/white"
+                android:textSize="@dimen/static_title_size" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView9"
+                android:layout_centerHorizontal="true"
+                fontPath="@string/font_medium"
+                tools:ignore="MissingPrefix"
+                android:layout_marginTop="12dp"
+                android:text="@string/choosePayment" />
+        </RelativeLayout>
+    </LinearLayout>
 </ScrollView>

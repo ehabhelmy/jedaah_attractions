@@ -152,6 +152,11 @@ public class EventsFragment extends BaseFragment implements EventsContract.View 
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "events tab";
+    }
+
+    @Override
     public void showResults(List<Data> events) {
         list.setVisibility(View.VISIBLE);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

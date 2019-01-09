@@ -55,7 +55,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/favourite"
                     android:layout_marginStart="24dp"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center_horizontal"
                     android:text="NOV"
                     android:textColor="@color/staticTitle"
@@ -68,7 +69,8 @@
                     android:layout_alignStart="@+id/eventMonth"
                     android:layout_below="@+id/eventMonth"
                     android:layout_toStartOf="@+id/eventTitle"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center_horizontal"
                     android:text="13"
                     android:maxLines="1"
@@ -82,7 +84,8 @@
                     android:layout_alignStart="@+id/eventMonth"
                     android:layout_below="@+id/eventDay"
                     android:layout_marginTop="3dp"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center_horizontal"
                     android:text="3-days"
                     android:layout_marginBottom="10dp"
@@ -97,7 +100,8 @@
                     android:layout_alignBottom="@+id/eventMonth"
                     android:layout_marginStart="13dp"
                     android:layout_toEndOf="@+id/eventMonth"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:text="Amr Diab Concert"
@@ -111,7 +115,8 @@
                     android:layout_below="@+id/eventTitle"
                     android:layout_marginTop="5dp"
                     android:layout_alignStart="@+id/eventTitle"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center"
                     android:text="ART | GALLERY"
                     android:textSize="@dimen/cardsubtitle" />
@@ -123,7 +128,8 @@
                     android:layout_marginTop="12dp"
                     android:layout_alignStart="@+id/eventTitle"
                     android:layout_below="@id/categories"
-                    android:fontFamily="@font/gotham_bold"
+                    fontPath="@string/font_bold"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center"
                     android:text="22 Interested - 230 Going"
                     android:textSize="@dimen/cardsubtitle" />
@@ -150,7 +156,8 @@
                     android:layout_alignTop="@+id/imageView7"
                     android:layout_marginStart="14dp"
                     android:layout_toEndOf="@+id/imageView7"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:text="12, Al-Aziz , Jeddah"
                     android:textSize="@dimen/titleSize" />
 
@@ -161,7 +168,8 @@
                     android:layout_alignStart="@+id/eventAddress"
                     android:layout_below="@+id/eventAddress"
                     android:layout_marginTop="6dp"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/getDirections"
                     android:textColor="@color/staticTitle"
                     android:textSize="@dimen/daysRemaining" />
@@ -181,7 +189,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/directions"
                     android:layout_alignTop="@+id/imageView9"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center"
                     android:text="November 13 - November 15"
                     android:textSize="@dimen/titleSize" />
@@ -237,7 +246,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorTitle"
                         android:textSize="@dimen/titleSize"
-                        android:fontFamily="@font/gotham_bold"
+                        fontPath="@string/font_bold"
+                        tools:ignore="MissingPrefix"
                         android:layout_marginBottom="4dp"
                         android:text="@string/description" />
 
@@ -245,7 +255,8 @@
                         android:id="@+id/eventDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/gotham_book"
+                        fontPath="@string/font_book"
+                        tools:ignore="MissingPrefix"
                         android:text="asdhasjdhasjkdhaaasjkdhasjkdhajsdhasjkdhasjdhasjdhasjdhasjdhasjdhasjdhasjdak, asdasdgashdgahdghasgdhasgdhasdgahsdgahsdgashdgashdgashdgashdgashdgasdgahdgahsdgahsdgahsdgahsdgahdgahdsgahsdgahsdgahsdgashdgahsdgash" />
                 </LinearLayout>
 
@@ -277,7 +288,8 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="6dp"
             android:layout_toEndOf="@+id/imageView12"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_book"
+            tools:ignore="MissingPrefix"
             android:gravity="center"
             android:text="100 - 250 SAR"
             android:textColor="@color/white" />
@@ -289,7 +301,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="12dp"
-            android:fontFamily="@font/gotham_medium"
+            fontPath="@string/font_medium"
+            tools:ignore="MissingPrefix"
             android:text="@string/buyNow"
             android:textColor="@color/colorTitle" />
     </RelativeLayout>

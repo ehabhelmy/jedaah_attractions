@@ -24,14 +24,12 @@
     <style name="TitleTheme">
         <item name="android:textSize">@dimen/static_title_size</item>
         <item name="android:textColor">@color/staticTitle</item>
-        <item name="android:fontFamily">@font/gotham_bold</item>
         <item name="android:layout_marginBottom">@dimen/spaceBetweenTitleAndItems</item>
     </style>
 
     <style name="eventName">
         <item name="android:textColor">@color/colorTitle</item>
         <item name="android:textSize">@dimen/titleSize</item>
-        <item name="android:fontFamily">@font/gotham_medium</item>
     </style>
 
     <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

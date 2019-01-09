@@ -130,6 +130,11 @@ public class EventInnerFragment extends BaseFragment implements EventInnerContra
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "event inner";
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }

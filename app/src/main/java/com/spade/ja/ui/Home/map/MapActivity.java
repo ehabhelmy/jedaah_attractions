@@ -106,6 +106,11 @@ public class MapActivity extends BaseActivity implements MapContract.View, OnMap
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "Maps";
+    }
+
+    @Override
     protected void initializeDagger() {
         JaApplication application = (JaApplication) getApplicationContext();
         application.getMainComponent().inject(this);

@@ -173,6 +173,11 @@ public class EventPhoneVerificationFragment extends BaseFragment implements Even
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "phone verification";
+    }
+
+    @Override
     public void onFocusChange(View view, boolean b) {
         EditText box = (EditText) view;
         if (b) {

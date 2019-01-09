@@ -115,6 +115,11 @@ public class EventInnerActivity extends BaseActivity implements EventInnerActivi
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "event details";
+    }
+
+    @Override
     public void onBackPressed() {
         if (presenter.getCurrentFragment() instanceof EventOrderSuccessFragment) {
             finish();

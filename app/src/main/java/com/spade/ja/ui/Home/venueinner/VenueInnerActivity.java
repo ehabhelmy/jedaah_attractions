@@ -48,6 +48,11 @@ public class VenueInnerActivity extends BaseActivity implements VenueInnerContra
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "Venue Details";
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         //presenter.goToHomeActivity();

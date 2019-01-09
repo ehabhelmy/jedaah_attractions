@@ -67,6 +67,11 @@ public class TicketsFragment extends BaseFragment implements TicketsContract.Vie
         return R.layout.fragment_tickets;
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "tickets";
+    }
+
 
     @Override
     public void showLoading() {

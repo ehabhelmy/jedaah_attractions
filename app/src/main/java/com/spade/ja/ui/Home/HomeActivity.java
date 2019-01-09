@@ -29,6 +29,7 @@ import com.spade.ja.ui.Home.events.EventsFragment;
 import com.spade.ja.ui.Home.events.filterevents.FilterEventActivity;
 import com.spade.ja.ui.Home.explore.ExploreContract;
 import com.spade.ja.ui.Home.explore.ExploreFragment;
+import com.spade.ja.ui.categories.FilterCategoriesActivity;
 import com.spade.ja.ui.navigation.JaNavigationManager;
 
 import java.lang.reflect.Field;
@@ -139,6 +140,11 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         }
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "Home";
+    }
+
 
     @Override
     public void onResume() {
@@ -223,6 +229,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             if (fragment instanceof DirectoryFragment) {
                 ((DirectoryFragment) fragment).showFilterResultsAttraction(data.getParcelableExtra(FilterEventActivity.SEARCH_CRITERIA));
             }
+        }
+        if (resultCode == FilterCategoriesActivity.RETURN_CODE){
+            showSearch();
         }
     }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
     android:padding="10dp">
 
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:text="@string/vip"
         android:buttonTint="@color/colorTitle"
         android:textColor="@color/colorTitle"
@@ -28,7 +29,8 @@
         android:layout_marginTop="6dp"
         android:layout_alignStart="@id/vipCheckbox"
         android:layout_toStartOf="@+id/vipPrice"
-        android:fontFamily="@font/gotham_book"
+        fontPath="@string/font_book"
+        tools:ignore="MissingPrefix"
         android:text="@string/vipSubtitle"
         android:textColor="@color/outerText"
         android:textSize="@dimen/daysRemaining" />
@@ -41,7 +43,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/vipCheckbox"
         android:layout_marginEnd="18dp"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:gravity="bottom"
         android:text="SAR"
         android:textSize="@dimen/cash" />
@@ -54,7 +57,8 @@
         android:layout_alignTop="@+id/textView40"
         android:layout_marginTop="8dp"
         android:layout_toStartOf="@+id/textView40"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:gravity="center"
         android:text="250"
         android:textSize="@dimen/static_title_size" />

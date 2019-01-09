@@ -23,7 +23,8 @@
         android:id="@+id/noAttractions"
         android:visibility="gone"
         android:textSize="@dimen/title_inner"
-        android:fontFamily="@font/gotham_bold"
+        fontPath="@string/font_bold"
+        tools:ignore="MissingPrefix"
         android:text="@string/noLikedDirectories"/>
 
 </RelativeLayout>

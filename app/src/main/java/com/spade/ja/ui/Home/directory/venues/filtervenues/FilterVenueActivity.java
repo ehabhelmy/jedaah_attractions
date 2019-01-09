@@ -87,6 +87,11 @@ public class FilterVenueActivity extends BaseActivity implements FilterVenueCont
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "filter venues";
+    }
+
     @OnClick(R.id.weeklySugg)
     void selectWeeklySugg() {
         if (isWeeklySelected) {

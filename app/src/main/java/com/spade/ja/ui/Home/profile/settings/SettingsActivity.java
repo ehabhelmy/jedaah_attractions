@@ -31,4 +31,9 @@ public class SettingsActivity extends BaseActivity implements SettingsContract.V
     public int getLayoutId() {
         return R.layout.activity_settings;
     }
+
+    @Override
+    protected String getScreenTrackingName() {
+        return "Settings";
+    }
 }

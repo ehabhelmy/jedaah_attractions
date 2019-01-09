@@ -122,6 +122,11 @@ public class AttractionFragment extends BaseFragment implements AttractionsContr
         return R.layout.fragment_attractions;
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "attraction list";
+    }
+
     @OnClick(R.id.fab)
     void openFilterVenues() {
         presenter.openFilterAttraction();

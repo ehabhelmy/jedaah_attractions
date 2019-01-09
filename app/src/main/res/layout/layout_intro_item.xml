@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <ImageView
@@ -24,7 +25,8 @@
         android:layout_marginTop="30dp"
         android:textSize="20sp"
         android:textColor="@color/lightBlack"
-        android:fontFamily="@font/gotham_bold"
+        fontPath="@string/font_bold"
+        tools:ignore="MissingPrefix"
         android:text="@string/location_intro"/>
 
     <TextView
@@ -38,7 +40,8 @@
         android:layout_marginTop="20dp"
         android:textSize="14sp"
         android:textColor="@color/outerText"
-        android:fontFamily="@font/gotham_book"
+        fontPath="@string/font_book"
+        tools:ignore="MissingPrefix"
         android:text="@string/location_intro_subtitle"/>
 
 </LinearLayout>

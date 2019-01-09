@@ -44,6 +44,7 @@ import com.spade.ja.ui.authentication.foretpassword.resetpassword.ResetPasswordF
 import com.spade.ja.ui.authentication.login.SignInFragment;
 import com.spade.ja.ui.authentication.registeration.RegisterationFragment;
 import com.spade.ja.ui.authentication.socialmedia.SocialMediaFragment;
+import com.spade.ja.ui.categories.FilterCategoriesActivity;
 import com.spade.ja.ui.splash.SplashActivity;
 import com.spade.ja.ui.walkthrough.WalkThroughActivity;
 
@@ -151,4 +152,6 @@ public interface MainComponent {
     void inject(ContactUsNewFragment contactUsNewFragment);
 
     void inject(WalkThroughActivity walkThroughActivity);
+
+    void inject(FilterCategoriesActivity filterCategoriesActivity);
 }

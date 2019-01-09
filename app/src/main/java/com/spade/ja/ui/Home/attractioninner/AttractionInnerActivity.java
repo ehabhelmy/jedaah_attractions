@@ -64,6 +64,11 @@ public class AttractionInnerActivity extends BaseActivity implements AttractionI
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "attraction details";
+    }
+
+    @Override
     public void onBackPressed() {
         if (presenter.getCurrentFragment() instanceof EventOrderSuccessFragment) {
             finish();

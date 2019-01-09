@@ -17,7 +17,8 @@
             android:visibility="gone"
             android:id="@+id/noEvents"
             android:textSize="@dimen/title_inner"
-            android:fontFamily="@font/gotham_bold"
+            fontPath="@string/font_bold"
+            tools:ignore="MissingPrefix"
             android:text="@string/noevents"/>
 
     <TextView
@@ -28,7 +29,8 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/cash"
         android:textColor="@color/outerText"
-        android:fontFamily="@font/gotham_book"
+        fontPath="@string/font_book"
+        tools:ignore="MissingPrefix"
         android:text="@string/upcomingEvents" />
 
         <android.support.v7.widget.RecyclerView
@@ -47,7 +49,8 @@
             android:layout_marginTop="10dp"
             android:textSize="@dimen/cash"
             android:textColor="@color/outerText"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_book"
+            tools:ignore="MissingPrefix"
             android:text="@string/pastEvents" />
 
         <android.support.v7.widget.RecyclerView

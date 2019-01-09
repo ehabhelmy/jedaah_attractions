@@ -133,4 +133,9 @@ public class SettingsInnerFragment extends BaseFragment implements SettingsInner
     protected int getLayoutId() {
         return R.layout.fragment_settings;
     }
+
+    @Override
+    protected String getScreenTrackingName() {
+        return "settings list";
+    }
 }

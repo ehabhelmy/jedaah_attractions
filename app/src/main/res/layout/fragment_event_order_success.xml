@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/lightBlack">
 <RelativeLayout
     android:layout_width="match_parent"
@@ -29,7 +29,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
         android:textSize="40sp"
-        android:fontFamily="@font/gotham_bold"
+        fontPath="@string/font_bold"
+        tools:ignore="MissingPrefix"
         android:textColor="@color/white"
         android:text="@string/thankyou" />
 
@@ -44,7 +45,8 @@
         android:layout_below="@+id/textView29"
         android:layout_marginTop="42dp"
         android:textSize="@dimen/static_title_size"
-        android:fontFamily="@font/gotham_book"
+        fontPath="@string/font_book"
+        tools:ignore="MissingPrefix"
         android:textColor="@color/white"
         android:text="@string/paymentDone" />
 
@@ -55,7 +57,8 @@
         android:layout_below="@+id/textView33"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/gotham_book"
+        fontPath="@string/font_book"
+        tools:ignore="MissingPrefix"
         android:text="@string/bookMore"
         android:textColor="@color/colorTitle"
         android:textSize="@dimen/static_title_size" />
@@ -68,7 +71,8 @@
         android:layout_below="@+id/bookMore"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/gotham_book"
+        fontPath="@string/font_book"
+        tools:ignore="MissingPrefix"
         android:text="@string/back_home"
         android:textColor="@color/colorTitle"
         android:textSize="@dimen/static_title_size" />

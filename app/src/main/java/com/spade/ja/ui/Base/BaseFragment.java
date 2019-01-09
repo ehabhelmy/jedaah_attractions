@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.spade.ja.JaApplication;
 import com.spade.ja.R;
 import com.spade.ja.ui.Base.listener.BaseView;
 import com.spade.ja.ui.navigation.JaNavigationManager;
@@ -61,6 +64,21 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     public void locationIsEnabled(){
 
+    }
+
+    protected abstract String getScreenTrackingName();
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        trackScreen();
+    }
+
+    private void trackScreen() {
+        JaApplication jaApplication = (JaApplication) getActivity().getApplication();
+        Tracker mTracker = jaApplication.getDefaultTracker();
+        mTracker.setScreenName(getScreenTrackingName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     public void onErrorAuth(String message) {

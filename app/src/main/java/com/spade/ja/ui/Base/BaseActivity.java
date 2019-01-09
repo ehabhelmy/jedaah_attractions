@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.spade.ja.JaApplication;
 import com.spade.ja.ui.Base.listener.BaseView;
 import com.spade.ja.ui.navigation.JaNavigationManager;
 import com.spade.ja.util.LocaleManager;
@@ -72,9 +75,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
+    protected abstract String getScreenTrackingName();
+
     @Override
     protected void onResume() {
         super.onResume();
+        trackScreen();
+    }
+
+    private void trackScreen() {
+        JaApplication jaApplication = (JaApplication) getApplication();
+        Tracker mTracker = jaApplication.getDefaultTracker();
+        mTracker.setScreenName(getScreenTrackingName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

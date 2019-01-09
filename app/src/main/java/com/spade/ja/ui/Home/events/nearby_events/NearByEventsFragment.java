@@ -185,4 +185,9 @@ public class NearByEventsFragment extends BaseFragment implements NearByEventsCo
         getLatitudeAndLongitude();
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "nearby events";
+    }
+
 }

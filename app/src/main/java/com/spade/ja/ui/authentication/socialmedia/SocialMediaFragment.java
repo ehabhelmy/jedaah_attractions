@@ -87,6 +87,11 @@ public class SocialMediaFragment extends BaseFragment implements SocialMediaCont
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "social media";
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (AuthenticationContract.View) context;

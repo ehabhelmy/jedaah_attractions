@@ -191,6 +191,11 @@ public class EventOrderFragment extends BaseFragment implements EventOrderContra
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "event checkout";
+    }
+
+    @Override
     public void setupOrderView(EventOrder eventOrder) {
         eventTitleTextView.setText(eventOrder.getEventTitle());
         nameTextView.setText(eventOrder.getName());

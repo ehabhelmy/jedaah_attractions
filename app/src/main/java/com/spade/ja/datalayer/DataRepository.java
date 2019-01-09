@@ -460,6 +460,16 @@ public class DataRepository implements DataSource {
     }
 
     @Override
+    public Single<AllNearByResponse> filterCatsExplore(List<Integer> categoryId) {
+        return remoteRepository.filterCatsExplore(categoryId);
+    }
+
+    @Override
+    public Single<AllNearByResponse> filterCatsDirectories(List<Integer> categoryId) {
+        return remoteRepository.filterCatsDirectories(categoryId);
+    }
+
+    @Override
     public Single<AllNearByResponse> search(String searchWord, List<String> types, List<Integer> categoryId) {
         return remoteRepository.search(searchWord,types,categoryId);
     }

@@ -63,6 +63,11 @@ public class LikedDirectoryFragment extends BaseFragment implements LikedDirecto
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "liked directories";
+    }
+
+    @Override
     public void showLoading() {
 
     }

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
+import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.datalayer.pojo.response.profile.Data;
 import com.spade.ja.ui.Base.BaseActivity;
 import com.spade.ja.ui.Base.BaseFragment;
@@ -14,6 +15,7 @@ import com.spade.ja.ui.Home.attractioninner.attractionpayment.pojo.AttractionPay
 import com.spade.ja.ui.Home.attractioninner.pojo.AttractionPaymentData;
 import com.spade.ja.ui.Home.eventsinner.eventbuy.pojo.PaymentData;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.pojo.EventOrder;
+import com.spade.ja.ui.categories.FilterCategoriesActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -259,4 +261,5 @@ public abstract class JaNavigationManager {
 
     public abstract void openContactUs();
 
+    public abstract void showFilterCategories(Cats cats, FilterCategoriesActivity.FilterCatType type);
 }

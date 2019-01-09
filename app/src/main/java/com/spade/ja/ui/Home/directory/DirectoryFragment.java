@@ -75,6 +75,11 @@ public class DirectoryFragment extends BaseFragment implements DirectoryContract
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "directory tab";
+    }
+
+    @Override
     public void showError(String message) {
 
     }

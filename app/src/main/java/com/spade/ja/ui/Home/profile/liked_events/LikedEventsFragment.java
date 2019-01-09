@@ -55,6 +55,11 @@ public class LikedEventsFragment extends BaseFragment implements LikedEventsCont
         return R.layout.fragment_liked_events;
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "liked events";
+    }
+
 
     @Override
     public void showLoading() {

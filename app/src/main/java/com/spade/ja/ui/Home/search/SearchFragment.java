@@ -183,6 +183,11 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "search";
+    }
+
+    @Override
     public void setupCategories(List<Cats> categories) {
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getContext(), 2);
         cats.setLayoutManager(mLayoutManager);

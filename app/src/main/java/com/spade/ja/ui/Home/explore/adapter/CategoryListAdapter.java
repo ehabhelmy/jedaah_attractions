@@ -16,6 +16,24 @@ import com.spade.ja.ui.Home.explore.viewholder.CategoryViewHolder;
 
 public class CategoryListAdapter extends BaseRecyclerViewAdapter<Cats> {
 
+    private OnItemClick onItemClick;
+
+    public void setOnItemClick(OnItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
+
+    public interface OnItemClick {
+        void onItemClick(Cats cats);
+    }
+
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
+        if (data != null){
+            ((CategoryViewHolder)holder).bind(data.get(position),onItemClick);
+        }else{
+            //TODO : throw Exception
+        }
+    }
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_card, parent, false);

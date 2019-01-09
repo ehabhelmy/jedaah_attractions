@@ -55,6 +55,11 @@ public class TodayEventsFragment extends BaseFragment implements TodayEventsCont
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "today events list";
+    }
+
+    @Override
     public void showError(String message) {
         if (message.equals(Constants.NO_TOKEN)) {
             showLoginRequiredError();

@@ -91,6 +91,11 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "profile tab";
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         editTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);

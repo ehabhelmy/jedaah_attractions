@@ -204,7 +204,7 @@
     <string name="attraction_intro"><![CDATA[EXPLORE ALL ATTRACTIONS & BOOK TICKETS]]></string>
     <string name="attraction_intro_subtitle">Enjoy and book most of the popular landmarks, Parks and entertainment hubs in Jeddah</string>
     <string name="back_home">Back to home screen</string>
-    <string name="font_book">"@font/gotham_medium"</string>
-    <string name="font_medium">"@font/gotham_medium"</string>
-    <string name="font_bold">"@font/gotham_medium"</string>
+    <string name="font_book">"fonts/gotham_book.otf"</string>
+    <string name="font_medium">"fonts/gotham_medium.otf"</string>
+    <string name="font_bold">"fonts/gotham_bold.otf"</string>
 </resources>

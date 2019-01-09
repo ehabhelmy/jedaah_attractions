@@ -205,7 +205,7 @@
     <string name="dateTime">التاريخ و الوقت</string>
     <string name="web_site">الموقع الالكتروني</string>
     <string name="phone">التليفون</string>
-    <string name="font_book"></string>
-    <string name="font_medium"></string>
-    <string name="font_bold"></string>
+    <string name="font_book">"fonts/arabic_light.otf"</string>
+    <string name="font_medium">"fonts/arabic_medium.otf"</string>
+    <string name="font_bold">"fonts/arabic_bold.otf"</string>
 </resources>

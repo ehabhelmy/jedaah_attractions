@@ -169,6 +169,11 @@ public class AttractionDetailsFragment extends BaseFragment implements Attractio
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "attraction inner";
+    }
+
+    @Override
     public void setupAttractionDetails(Data data) {
         latitude = Double.parseDouble(data.getLat());
         longitude = Double.parseDouble(data.getLng());

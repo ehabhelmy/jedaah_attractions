@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
     android:padding="10dp">
 
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:text="Adult Entry"
         android:buttonTint="@color/colorTitle"
         android:textColor="@color/colorTitle"
@@ -27,7 +28,8 @@
         android:layout_marginTop="6dp"
         android:layout_alignStart="@id/vipCheckbox"
         android:layout_toStartOf="@+id/price"
-        android:fontFamily="@font/gotham_book"
+        fontPath="@string/font_book"
+        tools:ignore="MissingPrefix"
         android:text="@string/vipSubtitle"
         android:textColor="@color/outerText"
         android:textSize="@dimen/daysRemaining" />
@@ -63,7 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/imageMinus"
             android:layout_alignBottom="@+id/imageMinus"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_book"
+            tools:ignore="MissingPrefix"
             android:gravity="center"
             android:text="0"
             android:textSize="@dimen/title_inner" />
@@ -82,7 +85,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="94dp"
-            android:fontFamily="@font/gotham_medium"
+            fontPath="@string/font_medium"
+            tools:ignore="MissingPrefix"
             android:text="@string/hint"
             android:textColor="@color/google"
             android:textSize="@dimen/cash" />
@@ -95,7 +99,8 @@
             android:layout_alignBottom="@+id/textView44"
             android:layout_alignTop="@+id/textView44"
             android:layout_toEndOf="@+id/textView44"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_book"
+            tools:ignore="MissingPrefix"
             android:gravity="center"
             android:text="Only 3 tickets are available"
             android:textColor="@color/outerText"
@@ -113,7 +118,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/ticketType"
         android:layout_marginEnd="18dp"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:gravity="bottom"
         android:text="SAR"
         android:textSize="@dimen/cash" />
@@ -125,7 +131,8 @@
         android:layout_alignBottom="@+id/textView40"
         android:layout_alignTop="@+id/textView40"
         android:layout_toStartOf="@+id/textView40"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:gravity="center"
         android:text="250"
         android:textSize="@dimen/static_title_size" />

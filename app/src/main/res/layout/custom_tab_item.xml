@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:textSize="10sp"
-    android:fontFamily="@font/gotham_medium"
+    fontPath="@string/font_medium"
+    tools:ignore="MissingPrefix"
     android:gravity="center"
     android:layout_height="match_parent">
 

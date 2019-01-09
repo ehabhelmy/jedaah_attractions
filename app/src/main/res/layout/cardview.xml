@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/eventCardView"
     android:layout_width="300dp"
     app:cardElevation="0dp"
@@ -67,7 +68,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="14dp"
                     android:textSize="@dimen/titleSize"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:textColor="@color/staticTitle"
                     android:gravity="center_horizontal"
                     android:text="NOV" />
@@ -79,7 +81,8 @@
                     android:id="@+id/eventDay"
                     android:gravity="center_horizontal"
                     android:textSize="@dimen/title_inner"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:textColor="@color/staticTitle"
                     android:text="13" />
 
@@ -87,7 +90,8 @@
                     android:id="@+id/eventRemaining"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:textColor="@color/staticTitle"
                     android:textSize="@dimen/daysRemaining"
                     android:layout_marginTop="5dp"
@@ -127,7 +131,8 @@
                         android:textSize="@dimen/address"
                         android:layout_marginStart="5dp"
                         android:maxLines="1"
-                        android:fontFamily="@font/gotham_book"
+                        fontPath="@string/font_book"
+                        tools:ignore="MissingPrefix"
                         android:textColor="@color/outerText"
                         android:id="@+id/eventAddress"
                         android:text="12, Al-Aziz , Jeddah" />
@@ -140,7 +145,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:textSize="@dimen/cardsubtitle"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:textColor="@color/outerText"
                     android:gravity="center"
                     android:text="22 Interested - 230 Going" />

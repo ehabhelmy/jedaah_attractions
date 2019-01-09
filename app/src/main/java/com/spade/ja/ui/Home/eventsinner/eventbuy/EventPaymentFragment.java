@@ -234,6 +234,11 @@ public class EventPaymentFragment extends BaseFragment implements EventPaymentCo
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "event setup payment";
+    }
+
+    @Override
     public void setupPaymentView(PaymentData paymentData) {
         eventTitle = paymentData.getEventTitle();
         vipPrice = paymentData.getVipPrice();

@@ -47,6 +47,9 @@
         <activity
             android:name=".ui.Home.directory.venues.filtervenues.FilterVenueActivity"
             android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".ui.categories.FilterCategoriesActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <activity
             android:name=".ui.Home.directory.attractions.filterattractions.FilterAttractionActivity"

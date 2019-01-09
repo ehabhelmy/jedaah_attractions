@@ -69,6 +69,11 @@ public class GetCodeFragment extends BaseFragment implements GetCodeContract.Vie
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "reset password";
+    }
+
+    @Override
     public void showError(String message) {
         showPopUp(message);
     }

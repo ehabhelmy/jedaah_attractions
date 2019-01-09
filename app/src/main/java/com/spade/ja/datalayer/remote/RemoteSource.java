@@ -122,6 +122,10 @@ public interface RemoteSource {
 
     Single<FilterVenuesResponse> filterAttracions(boolean weeklySuggest, List<Integer> categoryId , Double lat, Double lng);
 
+    Single<AllNearByResponse> filterCatsExplore(List<Integer> categoryId);
+
+    Single<AllNearByResponse> filterCatsDirectories(List<Integer> categoryId);
+
     Single<AllNearByResponse> search(String searchWord,List<String> types , List<Integer> categoryId);
 
     Single<ContactUsResponse> contactUs(String subject,String message , String token);

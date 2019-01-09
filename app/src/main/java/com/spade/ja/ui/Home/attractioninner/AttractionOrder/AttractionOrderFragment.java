@@ -188,6 +188,11 @@ public class AttractionOrderFragment extends BaseFragment implements AttractionO
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "attraction checkout";
+    }
+
+    @Override
     public void setupOrderView(AttractionOrder attractionOrder) {
         eventTitleTextView.setText(attractionOrder.getAttractionTitle());
         nameTextView.setText(attractionOrder.getName());

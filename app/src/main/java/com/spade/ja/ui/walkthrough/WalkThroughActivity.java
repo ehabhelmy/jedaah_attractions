@@ -44,6 +44,11 @@ public class WalkThroughActivity extends BaseActivity implements WalkThroughCont
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "Intro Screen";
+    }
+
+    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());

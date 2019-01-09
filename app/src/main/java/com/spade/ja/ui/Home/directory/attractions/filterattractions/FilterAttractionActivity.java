@@ -92,6 +92,11 @@ public class FilterAttractionActivity extends BaseActivity implements FilterAttr
         filter.setText(R.string.filterAttraction);
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "filter attractions";
+    }
+
     @OnClick(R.id.weeklySugg)
     void selectWeeklySugg() {
         if (isWeeklySelected) {

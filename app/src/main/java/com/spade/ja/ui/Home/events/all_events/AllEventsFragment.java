@@ -59,6 +59,11 @@ public class AllEventsFragment extends BaseFragment implements AllEventsContract
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "all events listing";
+    }
+
+    @Override
     public void showError(String message) {
         if (message.equals(Constants.NO_TOKEN)) {
             showLoginRequiredError();

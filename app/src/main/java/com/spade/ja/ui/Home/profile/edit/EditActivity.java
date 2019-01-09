@@ -119,6 +119,11 @@ public class EditActivity extends BaseActivity implements EditContract.View {
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "edit profile";
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();

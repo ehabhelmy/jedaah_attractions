@@ -102,6 +102,11 @@ public class FilterEventActivity extends BaseActivity implements FilterEventCont
         setupMonthSpinner();
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "filter events";
+    }
+
     private void setupMonthSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months_array, R.layout.dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

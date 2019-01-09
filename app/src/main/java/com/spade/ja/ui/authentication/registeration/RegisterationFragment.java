@@ -124,6 +124,11 @@ public class RegisterationFragment extends BaseFragment implements Registeration
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "register";
+    }
+
+    @Override
     public void showLoading() {
         loadingView.setVisibility(View.VISIBLE);
         registerContainer.setVisibility(View.GONE);

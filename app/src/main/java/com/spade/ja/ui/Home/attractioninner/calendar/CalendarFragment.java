@@ -102,6 +102,11 @@ public class CalendarFragment extends BaseFragment implements CalendarContract.V
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "calendar screen";
+    }
+
+    @Override
     public void setupCalendar(AttractionPaymentData attractionPaymentData) {
         this.attractionPaymentData = attractionPaymentData;
         List<Day> weekDays = attractionPaymentData.getWeekDays();

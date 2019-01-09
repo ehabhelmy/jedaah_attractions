@@ -7,7 +7,9 @@ import android.provider.Settings;
 
 import com.spade.ja.JaApplication;
 import com.spade.ja.R;
+import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.datalayer.pojo.response.profile.Data;
+import com.spade.ja.ui.Base.BaseActivity;
 import com.spade.ja.ui.Home.HomeActivity;
 import com.spade.ja.ui.Home.attractioninner.AttractionInnerActivity;
 import com.spade.ja.ui.Home.attractioninner.AttractionOrder.AttractionOrderFragment;
@@ -49,6 +51,7 @@ import com.spade.ja.ui.authentication.foretpassword.resetpassword.ResetPasswordF
 import com.spade.ja.ui.authentication.login.SignInFragment;
 import com.spade.ja.ui.authentication.registeration.RegisterationFragment;
 import com.spade.ja.ui.authentication.socialmedia.SocialMediaFragment;
+import com.spade.ja.ui.categories.FilterCategoriesActivity;
 import com.spade.ja.ui.splash.SplashActivity;
 import com.spade.ja.ui.walkthrough.WalkThroughActivity;
 import com.spade.ja.util.Constants;
@@ -537,5 +540,15 @@ public class JaPortraitNavigationManager extends JaNavigationManager {
         }
         replaceFragment(fragment,true,CONTACT_US_NEW,R.id.frame_layout_settings);
 
+    }
+
+    @Override
+    public void showFilterCategories(Cats cats, FilterCategoriesActivity.FilterCatType type) {
+        Intent intent = new Intent(context,FilterCategoriesActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(FilterCategoriesActivity.FILTER_CATS,cats);
+        bundle.putString(FilterCategoriesActivity.TYPE , type.name());
+        intent.putExtras(bundle);
+        ((BaseActivity)context).startActivityForResult(intent,2000);
     }
 }

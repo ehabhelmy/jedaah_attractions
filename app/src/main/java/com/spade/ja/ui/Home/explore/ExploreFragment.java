@@ -27,11 +27,13 @@ import com.spade.ja.R;
 import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.datalayer.pojo.response.venues.Venue;
 import com.spade.ja.ui.Base.BaseFragment;
+import com.spade.ja.ui.Base.listener.RecyclerViewItemListener;
 import com.spade.ja.ui.Home.HomeContract;
 import com.spade.ja.ui.Home.explore.adapter.CategoryListAdapter;
 import com.spade.ja.ui.Home.explore.adapter.EventsListAdapter;
 import com.spade.ja.ui.Home.explore.adapter.VenuesListAdapter;
 import com.spade.ja.ui.Home.explore.pojo.Event;
+import com.spade.ja.ui.categories.FilterCategoriesActivity;
 import com.spade.ja.ui.widget.CircularImageView;
 import com.spade.ja.util.Constants;
 import com.spade.ja.util.MyLocation;
@@ -394,6 +396,11 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
         getLatitudeAndLongitude();
     }
 
+    @Override
+    protected String getScreenTrackingName() {
+        return "explore tab";
+    }
+
     @OnClick(R.id.enableLocationSettings)
     void openLocationSettings() {
         presenter.openLocationSettings();
@@ -420,6 +427,7 @@ public class ExploreFragment extends BaseFragment implements ExploreContract.Vie
             CategoryListAdapter categoryListAdapter = new CategoryListAdapter();
             categoryListAdapter.setData((ArrayList<Cats>) categoryList);
             categories.setAdapter(categoryListAdapter);
+            categoryListAdapter.setOnItemClick(cats -> jaNavigationManager.showFilterCategories(cats,FilterCategoriesActivity.FilterCatType.EXPLORE));
         } else {
             categories.setVisibility(View.GONE);
             noCatogories.setVisibility(View.VISIBLE);

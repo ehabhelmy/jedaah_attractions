@@ -160,6 +160,11 @@ public class VenueDetailsFragment extends BaseFragment implements VenueDetailsCo
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "venue inner";
+    }
+
+    @Override
     public void setupVenueDetails(Data data) {
         latitude = Double.parseDouble(data.getLat());
         longitude = Double.parseDouble(data.getLng());

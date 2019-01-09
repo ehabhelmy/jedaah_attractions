@@ -69,6 +69,11 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "reset password";
+    }
+
+    @Override
     public void showSuccess(String msg) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.succes))

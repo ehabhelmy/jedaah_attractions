@@ -55,6 +55,11 @@ public class WeekEventsFragment extends BaseFragment implements WeekEventsContra
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "week events list";
+    }
+
+    @Override
     public void showError(String message) {
         if (message.equals(Constants.NO_TOKEN)) {
             showLoginRequiredError();

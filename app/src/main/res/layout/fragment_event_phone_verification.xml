@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/lightBlack">
 
     <RelativeLayout
@@ -19,7 +20,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
-            android:fontFamily="@font/gotham_medium"
+            fontPath="@string/font_medium"
+            tools:ignore="MissingPrefix"
             android:text="@string/verification"
             android:textColor="@color/white"
             android:textSize="@dimen/title_inner" />
@@ -31,7 +33,8 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView"
             android:layout_marginTop="32dp"
-            android:fontFamily="@font/gotham_medium"
+            fontPath="@string/font_medium"
+            tools:ignore="MissingPrefix"
             android:gravity="center"
             android:text="@string/enterVerification"
             android:textColor="@color/staticTitle"
@@ -46,7 +49,8 @@
             android:layout_marginEnd="100dp"
             android:layout_marginStart="100dp"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_book"
+            tools:ignore="MissingPrefix"
             android:gravity="center"
             android:text="@string/textMsg"
             android:textColor="@color/white"
@@ -135,7 +139,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pinview"
             android:background="@drawable/register_button"
-            android:fontFamily="@font/gotham_bold"
+            fontPath="@string/font_bold"
+            tools:ignore="MissingPrefix"
             android:text="@string/next"
             android:layout_marginTop="40dp"
             android:layout_marginStart="20dp"
@@ -149,7 +154,8 @@
             android:layout_below="@+id/pin_continue_btn"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_book"
+            tools:ignore="MissingPrefix"
             android:text="@string/resend"
             android:textColor="@color/colorTitle"
             android:textSize="@dimen/titleSize" />

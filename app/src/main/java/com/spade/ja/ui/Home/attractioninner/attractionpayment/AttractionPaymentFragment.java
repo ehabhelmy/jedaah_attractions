@@ -219,6 +219,11 @@ public class AttractionPaymentFragment extends BaseFragment implements Attractio
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "attraction setup payment";
+    }
+
+    @Override
     public void setupPaymentView(AttractionPaymentModel paymentData) {
         attractionTitle = paymentData.getAttractionTitle();
         cashTickets = paymentData.getCashTickets();

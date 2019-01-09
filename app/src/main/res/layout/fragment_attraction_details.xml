@@ -62,7 +62,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/gotham_book"
+                        fontPath="@string/font_book"
+                        tools:ignore="MissingPrefix"
                         android:gravity="center"
                         android:text="@string/sponspored"
                         android:textColor="@color/white"
@@ -72,7 +73,8 @@
                     android:id="@+id/venueTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/gotham_medium"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:layout_below="@+id/sponsored"
                     android:text="Attraction Name Here"
                     android:maxLines="1"
@@ -88,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/venueTitle"
                     android:layout_alignStart="@+id/venueTitle"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center"
                     android:layout_marginTop="4dp"
                     android:layout_marginStart="8dp"
@@ -118,7 +121,8 @@
                     android:layout_alignTop="@+id/imageView7"
                     android:layout_marginStart="14dp"
                     android:layout_toEndOf="@+id/imageView7"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:text="12, Al-Aziz , Jeddah"
                     android:textSize="@dimen/titleSize" />
 
@@ -129,7 +133,8 @@
                     android:layout_alignStart="@+id/venueAddress"
                     android:layout_below="@+id/venueAddress"
                     android:layout_marginTop="6dp"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/getDirections"
                     android:textColor="@color/staticTitle"
                     android:textSize="@dimen/daysRemaining" />
@@ -149,7 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/directions"
                     android:layout_alignTop="@+id/imageView9"
-                    android:fontFamily="@font/gotham_book"
+                    fontPath="@string/font_book"
+                    tools:ignore="MissingPrefix"
                     android:gravity="center"
                     android:text="Open Now"
                     android:textSize="@dimen/titleSize" />
@@ -211,7 +217,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorTitle"
                         android:textSize="@dimen/titleSize"
-                        android:fontFamily="@font/gotham_bold"
+                        fontPath="@string/font_bold"
+                        tools:ignore="MissingPrefix"
                         android:layout_marginBottom="4dp"
                         android:text="@string/description" />
 
@@ -219,7 +226,8 @@
                         android:id="@+id/venueDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/gotham_book"
+                        fontPath="@string/font_book"
+                        tools:ignore="MissingPrefix"
                         android:text="asdhasjdhasjkdhaaasjkdhasjkdhajsdhasjkdhasjdhasjdhasjdhasjdhasjdhasjdhasjdak, asdasdgashdgahdghasgdhasgdhasdgahsdgahsdgashdgashdgashdgashdgashdgasdgahdgahsdgahsdgahsdgahsdgahdgahdsgahsdgahsdgahsdgashdgahsdgash" />
                 </LinearLayout>
 
@@ -247,6 +255,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        fontPath="@string/font_bold"
+                        tools:ignore="MissingPrefix"
                         style="@style/TitleTheme"
                         android:text="@string/photos" />
 
@@ -286,7 +296,8 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="6dp"
             android:layout_toEndOf="@+id/imageView12"
-            android:fontFamily="@font/gotham_book"
+            fontPath="@string/font_book"
+            tools:ignore="MissingPrefix"
             android:gravity="center"
             android:text="100 - 250 SAR"
             android:textColor="@color/white" />
@@ -298,7 +309,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="12dp"
-            android:fontFamily="@font/gotham_medium"
+            fontPath="@string/font_medium"
+            tools:ignore="MissingPrefix"
             android:text="@string/buyNow"
             android:textColor="@color/colorTitle" />
     </RelativeLayout>

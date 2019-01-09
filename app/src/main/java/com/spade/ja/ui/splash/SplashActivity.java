@@ -31,4 +31,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     public int getLayoutId() {
         return R.layout.activity_splash;
     }
+
+    @Override
+    protected String getScreenTrackingName() {
+        return "splash";
+    }
 }

@@ -172,6 +172,10 @@ public interface DataSource {
 
     Single<FilterVenuesResponse> filterAttracions(boolean weeklySuggest, List<Integer> categoryId , Double lat, Double lng);
 
+    Single<AllNearByResponse> filterCatsExplore(List<Integer> categoryId);
+
+    Single<AllNearByResponse> filterCatsDirectories(List<Integer> categoryId);
+
     Single<AllNearByResponse> search(String searchWord,List<String> types , List<Integer> categoryId);
 
     Single<AttractionOrderResponse> orderAttraction(AttractionOrderRequest attractionOrderRequest);

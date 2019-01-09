@@ -11,6 +11,7 @@ import com.spade.ja.datalayer.pojo.response.category.Cats;
 import com.spade.ja.ui.Base.BaseViewHolder;
 import com.spade.ja.ui.Base.listener.RecyclerViewItemListener;
 import com.spade.ja.ui.Home.eventsinner.eventcheckout.adapter.TicketListener;
+import com.spade.ja.ui.Home.explore.adapter.CategoryListAdapter;
 
 import butterknife.BindView;
 
@@ -26,18 +27,24 @@ public class CategoryViewHolder extends BaseViewHolder<Cats> {
     @BindView(R.id.category_name)
     TextView categoryName;
 
+    View itemView;
+
     public CategoryViewHolder(View itemView) {
         super(itemView);
+        this.itemView = itemView;
     }
 
     @Override
     public void bind(Cats baseModel, RecyclerViewItemListener.onViewListener onViewListener, RecyclerViewItemListener.onFavouriteListener onFavouriteListener) {
-        categoryName.setText(baseModel.getName());
-        Glide.with(categoryImage.getContext()).load(baseModel.getIcon()).apply(new RequestOptions().placeholder(R.drawable.ca_cafe_ic).error(R.drawable.ca_cafe_ic)).into(categoryImage);
     }
 
     @Override
     public void bind(Cats baseModel, int position, TicketListener ticketListener) {
+    }
 
+    public void bind(Cats cats, CategoryListAdapter.OnItemClick onItemClick) {
+        itemView.setOnClickListener(v -> onItemClick.onItemClick(cats));
+        categoryName.setText(cats.getName());
+        Glide.with(categoryImage.getContext()).load(cats.getIcon()).apply(new RequestOptions().placeholder(R.drawable.ca_cafe_ic).error(R.drawable.ca_cafe_ic)).into(categoryImage);
     }
 }

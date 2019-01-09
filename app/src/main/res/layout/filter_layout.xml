@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="21dp"
         android:layout_marginTop="22dp"
-        android:fontFamily="@font/gotham_medium"
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:text="@string/clear"
         android:textColor="@color/lightBlack"
         android:textSize="@dimen/titleSize" />
@@ -28,7 +29,8 @@
         android:layout_alignBaseline="@+id/clear"
         android:layout_alignBottom="@+id/clear"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/gotham_medium "
+        fontPath="@string/font_medium"
+        tools:ignore="MissingPrefix"
         android:text="@string/filter"
         android:textColor="@color/black"
         android:textSize="@dimen/filter_size" />
@@ -61,6 +63,8 @@
                     <TextView
                         android:id="@+id/month"
                         style="@style/TitleTheme"
+                        fontPath="@string/font_bold"
+                        tools:ignore="MissingPrefix"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -95,6 +99,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/spinnerContainer"
                         android:layout_marginTop="40dp"
+                        fontPath="@string/font_bold"
+                        tools:ignore="MissingPrefix"
                         android:background="@color/background"
                         android:padding="@dimen/activity_horizontal_margin"
                         android:text="@string/filterBy" />
@@ -120,6 +126,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="2dp"
                                 android:layout_weight="1"
+                                fontPath="@string/font_book"
+                                tools:ignore="MissingPrefix"
                                 android:id="@+id/weekly_sugg_txt"
                                 android:text="@string/weeklySuggestions"
                                 android:textColor="@color/lightBlack" />
@@ -141,6 +149,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="2dp"
                                 android:layout_weight="1"
+                                fontPath="@string/font_book"
+                                tools:ignore="MissingPrefix"
                                 android:text="@string/NearBy"
                                 android:id="@+id/nearby_text"
                                 android:textColor="@color/lightBlack" />
@@ -153,6 +163,8 @@
                     <TextView
                         android:id="@+id/cats"
                         style="@style/TitleTheme"
+                        fontPath="@string/font_bold"
+                        tools:ignore="MissingPrefix"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/weeklyContainer"
@@ -167,20 +179,6 @@
                         android:layout_margin="10dp"
                         android:layout_height="match_parent" />
 
-                    <!--<com.spade.ja.ui.widget.StaticGridView-->
-                        <!--android:id="@+id/tags"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@+id/cats"-->
-                        <!--android:columnWidth="160dp"-->
-                        <!--android:layout_margin="10dp"-->
-                        <!--android:gravity="start"-->
-                        <!--android:horizontalSpacing="10dp"-->
-                        <!--android:listSelector="#00000000"-->
-                        <!--android:numColumns="2"-->
-                        <!--android:verticalSpacing="15dp">-->
-
-                    <!--</com.spade.ja.ui.widget.StaticGridView>-->
                 </RelativeLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
@@ -191,7 +189,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/colorTitle"
-            android:fontFamily="@font/gotham_bold"
+            fontPath="@string/font_bold"
+            tools:ignore="MissingPrefix"
             android:padding="20dp"
             android:text="@string/filterEvents"
             android:textColor="@color/white"

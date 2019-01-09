@@ -55,6 +55,11 @@ public class IntroFragment extends BaseFragment {
     }
 
     @Override
+    protected String getScreenTrackingName() {
+        return "intro item";
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null){

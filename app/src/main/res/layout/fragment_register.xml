@@ -37,7 +37,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:fontFamily="@font/gotham_bold"
+                    fontPath="@string/font_bold"
+                    tools:ignore="MissingPrefix"
                     android:text="@string/register"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
@@ -159,7 +160,8 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/register_button"
-                android:fontFamily="@font/gotham_bold"
+                fontPath="@string/font_bold"
+                tools:ignore="MissingPrefix"
                 android:text="@string/register"
                 android:textColor="@color/white" />
 
@@ -175,6 +177,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="Already have an account "
                     android:textColor="@color/white" />
 
@@ -182,6 +186,8 @@
                     android:id="@+id/signIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:text="Sign in "
                     android:textColor="@color/colorTitle" />
 
@@ -189,6 +195,8 @@
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
+                    fontPath="@string/font_medium"
+                    tools:ignore="MissingPrefix"
                     android:layout_height="wrap_content"
                     android:text="?"
                     android:textColor="@color/white" />
